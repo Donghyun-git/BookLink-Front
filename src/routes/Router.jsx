@@ -9,9 +9,9 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="main" element={<MainPage />}></Route>
-        <Route path="login" element={<LoginPage />}></Route>
-        <Route path="register" element={<RegisterPage />}></Route>
+        <Route path="/main" element={<MainPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
       </Route>
     </Routes>
   );
