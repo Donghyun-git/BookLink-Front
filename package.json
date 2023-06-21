@@ -16,10 +16,12 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-router-dom": "^6.13.0",
+    "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "redux-toolkit": "^1.1.2",
     "styled-components": "^6.0.0-rc.3",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
