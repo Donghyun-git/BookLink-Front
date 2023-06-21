@@ -10,8 +10,10 @@ const HeaderContainer = () => {
       </StyledLogoDiv>
       <div>
         <StyledLink to="/books">책방</StyledLink>
-        <StyledLinkWithMargin to="/bookMeetings">독서모임</StyledLinkWithMargin>
-        <StyledLink to="/myPage">마이페이지</StyledLink>
+        <StyledLinkWithMargin to="/book-meetings">
+          독서모임
+        </StyledLinkWithMargin>
+        <StyledLink to="/mypage">마이페이지</StyledLink>
       </div>
     </StyledHeaderContainer>
   );
