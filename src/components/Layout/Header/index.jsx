@@ -1,16 +1,11 @@
-import styled from "styled-components";
 import HeaderContainer from "./HeaderContainer";
+import * as Styled from "./HeaderStyled";
 
 const Header = () => {
   return (
-    <StyledHeader>
+    <Styled.Header>
       <HeaderContainer />
-    </StyledHeader>
+    </Styled.Header>
   );
 };
 export default Header;
-
-const StyledHeader = styled.header`
-  width: 100%;
-  background: #ffffff;
-`;
