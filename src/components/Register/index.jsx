@@ -16,7 +16,7 @@ function Register() {
   });
   return (
     <RegisterContext.Provider value={{ step, setStep, user, setUser }}>
-      {step == 1 && <Step1 />}
+      {step === 1 && <Step1 />}
       {step === 2 && <Step2 />}
     </RegisterContext.Provider>
   );
