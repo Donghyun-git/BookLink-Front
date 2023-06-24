@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
@@ -20,8 +21,8 @@
     "redux": "^4.2.1",
     "redux-toolkit": "^1.1.2",
     "styled-components": "^6.0.0-rc.3",
-    "yup": "^1.2.0",
-    "yarn": "^1.22.19"
+    "yarn": "^1.22.19",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
