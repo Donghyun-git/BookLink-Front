@@ -75,7 +75,7 @@ button {
   font-weight: 400;
   color: #333;
   letter-spacing: -0.05em;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 ul {
   list-style: none;
@@ -102,7 +102,7 @@ input,
 select,
 textarea,
 button,
-input[type="textarea"] {
+input[type='textarea'] {
   vertical-align: middle;
 }
 .hide,
@@ -134,12 +134,12 @@ a {
   clear: both;
 }
 .clear:after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
 .noto {
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* Form */
@@ -148,13 +148,12 @@ input::-webkit-input-placeholder {
   font-size: inherit;
 }
 
-input[type="tel"],
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="search"] {
-  height: 46px;
-  padding: 0 15px;
+input[type='tel'],
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='search'] {
+  padding: 0 1.071rem;
   display: block;
   background: #fff;
   border: solid 1px #ddd;
@@ -163,81 +162,81 @@ input[type="search"] {
   appearance: none;
 }
 
-input[type="tel"]:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="search"]:focus {
+input[type='tel']:focus,
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='search']:focus {
   outline: solid 2px #003c74;
 }
-input[type="textarea"]:focus {
+input[type='textarea']:focus {
   outline: solid 2px #003c74;
   border: 2px solid #003c74;
 }
 
-input[type="tel"]::placeholder,
-input[type="text"]::placeholder,
-input[type="password"]::placeholder,
-input[type="email"]::placeholder,
-input[type="search"]::placeholder {
+input[type='tel']::placeholder,
+input[type='text']::placeholder,
+input[type='password']::placeholder,
+input[type='email']::placeholder,
+input[type='search']::placeholder {
   color: #ccc;
 }
 
-input[type="tel"][readonly],
-input[type="text"][readonly],
-input[type="password"][readonly],
-input[type="email"][readonly],
-input[type="search"][readonly],
-input[type="tel"][disabled],
-input[type="text"][disabled],
-input[type="password"][disabled],
-input[type="search"][disabled],
-input[type="email"][disabled],
-input[type="tel"].readonly,
-input[type="text"].readonly,
-input[type="password"].readonly,
-input[type="email"].readonly,
-input[type="search"].readonly {
+input[type='tel'][readonly],
+input[type='text'][readonly],
+input[type='password'][readonly],
+input[type='email'][readonly],
+input[type='search'][readonly],
+input[type='tel'][disabled],
+input[type='text'][disabled],
+input[type='password'][disabled],
+input[type='search'][disabled],
+input[type='email'][disabled],
+input[type='tel'].readonly,
+input[type='text'].readonly,
+input[type='password'].readonly,
+input[type='email'].readonly,
+input[type='search'].readonly {
   color: #003c74;
 }
 
-input[type="tel"][readonly]:focus,
-input[type="text"][readonly]:focus,
-input[type="password"][readonly]:focus,
-input[type="email"][readonly]:focus,
-input[type="search"][readonly]:focus,
-input[type="tel"][disabled]:focus,
-input[type="text"][disabled]:focus,
-input[type="password"][disabled]:focus,
-input[type="search"][disabled]:focus,
-input[type="email"][disabled]:focus,
-input[type="tel"].readonly:focus,
-input[type="text"].readonly:focus,
-input[type="password"].readonly:focus,
-input[type="email"].readonly:focus,
-input[type="search"].readonly:focus {
+input[type='tel'][readonly]:focus,
+input[type='text'][readonly]:focus,
+input[type='password'][readonly]:focus,
+input[type='email'][readonly]:focus,
+input[type='search'][readonly]:focus,
+input[type='tel'][disabled]:focus,
+input[type='text'][disabled]:focus,
+input[type='password'][disabled]:focus,
+input[type='search'][disabled]:focus,
+input[type='email'][disabled]:focus,
+input[type='tel'].readonly:focus,
+input[type='text'].readonly:focus,
+input[type='password'].readonly:focus,
+input[type='email'].readonly:focus,
+input[type='search'].readonly:focus {
   outline: none;
 }
 
-input[type="tel"].dark,
-input[type="text"].dark,
-input[type="password"].dark,
-input[type="email"].dark,
-input[type="search"].dark {
+input[type='tel'].dark,
+input[type='text'].dark,
+input[type='password'].dark,
+input[type='email'].dark,
+input[type='search'].dark {
   background: #120635;
 }
 
-input[type="textarea"][readonly],
-input[type="textarea"][disabled] {
+input[type='textarea'][readonly],
+input[type='textarea'][disabled] {
   color: #666;
 }
-input[type="submit"] {
+input[type='submit'] {
   border-radius: 0px 0px 0px 0px;
   -moz-border-radius: 0px 0px 0px 0px;
   -webkit-border-radius: 0px 0px 0px 0px;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
@@ -246,19 +245,19 @@ input[type="checkbox"] {
   -moz-appearance: none;
   appearance: none;
 }
-input[type="checkbox"]:checked {
+input[type='checkbox']:checked {
   border-color: #003c74;
-  background: #003c74 url("../img/checkbox_checked.png") no-repeat center center /
+  background: #003c74 url('../img/checkbox_checked.png') no-repeat center center /
     9px auto;
 }
-input[type="checkbox"] + label {
+input[type='checkbox'] + label {
   display: inline-block;
   vertical-align: middle;
   margin-left: 5px;
   cursor: pointer;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   display: inline-block;
   vertical-align: middle;
   width: 18px;
@@ -273,11 +272,11 @@ input[type="radio"] {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
 }
-input[type="radio"]:checked {
+input[type='radio']:checked {
   border-color: #003c74;
 }
-input[type="radio"]:checked:after {
-  content: "";
+input[type='radio']:checked:after {
+  content: '';
   display: block;
   background: #003c74;
   position: absolute;
@@ -289,14 +288,14 @@ input[type="radio"]:checked:after {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
 }
-input[type="radio"] + label {
+input[type='radio'] + label {
   display: inline-block;
   vertical-align: middle;
   margin-left: 5px;
   cursor: pointer;
 }
 
-input[type="file"] {
+input[type='file'] {
 }
 
 select {
@@ -311,14 +310,14 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background: url("../img/select_arrow.png") no-repeat right 10px center / 10px
+  background: url('../img/select_arrow.png') no-repeat right 10px center / 10px
     auto;
 }
 select:focus {
   outline: solid 2px #003c74;
 }
 
-input[type="textarea"] {
+input[type='textarea'] {
   resize: none;
   display: block;
   width: 100%;
