@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { logIn } from '../../apis/authService';
-import Logo from '../../BookLink_Logo.svg';
+import Logo from '../../images/BookLink_Logo.svg';
 import * as Styled from './LoginFormStyled';
 import { loginSchema } from '../../validators/authValidator';
 

@@ -1,5 +1,5 @@
-import Logo from "../../../BookLink_Logo.svg";
-import * as Styled from "./HeaderStyled";
+import Logo from '../../../images/BookLink_Logo.svg';
+import * as Styled from './HeaderStyled';
 
 const HeaderContainer = () => {
   return (
