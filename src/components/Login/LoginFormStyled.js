@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const LoginDiv = styled.div`
   margin: 6.571rem auto 0 auto;
@@ -27,11 +27,19 @@ export const LoginFormDiv = styled.div`
 `;
 
 export const LoginForm = styled.form`
-  margin: 0 auto;
   text-align: left;
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
+`;
+
+export const InputDiv = styled.div`
+  position: relative;
+`;
+
+export const InputDivWithMargin = styled(InputDiv)`
+  margin: 4.286rem 0 1rem 0;
 `;
 
 export const Label = styled.label`
@@ -40,11 +48,8 @@ export const Label = styled.label`
   margin: 0 0 1rem 0;
 `;
 
-export const LabelWithMargin = styled(Label)`
-  margin: 2.571rem 0 1rem 0;
-`;
 export const LoginInput = styled.input`
-  width: 63rem;
+  width: 40.714rem;
   height: 4.286rem;
   border-radius: 0.857rem;
 `;
@@ -53,7 +58,8 @@ export const LoginFormFooterDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.857rem 0 0 0;
+  gap: 21.429rem;
+  margin: 3.143rem 0 0 0;
 `;
 
 export const LoginFormCheckBox = styled.input`
@@ -74,7 +80,7 @@ export const StyledLink = styled(Link)`
 
 export const LoginButton = styled.button`
   margin: 6.429rem auto 2.571rem auto;
-  width: 65.286rem;
+  width: 42.857rem;
   height: 4.286rem;
   border-radius: 0.857rem;
   background: #003c74;
@@ -87,4 +93,12 @@ export const RegisterButton = styled(Link)`
   text-align: center;
   text-decoration-line: underline;
   color: #003c74;
+`;
+
+export const ErrorMessage = styled.span`
+  color: #e30000;
+  font-size: 1.143rem;
+  position: absolute;
+  bottom: -2rem;
+  left: 0.429rem;
 `;

@@ -1,29 +1,69 @@
-import Logo from "../../BookLink_Logo.svg";
-import * as Styled from "./LoginFormStyled";
+import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { logIn } from '../../apis/authService';
+import Logo from '../../BookLink_Logo.svg';
+import * as Styled from './LoginFormStyled';
+import { loginSchema } from '../../validators/authValidator';
 
-//후에 form태그에 onsubmit달기
 const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const watchEmail = watch('email');
+  const watchPassword = watch('password');
+
+  const handleOnSubmit = useCallback(async (user) => {
+    try {
+      const { email, password } = user;
+
+      const { data } = await logIn({ email, password });
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     <Styled.LoginDiv>
       <Styled.LogoDiv>
         <Styled.Img src={Logo} />
       </Styled.LogoDiv>
       <Styled.LoginFormDiv>
-        <Styled.LoginForm>
-          <Styled.Label htmlFor="email">아이디</Styled.Label>
-          <Styled.LoginInput
-            type="email"
-            id="email"
-            placeholder="example@gmail.com"
-          />
-          <Styled.LabelWithMargin htmlFor="password">
-            패스워드
-          </Styled.LabelWithMargin>
-          <Styled.LoginInput
-            type="password"
-            id="password"
-            placeholder="8~16자로 입력해주세요."
-          />
+        <Styled.LoginForm onSubmit={handleSubmit(handleOnSubmit)}>
+          <Styled.InputDiv>
+            <Styled.Label htmlFor="email">아이디</Styled.Label>
+            <Styled.LoginInput
+              type="email"
+              id="email"
+              placeholder="example@gmail.com"
+              {...register('email')}
+            />
+            {watchEmail && errors.email && (
+              <Styled.ErrorMessage>{errors.email.message}</Styled.ErrorMessage>
+            )}
+          </Styled.InputDiv>
+          <Styled.InputDivWithMargin>
+            <Styled.Label htmlFor="password">패스워드</Styled.Label>
+            <Styled.LoginInput
+              type="password"
+              id="password"
+              placeholder="8~16자로 입력해주세요."
+              {...register('password')}
+            />
+            {watchPassword && errors.password && (
+              <Styled.ErrorMessage>
+                {errors.password.message}
+              </Styled.ErrorMessage>
+            )}
+          </Styled.InputDivWithMargin>
           <Styled.LoginFormFooterDiv>
             <div>
               <Styled.LoginFormCheckBox type="checkbox" id="checkbox" />
@@ -35,7 +75,7 @@ const LoginForm = () => {
               <Styled.StyledLink to="#">아이디/비밀번호 찾기</Styled.StyledLink>
             </div>
           </Styled.LoginFormFooterDiv>
-          <Styled.LoginButton>로그인</Styled.LoginButton>
+          <Styled.LoginButton type="submit">로그인</Styled.LoginButton>
           <Styled.RegisterButton to="/register">
             회원가입 하기
           </Styled.RegisterButton>
