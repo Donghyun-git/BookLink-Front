@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { logIn } from '../../apis/authService';
+import { login } from '../../apis/authService';
 import Logo from '../../images/BookLink_Logo.svg';
 import * as Styled from './LoginFormStyled';
 import { loginSchema } from '../../validators/authValidator';
@@ -23,7 +23,7 @@ const LoginForm = () => {
     try {
       const { email, password } = user;
 
-      const { data } = await logIn({ email, password });
+      const { data } = await login({ email, password });
 
       console.log(data);
     } catch (error) {
