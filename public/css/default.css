@@ -148,7 +148,7 @@ input::-webkit-input-placeholder {
   font-size: inherit;
 }
 
-/*input[type='tel'],
+input[type='tel'],
 input[type='text'],
 input[type='password'],
 input[type='email'],
@@ -160,7 +160,7 @@ input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}*/
+}
 
 input[type='tel']:focus,
 input[type='text']:focus,
