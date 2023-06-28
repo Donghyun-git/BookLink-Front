@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // [ Header(index)]
 export const Header = styled.header`
   width: 100%;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 `;
 
