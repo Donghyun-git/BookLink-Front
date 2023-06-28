@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MainDiv = styled.div`
   width: 100vw;
@@ -19,7 +19,7 @@ export const RegisterDiv = styled.div`
 export const RegisterForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   width: 50%;
 `;
 export const Div = styled.div`
@@ -48,16 +48,17 @@ export const genderDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
+export const searchDiv = styled(buttonIncludedDiv)`
+  width: 50%;
+`;
 
 export const Input = styled.input`
   margin-top: 1rem;
   height: 3.75rem;
   width: 100%;
   border: 1px solid #d9d9d9;
+  box-sizing: border-box;
   border-radius: 1.5rem;
-`;
-export const searchInput = styled(Input)`
-  width: 50%;
 `;
 
 export const RegisterBtn = styled.button`
