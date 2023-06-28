@@ -149,6 +149,7 @@ input::-webkit-input-placeholder {
 }
 
 input[type='tel'],
+input[type='date'],
 input[type='text'],
 input[type='password'],
 input[type='email'],
@@ -295,9 +296,6 @@ input[type='radio'] + label {
   cursor: pointer;
 }
 
-input[type='file'] {
-}
-
 select {
   display: block;
   width: 100%;
@@ -342,12 +340,12 @@ label {
   cursor: pointer;
 }
 
-a:focus,
+/* a:focus,
 button:focus,
 select:focus,
 input:focus {
-  /* outline: #000 solid 2px !important; */
-}
+  outline: #000 solid 2px !important;
+} */
 .hidden {
   font-size: 0px;
   height: 0px;
