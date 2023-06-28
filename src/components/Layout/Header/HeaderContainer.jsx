@@ -1,11 +1,14 @@
 import Logo from '../../../images/BookLink_Logo.svg';
 import * as Styled from './HeaderStyled';
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = () => {
   return (
     <Styled.HeaderContainer>
       <Styled.LogoDiv>
-        <Styled.Img src={Logo} />
+        <Link to="/books">
+          <Styled.Img src={Logo} />
+        </Link>
       </Styled.LogoDiv>
       <div>
         <Styled.StyledLink to="/books">책방</Styled.StyledLink>

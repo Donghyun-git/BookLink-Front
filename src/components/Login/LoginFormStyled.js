@@ -99,6 +99,6 @@ export const ErrorMessage = styled.span`
   color: #e30000;
   font-size: 1.143rem;
   position: absolute;
-  bottom: -2rem;
+  bottom: -2.571rem;
   left: 0.429rem;
 `;
