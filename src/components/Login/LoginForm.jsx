@@ -1,12 +1,19 @@
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { login } from '../../apis/authService';
-import Logo from '../../images/BookLink_Logo.svg';
 import * as Styled from './LoginFormStyled';
 import { loginSchema } from '../../validators/authValidator';
+import Logo from '../../images/BookLink_Logo.svg';
+import showPasswordImg from '../../images/password_eye.svg';
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = useCallback(() => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -53,10 +60,14 @@ const LoginForm = () => {
           <Styled.InputDivWithMargin>
             <Styled.Label htmlFor="password">패스워드</Styled.Label>
             <Styled.LoginInput
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="8~16자로 입력해주세요."
               {...register('password')}
+            />
+            <Styled.ShowPasswordImg
+              src={showPasswordImg}
+              onClick={handleShowPassword}
             />
             {watchPassword && errors.password && (
               <Styled.ErrorMessage>

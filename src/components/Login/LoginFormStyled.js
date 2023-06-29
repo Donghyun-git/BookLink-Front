@@ -39,6 +39,7 @@ export const InputDiv = styled.div`
 `;
 
 export const InputDivWithMargin = styled(InputDiv)`
+  position: relative;
   margin: 4.286rem 0 1rem 0;
 `;
 
@@ -52,6 +53,15 @@ export const LoginInput = styled.input`
   width: 40.714rem;
   height: 4.286rem;
   border-radius: 0.857rem;
+`;
+
+export const ShowPasswordImg = styled.img`
+  position: absolute;
+  width: 2.57143rem;
+  height: 1.76236rem;
+  bottom: 1.257rem;
+  right: 1.34rem;
+  cursor: pointer;
 `;
 
 export const LoginFormFooterDiv = styled.div`
