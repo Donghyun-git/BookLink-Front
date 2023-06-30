@@ -50,9 +50,15 @@ export const CardHeaderDiv = styled.div`
 `;
 
 export const CardHeaderWithFlex = styled.div`
-display: flex;
-justify-content:center;
-align-itemscenter;`;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CardHeaderNumberSpan = styled.span`
+  margin-left: 0.25rem;
+`;
+
 export const CardHeaderWithMargin = styled.div`
   padding-left: 0.86rem;
 `;
@@ -95,6 +101,7 @@ export const ContentsPriceDiv = styled.div``;
 export const ContentSpan = styled.span`
   color: #848484;
   font-size: 1rem;
+  margin-right: 0.64rem;
 `;
 
 export const ContentSpanRight = styled(ContentSpan)`
@@ -125,8 +132,9 @@ export const CardButtonDiv = styled.div`
 export const CardButton = styled.button`
   width: 12.214rem;
   height: 2.714rem;
-  font-size: 0.857rem;
-  font-weight: 700;
+  font-size: 0.85714rem;
+  font-weight: 500;
+  color: #d9d9d9;
   padding: 0.714rem 2.357rem;
   border-radius: 0 0 0 0.857rem;
   background-color: #fff;

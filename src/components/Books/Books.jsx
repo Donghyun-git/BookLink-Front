@@ -111,17 +111,23 @@ const Books = () => {
                 <Styled.CardHeaderWithFlex>
                   <span>
                     <img src={likesLogo} alt="좋아요 이미지" />
-                    {likes}
+                    <Styled.CardHeaderNumberSpan>
+                      {likes}
+                    </Styled.CardHeaderNumberSpan>
                   </span>
                   <Styled.CardHeaderWithMargin>
                     <img src={commentsLogo} alt="댓글 이미지" />
-                    {comments}
+                    <Styled.CardHeaderNumberSpan>
+                      {comments}
+                    </Styled.CardHeaderNumberSpan>
                   </Styled.CardHeaderWithMargin>
                 </Styled.CardHeaderWithFlex>
                 <div>
                   <span>
                     <img src={viewsLogo} alt="조회수 이미지" />
-                    {views}
+                    <Styled.CardHeaderNumberSpan>
+                      {views}
+                    </Styled.CardHeaderNumberSpan>
                   </span>
                 </div>
               </Styled.CardHeaderDiv>
@@ -131,15 +137,15 @@ const Books = () => {
               <Styled.CardContentsDiv>
                 <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
                 <Styled.ContentsAuthorDiv>
-                  <Styled.ContentSpan>저자</Styled.ContentSpan>{' '}
+                  <Styled.ContentSpan>저자</Styled.ContentSpan>
                   <Styled.ContentSpanRight>{author}</Styled.ContentSpanRight>
                 </Styled.ContentsAuthorDiv>
                 <Styled.ContentsPublishDiv>
-                  <Styled.ContentSpan>출판</Styled.ContentSpan>{' '}
+                  <Styled.ContentSpan>출판</Styled.ContentSpan>
                   <Styled.ContentSpanRight>{publish}</Styled.ContentSpanRight>
                 </Styled.ContentsPublishDiv>
                 <Styled.ContentsPriceDiv>
-                  <Styled.ContentSpan>정가</Styled.ContentSpan>{' '}
+                  <Styled.ContentSpan>정가</Styled.ContentSpan>
                   <Styled.ContentSpanRight>{price}</Styled.ContentSpanRight>
                 </Styled.ContentsPriceDiv>
               </Styled.CardContentsDiv>
