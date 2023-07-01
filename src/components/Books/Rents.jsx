@@ -1,5 +1,7 @@
+import * as Styled from './BooksStyled';
+
 const Rents = () => {
-  return <div>Rents</div>;
+  return <Styled.RentsComponentDiv>Rents</Styled.RentsComponentDiv>;
 };
 
 export default Rents;

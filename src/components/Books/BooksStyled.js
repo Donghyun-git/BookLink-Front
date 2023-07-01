@@ -3,6 +3,7 @@ import styled from 'styled-components';
 //[BooksComponent]
 
 export const BooksComponentDiv = styled.div`
+  min-height: 75rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -156,4 +157,6 @@ export const CardButtonRight = styled(CardButton)`
 
 //[RentsComponent]
 
-export const RentsComponentDiv = styled.div``;
+export const RentsComponentDiv = styled.div`
+  min-height: 75rem;
+`;
