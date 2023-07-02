@@ -166,9 +166,7 @@ input[type='search'] {
 input[type='tel']:focus,
 input[type='text']:focus,
 input[type='password']:focus,
-input[type='email']:focus {
-  outline: solid 2px #003c74;
-}
+input[type='email']:focus,
 input[type='textarea']:focus {
   outline: solid 2px #003c74;
   border: 2px solid #003c74;
@@ -177,13 +175,9 @@ input[type='textarea']:focus {
 input[type='tel']::placeholder,
 input[type='text']::placeholder,
 input[type='password']::placeholder,
-input[type='email']::placeholder {
-  color: #ccc;
-}
-
+input[type='email']::placeholder,
 input[type='search']::placeholder {
-  padding: 1.286rem 0;
-  text-align-last: center;
+  padding-left: -0.46rem;
   color: #ccc;
 }
 
