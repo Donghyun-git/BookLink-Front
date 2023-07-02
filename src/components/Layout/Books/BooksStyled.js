@@ -48,17 +48,37 @@ export const NavList = styled.ul`
 `;
 
 export const NavLi = styled.li`
-  font-size: 2.571rem;
-  font-weight: 700;
-  color: ${({ active }) =>
-    active === 'true' ? 'rgba(0, 0, 0, 1)' : 'rgba(217, 217, 217, 1)'};
-  margin: 1.714rem;
-  cursor: pointer;
-  transition: all 0.2s;
+  color: #fff;
+  font-size: 1.71429rem;
+  font-weight: 500;
+  margin: 1.714rem 0;
 
-  &:first-child {
-    margin-left: 0;
-  }
+  cursor: pointer;
+  transition: all 0.1s;
+
+  color: ${({ active }) =>
+    active === 'true' ? '#fff' : 'rgba(217, 217, 217, 1)'};
+  border-radius: ${({ active }) => (active === 'true' ? '8px' : '0')};
+  background: ${({ active }) => (active === 'true' ? '#00e37d' : '#fff')};
+  box-shadow: ${({ active }) =>
+    active === 'true' ? '0px 0px 4px 0px rgba(0, 0, 0, 0.25)' : '0'};
+`;
+
+export const NavLiDiv = styled.div`
+  padding: 0.71rem 1.71rem 0.2rem 1.71rem;
+`;
+
+export const NavLiLogo = styled.img`
+  width: 2.28571rem;
+  height: 2.71429rem;
+  margin: 0 0.29rem 0.657rem 0;
+  filter: ${({ active }) =>
+    active === 'true' ? 'brightness(1)' : 'brightness(0.9)'};
+`;
+
+export const NavLiRentLogo = styled(NavLiLogo)`
+  filter: ${({ active }) =>
+    active === 'true' ? 'brightness(2)' : 'brightness(1)'};
 `;
 
 export const NavSortUl = styled.ul`

@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 import * as Styled from './BooksStyled';
 import Books from '../../Books/Books';
 import Rents from '../../Books/Rents';
+import rentButtonLogo from '../../../images/rent_logo.svg';
+import bookStoreLogo from '../../../images/bookstore_logo.svg';
 
 const BooksContainer = () => {
   const [showBooksComponent, setShowBooksComponent] = useState(true);
@@ -41,13 +43,27 @@ const BooksContainer = () => {
               onClick={handleClickBooks}
               active={showBooksComponent.toString()}
             >
-              책방
+              <Styled.NavLiDiv>
+                <Styled.NavLiLogo
+                  src={bookStoreLogo}
+                  alt="책방 버튼 로고"
+                  active={showBooksComponent.toString()}
+                />
+                책방
+              </Styled.NavLiDiv>
             </Styled.NavLi>
             <Styled.NavLi
               onClick={handleClickRents}
               active={showRentsComponent.toString()}
             >
-              대여하기
+              <Styled.NavLiDiv>
+                <Styled.NavLiRentLogo
+                  src={rentButtonLogo}
+                  alt="대여하기 버튼 로고"
+                  active={showRentsComponent.toString()}
+                />
+                대여하기
+              </Styled.NavLiDiv>
             </Styled.NavLi>
           </Styled.NavList>
         </div>
