@@ -9,7 +9,8 @@ export const BooksMain = styled.div`
 //[Books Container]
 export const BooksContainer = styled.div`
   width: 102.857rem;
-  margin: 0 auto;
+
+  margin: 2.57rem auto 0 auto;
 `;
 
 export const SearchDiv = styled.div`

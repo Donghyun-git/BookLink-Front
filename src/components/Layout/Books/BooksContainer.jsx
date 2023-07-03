@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import * as Styled from './BooksStyled';
 import Books from '../../Books/Books';
 import Rents from '../../Books/Rents';
+import CategorySelects from '../../Books/CategorySelects';
 import rentButtonLogo from '../../../images/rent_logo.svg';
 import bookStoreLogo from '../../../images/bookstore_logo.svg';
 
@@ -33,9 +34,9 @@ const BooksContainer = () => {
 
   return (
     <Styled.BooksContainer>
-      <Styled.SearchDiv>
+      {/* <Styled.SearchDiv>
         <Styled.SearchInput type="search" placeholder="책을 검색해보세요!" />
-      </Styled.SearchDiv>
+      </Styled.SearchDiv> */}
       <Styled.NavDiv>
         <div>
           <Styled.NavList>
@@ -84,6 +85,7 @@ const BooksContainer = () => {
           </Styled.NavSortUl>
         </div>
       </Styled.NavDiv>
+      <CategorySelects />
       {showBooksComponent && <Books />}
       {showRentsComponent && <Rents />}
     </Styled.BooksContainer>

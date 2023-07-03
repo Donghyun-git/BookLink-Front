@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ToggleLogo from '../../images/select_arrow.png';
 
 //[BooksComponent]
 
@@ -159,4 +160,124 @@ export const CardButtonRight = styled(CardButton)`
 
 export const RentsComponentDiv = styled.div`
   min-height: 75rem;
+`;
+
+// [CategorySelects]
+export const SelectMain = styled.div`
+  width: 100%;
+  margin: 3rem 0;
+`;
+export const SelectContainer = styled.div`
+  position: relative;
+  margin: 0 auto;
+`;
+
+export const CategorySelect = styled.select`
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: -0.7rem;
+  && {
+    width: 6.86rem;
+    height: 2.57143rem;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: #000;
+    text-align: center;
+    font-size: 0.714rem;
+    font-weight: 500;
+    background-repeat: no-repeat;
+    background-position: right 0.48rem center;
+    background-size: 0.85714rem auto;
+    &:focus {
+      outline: none;
+    }
+  }
+`;
+export const SelectSpan = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #000;
+  text-align: center;
+  font-size: 0.85714rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 11.92857rem;
+  height: 2.57143rem;
+  min-width: 3rem;
+
+  && {
+    border: 2px solid transparent;
+    border-radius: 0.571rem;
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0.87rem;
+    transform: translateY(-50%);
+    width: 0.45714rem;
+    height: 0.45714rem;
+    background-image: url(${ToggleLogo});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+`;
+
+export const OptionsList = styled.ul`
+  && {
+    border: 2px solid transparent;
+    border-radius: 0.571rem;
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  position: absolute;
+  top: 3.464rem;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  width: 11.92857rem;
+  background-color: #fff;
+  cursor: pointer;
+  z-index: 9999;
+`;
+
+export const OptionItem = styled.li`
+  padding: 0.57rem 1.15rem;
+  margin: 0 0.61rem;
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  color: #848484;
+  text-align: center;
+  font-size: 0.85714rem;
+  font-weight: 500;
+
+  &:hover {
+    color: #000;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+`;
+
+export const OptionImage = styled.img`
+  /* position: fixed;
+  top: 0.79rem;
+  right: 0.43rem; */
+  width: 0.85714rem;
+  height: 0.85714rem;
 `;

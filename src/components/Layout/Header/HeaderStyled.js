@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import ToggleLogo from '../../../images/select_arrow.png';
 
 // [ Header(index)]
 export const Header = styled.header`
@@ -46,7 +47,7 @@ export const SearchDiv = styled.div`
   margin-left: 11.43rem;
   &:before {
     content: '';
-    width: 1.2px;
+    width: 1px;
     height: 1.71429rem;
     background-color: rgba(217, 217, 217, 1);
     position: absolute;
@@ -76,7 +77,14 @@ export const SearchInput = styled.input`
   }
 `;
 
+export const SelectContainer = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0.273rem;
+`;
+
 export const CategorySelect = styled.select`
+  display: none;
   position: absolute;
   bottom: 0;
   left: -0.7rem;
@@ -97,4 +105,77 @@ export const CategorySelect = styled.select`
       outline: none;
     }
   }
+`;
+export const SelectSpan = styled.span`
+  display: inline-block;
+  position: relative;
+  color: #000;
+  text-align: center;
+  font-size: 0.85714rem;
+  font-weight: 500;
+  padding: 0.2rem 1.61rem;
+  cursor: pointer;
+  min-width: 3rem;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 0.45714rem;
+    height: 0.45714rem;
+    background-image: url(${ToggleLogo});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+`;
+
+export const OptionsList = styled.ul`
+  && {
+    border: 1px solid transparent;
+    border-radius: 0.571rem;
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+
+  position: absolute;
+  top: 2.894rem;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  width: 6.42857rem;
+  background-color: #fff;
+  cursor: pointer;
+`;
+
+export const OptionItem = styled.li`
+  padding: 0.57rem 1.15rem;
+  margin: 0 0.61rem;
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  color: #848484;
+  text-align: center;
+  font-size: 0.85714rem;
+  font-weight: 500;
+
+  &:hover {
+    color: #000;
+  }
+
+  &:last-child {
+    border: 0;
+  }
+`;
+
+export const OptionImage = styled.img`
+  /* position: fixed;
+  top: 0.79rem;
+  right: 0.43rem; */
+  width: 0.85714rem;
+  height: 0.85714rem;
 `;
