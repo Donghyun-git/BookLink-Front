@@ -170,6 +170,8 @@ export const SelectMain = styled.div`
 export const SelectContainer = styled.div`
   position: relative;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 `;
 
 export const CategorySelect = styled.select`
@@ -274,10 +276,34 @@ export const OptionItem = styled.li`
   }
 `;
 
-export const OptionImage = styled.img`
-  /* position: fixed;
-  top: 0.79rem;
-  right: 0.43rem; */
-  width: 0.85714rem;
-  height: 0.85714rem;
+export const SearchDiv = styled.div`
+  position: relative;
+  margin-left: 1.71rem;
+`;
+
+export const SearchInput = styled.input`
+  && {
+    padding-left: 0;
+    padding-right: 0;
+    width: 25.71429rem;
+    height: 2.93143rem;
+    border: 2px solid transparent;
+    border-radius: 0.571rem;
+    text-indent: 1.071rem;
+    font-size: 0.714rem;
+    background-image: linear-gradient(#fff, #fff),
+      linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchIcon = styled.div`
+  position: absolute;
+  top: 0.214rem;
+  right: 0.67rem;
+  cursor: pointer;
 `;
