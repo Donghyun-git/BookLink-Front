@@ -217,6 +217,13 @@ input[type='search'].readonly:focus {
   outline: none;
 }
 
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
 input[type='tel'].dark,
 input[type='text'].dark,
 input[type='password'].dark,
