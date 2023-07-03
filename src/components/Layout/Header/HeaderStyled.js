@@ -134,7 +134,7 @@ export const SelectSpan = styled.span`
 
 export const OptionsList = styled.ul`
   && {
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 0.571rem;
     background-image: linear-gradient(#fff, #fff),
       linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
