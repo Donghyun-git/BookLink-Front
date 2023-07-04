@@ -5,6 +5,8 @@ export const FooterMain = styled.footer`
   width: 100%;
   background-color: rgba(64, 64, 64, 1);
   margin-top: 14.64rem;
+  ${({ pathname }) =>
+    pathname === '/login' || pathname === '/register' ? 'margin: 0;' : ''}
 `;
 
 //[ FooterContainer ]

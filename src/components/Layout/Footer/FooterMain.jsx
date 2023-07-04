@@ -1,9 +1,12 @@
+import { useLocation } from 'react-router-dom';
 import * as Styled from './FooterStyled';
 import FooterContainer from './FooterContainer';
 
 const FooterMain = () => {
+  const { pathname } = useLocation();
+
   return (
-    <Styled.FooterMain>
+    <Styled.FooterMain pathname={pathname}>
       <FooterContainer></FooterContainer>
     </Styled.FooterMain>
   );
