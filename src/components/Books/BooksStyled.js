@@ -4,7 +4,7 @@ import ToggleLogo from '../../images/select_arrow.png';
 //[BooksComponent]
 
 export const BooksComponentDiv = styled.div`
-  min-height: 75rem;
+  min-height: 86rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -14,11 +14,10 @@ export const CardDiv = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 24.429rem;
-  /* height: 40rem; */
   background-color: rgba(255, 255, 255, 1);
-  border-left: 0.5px solid #dedede;
+  /* border-left: 0.5px solid #dedede;
   border-right: 0.5px solid #dedede;
-  border-top: 0.5px solid #dedede;
+  border-top: 0.5px solid #dedede; */
   border-radius: 0.857rem;
   margin: 0 0.857rem 1.71rem 0.857rem;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
@@ -159,7 +158,7 @@ export const CardButtonRight = styled(CardButton)`
 //[RentsComponent]
 
 export const RentsComponentDiv = styled.div`
-  min-height: 75rem;
+  min-height: 86rem;
 `;
 
 // [CategorySelects]
