@@ -34,17 +34,19 @@ export const CardDiv = styled.div`
   }
   &:hover {
     transform: translateY(-8px);
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 12px 20px;
+    /* box-shadow: rgba(0, 0, 0, 0.08) 0px 12px 20px; */
+    box-shadow: 0px 0px 6px 0px #00e37d;
   }
 `;
 
-export const CardContainderDiv = styled.div`
+export const CardContainerDiv = styled.div`
   padding: 0.857rem 1.714rem 0 0.957rem;
 `;
 
 export const CardHeaderDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ isbooks }) =>
+    isbooks === 'true' ? 'space-between' : 'flex-start'};
   align-items: center;
   flex-wrap: nowrap;
   margin-bottom: 0.71rem;
@@ -89,7 +91,6 @@ export const ContentsTitleDiv = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 1.71429rem;
-  font-family: Noto Sans KR;
   font-weight: 500;
 `;
 
@@ -160,6 +161,57 @@ export const CardButtonRight = styled(CardButton)`
 export const RentsComponentDiv = styled.div`
   min-height: 86rem;
 `;
+
+export const CardProfileImageDiv = styled.div`
+  width: 3.71429rem;
+  height: 3.71429rem;
+  clip-path: circle(50%);
+`;
+
+export const CardProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const CardProfileInfoDiv = styled.div`
+  margin-left: 0.86rem;
+`;
+
+export const CardProfileInfoUl = styled.ul``;
+
+export const CardProfileInfoLi = styled.li`
+  color: #000;
+  font-size: 1.42857rem;
+  font-style: normal;
+  font-weight: 500;
+
+  &:last-child {
+    color: #000;
+    font-size: 0.85714rem;
+    font-style: normal;
+    font-weight: 400;
+  }
+`;
+
+export const RentsLi = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #000;
+  font-size: 1.14286rem;
+  font-style: normal;
+  font-weight: 400;
+
+  margin: 0.86rem 0;
+
+  & > span:last-child {
+    font-weight: 500;
+  }
+`;
+
+// -----------
 
 // [CategorySelects]
 export const SelectMain = styled.div`

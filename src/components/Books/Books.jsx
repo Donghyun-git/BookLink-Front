@@ -5,7 +5,7 @@ import likesLogo from '../../images/likes.svg';
 import commentsLogo from '../../images/comments.svg';
 import viewsLogo from '../../images/views.svg';
 
-const Books = () => {
+const Books = ({ isBooks }) => {
   const initialState = [
     {
       key: 1,
@@ -88,7 +88,6 @@ const Books = () => {
   //   })(),
   //   [cards]
   // );
-
   return (
     <Styled.BooksComponentDiv>
       {cards.map((card) => {
@@ -106,8 +105,8 @@ const Books = () => {
         } = card;
         return (
           <Styled.CardDiv key={key}>
-            <Styled.CardContainderDiv>
-              <Styled.CardHeaderDiv>
+            <Styled.CardContainerDiv>
+              <Styled.CardHeaderDiv isbooks={isBooks.toString()}>
                 <Styled.CardHeaderWithFlex>
                   <span>
                     <img src={likesLogo} alt="좋아요 이미지" />
@@ -154,7 +153,7 @@ const Books = () => {
                   {quantitiy}명이 이 책을 소장하고 있어요!
                 </Styled.FooterSpan>
               </Styled.CardFooterDiv>
-            </Styled.CardContainderDiv>
+            </Styled.CardContainerDiv>
             <Styled.CardButtonDiv>
               <Styled.CardButton>대여정보 확인하기</Styled.CardButton>
               <Styled.CardButtonRight>쇼핑 등록하기</Styled.CardButtonRight>

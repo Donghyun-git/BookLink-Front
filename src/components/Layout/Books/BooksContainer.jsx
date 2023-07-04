@@ -86,7 +86,7 @@ const BooksContainer = () => {
         </div>
       </Styled.NavDiv>
       <CategorySelects />
-      {showBooksComponent && <Books />}
+      {showBooksComponent && <Books isBooks={showBooksComponent} />}
       {showRentsComponent && <Rents />}
     </Styled.BooksContainer>
   );
