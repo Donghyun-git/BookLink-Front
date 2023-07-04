@@ -47,10 +47,10 @@ figcaption {
   margin: 0;
   padding: 0;
 }
-html,
-body {
+html {
   width: 100%;
 }
+
 html {
   -webkit-touch-callout: none; /*-webkit-user-select:none;*/
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -58,7 +58,7 @@ html {
 }
 body {
   width: 100%;
-  background: #fff;
+  background: #fafbfa;
   min-width: 320px;
   -webkit-text-size-adjust: none;
   word-wrap: break-word;
