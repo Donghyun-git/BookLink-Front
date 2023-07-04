@@ -45,6 +45,7 @@ export const LinkWithMargin = styled(StyledLink)`
 export const SearchDiv = styled.div`
   position: relative;
   margin-left: 11.43rem;
+
   &:before {
     content: '';
     width: 1px;
@@ -53,6 +54,7 @@ export const SearchDiv = styled.div`
     position: absolute;
     top: 0.38rem;
     left: 6.43rem;
+    z-index: 9999;
   }
 `;
 
@@ -116,7 +118,7 @@ export const SelectSpan = styled.span`
   padding: 0.2rem 1.61rem;
   cursor: pointer;
   min-width: 3rem;
-
+  z-index: 9999;
   &:after {
     content: '';
     position: absolute;

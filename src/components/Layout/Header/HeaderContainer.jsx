@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../../../images/BookLink_Logo.svg';
+import searchLogo from '../../../images/search_icon.svg';
 import * as Styled from './HeaderStyled';
 
 const HeaderContainer = () => {
@@ -80,11 +81,25 @@ const HeaderContainer = () => {
               </Styled.OptionsList>
             )}
           </Styled.SelectContainer>
-          <div>
+          <div style={{ position: 'relative' }}>
             <Styled.SearchInput
               type="search"
               placeholder="책을 검색해보세요!"
             />
+            <div
+              style={{
+                position: 'absolute',
+                top: '0.143rem',
+                right: '0.429rem',
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                src={searchLogo}
+                alt="검색 아이콘"
+                style={{ width: '100%' }}
+              />
+            </div>
           </div>
         </Styled.SearchDiv>
       </div>
