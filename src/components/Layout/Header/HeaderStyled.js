@@ -173,9 +173,29 @@ export const OptionItem = styled.li`
 `;
 
 export const OptionImage = styled.img`
-  /* position: fixed;
-  top: 0.79rem;
-  right: 0.43rem; */
   width: 0.85714rem;
   height: 0.85714rem;
+`;
+
+export const HeaderProfileDiv = styled.div`
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProfileText = styled.span`
+  color: #000;
+  font-size: 1.14286rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const ProfileImgDiv = styled.div`
+  width: 3.42857rem;
+  height: 3.42857rem;
+  border-radius: 3.42857rem;
+  background: #d9d9d9;
+  margin-left: 0.86rem;
 `;

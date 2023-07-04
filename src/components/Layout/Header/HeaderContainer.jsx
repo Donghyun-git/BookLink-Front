@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import Logo from '../../../images/BookLink_Logo.svg';
 import * as Styled from './HeaderStyled';
@@ -9,6 +9,8 @@ const HeaderContainer = () => {
 
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('도서');
+
+  const [isLoginned, setIsLoginned] = useState(true); // 후에 로그인 상태 전역 관리.
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -86,6 +88,21 @@ const HeaderContainer = () => {
           </div>
         </Styled.SearchDiv>
       </div>
+      <Styled.HeaderProfileDiv>
+        {isLoginned ? (
+          <Fragment>
+            <Styled.ProfileText>00님 환영합니다!</Styled.ProfileText>
+            <Styled.ProfileImgDiv>
+              {/* <img src="" alt="프로필 이미지" /> */}
+            </Styled.ProfileImgDiv>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <div>로그인</div>
+            <div>회원가입</div>
+          </Fragment>
+        )}
+      </Styled.HeaderProfileDiv>
     </Styled.HeaderContainer>
   );
 };
