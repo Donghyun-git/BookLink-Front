@@ -169,7 +169,6 @@ input[type='password']:focus,
 input[type='email']:focus,
 input[type='textarea']:focus {
   outline: solid 2px #003c74;
-  border: 2px solid #003c74;
 }
 
 input[type='tel']::placeholder,
