@@ -44,7 +44,7 @@ const BooksContainer = () => {
               onClick={handleClickBooks}
               active={showBooksComponent.toString()}
             >
-              <Styled.NavLiDiv>
+              <Styled.NavLiDiv active={showBooksComponent.toString()}>
                 <Styled.NavLiLogo
                   src={bookStoreLogo}
                   alt="책방 버튼 로고"
@@ -57,7 +57,7 @@ const BooksContainer = () => {
               onClick={handleClickRents}
               active={showRentsComponent.toString()}
             >
-              <Styled.NavLiDiv>
+              <Styled.NavLiDiv active={showRentsComponent.toString()}>
                 <Styled.NavLiRentLogo
                   src={rentButtonLogo}
                   alt="대여하기 버튼 로고"
