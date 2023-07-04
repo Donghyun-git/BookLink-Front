@@ -3,7 +3,7 @@ import styled from 'styled-components';
 //[Books Main]
 export const BooksMain = styled.div`
   width: 100%;
-  background-color: #fff;
+  background: #fafbfa;
 `;
 
 //[Books Container]
@@ -66,6 +66,7 @@ export const NavLi = styled.li`
 `;
 
 export const NavLiDiv = styled.div`
+  background-color: ${({ active }) => (active === 'true' ? '' : '#fafbfa')};
   padding: 0.71rem 1.71rem 0.2rem 1.71rem;
 `;
 
