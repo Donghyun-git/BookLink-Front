@@ -5,7 +5,7 @@ import MainPage from '../pages/Main';
 import LoginPage from '../pages/Login/Login';
 import RegisterPage from '../pages/Register';
 import BooksPage from '../pages/Books/Books';
-
+import SearchPage from '../pages/Search';
 function Router() {
   return (
     <Routes>
@@ -14,6 +14,7 @@ function Router() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/books" element={<BooksPage />}></Route>
+        <Route path="/search" element={<SearchPage />}></Route>
       </Route>
     </Routes>
   );
