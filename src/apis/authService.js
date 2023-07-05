@@ -1,23 +1,28 @@
-import axios from 'axios';
+import { axiosJsonInstance } from './axios';
 import * as env from '../../env.config';
 
 export const emailAuth = async (num) => {
-  const { data } = await axios.post(
-    `${env.VITE_SERVER_URL}/email/confirm`,
-    num
-  );
-  return data;
+  try {
+    const { data } = await axiosJsonInstance.post(`/member/email/confirm`, num);
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
 
-export const register = async (user) => {
-  const { data } = await axios.post(
-    `${env.VITE_SERVER_URL}/auth/register`,
-    user
-  );
-  return data;
+export const signUp = async (user) => {
+  try {
+    const { data } = await axiosJsonInstance.post(`/member`, user);
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
 
 export const login = async (user) => {
-  const { data } = await axios.post(`${env.VITE_SERVER_URL}/auth/login`, user);
+  const { data } = await axiosJsonInstance.post(
+    `${env.VITE_SERVER_URL}/auth/login`,
+    user
+  );
   return data;
 };

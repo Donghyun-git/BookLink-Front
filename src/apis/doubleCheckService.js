@@ -1,11 +1,25 @@
-import axios from "axios";
-
+//import axios from "axios";
+import { axiosJsonInstance } from './axios';
 export const emailDoubleCheck = async (email) => {
-  const { data } = await axios.post("/email/double-check", email);
-  return data;
+  try {
+    const { data } = await axiosJsonInstance.post(
+      'member/double-check/email',
+      email
+    );
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
 
 export const nicknameDoubleCheck = async (nickname) => {
-  const { data } = await axios.post("/nickname/double-check", nickname);
-  return data;
+  try {
+    const { data } = await axiosJsonInstance.post(
+      'member/double-check/nickname',
+      nickname
+    );
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
