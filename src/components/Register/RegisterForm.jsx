@@ -5,8 +5,10 @@ import * as Styled from './Styled';
 import { useState /*useRef, useEffect */ } from 'react';
 import AddressSearchForm from '../AddressSearch/AddressSearchForm';
 import { registerSchema } from '../../validators/authValidator';
-//import { emailAuth, register} from "../../apis/authService";
-//import { emailDoubleCheck, nicknameDoubleCheck} from "../../apis/doubleCheckService";
+import { emailAuth, signUp } from '../../apis/authService';
+import {
+  emailDoubleCheck /*nicknameDoubleCheck*/,
+} from '../../apis/doubleCheckService';
 /*const schema = yup.object().shape({
   email: yup
     .string()
@@ -48,11 +50,15 @@ const RegisterForm = () => {
   //const authNumRef = useRef(null);
   //const nicknameRef = useRef(null);
   //const basicAddressRef = useRef(null);
-
+  const [emailBtnText, setEmailBtnText] = useState('중복확인');
   const [searchBtnClick, setSearchBtnClick] = useState(false);
   //const [basicAddress, setBasicAddress] = useState('');
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { email, password, nickname, birth, basicAddress, detailAddress } =
+      data;
+    const address = basicAddress + ' ' + detailAddress;
+    const data1 = await signUp({ email, password, nickname, birth, address });
+    console.log(data1);
   };
   const handleAddressClick = (address) => {
     //console.log(basicAddressRef.current.value);
@@ -65,6 +71,13 @@ const RegisterForm = () => {
   const handleEmailCheck = async () => {
     //console.log(emailRef.current.value);
     console.log(getValues('email'));
+    const data1 = await emailDoubleCheck(getValues('email'));
+    if (data1) {
+      setEmailBtnText('인증번호 전송');
+      const data2 = await emailAuth(getValues('email'));
+      console.log(data2);
+    }
+    console.log(data1);
   };
   const handleAuthNum = async () => {
     //console.log(authNumRef.current.value);
@@ -101,7 +114,7 @@ const RegisterForm = () => {
             />
             {errors.email && <p>{errors.email.message}</p>}
             <button type="button" onClick={handleEmailCheck}>
-              중복확인
+              {emailBtnText}
             </button>
           </Styled.buttonIncludedDiv>
           <Styled.noTagDiv>

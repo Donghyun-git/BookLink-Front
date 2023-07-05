@@ -2,7 +2,7 @@ import DaumPostcode from 'react-daum-postcode';
 const AddressSearchForm = ({ onAddressClick }) => {
   const handleComplete = (data) => {
     let fullAddress = data.address;
-    let extraAddress = '';
+    /*let extraAddress = '';
     // console.log(data);
     if (data.addressType === 'R') {
       if (data.bname !== '') {
@@ -13,7 +13,7 @@ const AddressSearchForm = ({ onAddressClick }) => {
           extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
+    }*/
     onAddressClick(fullAddress);
     console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
   };
