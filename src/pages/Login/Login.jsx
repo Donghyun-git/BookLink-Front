@@ -1,15 +1,7 @@
-import AuthMain from "../../components/Layout/Login/LoginMain";
-import AuthMainContainer from "../../components/Layout/Login/LoginMainContainer";
-import LoginForm from "../../components/Login/LoginForm";
+import AuthMain from '../../components/Layout/Login/LoginMain';
 
 const Login = () => {
-  return (
-    <AuthMain>
-      <AuthMainContainer>
-        <LoginForm></LoginForm>
-      </AuthMainContainer>
-    </AuthMain>
-  );
+  return <AuthMain />;
 };
 
 export default Login;
