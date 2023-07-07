@@ -26,15 +26,19 @@ const LoginForm = () => {
   const watchEmail = watch('email');
   const watchPassword = watch('password');
 
+  //[ 로그인 ]
   const handleOnSubmit = useCallback(async (user) => {
     try {
       const { email, password } = user;
 
-      const { data } = await login({ email, password });
+      const { status, data } = await login({ email, password });
 
-      console.log(data);
+      if (status !== 200) throw new Error(data.message);
+
+      alert(data.message);
     } catch (error) {
       console.error(error);
+      console.log(error.message);
     }
   }, []);
 

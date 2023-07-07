@@ -1,5 +1,4 @@
 import { axiosJsonInstance } from './axios';
-import * as env from '../../env.config';
 
 export const emailAuth = async (num) => {
   try {
@@ -20,9 +19,10 @@ export const signUp = async (user) => {
 };
 
 export const login = async (user) => {
-  const { data } = await axiosJsonInstance.post(
-    `${env.VITE_SERVER_URL}/auth/login`,
-    user
-  );
-  return data;
+  try {
+    return await axiosJsonInstance.post(`/member/login`, user);
+  } catch (error) {
+    console.error(error);
+    return error.response;
+  }
 };

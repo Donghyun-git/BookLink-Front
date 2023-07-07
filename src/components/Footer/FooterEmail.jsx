@@ -10,13 +10,13 @@ const FooterEmail = () => {
       <Styled.EmailFormDiv>
         <Styled.EmailForm action="">
           <Styled.EmailFormInputDiv>
-            <Styled.EmailFormLabel htmlFor="email">
+            <Styled.EmailFormLabel htmlFor="footer-email">
               E-mail
             </Styled.EmailFormLabel>
             <Styled.EmailFormInput
               type="email"
               placeholder="이메일을 작성해주세요"
-              id="email"
+              id="footer-email"
             />
           </Styled.EmailFormInputDiv>
           <Styled.EmailFormTextInputDiv

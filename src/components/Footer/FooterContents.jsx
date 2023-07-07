@@ -68,7 +68,7 @@ const FooterContents = () => {
           </Styled.FooterContentLi>
           <Styled.FooterContentLi>
             <Styled.FooterContentLiSpan>이메일</Styled.FooterContentLiSpan>
-            bookStyled.FooterContentLink12@gmail.com
+            FooterContentLink12@gmail.com
           </Styled.FooterContentLi>
         </Styled.FooterContentUl>
         <Styled.FooterContentUl>

@@ -145,6 +145,10 @@ export const CardButton = styled.button`
     color: #fff;
     background-color: rgba(0, 227, 125, 1);
   }
+  &:active {
+    color: #fff;
+    background-color: #00723f;
+  }
 `;
 
 export const CardButtonRight = styled(CardButton)`
@@ -153,6 +157,11 @@ export const CardButtonRight = styled(CardButton)`
   &:hover {
     color: #fff;
     background-color: rgba(0, 227, 125, 1);
+  }
+
+  &:active {
+    color: #fff;
+    background-color: #00723f;
   }
 `;
 
