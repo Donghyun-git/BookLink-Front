@@ -5,12 +5,12 @@ import MainPage from '../pages/Main';
 import LoginPage from '../pages/Login/Login';
 import RegisterPage from '../pages/Register';
 import BooksPage from '../pages/Books/Books';
-import SearchPage from '../pages/Search';
+import SearchPage from '../pages/Search/Search';
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/main" element={<MainPage />}></Route>
+        <Route path="/" element={<MainPage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/books" element={<BooksPage />}></Route>

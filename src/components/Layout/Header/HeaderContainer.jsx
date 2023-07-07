@@ -33,15 +33,12 @@ const HeaderContainer = () => {
   return (
     <Styled.HeaderContainer>
       <Styled.LogoDiv>
-        <Styled.StyledLink to="/books">
+        <Styled.StyledLink to="/">
           <Styled.Img src={Logo} />
         </Styled.StyledLink>
       </Styled.LogoDiv>
       <div>
-        <Styled.StyledLink
-          to="/home"
-          active={(pathName === '/home').toString()}
-        >
+        <Styled.StyledLink to="/" active={(pathName === '/').toString()}>
           홈
         </Styled.StyledLink>
         <Styled.LinkWithMargin
