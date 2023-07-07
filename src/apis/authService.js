@@ -1,14 +1,6 @@
 import { axiosJsonInstance } from './axios';
 
-export const emailAuth = async (num) => {
-  try {
-    const { data } = await axiosJsonInstance.post(`/member/email/confirm`, num);
-    return data;
-  } catch (error) {
-    console.log(error.response);
-  }
-};
-
+// [ 회원가입 ]
 export const signUp = async (user) => {
   try {
     const { data } = await axiosJsonInstance.post(`/member`, user);
@@ -18,9 +10,48 @@ export const signUp = async (user) => {
   }
 };
 
+// [ 이메일 인증 코드 ]
+export const emailAuth = async (num) => {
+  try {
+    const { data } = await axiosJsonInstance.post(`/member/email/confirm`, num);
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+//[ 이메일 중복 체크 ]
+export const emailDoubleCheck = async (email) => {
+  try {
+    const { data } = await axiosJsonInstance.post(
+      'member/double-check/email',
+      email
+    );
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+//[ 닉네임 중복 체크 ]
+export const nicknameDoubleCheck = async (nickname) => {
+  try {
+    const { data } = await axiosJsonInstance.post(
+      'member/double-check/nickname',
+      nickname
+    );
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+// [ 로그인 ]
 export const login = async (user) => {
   try {
-    return await axiosJsonInstance.post(`/member/login`, user);
+    const response = await axiosJsonInstance.post(`/member/login`, user);
+    console.log(response);
+    return response;
   } catch (error) {
     console.error(error);
     return error.response;
