@@ -1,13 +1,19 @@
 import { useState, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { login } from '../../apis/authService';
 import * as Styled from './LoginFormStyled';
 import { loginSchema } from '../../validators/authValidator';
+import * as authActions from '../../redux/actions/authActions';
 import Logo from '../../images/BookLink_Logo.svg';
 import showPasswordImg from '../../images/password_eye.svg';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = useCallback(() => {
@@ -35,7 +41,13 @@ const LoginForm = () => {
 
       if (status !== 200) throw new Error(data.message);
 
+      dispatch({
+        ...authActions.login(),
+        payload: { ...data.data, isLoggedIn: true },
+      });
+
       alert(data.message);
+      navigate('/');
     } catch (error) {
       console.error(error);
       console.log(error.message);
