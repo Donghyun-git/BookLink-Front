@@ -201,3 +201,28 @@ export const ProfileImgDiv = styled.div`
   background: #d9d9d9;
   margin-left: 0.86rem;
 `;
+
+export const HeaderAuthButton = styled.div`
+  position: relative;
+  font-size: 1.34286rem;
+  font-style: normal;
+  font-weight: 700;
+  padding: 0 0.86rem;
+
+  &:last-child {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0.771rem;
+      left: -0.071rem;
+      width: 0.214rem;
+      height: 0.214rem;
+      border-radius: 7.143rem;
+      background: rgb(228, 228, 228);
+    }
+  }
+`;
+
+export const LinkWithAuthHref = styled(Link)`
+  color: #000;
+`;
