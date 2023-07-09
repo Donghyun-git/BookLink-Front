@@ -96,8 +96,8 @@ const Rents = () => {
           } = card;
           return (
             <Styled.CardDiv key={key}>
-              <Styled.CardContainerDiv>
-                <Styled.CardHeaderDiv>
+              <Styled.RentsCardContainer>
+                {/* <Styled.CardHeaderDiv>
                   <div>
                     <Styled.CardProfileImageDiv>
                       <Styled.CardProfileImage
@@ -116,10 +116,7 @@ const Rents = () => {
                       </Styled.CardProfileInfoLi>
                     </Styled.CardProfileInfoUl>
                   </Styled.CardProfileInfoDiv>
-                </Styled.CardHeaderDiv>
-                <Styled.CardImageDiv>
-                  <Styled.CardImage src={image} alt="책 이미지" />
-                </Styled.CardImageDiv>
+                </Styled.CardHeaderDiv> */}
                 <Styled.CardContentsDiv>
                   <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
                   <Styled.ContentsAuthorDiv>
@@ -131,19 +128,31 @@ const Rents = () => {
                     <Styled.ContentSpanRight>{publish}</Styled.ContentSpanRight>
                   </Styled.ContentsPublishDiv>
                 </Styled.CardContentsDiv>
+                <Styled.CardImageDiv>
+                  <Styled.CardImage src={image} alt="책 이미지" />
+                </Styled.CardImageDiv>
+
                 <Styled.CardFooterDiv>
                   <ul>
                     <Styled.RentsLi>
-                      <span>대여료</span>
+                      <Styled.RentsLiSpan>대여료</Styled.RentsLiSpan>
                       <span>{price}</span>
                     </Styled.RentsLi>
                     <Styled.RentsLi>
-                      <span>대여 가능 시간</span>
+                      <Styled.RentsLiSpan>대여 가능 시간</Styled.RentsLiSpan>
                       <span>최대 {max_during_date}개월</span>
                     </Styled.RentsLi>
                   </ul>
+                  <Styled.RentsCardFooterButtonDiv>
+                    <Styled.RentsCardButton>
+                      대여정보 확인하기
+                    </Styled.RentsCardButton>
+                    <Styled.RentsCardButton>
+                      내 주변 도서관 찾기
+                    </Styled.RentsCardButton>
+                  </Styled.RentsCardFooterButtonDiv>
                 </Styled.CardFooterDiv>
-              </Styled.CardContainerDiv>
+              </Styled.RentsCardContainer>
             </Styled.CardDiv>
           );
         })}

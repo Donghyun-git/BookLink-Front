@@ -40,7 +40,7 @@ export const CardDiv = styled.div`
 `;
 
 export const CardContainerDiv = styled.div`
-  padding: 0.857rem 1.714rem 0 0.957rem;
+  padding: 0.64rem 1.71rem 0 1.71rem;
 `;
 
 export const CardHeaderDiv = styled.div`
@@ -67,9 +67,9 @@ export const CardHeaderWithMargin = styled.div`
 `;
 
 export const CardImageDiv = styled.div`
-  width: 19.571rem;
   height: 19.571rem;
   overflow: hidden;
+  margin-top: 0.86rem;
   padding: 1.429rem;
   border-radius: 0.857rem;
   background-color: rgba(244, 244, 244, 1);
@@ -82,7 +82,9 @@ export const CardImage = styled.img`
 `;
 
 export const CardContentsDiv = styled.div`
-  margin-top: 1.71rem;
+  padding: ${({ isbooks }) =>
+    isbooks === 'true' ? '1.71rem 0 0.57rem 0' : '0 0 0.57rem 0'};
+  border-bottom: 0.07143rem solid #d9d9d9;
 `;
 
 export const ContentsTitleDiv = styled.div`
@@ -112,7 +114,6 @@ export const ContentSpanRight = styled(ContentSpan)`
 `;
 
 export const CardFooterDiv = styled.div`
-  border-top: 0.07143rem solid #d9d9d9;
   padding: 0.57rem 0;
 `;
 
@@ -171,6 +172,10 @@ export const RentsComponentDiv = styled.div`
   min-height: 86rem;
 `;
 
+export const RentsCardContainer = styled.div`
+  padding: 1.71rem;
+`;
+
 export const CardProfileImageDiv = styled.div`
   width: 3.71429rem;
   height: 3.71429rem;
@@ -217,6 +222,41 @@ export const RentsLi = styled.li`
 
   & > span:last-child {
     font-weight: 500;
+  }
+`;
+
+export const RentsLiSpan = styled.span`
+  color: #000;
+  font-size: 1.14286rem;
+  font-weight: 400;
+`;
+
+export const RentsCardFooterButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const RentsCardButton = styled.button`
+  border-radius: 0.28571rem;
+  border: 1px solid #d9d9d9;
+  padding: 0.86rem 3.5rem;
+  color: #848484;
+  background-color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 21rem;
+  height: 3.21429rem;
+  transition: all 0.2s;
+
+  &:last-child {
+    margin-top: 0.57rem;
+  }
+  &:hover {
+    color: #000;
+    background-color: #f5f5f5;
   }
 `;
 

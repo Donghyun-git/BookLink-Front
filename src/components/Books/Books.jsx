@@ -133,7 +133,7 @@ const Books = ({ isBooks }) => {
               <Styled.CardImageDiv>
                 <Styled.CardImage src={image} alt="책 이미지" />
               </Styled.CardImageDiv>
-              <Styled.CardContentsDiv>
+              <Styled.CardContentsDiv isbooks={isBooks.toString()}>
                 <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
                 <Styled.ContentsAuthorDiv>
                   <Styled.ContentSpan>저자</Styled.ContentSpan>
