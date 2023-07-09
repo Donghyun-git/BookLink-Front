@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
+import { persistor } from '../../../main';
 import Logo from '../../../images/BookLink_Logo.svg';
 import searchLogo from '../../../images/search_icon.svg';
 import * as Styled from './HeaderStyled';
@@ -16,8 +17,8 @@ const HeaderContainer = () => {
   const [selectedValue, setSelectedValue] = useState('도서');
 
   const dispatch = useDispatch();
-  const nickName = useSelector((state) => state.authReducer.nickname);
-  const isLoggedIn = useSelector((state) => state.authReducer.isLoggedIn); // 후에 로그인 상태 전역 관리.
+  const nickName = useSelector((state) => state.USER.nickname);
+  const isLoggedIn = useSelector((state) => state.USER.isLoggedIn);
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -33,8 +34,9 @@ const HeaderContainer = () => {
   };
 
   const handleLogOut = () => {
-    dispatch({ ...authActions.logout(), payload: { isLoggedIn: false } });
+    dispatch(authActions.logout());
     alert('로그아웃 되었습니다!');
+    persistor.purge();
     navigate('/');
   };
 
