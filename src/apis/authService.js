@@ -13,7 +13,10 @@ export const signUp = async (user) => {
 // [ 이메일 인증 코드 ]
 export const emailAuth = async (num) => {
   try {
-    const { data } = await axiosJsonInstance.post(`/member/email/confirm`, num);
+    const { data } = await axiosJsonInstance.post(
+      `/member/email/email-auth`,
+      num
+    );
     return data;
   } catch (error) {
     console.log(error.response);
@@ -23,10 +26,10 @@ export const emailAuth = async (num) => {
 //[ 이메일 중복 체크 ]
 export const emailDoubleCheck = async (email) => {
   try {
-    const { data } = await axiosJsonInstance.post(
-      'member/double-check/email',
-      email
-    );
+    const { data } = await axiosJsonInstance.post('member/email/double-check', {
+      ...email,
+      number: null,
+    });
     return data;
   } catch (error) {
     console.log(error.response);
@@ -37,7 +40,7 @@ export const emailDoubleCheck = async (email) => {
 export const nicknameDoubleCheck = async (nickname) => {
   try {
     const { data } = await axiosJsonInstance.post(
-      'member/double-check/nickname',
+      'member/nickname/double-check',
       nickname
     );
     return data;
