@@ -8,22 +8,23 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'AUTH/LOGIN': {
-      console.log('action.type');
+      const { email, name, nickname, isLoggedIn } = action.payload;
       return {
         ...state,
-        email: action.payload.email,
-        name: action.payload.name,
-        nickname: action.payload.nickname,
-        isLoggedIn: action.payload.isLoggedIn,
+        email,
+        name,
+        nickname,
+        isLoggedIn,
       };
     }
     case 'AUTH/LOGOUT': {
+      const { isLoggedIn } = action.payload;
       return {
         ...state,
         email: '',
         name: '',
         nickname: '',
-        isLoggedIn: action.payload.isLoggedIn,
+        isLoggedIn,
       };
     }
     default: {
