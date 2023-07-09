@@ -96,11 +96,23 @@ export const ContentsTitleDiv = styled.div`
   font-weight: 500;
 `;
 
-export const ContentsAuthorDiv = styled.div``;
+export const ContentsAuthorDiv = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
-export const ContentsPublishDiv = styled.div``;
+export const ContentsPublishDiv = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
-export const ContentsPriceDiv = styled.div``;
+export const ContentsPriceDiv = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 export const ContentSpan = styled.span`
   color: #848484;
