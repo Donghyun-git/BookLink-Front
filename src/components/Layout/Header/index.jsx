@@ -1,5 +1,5 @@
 import HeaderContainer from './HeaderContainer';
-import * as Styled from './HeaderStyled';
+import * as Styled from './Styled';
 
 const Header = () => {
   return (

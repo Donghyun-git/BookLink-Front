@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as Styled from './BooksStyled';
+import * as Styled from './Styled';
 
 const Rents = () => {
   const initialState = [

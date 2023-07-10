@@ -1,4 +1,4 @@
-import * as Styled from './BooksStyled';
+import * as Styled from './Styled';
 import BooksContainer from './BooksContainer';
 
 const BooksMain = () => {

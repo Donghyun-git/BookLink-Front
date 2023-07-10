@@ -1,4 +1,4 @@
-import * as Styled from './LoginStyled';
+import * as Styled from './Styled';
 import LoginForm from '../../Login/LoginForm';
 
 const LoginMainContainer = () => {

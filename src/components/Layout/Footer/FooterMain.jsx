@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import * as Styled from './FooterStyled';
+import * as Styled from './styled';
 import FooterContainer from './FooterContainer';
 
 const FooterMain = () => {

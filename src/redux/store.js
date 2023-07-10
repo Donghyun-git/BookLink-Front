@@ -1,5 +1,5 @@
 import { createLogger } from 'redux-logger';
-import { createStore, applyMiddleware } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';

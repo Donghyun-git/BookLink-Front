@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import * as Styled from './BooksStyled';
+import * as Styled from './Styled';
 import Books from '../../Books/Books';
 import Rents from '../../Books/Rents';
 import CategorySelects from '../../Books/CategorySelects';
@@ -34,9 +34,6 @@ const BooksContainer = () => {
 
   return (
     <Styled.BooksContainer>
-      {/* <Styled.SearchDiv>
-        <Styled.SearchInput type="search" placeholder="책을 검색해보세요!" />
-      </Styled.SearchDiv> */}
       <Styled.NavDiv>
         <div>
           <Styled.NavList>

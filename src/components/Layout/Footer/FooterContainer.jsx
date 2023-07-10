@@ -1,4 +1,4 @@
-import * as Styled from './FooterStyled';
+import * as Styled from './styled';
 import FooterLogoDiv from '../../Footer/FooterLogo';
 import FooterContentsDiv from '../../Footer/FooterContents';
 import FooterEmailDiv from '../../Footer/FooterEmail';

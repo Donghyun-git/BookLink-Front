@@ -5,7 +5,7 @@ import * as authActions from '../../../redux/actions/authActions';
 import { persistor } from '../../../main';
 import Logo from '../../../images/BookLink_Logo.svg';
 import searchLogo from '../../../images/search_icon.svg';
-import * as Styled from './HeaderStyled';
+import * as Styled from './Styled';
 
 const HeaderContainer = () => {
   const navigate = useNavigate();

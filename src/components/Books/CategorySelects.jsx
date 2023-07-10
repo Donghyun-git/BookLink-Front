@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import * as Styled from './BooksStyled';
+import * as Styled from './Styled';
 import searchIcon from '../../images/search_icon.svg';
 
 const CategorySelects = () => {

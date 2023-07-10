@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { login } from '../../apis/authService';
-import * as Styled from './LoginFormStyled';
+import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
 import * as authActions from '../../redux/actions/authActions';
 import Logo from '../../images/BookLink_Logo.svg';
