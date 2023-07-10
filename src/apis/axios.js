@@ -2,11 +2,11 @@ import axios from 'axios';
 import { VITE_SERVER_URL } from '../../env.config';
 const getAxiosInstance = (contentType) => {
   const config = {
-    baseURL: VITE_SERVER_URL,
+    baseURL: '/api/v1',
     headers: {
       'content-Type': contentType,
     },
-    //withCredentials: true,
+    withCredentials: true,
   };
   console.log(VITE_SERVER_URL);
   const instance = axios.create(config);
