@@ -1,12 +1,14 @@
-import { axiosJsonInstance } from './axios';
+import { axiosJsonInstance } from './config/axios';
 
 // [ 모든 책 데이터 ]
-export const getAllBooks = async (category) => {
+export const getAllBooks = async () => {
   try {
-    if (category) return await axiosJsonInstance(`/book/main/${category}`);
+    const { status, data } = await axiosJsonInstance('/books/main');
 
-    return await axiosJsonInstance('/book/main');
+    if (status !== 200) throw new Error(data.message);
+
+    return { status, data };
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 };
