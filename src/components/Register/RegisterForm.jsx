@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-//import * as yup from 'yup';
 import * as Styled from './Styled';
 import { useState /*useRef, useEffect */ } from 'react';
 import AddressSearchForm from '../AddressSearch/AddressSearchForm';
 import { registerSchema } from '../../validators/authValidator';
-import { emailAuth, signUp } from '../../apis/authService';
 import {
-  emailDoubleCheck /*nicknameDoubleCheck*/,
+  emailAuth,
+  signUp,
+  AuthNumConfirm,
+  emailDoubleCheck,
+  nicknameDoubleCheck,
 } from '../../apis/authService';
 
 const RegisterForm = () => {
@@ -21,60 +23,59 @@ const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
     mode: 'onChange',
   });
-  //const emailRegister = register('email');
-  //const authNumRegister = register('authNum');
-  //const nicknameRegister = register('nickname');
-  //const basicAddressRegister = register('basicAddress');
-
-  //const emailRef = useRef(null);
-  //const authNumRef = useRef(null);
-  //const nicknameRef = useRef(null);
-  //const basicAddressRef = useRef(null);
-  const [emailBtnText, setEmailBtnText] = useState('중복확인');
+  const [doubleEmailCheck, setDoubleEmailCheck] = useState(false);
   const [searchBtnClick, setSearchBtnClick] = useState(false);
-  //const [basicAddress, setBasicAddress] = useState('');
   const onSubmit = async (data) => {
-    const { email, password, nickname, birth, basicAddress, detailAddress } =
-      data;
+    const {
+      email,
+      password,
+      nickname,
+      birth,
+      name,
+      basicAddress,
+      detailAddress,
+    } = data;
     const address = basicAddress + ' ' + detailAddress;
-    const data1 = await signUp({ email, password, nickname, birth, address });
+    const data1 = await signUp({
+      email,
+      password,
+      nickname,
+      name,
+      birth,
+      address,
+    });
     console.log(data1);
   };
   const handleAddressClick = (address) => {
-    //console.log(basicAddressRef.current.value);
     console.log(getValues('basicAddress'));
     setValue('basicAddress', address, { shouldValidate: true });
-    //console.log(basicAddressRef.current.value);
     console.log(getValues('basicAddress'));
     setSearchBtnClick(false);
   };
   const handleEmailCheck = async () => {
-    //console.log(emailRef.current.value);
     console.log(getValues('email'));
     const data1 = await emailDoubleCheck(getValues('email'));
-    if (data1) {
-      setEmailBtnText('인증번호 전송');
-      const data2 = await emailAuth(getValues('email'));
-      console.log(data2);
-    }
+    if (data1) setDoubleEmailCheck(true);
     console.log(data1);
   };
   const handleAuthNum = async () => {
-    //console.log(authNumRef.current.value);
+    console.log(getValues('email'));
+    const data1 = await emailAuth(getValues('email'));
+    console.log(data1);
+  };
+  const handleAuthNumConfirm = async () => {
     console.log(getValues('authNum'));
+    const data1 = await AuthNumConfirm(
+      getValues('email'),
+      getValues('authNum')
+    );
+    console.log(data1);
   };
   const nicknameCheck = async () => {
-    //console.log(nicknameRef.current.value);
     console.log(getValues('nickname'));
+    const data1 = await nicknameDoubleCheck(getValues('nickname'));
+    console.log(data1);
   };
-
-  /*useEffect(() => {
-    //emailRegister.ref(emailRef.current);
-    //authNumRegister.ref(authNumRef.current);
-    //nicknameRegister.ref(nicknameRef.current);
-    //basicAddressRegister.ref(basicAddressRef.current);
-  }, []);*/
-
   return (
     <Styled.MainDiv>
       <Styled.RegisterDiv>
@@ -93,21 +94,27 @@ const RegisterForm = () => {
               placeholder="이메일을 입력해주세요"
             />
             {errors.email && <p>{errors.email.message}</p>}
-            <button type="button" onClick={handleEmailCheck}>
-              {emailBtnText}
-            </button>
+            {doubleEmailCheck ? (
+              <button type="button" onClick={handleAuthNum}>
+                인증번호 전송
+              </button>
+            ) : (
+              <button type="button" onClick={handleEmailCheck}>
+                중복확인
+              </button>
+            )}
           </Styled.buttonIncludedDiv>
           <Styled.noTagDiv>
             <Styled.Input
               type="text"
               {...register('authNum')}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') handleAuthNum();
+                if (e.key === 'Enter') handleAuthNumConfirm();
               }}
               //ref={authNumRef}
             />
             {errors.authNum && <p>{errors.authNum.message}</p>}
-            <button type="button" onClick={handleAuthNum}>
+            <button type="button" onClick={handleAuthNumConfirm}>
               인증번호 확인
             </button>
           </Styled.noTagDiv>
@@ -136,6 +143,11 @@ const RegisterForm = () => {
               중복확인
             </button>
           </Styled.buttonIncludedDiv>
+          <Styled.Div>
+            <h4>이름</h4>
+            <Styled.Input type="text" {...register('name')} />
+            {errors.name && <p>{errors.name.message}</p>}
+          </Styled.Div>
           {/*<Styled.Div>
             <h4>성별</h4>
             <Styled.genderDiv>

@@ -31,6 +31,7 @@ const registerSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다'),
   nickname: yup.string().required('닉네임을 입력해주세요'),
+  name: yup.string().required('이름을 입력해주세요'),
   birth: yup.string().required('생년월일을 선택해주세요'),
   basicAddress: yup.string().required('도로명을 검색해주세요'),
   detailAddress: yup.string().required('상세주소를 입력해주세요'),
