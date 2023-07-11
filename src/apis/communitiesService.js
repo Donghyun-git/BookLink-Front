@@ -25,13 +25,16 @@ export const freeRegister = async (title, content) => {
 
 export const bookClubRegister = async (title, content, location) => {
   try {
-    const { data } = await axiosJsonInstance.post(`/communities/book-club`, {
-      title,
-      content,
-      location,
-    });
-    console.log(data);
-    return data;
+    const { data, status } = await axiosJsonInstance.post(
+      `/communities/book-club`,
+      {
+        title,
+        content,
+        location,
+      }
+    );
+    console.log(data, status);
+    return { data, status };
   } catch (error) {
     console.log(error.response);
   }
