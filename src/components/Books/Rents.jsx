@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import * as Styled from './Styled';
+import BackDrop from './modal/BackDrop';
 
 const Rents = () => {
   const initialState = [
@@ -78,6 +79,15 @@ const Rents = () => {
   ];
 
   const [cards, setCards] = useState(initialState);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openRentsModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeRentsModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   return (
     <Styled.RentsComponentDiv>
@@ -144,7 +154,7 @@ const Rents = () => {
                     </Styled.RentsLi>
                   </ul>
                   <Styled.RentsCardFooterButtonDiv>
-                    <Styled.RentsCardButton>
+                    <Styled.RentsCardButton onClick={openRentsModal}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
                     <Styled.RentsCardButton>
@@ -157,6 +167,7 @@ const Rents = () => {
           );
         })}
       </Styled.BooksComponentDiv>
+      {isModalOpen && <BackDrop onClose={closeRentsModal} />}
     </Styled.RentsComponentDiv>
   );
 };
