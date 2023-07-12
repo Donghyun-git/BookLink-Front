@@ -28,17 +28,12 @@ const Books = ({ isBooks }) => {
         <div>{error}</div>
       ) : (
         cards.map((card) => {
-          const {
-            isbn13,
-            likes,
-            reviews,
-            cover,
-            title,
-            author,
-            publisher,
-            priceStandard,
-            owners,
-          } = card;
+          const { isbn13, cover, title, author, publisher, priceStandard } =
+            card;
+
+          const likes = card.like_cnt;
+          const owners = card.owner_cnt;
+          const reviews = card.review_cnt;
 
           return (
             <Styled.CardDiv key={isbn13}>
