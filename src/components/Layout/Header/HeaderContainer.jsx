@@ -62,8 +62,8 @@ const HeaderContainer = () => {
           책방
         </Styled.LinkWithMargin>
         <Styled.StyledLink
-          to="/book-meetings"
-          active={(pathName === '/book-meetings').toString()}
+          to="/communities"
+          active={(pathName === '/communities').toString()}
         >
           커뮤니티
         </Styled.StyledLink>
