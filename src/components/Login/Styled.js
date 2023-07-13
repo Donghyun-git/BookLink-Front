@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const LoginDiv = styled.div`
   margin: 6.571rem auto 0 auto;
   width: 85.714rem;
-  height: 57.143rem;
+  height: fit-content;
   background: #fff;
   border: 1px rgba(217, 217, 217, 1) solid;
   filter: drop-shadow(0 0.286rem 0.286rem rgba(0, 0, 0, 0.25));
@@ -89,12 +89,39 @@ export const StyledLink = styled(Link)`
 `;
 
 export const LoginButton = styled.button`
-  margin: 6.429rem auto 2.571rem auto;
+  margin: 6.429rem auto 0.571rem auto;
   width: 42.857rem;
   height: 4.286rem;
   border-radius: 0.857rem;
   background: #003c74;
   color: #fff;
+  transition: all 0.1s;
+
+  &:hover {
+    background: #002c5c;
+  }
+`;
+
+export const KakaoLoginButton = styled.div`
+  margin: 0 auto 2.571rem auto;
+  width: 42.857rem;
+  height: 4.286rem;
+  color: #000;
+  border-radius: 0.857rem;
+  background: #fee500;
+  transition: all 0.1s;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    background: #fedd33;
+  }
 `;
 
 export const RegisterButton = styled(Link)`

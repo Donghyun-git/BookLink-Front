@@ -8,6 +8,8 @@ import BooksPage from '../pages/Books/Books';
 import SearchPage from '../pages/Search/Search';
 import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
+import AuthPage from '../pages/Auth';
+
 function Router() {
   return (
     <Routes>
@@ -18,8 +20,12 @@ function Router() {
         <Route path="/books" element={<BooksPage />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>
         <Route path="communities" element={<CommunitiesPage />}></Route>
-        <Route path="communities/bookClubs" element={<BookClubsPage />}></Route>
+        <Route
+          path="communities/book-clubs"
+          element={<BookClubsPage />}
+        ></Route>
       </Route>
+      <Route path="/auth" element={<AuthPage />} />
     </Routes>
   );
 }

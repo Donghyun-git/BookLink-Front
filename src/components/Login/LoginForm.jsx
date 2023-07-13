@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { login } from '../../apis/authService';
+import * as env from '../../../env.config';
 import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
 import * as authActions from '../../redux/actions/authActions';
@@ -103,6 +105,9 @@ const LoginForm = () => {
             </div>
           </Styled.LoginFormFooterDiv>
           <Styled.LoginButton type="submit">로그인</Styled.LoginButton>
+          <Styled.KakaoLoginButton>
+            <a href={env.KAKAO_AUTH_URL}>카카오 로그인</a>
+          </Styled.KakaoLoginButton>
           <Styled.RegisterButton to="/register">
             회원가입 하기
           </Styled.RegisterButton>
