@@ -18,3 +18,6 @@ const getAxiosInstance = (contentType) => {
 
 export const axiosJsonInstance = getAxiosInstance('application/json');
 export const axiosFormInstance = getAxiosInstance('multipart/form-data');
+export const axiosAuthInstance = getAxiosInstance(
+  'application/x-www-form-urlencoded'
+);
