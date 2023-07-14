@@ -1,4 +1,4 @@
-import * as Styled from '../Styled';
+import * as Styled from './Styled';
 import RentsModal from './RentsModal';
 
 const BackDrop = ({ onClose }) => {
