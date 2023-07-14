@@ -5,6 +5,7 @@ import MainPage from '../pages/Main';
 import LoginPage from '../pages/Login/Login';
 import RegisterPage from '../pages/Register';
 import BooksPage from '../pages/Books/Books';
+import BookDetailPage from '../pages/BookDetail';
 import SearchPage from '../pages/Search/Search';
 import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
@@ -14,16 +15,14 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<MainPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/books" element={<BooksPage />}></Route>
-        <Route path="/search" element={<SearchPage />}></Route>
-        <Route path="communities" element={<CommunitiesPage />}></Route>
-        <Route
-          path="communities/book-clubs"
-          element={<BookClubsPage />}
-        ></Route>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/books" element={<BooksPage />} />
+        <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/communities" element={<CommunitiesPage />} />
+        <Route path="/communities/book-clubs" element={<BookClubsPage />} />
       </Route>
       <Route path="/auth" element={<AuthPage />} />
     </Routes>

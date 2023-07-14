@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as bookService from '../../apis/booksService';
 import * as Styled from './Styled';
 import likesLogo from '../../images/likes.svg';
 import commentsLogo from '../../images/comments.svg';
 
 const Books = ({ isBooks }) => {
+  const navigate = useNavigate();
+
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
 
@@ -22,6 +25,10 @@ const Books = ({ isBooks }) => {
     })();
   }, []);
 
+  const goToDetailPage = (isbn) => {
+    navigate(`/books/${isbn}`);
+  };
+
   return (
     <Styled.BooksComponentDiv>
       {error ? (
@@ -37,7 +44,7 @@ const Books = ({ isBooks }) => {
 
           return (
             <Styled.CardDiv key={isbn13}>
-              <Styled.CardContainerDiv>
+              <Styled.CardContainerDiv onClick={() => goToDetailPage(isbn13)}>
                 <Styled.CardHeaderDiv isbooks={isBooks.toString()}>
                   <Styled.CardHeaderWithFlex>
                     <span>
