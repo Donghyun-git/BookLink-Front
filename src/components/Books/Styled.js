@@ -41,6 +41,7 @@ export const CardDiv = styled.div`
 
 export const CardContainerDiv = styled.div`
   padding: 0.64rem 1.71rem 0 1.71rem;
+  cursor: pointer;
 `;
 
 export const CardHeaderDiv = styled.div`
@@ -78,7 +79,6 @@ export const CardImageDiv = styled.div`
 export const CardImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
 `;
 
 export const CardContentsDiv = styled.div`
@@ -420,21 +420,13 @@ export const SearchIcon = styled.div`
   cursor: pointer;
 `;
 
-//[BackDropLayer]
-export const BackDropDiv = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
+//[ Book Detail ]
 
-export const BackDropLayer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9997;
-`;
+// 댓글 인풋 css
+// outline: none;
+// border-bottom: 3px solid #72dede;
+// border-left: none;
+// border-right: none;
+// border-top: none;
+// transition: 0.2s;
+// padding-top: 35px;
