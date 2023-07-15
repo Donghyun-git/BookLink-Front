@@ -1,4 +1,4 @@
-import BookDetail from '../../Books/BookDetail';
+import BookDetail from '../../Books/BookDetail/BookDetail';
 import * as Styled from './Styled';
 
 const BookDetailContainer = () => {

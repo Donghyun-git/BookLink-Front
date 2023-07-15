@@ -10,6 +10,7 @@ const Books = ({ isBooks }) => {
 
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // [ 카드정보 받기 ]
   useEffect(() => {
@@ -18,6 +19,7 @@ const Books = ({ isBooks }) => {
         const { data } = await bookService.getAllBooks();
 
         setCards([...data.data.item]);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
         setError('에러 컴포넌트 만들기');
@@ -33,6 +35,8 @@ const Books = ({ isBooks }) => {
     <Styled.BooksComponentDiv>
       {error ? (
         <div>{error}</div>
+      ) : isLoading ? (
+        <div>로딩중입니다.</div>
       ) : (
         cards.map((card) => {
           const { isbn13, cover, title, author, publisher, priceStandard } =
