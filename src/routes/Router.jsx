@@ -9,6 +9,8 @@ import BookDetailPage from '../pages/BookDetail';
 import SearchPage from '../pages/Search/Search';
 import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
+import BoardsPage from '../pages/Boards';
+import CommunitiesRegisterPage from '../pages/CommunitiesRegisterPag';
 import AuthPage from '../pages/Auth';
 
 function Router() {
@@ -23,6 +25,11 @@ function Router() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/communities/book-clubs" element={<BookClubsPage />} />
+        <Route path="/communities/boards" element={<BoardsPage />}></Route>
+        <Route
+          path="communities/write"
+          element={<CommunitiesRegisterPage />}
+        ></Route>
       </Route>
       <Route path="/auth" element={<AuthPage />} />
     </Routes>
