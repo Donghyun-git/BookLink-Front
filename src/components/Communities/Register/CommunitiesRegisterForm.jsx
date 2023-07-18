@@ -5,18 +5,23 @@ import * as Styled from './Styled';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { communitiesRegisterSchema } from '../../../validators/communityValidator';
+import { useNavigate } from 'react-router-dom';
 import {
   freeRegister,
   bookClubRegister,
+  reportRegister,
+  bookSearch,
 } from '../../../apis/communitiesService';
 
 const CommunitiesRegisterForm = () => {
+  const navigate = useNavigate();
   const [bookReportClick, setBookReportClick] = useState(false);
   const [bookClubsReportClick, setBookClubsReportClick] = useState(false);
   const {
     register,
     handleSubmit,
     setValue,
+    getValues,
     trigger,
     formState: { errors },
   } = useForm({
@@ -26,13 +31,34 @@ const CommunitiesRegisterForm = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const { title, content, location } = data;
+    const {
+      title,
+      content,
+      location,
+      book_title,
+      authors,
+      publisher,
+      pud_date,
+    } = data;
     if (location) {
-      const data1 = await bookClubRegister(title, location, content);
+      const data1 = await bookClubRegister(title, content, location);
       console.log(data1);
+      navigate('/communities/book-clubs');
+    } else if (book_title && authors && publisher && pud_date) {
+      const data1 = await reportRegister(
+        title,
+        content,
+        book_title,
+        authors,
+        publisher,
+        pud_date
+      );
+      console.log(data1);
+      navigate('/communities/boards');
     } else {
       const data1 = await freeRegister(title, content);
       console.log(data1);
+      navigate('/communities/boards');
     }
   };
 
@@ -47,6 +73,18 @@ const CommunitiesRegisterForm = () => {
     } else {
       setBookReportClick(false);
       setBookClubsReportClick(false);
+    }
+  };
+  const onBookInfoHandler = async (e) => {
+    console.log(e.target.value);
+    const { item } = await bookSearch(e.target.value);
+    if (item) {
+      const { title, author, pubDate, publisher } = item[0];
+      console.log(item[0]);
+      setValue('book_title', title);
+      setValue('authors', author);
+      setValue('publisher', publisher);
+      setValue('pud_date', pubDate);
     }
   };
   const onContentsHandler = (value) => {
@@ -90,7 +128,15 @@ const CommunitiesRegisterForm = () => {
           {bookReportClick && (
             <div>
               <h4>도서명</h4>{' '}
-              <input type="search" placeholder="도서명 검색하세요" />
+              <input
+                type="search"
+                placeholder="도서명 검색하세요"
+                onChange={onBookInfoHandler}
+              />
+              <p>{getValues('book_title')}</p>
+              <p>{getValues('authors')}</p>
+              <p>{getValues('publisher')}</p>
+              <p>{getValues('pud_date')}</p>
             </div>
           )}
           {bookClubsReportClick && (
