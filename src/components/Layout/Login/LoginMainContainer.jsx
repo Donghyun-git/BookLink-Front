@@ -1,10 +1,10 @@
 import * as Styled from './Styled';
-import LoginForm from '../../Login/LoginForm';
+import LoginFormContainer from '../../../containers/LoginFormContainer';
 
 const LoginMainContainer = () => {
   return (
     <Styled.LoginMainContainer>
-      <LoginForm />
+      <LoginFormContainer />
     </Styled.LoginMainContainer>
   );
 };
