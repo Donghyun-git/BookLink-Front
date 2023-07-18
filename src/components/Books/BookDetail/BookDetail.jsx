@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import BookInfo from './BookInfo/BookInfo';
 import BookAside from './BookAside/BookAside';
-import * as bookService from '../../../apis/booksService';
+import * as bookService from '../../../lib/apis/booksService';
 import * as Styled from './Styled';
 
 const BookDetail = () => {

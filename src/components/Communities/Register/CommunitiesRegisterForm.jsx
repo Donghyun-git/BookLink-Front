@@ -8,7 +8,7 @@ import { communitiesRegisterSchema } from '../../../validators/communityValidato
 import {
   freeRegister,
   bookClubRegister,
-} from '../../../apis/communitiesService';
+} from '../../../lib/apis/communitiesService';
 
 const CommunitiesRegisterForm = () => {
   const [bookReportClick, setBookReportClick] = useState(false);

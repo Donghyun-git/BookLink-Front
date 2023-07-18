@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import * as Styled from './Styled';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
