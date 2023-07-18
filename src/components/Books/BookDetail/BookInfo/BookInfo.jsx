@@ -1,7 +1,24 @@
+import { useState, useRef } from 'react';
 import * as Styled from './Styled';
 import CommentCard from './CommentCard';
+import CommentForm from './CommentForm';
 
 const BookInfo = ({ book }) => {
+  const commentInputRef = useRef();
+
+  const handleCommentCancel = () => {
+    commentInputRef.current.value = '';
+  };
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+
+    const { value } = commentInputRef.current;
+
+    if (!value) console.log('작성 내용을 입력해주세요.');
+    console.log(value); //작성하기 데이터 전송
+  };
+
   return (
     <Styled.BookInfoWrap>
       <Styled.BookInfoContainer>
@@ -52,31 +69,36 @@ const BookInfo = ({ book }) => {
           <Styled.BookReviewUserProfileDiv>
             {/* <img src="" alt="프로필 이미지" /> */}
           </Styled.BookReviewUserProfileDiv>
-          <Styled.BookReviewCommentDiv>
-            <label htmlFor="comment" className="hidden">
-              댓글
-            </label>
-            <input
-              type="text"
-              id="comment"
-              placeholder="댓글을 입력해주세요."
-            />
-            <div>
-              <span>취소</span>
-              <button>
-                <span className="write">작성하기</span>
-              </button>
-            </div>
-          </Styled.BookReviewCommentDiv>
+          <CommentForm
+            onSubmit={handleCommentSubmit}
+            onCancel={handleCommentCancel}
+            commentInputRef={commentInputRef}
+          />
         </Styled.BookReviewWriteForm>
         <Styled.CommentFilterDiv>
           <div>공감순</div>
           <div>최신순</div>
         </Styled.CommentFilterDiv>
-        <CommentCard />
-        <CommentCard />
-        <CommentCard />
-        <CommentCard />
+        <CommentCard
+          onSubmit={handleCommentSubmit}
+          onCancel={handleCommentCancel}
+          commentInputRef={commentInputRef}
+        />
+        <CommentCard
+          onSubmit={handleCommentSubmit}
+          onCancel={handleCommentCancel}
+          commentInputRef={commentInputRef}
+        />
+        <CommentCard
+          onSubmit={handleCommentSubmit}
+          onCancel={handleCommentCancel}
+          commentInputRef={commentInputRef}
+        />
+        <CommentCard
+          onSubmit={handleCommentSubmit}
+          onCancel={handleCommentCancel}
+          commentInputRef={commentInputRef}
+        />
       </Styled.BookReviewWrap>
     </Styled.BookInfoWrap>
   );
