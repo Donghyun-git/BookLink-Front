@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { VITE_SERVER_URL } from '../../../env.config';
+import { VITE_SERVER_URL } from '../../../../env.config';
 
 const getAxiosInstance = (contentType) => {
   const config = {
