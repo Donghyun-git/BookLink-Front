@@ -106,6 +106,8 @@ export const BookImageDiv = styled.div`
   border-radius: 0.85714rem;
 
   img {
+    width: 13.71429rem;
+    height: 18.71429rem;
     margin: auto;
     box-shadow: -2px -2px 12px 0px rgba(0, 0, 0, 0.15);
   }
@@ -190,10 +192,12 @@ export const BookReviewCommentDiv = styled.div`
     margin-top: 1rem;
 
     span {
+      display: inline-block;
       color: #d9d9d9;
       font-size: 0.85714rem;
       font-weight: 500;
       margin-right: 2rem;
+      padding: 0.29rem 0.57rem;
       cursor: pointer;
     }
 
@@ -210,6 +214,7 @@ export const BookReviewCommentDiv = styled.div`
 `;
 
 export const CommentFilterDiv = styled.div`
+  margin-top: 2.86rem;
   display: flex;
   align-items: center;
   div {
@@ -217,6 +222,8 @@ export const CommentFilterDiv = styled.div`
     color: #d9d9d9;
     font-size: 0.85714rem;
     font-weight: 500;
+    cursor: pointer;
+
     &:first-child {
       color: #000;
       margin-right: 0.86rem;
@@ -227,7 +234,14 @@ export const CommentFilterDiv = styled.div`
 export const CommentCardDiv = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   margin-top: 1.71rem;
+
+  div {
+    &:first-child {
+      display: flex;
+    }
+  }
 `;
 
 export const CommentCardUserProfileDiv = styled.div`
@@ -263,6 +277,7 @@ export const CommentOptionDiv = styled.div`
   right: 0;
   padding: 0 1rem;
   cursor: pointer;
+
   div {
     position: relative;
     width: 0.28571rem;
@@ -275,9 +290,10 @@ export const CommentOptionDiv = styled.div`
     ul {
       position: absolute;
       top: 0;
-      left: -4.58rem;
-      display: none;
-      width: 4.35714rem;
+      left: -5.78rem;
+      display: ${({ active }) => (active === 'true' ? 'block' : 'none')};
+      /* display: none; */
+      width: 5.35714rem;
       border-radius: 0.28571rem;
       border: 1px solid #d9d9d9;
 
@@ -286,6 +302,7 @@ export const CommentOptionDiv = styled.div`
         border-radius: 0.28571rem;
         background: #fff;
         text-align: center;
+        margin-right: 0;
         cursor: pointer;
 
         span {
@@ -294,6 +311,10 @@ export const CommentOptionDiv = styled.div`
           font-size: 0.85714rem;
           font-weight: 400;
           padding: 0.29rem 0.57rem;
+
+          &:first-child {
+            margin-right: 0;
+          }
         }
 
         &:last-child {
@@ -344,7 +365,7 @@ export const CommentThumbsCountDiv = styled.div`
 
 export const CommentReviewWriteDiv = styled.div`
   button {
-    color: #d9d9d9;
+    color: ${({ active }) => (active === 'true' ? '#0084FF' : '#d9d9d9')};
     font-size: 0.85714rem;
     font-weight: 500;
     background: 0;
