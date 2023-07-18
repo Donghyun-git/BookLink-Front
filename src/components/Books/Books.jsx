@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as bookService from '../../apis/booksService';
+import { useSelector } from 'react-redux';
 import * as Styled from './Styled';
 import likesLogo from '../../images/likes.svg';
 import commentsLogo from '../../images/comments.svg';
 
 const Books = ({ isBooks }) => {
   const navigate = useNavigate();
-
-  const [cards, setCards] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // [ 카드정보 받기 ]
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await bookService.getAllBooks();
-
-        setCards([...data.data.item]);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-        setError('에러 컴포넌트 만들기');
-      }
-    })();
-  }, []);
+  const isLoading = useSelector((state) => state.BOOK.isLoading);
+  const error = useSelector((state) => state.BOOK.error);
+  const cards = useSelector((state) => state.BOOK.books);
 
   const goToDetailPage = (isbn) => {
     navigate(`/books/${isbn}`);
