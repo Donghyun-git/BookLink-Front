@@ -1,21 +1,13 @@
 import { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { login } from '../../apis/authService';
 import * as env from '../../../env.config';
 import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
-import * as authActions from '../../redux/actions/authActions';
 import Logo from '../../images/BookLink_Logo.svg';
 import showPasswordImg from '../../images/password_eye.svg';
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+const LoginForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = useCallback(() => {
@@ -34,35 +26,13 @@ const LoginForm = () => {
   const watchEmail = watch('email');
   const watchPassword = watch('password');
 
-  //[ 로그인 ]
-  const handleOnSubmit = useCallback(async (user) => {
-    try {
-      const { email, password } = user;
-
-      const { status, data } = await login({ email, password });
-
-      if (status !== 200) throw new Error(data.message);
-
-      dispatch({
-        ...authActions.login(),
-        payload: { ...data.data, isLoggedIn: true },
-      });
-
-      alert(data.message);
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-      console.log(error.message);
-    }
-  }, []);
-
   return (
     <Styled.LoginDiv>
       <Styled.LogoDiv>
         <Styled.Img src={Logo} />
       </Styled.LogoDiv>
       <Styled.LoginFormDiv>
-        <Styled.LoginForm onSubmit={handleSubmit(handleOnSubmit)}>
+        <Styled.LoginForm onSubmit={handleSubmit(onSubmit)}>
           <Styled.InputDiv>
             <Styled.Label htmlFor="email">아이디</Styled.Label>
             <Styled.LoginInput

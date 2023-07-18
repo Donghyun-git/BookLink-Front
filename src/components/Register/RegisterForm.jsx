@@ -11,7 +11,7 @@ import {
   AuthNumConfirm,
   emailDoubleCheck,
   nicknameDoubleCheck,
-} from '../../apis/authService';
+} from '../../lib/apis/authService';
 
 const RegisterForm = () => {
   const {

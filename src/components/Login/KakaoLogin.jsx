@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { axiosAuthInstance } from '../../apis/config/axios';
+import { axiosAuthInstance } from '../../lib/apis/config/axios';
 import * as env from '../../../env.config';
 
 const KakaoLogin = () => {

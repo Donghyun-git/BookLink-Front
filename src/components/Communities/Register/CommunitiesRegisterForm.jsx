@@ -11,7 +11,7 @@ import {
   bookClubRegister,
   reportRegister,
   bookSearch,
-} from '../../../apis/communitiesService';
+} from '../../../lib/apis/communitiesService';
 
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();

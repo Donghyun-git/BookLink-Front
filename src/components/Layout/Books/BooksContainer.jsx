@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import * as Styled from './Styled';
-import Books from '../../Books/Books';
+import BookContainer from '../../../containers/BookContainer';
 import Rents from '../../Books/Rents';
 import CategorySelects from '../../Books/CategorySelects';
 import rentButtonLogo from '../../../images/rent_logo.svg';
@@ -83,7 +83,7 @@ const BooksContainer = () => {
         </div>
       </Styled.NavDiv>
       <CategorySelects />
-      {showBooksComponent && <Books isBooks={showBooksComponent} />}
+      {showBooksComponent && <BookContainer isBooks={showBooksComponent} />}
       {showRentsComponent && <Rents />}
     </Styled.BooksContainer>
   );
