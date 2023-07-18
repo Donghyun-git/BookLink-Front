@@ -4,6 +4,7 @@ import * as Styled from './Styled';
 import { useState /*useRef, useEffect */ } from 'react';
 import AddressSearchForm from '../AddressSearch/AddressSearchForm';
 import { registerSchema } from '../../validators/authValidator';
+import { useNavigate } from 'react-router-dom';
 import {
   emailAuth,
   signUp,
@@ -23,6 +24,7 @@ const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
     mode: 'onChange',
   });
+  const navigate = useNavigate();
   const [doubleEmailCheck, setDoubleEmailCheck] = useState(false);
   const [searchBtnClick, setSearchBtnClick] = useState(false);
   const onSubmit = async (data) => {
@@ -45,6 +47,7 @@ const RegisterForm = () => {
       address,
     });
     console.log(data1);
+    navigate('/login');
   };
   const handleAddressClick = (address) => {
     console.log(getValues('basicAddress'));
