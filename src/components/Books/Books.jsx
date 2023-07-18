@@ -44,7 +44,7 @@ const Books = ({ isBooks }) => {
 
           const likes = card.like_cnt;
           const owners = card.owner_cnt;
-          const reviews = card.review_cnt;
+          const reviews = card.reply_cnt;
 
           return (
             <Styled.CardDiv key={isbn13}>
