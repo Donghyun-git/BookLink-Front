@@ -1,6 +1,20 @@
-//import React from 'react'
+import { useState, useEffect } from 'react';
 import * as Styled from './Styled';
+import { bookClubList } from '../../../lib/apis/communitiesService';
 const BookClubsForm = () => {
+  const [bookClubs, setBookClubs] = useState([]);
+  const getBookClubs = async () => {
+    const { data } = await bookClubList();
+    setBookClubs(data);
+  };
+  useEffect(() => {
+    getBookClubs();
+  }, []);
+  const dateFormat = (localDate) => {
+    let [date, time] = localDate.split('T');
+    time = time.split(':').slice(0, 2).join(':');
+    return date + ' ' + time;
+  };
   return (
     <Styled.MainContainerDiv>
       <Styled.MainContentsDiv>
@@ -17,10 +31,21 @@ const BookClubsForm = () => {
           <input type="search" placeholder="독서 모임 위치로 검색해 보세요" />
         </Styled.SelectDiv>
         <Styled.ContentsDiv>
-          <Styled.CardDiv></Styled.CardDiv>
-          <Styled.CardDiv></Styled.CardDiv>
-          <Styled.CardDiv></Styled.CardDiv>
-          <Styled.CardDiv></Styled.CardDiv>
+          {bookClubs.map(
+            ({ location, reply_cnt, writer, date, title, content }) => {
+              return (
+                <Styled.CardDiv key={date}>
+                  <p>{location}</p>
+                  <p>{reply_cnt}</p>
+                  <p>{writer}</p>
+                  <p>{dateFormat(date)}</p>
+                  <p>{title}</p>
+                  <p>{content}</p>
+                </Styled.CardDiv>
+              );
+            }
+          )}
+
           <Styled.CardDiv></Styled.CardDiv>
           <Styled.CardDiv></Styled.CardDiv>
           <Styled.CardDiv></Styled.CardDiv>
