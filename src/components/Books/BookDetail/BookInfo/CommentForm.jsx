@@ -1,6 +1,6 @@
 import * as Styled from './Styled';
 
-const CommentForm = ({ commentInputRef, onSubmit, onCancel }) => {
+const CommentForm = ({ commentInputRef, onSubmit, onCancel, parentId }) => {
   return (
     <Styled.BookReviewCommentDiv>
       <label htmlFor="comment" className="hidden">
@@ -14,7 +14,7 @@ const CommentForm = ({ commentInputRef, onSubmit, onCancel }) => {
       />
       <div>
         <span onClick={onCancel}>취소</span>
-        <button onClick={onSubmit}>
+        <button onClick={onSubmit(parentId)}>
           <span className="write">작성하기</span>
         </button>
       </div>

@@ -28,6 +28,7 @@ const Books = ({ isBooks }) => {
           const likes = card.like_cnt;
           const owners = card.owner_cnt;
           const reviews = card.reply_cnt;
+          const formattedPrice = priceStandard.toLocaleString('ko-KR');
 
           return (
             <Styled.CardDiv key={isbn13}>
@@ -74,7 +75,7 @@ const Books = ({ isBooks }) => {
                   <Styled.ContentsPriceDiv>
                     <Styled.ContentSpan>정가</Styled.ContentSpan>
                     <Styled.ContentSpanRight>
-                      {priceStandard}원
+                      {formattedPrice}원
                     </Styled.ContentSpanRight>
                   </Styled.ContentsPriceDiv>
                 </Styled.CardContentsDiv>

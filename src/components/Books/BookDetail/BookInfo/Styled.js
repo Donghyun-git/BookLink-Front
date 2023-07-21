@@ -163,6 +163,11 @@ export const BookReviewUserProfileDiv = styled.div`
   border-radius: 50%;
   background-color: #00e37d;
   margin-right: 1.71rem;
+
+  img {
+    object-fit: cover;
+    border-radius: 50%;
+  }
 `;
 
 export const BookReviewCommentDiv = styled.div`
@@ -248,8 +253,13 @@ export const CommentCardUserProfileDiv = styled.div`
   width: 3.42857rem;
   height: 3.42857rem;
   border-radius: 50%;
-  background-color: #00e37d;
+  background-color: #dedede;
   margin-right: 1.71rem;
+
+  img {
+    object-fit: cover;
+    border-radius: 50%;
+  }
 `;
 
 export const CommentListUserInfo = styled.div`
@@ -345,18 +355,21 @@ export const CommentReviewDiv = styled.div`
 export const CommentThumbsDiv = styled.div`
   width: 1.42857rem;
   height: 1.42857rem;
-  margin-right: 0.57rem;
+
+  margin: 0.214em 0.57rem 0 0;
   cursor: pointer;
 
   img {
+    fill: ${({ active }) => (active === 'true' ? '#E33600' : '#000')};
     //클릭시 fill:#E33600;
     width: 100%;
   }
 `;
 
 export const CommentThumbsCountDiv = styled.div`
+  width: 1.57143rem;
   margin-right: 1.71rem;
-  color: #d9d9d9;
+  color: ${({ active }) => (active === 'true' ? '#E33600' : '#d9d9d9')};
   font-size: 0.85714rem;
   font-weight: 700;
   line-height: 2.5;
@@ -364,10 +377,85 @@ export const CommentThumbsCountDiv = styled.div`
 `;
 
 export const CommentReviewWriteDiv = styled.div`
+  margin-top: 0.107rem;
+
   button {
     color: ${({ active }) => (active === 'true' ? '#0084FF' : '#d9d9d9')};
     font-size: 0.85714rem;
     font-weight: 500;
     background: 0;
+  }
+`;
+
+export const ShowCommentButtonDiv = styled.div`
+  button {
+    border: 0;
+    background: 0;
+    color: #0084ff;
+    font-size: 0.85714rem;
+    font-weight: 500;
+  }
+`;
+// [답글]
+export const ReCommentListContentDiv = styled.div`
+  p {
+    width: 56rem;
+    color: #000;
+    font-size: 0.85714rem;
+    font-weight: 400;
+  }
+`;
+
+export const ReCommentOptionDiv = styled.div`
+  position: absolute;
+  top: 0;
+  right: -4.9px;
+  padding: 0 1rem;
+  cursor: pointer;
+
+  div {
+    position: relative;
+    width: 0.28571rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    ul {
+      position: absolute;
+      top: 0;
+      left: -5.78rem;
+      display: ${({ active }) => (active === 'true' ? 'block' : 'none')};
+      /* display: none; */
+      width: 5.35714rem;
+      border-radius: 0.28571rem;
+      border: 1px solid #d9d9d9;
+
+      li {
+        border-bottom: 1px solid #d9d9d9;
+        border-radius: 0.28571rem;
+        background: #fff;
+        text-align: center;
+        margin-right: 0;
+        cursor: pointer;
+
+        span {
+          display: inline-block;
+          color: #3a3a3a;
+          font-size: 0.85714rem;
+          font-weight: 400;
+          padding: 0.29rem 0.57rem;
+
+          &:first-child {
+            margin-right: 0;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: -1px;
+        }
+      }
+    }
   }
 `;

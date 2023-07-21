@@ -1,31 +1,83 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import * as Styled from './Styled';
+import * as bookService from '../../../../lib/apis/booksService';
+import RecommentCard from './RecommentCard';
 import CommentForm from './CommentForm';
 import optionImage from '../../../../images/comment_option.svg';
 import thumbsImage from '../../../../images/thumbs.svg';
+import likedThumbsImage from '../../../../images/liked_thumbs.svg';
 
-const CommentCard = ({ commentInputRef, onSubmit, onCancel }) => {
+const CommentCard = ({
+  commentInputRef,
+  onSubmit,
+  onCancel,
+  comment,
+  parentId,
+}) => {
+  const [likes, setLikes] = useState(comment.like_cnt);
+  const [isLiked, setIsLiked] = useState(comment.liked);
+  const { params } = useParams();
   const [isRecommentClicked, setIsRecommentClicked] = useState(false);
+  const [isShowRecomment, setIsShowRecomment] = useState(false);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
 
-  const handleOptionClick = () => {
+  const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
-  };
+  }, [isOptionClicked]);
 
-  const handleRecommentClick = () => {
+  const handleRecommentClick = useCallback(() => {
     setIsRecommentClicked(!isRecommentClicked);
-  };
+  }, [isRecommentClicked]);
+
+  const handleShowRecomment = useCallback(() => {
+    setIsShowRecomment(!isShowRecomment);
+  }, [isShowRecomment]);
+
+  const handleLikeClick = useCallback(async () => {
+    try {
+      const { data } = await bookService.addLikeComment(params, comment.id);
+
+      console.log(data);
+
+      setLikes((prevLikes) => {
+        if (isLiked) return prevLikes - 1;
+
+        return prevLikes + 1;
+      });
+
+      setIsLiked(!isLiked);
+      return;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }, [params, comment.id, isLiked]);
+
+  const recommentParentId = isRecommentClicked ? parentId : 0;
+
+  const {
+    content,
+    children,
+    date,
+    image,
+    writer,
+    sub_reply_cnt: subReplyCnt,
+  } = comment;
+
+  console.log('커멘트카드 배열', comment.children);
+
+  const formattedDate = date.split('T')[0].split('-').join('.');
 
   return (
     <Styled.CommentCardDiv>
       <div>
         <Styled.CommentCardUserProfileDiv>
-          {/* <img src="" alt="프로필 이미지" /> */}
+          <img src={image} alt="프로필 이미지" />
         </Styled.CommentCardUserProfileDiv>
         <div>
           <Styled.CommentListUserInfo>
             <div>
-              <span>고구마방귀뽕</span> <span>2022.06.21</span>
+              <span>{writer}</span> <span>{formattedDate}</span>
             </div>
             <div>
               <Styled.CommentOptionDiv
@@ -50,20 +102,22 @@ const CommentCard = ({ commentInputRef, onSubmit, onCancel }) => {
             </div>
           </Styled.CommentListUserInfo>
           <Styled.CommentListContentDiv>
-            <p>
-              예리한 칼날 같고 냉정하지만 그 안에는 사람을 위하는 진실된
-              마음이있다. 사는동안 수십 번은 더 읽고 싶은 책. 뜬구름 잡는 얘기가
-              아닌 그야말로 현실속에 녹아내리는 체험담이며 질문에 대한 응답도
-              구체적으로 적용할수 있게 해주신다.그저 저렴한 값에 이렇게 귀한
-              책을 접하게 할수있게 해주신 세이노님께 감사할 따름이다.
-            </p>
+            <p>{content}</p>
           </Styled.CommentListContentDiv>
 
           <Styled.CommentReviewDiv>
-            <Styled.CommentThumbsDiv>
-              <img src={thumbsImage} alt="좋아요 이미지" />
+            <Styled.CommentThumbsDiv
+              active={isLiked.toString()}
+              onClick={handleLikeClick}
+            >
+              <img
+                src={isLiked ? likedThumbsImage : thumbsImage}
+                alt="좋아요 이미지"
+              />
             </Styled.CommentThumbsDiv>
-            <Styled.CommentThumbsCountDiv>1</Styled.CommentThumbsCountDiv>
+            <Styled.CommentThumbsCountDiv active={isLiked.toString()}>
+              {likes}
+            </Styled.CommentThumbsCountDiv>
             <Styled.CommentReviewWriteDiv
               active={isRecommentClicked.toString()}
             >
@@ -72,18 +126,42 @@ const CommentCard = ({ commentInputRef, onSubmit, onCancel }) => {
               </button>
             </Styled.CommentReviewWriteDiv>
           </Styled.CommentReviewDiv>
+          {subReplyCnt > 0 ? (
+            <Styled.ShowCommentButtonDiv>
+              <button onClick={handleShowRecomment}>
+                답글 {subReplyCnt}개
+              </button>
+            </Styled.ShowCommentButtonDiv>
+          ) : (
+            <></>
+          )}
+          {subReplyCnt > 0 && isShowRecomment ? (
+            children.length > 0 &&
+            children.map((reComment) => {
+              return (
+                <RecommentCard
+                  key={reComment.id}
+                  comments={reComment}
+                  isRecommentClicked={isRecommentClicked}
+                />
+              );
+            })
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div>
         {isRecommentClicked && (
           <Styled.BookReviewWriteForm>
             <Styled.BookReviewUserProfileDiv>
-              {/* <img src="" alt="프로필 이미지" /> */}
+              <img src={image} alt="프로필 이미지" />
             </Styled.BookReviewUserProfileDiv>
             <CommentForm
               onSubmit={onSubmit}
               onCancel={onCancel}
               commentInputRef={commentInputRef}
+              parentId={recommentParentId}
             />
           </Styled.BookReviewWriteForm>
         )}
