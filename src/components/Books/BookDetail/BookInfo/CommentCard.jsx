@@ -7,6 +7,8 @@ import CommentForm from './CommentForm';
 import optionImage from '../../../../images/comment_option.svg';
 import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
+import upToggleImage from '../../../../images/up_toggle.svg';
+import downToggleImage from '../../../../images/down_toggle.svg';
 
 const CommentCard = ({
   commentInputRef,
@@ -17,10 +19,11 @@ const CommentCard = ({
 }) => {
   const [likes, setLikes] = useState(comment.like_cnt);
   const [isLiked, setIsLiked] = useState(comment.liked);
-  const { params } = useParams();
   const [isRecommentClicked, setIsRecommentClicked] = useState(false);
   const [isShowRecomment, setIsShowRecomment] = useState(false);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
+
+  const { params } = useParams();
 
   const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
@@ -64,8 +67,6 @@ const CommentCard = ({
     sub_reply_cnt: subReplyCnt,
   } = comment;
 
-  console.log('커멘트카드 배열', comment.children);
-
   const formattedDate = date.split('T')[0].split('-').join('.');
 
   return (
@@ -106,10 +107,7 @@ const CommentCard = ({
           </Styled.CommentListContentDiv>
 
           <Styled.CommentReviewDiv>
-            <Styled.CommentThumbsDiv
-              active={isLiked.toString()}
-              onClick={handleLikeClick}
-            >
+            <Styled.CommentThumbsDiv onClick={() => handleLikeClick()}>
               <img
                 src={isLiked ? likedThumbsImage : thumbsImage}
                 alt="좋아요 이미지"
@@ -121,14 +119,18 @@ const CommentCard = ({
             <Styled.CommentReviewWriteDiv
               active={isRecommentClicked.toString()}
             >
-              <button onClick={handleRecommentClick}>
+              <button onClick={() => handleRecommentClick()}>
                 <span>답글 달기</span>
               </button>
             </Styled.CommentReviewWriteDiv>
           </Styled.CommentReviewDiv>
           {subReplyCnt > 0 ? (
             <Styled.ShowCommentButtonDiv>
-              <button onClick={handleShowRecomment}>
+              <button onClick={() => handleShowRecomment()}>
+                <img
+                  src={isShowRecomment ? upToggleImage : downToggleImage}
+                  alt="토글 이미지"
+                />
                 답글 {subReplyCnt}개
               </button>
             </Styled.ShowCommentButtonDiv>
