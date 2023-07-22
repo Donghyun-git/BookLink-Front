@@ -8,7 +8,7 @@ export const BookDetailMain = styled.main`
 
 //[Books Container]
 export const BookDetailContainer = styled.section`
-  width: 102.857rem;
+  width: 121.857rem;
   margin: 2.57rem auto 0 auto;
   min-height: 83rem;
 `;
