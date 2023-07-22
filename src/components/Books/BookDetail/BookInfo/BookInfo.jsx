@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { persistor } from '../../../../main';
 import * as Styled from './Styled';
 import * as bookService from '../../../../lib/apis/booksService';
-import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 
@@ -57,8 +56,6 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
     [isbn, navigate, setComments]
   );
 
-  console.log('댓글목록', replies);
-
   return (
     <Styled.BookInfoWrap>
       <Styled.BookInfoContainer>
@@ -104,10 +101,13 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
       </Styled.BookInfoContainer>
       <Styled.BookReviewWrap>
         <h2>도서 후기</h2>
-        <span>{comments.length}개</span>
+        <span>{replies.length}개</span>
         <Styled.BookReviewWriteForm>
           <Styled.BookReviewUserProfileDiv>
-            {/* <img src="" alt="프로필 이미지" /> */}
+            <img
+              src="https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png"
+              alt="프로필 이미지"
+            />
           </Styled.BookReviewUserProfileDiv>
           <CommentForm
             onSubmit={handleCommentSubmit}
@@ -126,22 +126,6 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
           commentInputRef={commentInputRef}
           comments={replies}
         />
-        {/* {replies.map((comment) => {
-          const { id, parent_id: parentId } = comment;
-
-          return (
-            id === parentId && (
-              <CommentCard
-                key={id}
-                onSubmit={handleCommentSubmit}
-                onCancel={handleCommentCancel}
-                commentInputRef={commentInputRef}
-                comment={comment}
-                parentId={parentId}
-              />
-            )
-          );
-        })} */}
       </Styled.BookReviewWrap>
     </Styled.BookInfoWrap>
   );
