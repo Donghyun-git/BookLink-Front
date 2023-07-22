@@ -161,10 +161,12 @@ export const BookReviewUserProfileDiv = styled.div`
   width: 3.42857rem;
   height: 3.42857rem;
   border-radius: 50%;
-  background-color: #00e37d;
+  background-color: #dedede;
   margin-right: 1.71rem;
 
   img {
+    width: 3.42857rem;
+    height: 3.42857rem;
     object-fit: cover;
     border-radius: 50%;
   }
@@ -369,7 +371,10 @@ export const CommentThumbsDiv = styled.div`
 export const CommentThumbsCountDiv = styled.div`
   width: 1.57143rem;
   margin-right: 1.71rem;
-  color: ${({ active }) => (active === 'true' ? '#E33600' : '#d9d9d9')};
+  color: ${({ active }) => {
+    console.log(active);
+    return active === 'true' ? '#E33600' : '#d9d9d9';
+  }};
   font-size: 0.85714rem;
   font-weight: 700;
   line-height: 2.5;
@@ -394,6 +399,12 @@ export const ShowCommentButtonDiv = styled.div`
     color: #0084ff;
     font-size: 0.85714rem;
     font-weight: 500;
+
+    img {
+      width: 0.85714rem;
+      height: 0.85714rem;
+      margin: 0 0.57rem 0.125rem 0;
+    }
   }
 `;
 // [답글]
