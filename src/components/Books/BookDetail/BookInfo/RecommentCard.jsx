@@ -1,25 +1,45 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
+import * as bookService from '../../../../lib/apis/booksService';
 import * as Styled from './Styled';
 import optionImage from '../../../../images/comment_option.svg';
 import thumbsImage from '../../../../images/thumbs.svg';
+import likedThumbsImage from '../../../../images/liked_thumbs.svg';
 
 const RecommentCard = ({ comments }) => {
+  const [likes, setLikes] = useState(comments.like_cnt);
+  const [isLiked, setIsLiked] = useState(comments.liked);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
+  console.log(likes, isLiked);
+  const { params } = useParams();
 
-  const handleOptionClick = () => {
+  const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
-  };
+  }, [isOptionClicked]);
 
-  const {
-    id,
-    parent_id: parentId,
-    content,
-    date,
-    image,
-    liked,
-    writer,
-    like_cnt: likeCnt,
-  } = comments;
+  const handleLikeClick = useCallback(
+    async (id) => {
+      try {
+        const { data } = await bookService.addLikeComment(params, id);
+
+        console.log(data);
+
+        setLikes((prevLikes) => {
+          if (isLiked) return prevLikes - 1;
+
+          return prevLikes + 1;
+        });
+
+        setIsLiked(!isLiked);
+        return;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    [params, isLiked]
+  );
+
+  const { id, content, date, image, writer } = comments;
 
   const formattedDate = date.split('T')[0].split('-').join('.');
 
@@ -37,7 +57,7 @@ const RecommentCard = ({ comments }) => {
             <div>
               <Styled.ReCommentOptionDiv
                 active={isOptionClicked.toString()}
-                onClick={handleOptionClick}
+                onClick={() => handleOptionClick}
               >
                 <div>
                   <img src={optionImage} alt="옵션 이미지" />
@@ -61,11 +81,17 @@ const RecommentCard = ({ comments }) => {
           </Styled.ReCommentListContentDiv>
 
           <Styled.CommentReviewDiv>
-            <Styled.CommentThumbsDiv active={liked.toString()}>
-              <img src={thumbsImage} alt="좋아요 이미지" />
+            <Styled.CommentThumbsDiv
+              active={isLiked.toString()}
+              onClick={() => handleLikeClick(id)}
+            >
+              <img
+                src={isLiked ? likedThumbsImage : thumbsImage}
+                alt="좋아요 이미지"
+              />
             </Styled.CommentThumbsDiv>
-            <Styled.CommentThumbsCountDiv>
-              {likeCnt}
+            <Styled.CommentThumbsCountDiv active={isLiked.toString()}>
+              {likes}
             </Styled.CommentThumbsCountDiv>
           </Styled.CommentReviewDiv>
         </div>
