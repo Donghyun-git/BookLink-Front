@@ -63,3 +63,19 @@ export const addLikeComment = async (isbn, id) => {
     throw new Error(error.message);
   }
 };
+
+// [ 책 좋아요 ]
+
+export const addLikeBook = async (isbn) => {
+  try {
+    const { status, data } = await axiosJsonInstance.post(
+      `/books/${isbn}/like`
+    );
+
+    if (status !== 200) throw new Error(data.message);
+
+    return { data };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
