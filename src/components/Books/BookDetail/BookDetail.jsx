@@ -2,10 +2,13 @@ import { useState, useEffect, useCallback, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import BookInfo from './BookInfo/BookInfo';
 import BookAside from './BookAside/BookAside';
+import SideBar from './SideBar';
 import * as bookService from '../../../lib/apis/booksService';
 import * as Styled from './Styled';
 
 const BookDetail = () => {
+  const [likes, setLikes] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const [book, setBook] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +28,8 @@ const BookDetail = () => {
         console.log(data);
         if (!data) throw new Error('데이터를 불러오는데 실패하였습니다.');
 
+        setLikes(data.data.item[0].like_cnt);
+        setIsLiked(data.data.item[0].liked);
         setComments([...data.data.replies]);
         setBook({ ...data.data.item[0] });
         setIsLoading(false);
@@ -42,21 +47,31 @@ const BookDetail = () => {
       ) : isLoading ? (
         <div>로딩중입니다.</div>
       ) : (
-        <Fragment>
-          <Styled.BookDetailTitle>
-            <h2>도서 정보</h2>
-          </Styled.BookDetailTitle>
-          <Styled.BookDetailWithFlexDiv>
-            <BookInfo
-              book={book}
-              isbn={isbn}
-              comments={comments}
-              setComments={updateCommentList}
-            />
-            <BookAside book={book} />
-          </Styled.BookDetailWithFlexDiv>
-        </Fragment>
+        <SideBar isLiked={isLiked} likes={likes} />
       )}
+
+      <Styled.BookDetailContainer>
+        {error ? (
+          <div>{error}</div>
+        ) : isLoading ? (
+          <div>로딩중입니다.</div>
+        ) : (
+          <Fragment>
+            <Styled.BookDetailTitle>
+              <h2>도서 정보</h2>
+            </Styled.BookDetailTitle>
+            <Styled.BookDetailWithFlexDiv>
+              <BookInfo
+                book={book}
+                isbn={isbn}
+                comments={comments}
+                setComments={updateCommentList}
+              />
+              <BookAside book={book} />
+            </Styled.BookDetailWithFlexDiv>
+          </Fragment>
+        )}
+      </Styled.BookDetailContainer>
     </Styled.BookDetailWrap>
   );
 };
