@@ -32,6 +32,12 @@ const BooksContainer = () => {
     setSortLikes(true);
   }, []);
 
+  const [category, setCategory] = useState('카테고리 선택');
+
+  const handleSelectCategory = useCallback((category) => {
+    setCategory(category);
+  }, []);
+
   return (
     <Styled.BooksContainer>
       <Styled.NavDiv>
@@ -82,8 +88,13 @@ const BooksContainer = () => {
           </Styled.NavSortUl>
         </div>
       </Styled.NavDiv>
-      <CategorySelects />
-      {showBooksComponent && <BookContainer isBooks={showBooksComponent} />}
+      <CategorySelects selectCategory={handleSelectCategory} />
+      {showBooksComponent && (
+        <BookContainer
+          isBooks={showBooksComponent}
+          currentCategory={category}
+        />
+      )}
       {showRentsComponent && <Rents />}
     </Styled.BooksContainer>
   );

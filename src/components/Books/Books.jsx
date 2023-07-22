@@ -1,18 +1,25 @@
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as Styled from './Styled';
+import * as bookService from '../../lib/apis/booksService';
 import likesLogo from '../../images/likes.svg';
 import commentsLogo from '../../images/comments.svg';
 
-const Books = ({ isBooks }) => {
+const Books = ({ isBooks, currentCategory }) => {
   const navigate = useNavigate();
   const isLoading = useSelector((state) => state.BOOK.isLoading);
   const error = useSelector((state) => state.BOOK.error);
   const cards = useSelector((state) => state.BOOK.books);
 
-  const goToDetailPage = (isbn) => {
-    navigate(`/books/${isbn}`);
-  };
+  const goToDetailPage = useCallback(
+    (isbn) => {
+      navigate(`/books/${isbn}`);
+    },
+    [navigate]
+  );
+
+  console.log('카테고리 잘 받아옴', currentCategory);
 
   return (
     <Styled.BooksComponentDiv>

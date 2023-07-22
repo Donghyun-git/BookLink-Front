@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import * as Styled from './Styled';
 import searchIcon from '../../images/search_icon.svg';
 
-const CategorySelects = () => {
+const CategorySelects = ({ selectCategory }) => {
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('카테고리 선택');
 
@@ -18,6 +18,10 @@ const CategorySelects = () => {
     setSelectedValue(value);
     setIsCategoryListOpen(false);
   }, []);
+
+  useEffect(() => {
+    selectCategory(selectedValue);
+  }, [selectCategory, selectedValue]);
 
   return (
     <Styled.SelectMain>
