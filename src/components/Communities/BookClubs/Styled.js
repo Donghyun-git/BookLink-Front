@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const MainContainerDiv = styled.div`
-  width: 100vw;
+  width: 100%;
   border: 1px solid black;
   display: flex;
   justify-content: center;
 `;
 
 export const MainContentsDiv = styled.div`
-  width: 70%;
+  width: 102.857rem;
   height: 100%;
   border: 1px solid black;
 `;

@@ -91,12 +91,13 @@ const CommunitiesRegisterForm = () => {
     console.log(e.target.value);
     const { item } = await communitiesBookSearch(e.target.value);
     if (item) {
-      const { title, author, pubDate, publisher } = item[0];
+      const { cover, title, author, pubDate, publisher } = item[0];
       console.log(item[0]);
       setValue('book_title', title);
       setValue('authors', author);
       setValue('publisher', publisher);
       setValue('pud_date', pubDate);
+      setValue('book_image', cover);
     }
   };
   const onCityHandler = (e) => {
@@ -191,12 +192,19 @@ const CommunitiesRegisterForm = () => {
                   onChange={onBookInfoHandler}
                 />
               </Styled.BookContainerDiv>
-              <div>
-                <p>{getValues('book_title')}</p>
-                <p>{getValues('authors')}</p>
-                <p>{getValues('publisher')}</p>
-                <p>{getValues('pud_date')}</p>
-              </div>
+              {getValues('book_title') && (
+                <div>
+                  <Styled.BookInfoDiv>
+                    <Styled.BookImg src={getValues('book_image')} />
+                    <Styled.BookDetailDiv>
+                      <p>{getValues('book_title')}</p>
+                      <p>{getValues('authors')}</p>
+                      <p>{getValues('publisher')}</p>
+                      <p>{getValues('pud_date')}</p>
+                    </Styled.BookDetailDiv>
+                  </Styled.BookInfoDiv>
+                </div>
+              )}
             </div>
           )}
           {bookClubsReportClick && (
