@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const MainContainerDiv = styled.div`
   width: 100%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
 `;
@@ -10,26 +9,44 @@ export const MainContainerDiv = styled.div`
 export const MainContentsDiv = styled.div`
   width: 102.857rem;
   height: 100%;
-  border: 1px solid black;
+`;
+export const TagDiv = styled.div`
+  margin-top: 5.286rem;
+  height: 4.571rem;
+  display: flex;
+`;
+export const openbookImg = styled.img`
+  width: 2.457rem;
+  height: 3rem;
+`;
+export const tag = styled.div`
+  height: 2.571rem;
+  margin: 0 0.571rem;
+  font-size: 1.714rem;
+  font-weight: bold;
 `;
 
 export const SelectDiv = styled.div`
   display: flex;
-  height: 2.5rem;
-  div {
-    margin-right: 1.5rem;
-  }
-  select {
-    height: 100%;
-  }
-  input {
-    width: 25.7rem;
-  }
+  height: 2.571rem;
+`;
+export const select = styled.select`
+  height: 100%;
+  width: 11.926rem;
+  border-radius: 0.571rem;
+  margin-right: 1.714rem;
+  border: 0.143rem solid #848484;
+`;
+export const searchInput = styled.input`
+  height: 100%;
+  width: 25.714rem;
+  border: 0.143rem solid #848484;
+  border-radius: 0.571rem;
 `;
 
 export const ContentsDiv = styled.div`
   width: 100%;
-  border: 1px solid black;
+  margin-top: 2.571rem;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -38,6 +55,20 @@ export const ContentsDiv = styled.div`
 export const CardDiv = styled.div`
   height: 33.426rem;
   width: 24.426rem;
-  border: 1px solid black;
-  margin-right: 1.714rem;
+  box-sizing: border-box;
+  border: 0.071rem solid #d9d9d9;
+  border-radius: 0.857rem;
+  margin: 0 0.857rem;
+  &:nth-child(4n + 1) {
+    margin-left: 0;
+  }
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
 `;
+
+/* border: 0.143rem solid transparent;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
+  background-origin: border-box;
+  background-clip: content-box, border-box;*/

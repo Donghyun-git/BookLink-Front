@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const MainContainerDiv = styled.div`
   width: 100%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
 `;
@@ -10,34 +9,100 @@ export const MainContainerDiv = styled.div`
 export const MainContentsDiv = styled.div`
   width: 102.857rem;
   height: 100%;
-  border: 1px solid black;
+`;
+export const TagDiv = styled.div`
+  margin-top: 5.286rem;
+  height: 4.571rem;
+  display: flex;
+`;
+export const bellImg = styled.img`
+  width: 2.571rem;
+  height: 2.571rem;
+`;
+export const tag = styled.div`
+  height: 2.571rem;
+  margin: 0 0.571rem;
+  font-size: 1.714rem;
+  font-weight: bold;
 `;
 
 export const SelectDiv = styled.div`
   display: flex;
-  height: 2.5rem;
-  div {
-    margin-right: 1.5rem;
-  }
-  select {
-    height: 100%;
-  }
-  input {
-    width: 25.7rem;
-  }
+  height: 2.571rem;
+`;
+export const select = styled.select`
+  height: 100%;
+  width: 11.926rem;
+  border-radius: 0.571rem;
+  margin-right: 1.714rem;
+  border: 0.143rem solid #848484;
+`;
+export const searchInput = styled.input`
+  height: 100%;
+  width: 25.714rem;
+  border: 0.143rem solid #848484;
+  border-radius: 0.571rem;
 `;
 
 export const ContentsDiv = styled.div`
   width: 100%;
-  border: 1px solid black;
+  margin-top: 2.571rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 `;
 
 export const CardDiv = styled.div`
-  width: 23%;
+  width: 24.426rem;
   height: 20rem;
-  border: 1px solid black;
-  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 0.071rem solid #d9d9d9;
+  border-radius: 0.857rem;
+  margin: 0.857rem;
+  &:nth-child(4n + 1) {
+    margin-left: 0;
+  }
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+`;
+
+export const CardContainerDiv = styled.div`
+  width: 22.714rem;
+`;
+export const CardHeaderDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 2.571rem;
+`;
+export const CardInfoDiv = styled.div`
+  display: flex;
+  font-size: 1rem;
+`;
+export const CardInfoWriterDiv = styled.div`
+  border-right: 0.071rem solid #848484;
+  padding-right: 0.571rem;
+`;
+export const CardInfoCategoryDiv = styled.div`
+  border-right: 0.071rem solid #848484;
+  width: 4.857rem;
+  text-align: center;
+`;
+export const CardInfoDateDiv = styled.div`
+  padding-left: 0.571rem;
+`;
+
+export const CardTitleDiv = styled.div`
+  width: 100%;
+  margin-top: 0.571rem;
+  font-weight: bold;
+`;
+export const CardContentDiv = styled.div`
+  width: 100%;
+  margin-top: 0.571rem;
+  font-size: 0.857rem;
 `;

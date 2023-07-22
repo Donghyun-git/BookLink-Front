@@ -92,6 +92,7 @@ export const Title = styled.input`
 export const ButtonDiv = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-top: 2.071rem;
   button {
     box-sizing: border-box;
     width: 13rem;

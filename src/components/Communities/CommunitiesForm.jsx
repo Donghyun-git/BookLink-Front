@@ -5,6 +5,9 @@ import {
   frees,
   bookReports,
 } from '../../lib/apis/communitiesService';
+import fire from '../../images/fire.png';
+import bell from '../../images/bell.png';
+import openbook from '../../images/openbook.png';
 const CommunitiesForm = () => {
   const [freeList, setFreeList] = useState([]);
   const [bookReportList, setBookReportList] = useState([]);
@@ -20,7 +23,7 @@ const CommunitiesForm = () => {
 
   const getBookClubs = async () => {
     const { data } = await bookClubList();
-    setBookClubs(data);
+    setBookClubs(data.slice(0, 4));
   };
   useEffect(() => {
     getFrees();
@@ -39,8 +42,9 @@ const CommunitiesForm = () => {
       <Styled.MainContentsDiv>
         <Styled.PopularDiv>
           <Styled.TagDiv>
-            <a href="/communities">🔥주간 인기글</a>
-            <a href="/communities/popular">전체보기</a>
+            <Styled.fireImg src={fire} />
+            <Styled.tag>주간 인기글</Styled.tag>
+            <Styled.link href="/communities/popular">전체보기</Styled.link>
           </Styled.TagDiv>
           <Styled.PopularContentSDiv>
             <Styled.CardDiv></Styled.CardDiv>
@@ -51,20 +55,38 @@ const CommunitiesForm = () => {
         </Styled.PopularDiv>
         <Styled.BookClubsDiv>
           <Styled.TagDiv>
-            <a href="/communities">🔔독서 모임 모집</a>
-            <a href="/communities/book-clubs">전체보기</a>
+            <Styled.bellImg src={bell} />
+            <Styled.tag>독서 모임 모집</Styled.tag>
+            <Styled.link href="/communities/book-clubs">전체보기</Styled.link>
           </Styled.TagDiv>
           <Styled.BookClubsContentSDiv>
             {bookClubs.map(
               ({ location, reply_cnt, writer, date, title, content }) => {
                 return (
                   <Styled.BookClubsCardDiv key={date}>
-                    <p>{location}</p>
-                    <p>{reply_cnt}</p>
-                    <p>{writer}</p>
-                    <p>{dateFormat(date)}</p>
-                    <p>{title}</p>
-                    <p>{content}</p>
+                    <Styled.BookClubsCardContainerDiv>
+                      <Styled.BookClubsCardHeaderDiv>
+                        <p>{location}</p>
+                        <p>{reply_cnt}</p>
+                      </Styled.BookClubsCardHeaderDiv>
+                      <Styled.BookClubsCardInfoDiv>
+                        <Styled.BookClubsCardInfoWriterDiv>
+                          {writer}
+                        </Styled.BookClubsCardInfoWriterDiv>
+                        <Styled.BookClubsCardInfoCategoryDiv>
+                          독서모임
+                        </Styled.BookClubsCardInfoCategoryDiv>
+                        <Styled.BookClubsCardInfoDateDiv>
+                          {dateFormat(date)}
+                        </Styled.BookClubsCardInfoDateDiv>
+                      </Styled.BookClubsCardInfoDiv>
+                      <Styled.BookClubsCardTitleDiv>
+                        {title}
+                      </Styled.BookClubsCardTitleDiv>
+                      <Styled.BookClubsCardContentDiv
+                        dangerouslySetInnerHTML={{ __html: content }}
+                      />
+                    </Styled.BookClubsCardContainerDiv>
                   </Styled.BookClubsCardDiv>
                 );
               }
@@ -73,8 +95,9 @@ const CommunitiesForm = () => {
         </Styled.BookClubsDiv>
         <Styled.BoardsDiv>
           <Styled.TagDiv>
-            <a href="/communities">📖게시판</a>
-            <a href="/communities/boards">전체보기</a>
+            <Styled.openbookImg src={openbook} />
+            <Styled.tag>게시판</Styled.tag>
+            <Styled.link href="/communities/boards">전체보기</Styled.link>
           </Styled.TagDiv>
           <Styled.BoardsContentsDiv>
             {[...freeList, ...bookReportList]
@@ -88,7 +111,7 @@ const CommunitiesForm = () => {
                   <Styled.CardDiv key={lastModifiedTime}>
                     <p>{dateFormat(lastModifiedTime)}</p>
                     <p>{title}</p>
-                    <p>{content}</p>
+                    <div dangerouslySetInnerHTML={{ __html: content }} />
                   </Styled.CardDiv>
                 );
               })}

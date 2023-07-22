@@ -2,6 +2,7 @@
 import * as Styled from './Styled';
 import { frees, bookReports } from '../../../lib/apis/communitiesService';
 import { useState, useEffect } from 'react';
+import openbook from '../../../images/openbook.png';
 const BoardsForm = () => {
   const [freeList, setFreeList] = useState([]);
   const [bookReportList, setBookReportList] = useState([]);
@@ -35,15 +36,20 @@ const BoardsForm = () => {
   return (
     <Styled.MainContainerDiv>
       <Styled.MainContentsDiv>
-        <h2>📖게시판</h2>
+        <Styled.TagDiv>
+          <Styled.openbookImg src={openbook} />
+          <Styled.tag>게시글</Styled.tag>
+        </Styled.TagDiv>
         <Styled.SelectDiv>
-          <div>
-            <select onChange={onSelectHandler}>
-              <option value="자유글">자유글</option>
-              <option value="독후감">독후감</option>
-            </select>
-          </div>
-          <input type="search" placeholder="검색어를 입력해보세요" />
+          <Styled.select onChange={onSelectHandler}>
+            <option value="자유글">자유글</option>
+            <option value="독후감">독후감</option>
+          </Styled.select>
+
+          <Styled.searchInput
+            type="search"
+            placeholder="검색어를 입력해보세요"
+          />
         </Styled.SelectDiv>
         <Styled.ContentsDiv>
           {select
@@ -52,7 +58,7 @@ const BoardsForm = () => {
                   <Styled.CardDiv key={lastModifiedTime}>
                     <p>{dateFormat(lastModifiedTime)}</p>
                     <p>{title}</p>
-                    <p>{content}</p>
+                    <div dangerouslySetInnerHTML={{ __html: content }} />
                   </Styled.CardDiv>
                 );
               })
@@ -61,7 +67,7 @@ const BoardsForm = () => {
                   <Styled.CardDiv key={lastModifiedTime}>
                     <p>{dateFormat(lastModifiedTime)}</p>
                     <p>{title}</p>
-                    <p>{content}</p>
+                    <div dangerouslySetInnerHTML={{ __html: content }} />
                   </Styled.CardDiv>
                 );
               })}
