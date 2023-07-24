@@ -51,24 +51,3 @@ export const ContentsDiv = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
 `;
-
-export const CardDiv = styled.div`
-  height: 33.426rem;
-  width: 24.426rem;
-  box-sizing: border-box;
-  border: 0.071rem solid #d9d9d9;
-  border-radius: 0.857rem;
-  margin: 0 0.857rem;
-  &:nth-child(4n + 1) {
-    margin-left: 0;
-  }
-  &:nth-child(4n) {
-    margin-right: 0;
-  }
-`;
-
-/* border: 0.143rem solid transparent;
-  background-image: linear-gradient(#fff, #fff),
-    linear-gradient(to right, rgba(0, 227, 125, 1), rgba(0, 60, 116, 1));
-  background-origin: border-box;
-  background-clip: content-box, border-box;*/

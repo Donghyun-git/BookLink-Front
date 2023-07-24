@@ -8,10 +8,14 @@ import {
 import fire from '../../images/fire.png';
 import bell from '../../images/bell.png';
 import openbook from '../../images/openbook.png';
+import BookClubsCardForm from '../Common/Card/BookClubsCard/BookClubsCardForm';
+import BoardsCardForm from '../Common/Card/BoardsCard/BoardsCardForm';
+import { useNavigate } from 'react-router-dom';
 const CommunitiesForm = () => {
   const [freeList, setFreeList] = useState([]);
   const [bookReportList, setBookReportList] = useState([]);
   const [bookClubs, setBookClubs] = useState([]);
+  const navigate = useNavigate();
   const getFrees = async () => {
     const { data } = await frees();
     setFreeList(data);
@@ -30,12 +34,6 @@ const CommunitiesForm = () => {
     getBookReports();
     getBookClubs();
   }, []);
-
-  const dateFormat = (localDate) => {
-    let [date, time] = localDate.split('T');
-    time = time.split(':').slice(0, 2).join(':');
-    return date + ' ' + time;
-  };
 
   return (
     <Styled.MainContainerDiv>
@@ -63,31 +61,18 @@ const CommunitiesForm = () => {
             {bookClubs.map(
               ({ location, reply_cnt, writer, date, title, content }) => {
                 return (
-                  <Styled.BookClubsCardDiv key={date}>
-                    <Styled.BookClubsCardContainerDiv>
-                      <Styled.BookClubsCardHeaderDiv>
-                        <p>{location}</p>
-                        <p>{reply_cnt}</p>
-                      </Styled.BookClubsCardHeaderDiv>
-                      <Styled.BookClubsCardInfoDiv>
-                        <Styled.BookClubsCardInfoWriterDiv>
-                          {writer}
-                        </Styled.BookClubsCardInfoWriterDiv>
-                        <Styled.BookClubsCardInfoCategoryDiv>
-                          독서모임
-                        </Styled.BookClubsCardInfoCategoryDiv>
-                        <Styled.BookClubsCardInfoDateDiv>
-                          {dateFormat(date)}
-                        </Styled.BookClubsCardInfoDateDiv>
-                      </Styled.BookClubsCardInfoDiv>
-                      <Styled.BookClubsCardTitleDiv>
-                        {title}
-                      </Styled.BookClubsCardTitleDiv>
-                      <Styled.BookClubsCardContentDiv
-                        dangerouslySetInnerHTML={{ __html: content }}
-                      />
-                    </Styled.BookClubsCardContainerDiv>
-                  </Styled.BookClubsCardDiv>
+                  <BookClubsCardForm
+                    key={date}
+                    location={location}
+                    reply_cnt={reply_cnt}
+                    writer={writer}
+                    date={date}
+                    title={title}
+                    content={content}
+                    onClick={() => {
+                      navigate('/communities/book-clubs');
+                    }}
+                  />
                 );
               }
             )}
@@ -108,11 +93,12 @@ const CommunitiesForm = () => {
               )
               .map(({ lastModifiedTime, title, content }) => {
                 return (
-                  <Styled.CardDiv key={lastModifiedTime}>
-                    <p>{dateFormat(lastModifiedTime)}</p>
-                    <p>{title}</p>
-                    <div dangerouslySetInnerHTML={{ __html: content }} />
-                  </Styled.CardDiv>
+                  <BoardsCardForm
+                    key={lastModifiedTime}
+                    lastModifiedTime={lastModifiedTime}
+                    title={title}
+                    content={content}
+                  />
                 );
               })}
           </Styled.BoardsContentsDiv>
