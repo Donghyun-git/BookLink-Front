@@ -6,6 +6,7 @@ import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
 import Logo from '../../images/BookLink_Logo.svg';
 import showPasswordImg from '../../images/password_eye.svg';
+import kakaoLogo from '../../images/kakao.svg';
 
 const LoginForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -76,7 +77,10 @@ const LoginForm = ({ onSubmit }) => {
           </Styled.LoginFormFooterDiv>
           <Styled.LoginButton type="submit">로그인</Styled.LoginButton>
           <Styled.KakaoLoginButton>
-            <a href={env.KAKAO_AUTH_URL}>카카오 로그인</a>
+            <a href={env.KAKAO_AUTH_URL}>
+              <img src={kakaoLogo} alt="카카오 로고" />
+              카카오 로그인
+            </a>
           </Styled.KakaoLoginButton>
           <Styled.RegisterButton to="/register">
             회원가입 하기

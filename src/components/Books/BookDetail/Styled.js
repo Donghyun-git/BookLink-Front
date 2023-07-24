@@ -1,4 +1,29 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+// [좋아요 애니메이션]
+const fadeScale = keyframes`
+    0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  40% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+`;
 
 //[책 상세페이지 레이아웃]
 export const BookDetailWrap = styled.div`
@@ -27,13 +52,10 @@ export const SideBarDiv = styled.div`
   height: fit-content;
   position: sticky;
   top: 14rem;
-  margin-right: 1.64rem;
+  margin-right: 4.64rem;
   padding: 20px;
   z-index: 999;
-  border: 1px solid #f1f3f5;
-  border-radius: 2rem;
   padding: 0.5rem;
-  background: #f8f9fa;
 
   display: flex;
   align-items: center;
@@ -49,6 +71,13 @@ export const SideBarDiv = styled.div`
     &:nth-child(2) {
       color: #900000;
       margin-top: 0.27rem;
+      &:last-child {
+        color: #000;
+        text-align: center;
+        font-size: 0.71429rem;
+
+        font-weight: 500;
+      }
     }
 
     button {
@@ -92,10 +121,15 @@ export const SideBarDiv = styled.div`
         opacity: 1;
         top: -3.368rem;
       }
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+
+        &:active {
+          animation: ${fadeScale} 2s ease-in-out;
+        }
       }
     }
   }
