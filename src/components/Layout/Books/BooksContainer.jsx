@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import * as Styled from './Styled';
 import BookContainer from '../../../containers/BookContainer';
 import Rents from '../../Books/Rents';
@@ -7,10 +8,14 @@ import rentButtonLogo from '../../../images/rent_logo.svg';
 import bookStoreLogo from '../../../images/bookstore_logo.svg';
 
 const BooksContainer = () => {
+  const cards = useSelector((state) => state.BOOK.books);
+
   const [showBooksComponent, setShowBooksComponent] = useState(true);
   const [showRentsComponent, setShowRentsComponent] = useState(false);
   const [sortCurrent, setSortCurrent] = useState(true);
   const [sortLikes, setSortLikes] = useState(false);
+  const [likeSortedBooks, setLikeSortedBooks] = useState([]);
+  const [currentSortedBooks, setCurrentSortedBooks] = useState([]);
 
   const handleClickBooks = useCallback(() => {
     setShowRentsComponent(false);
@@ -30,7 +35,12 @@ const BooksContainer = () => {
   const handleClickSortLikes = useCallback(() => {
     setSortCurrent(false);
     setSortLikes(true);
-  }, []);
+    const likeSortedBooks = [...cards].sort((a, b) => {
+      return b.like_cnt - a.like_cnt;
+    });
+
+    setLikeSortedBooks([...likeSortedBooks]);
+  }, [cards]);
 
   const [category, setCategory] = useState('카테고리 선택');
 
@@ -92,6 +102,10 @@ const BooksContainer = () => {
       {showBooksComponent && (
         <BookContainer
           isBooks={showBooksComponent}
+          sortCurrent={sortCurrent}
+          currentSortedBooks={currentSortedBooks}
+          sortLikes={sortLikes}
+          likeSortedBooks={likeSortedBooks}
           currentCategory={category}
         />
       )}
