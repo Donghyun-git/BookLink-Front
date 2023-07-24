@@ -110,10 +110,16 @@ export const KakaoLoginButton = styled.div`
   border-radius: 0.857rem;
   background: #fee500;
   transition: all 0.1s;
+  display: flex;
+  align-items: center;
 
+  img {
+    width: 2.57143rem;
+    height: 2.42829rem;
+    margin: 0 13rem 0 2.14rem;
+  }
   a {
     display: flex;
-    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
