@@ -1,5 +1,3 @@
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useState /*useEffect*/ } from 'react';
 import * as Styled from './Styled';
 import { useForm } from 'react-hook-form';
@@ -13,7 +11,9 @@ import {
 } from '../../../lib/apis/communitiesService';
 import { communitiesBookSearch } from '../../../lib/apis/searchService';
 import { data } from '../../../constants/sidoguInfo';
-
+import WebEditorForm from '../../Common/WebEditor/WebEditorForm';
+import TopicInputForm from '../../Common/Input/TopicInputForm';
+import CityDistrictSelectorForm from '../../Common/CityDistrictSelector/CityDistrictSelectorForm';
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();
   const [bookReportClick, setBookReportClick] = useState(false);
@@ -209,49 +209,20 @@ const CommunitiesRegisterForm = () => {
           )}
           {bookClubsReportClick && (
             <div>
-              <h2>모임위치</h2>
-              <Styled.cityContainerDiv>
-                <Styled.citiesDiv>
-                  {cities.map((city, idx) => {
-                    return (
-                      <Styled.cityDiv
-                        key={city}
-                        onClick={onCityHandler}
-                        active={cityActive[idx].toString()}
-                      >
-                        <span>{city}</span>
-                      </Styled.cityDiv>
-                    );
-                  })}
-                </Styled.citiesDiv>
-                <Styled.districtiesDiv>
-                  {districts.map((district, idx) => {
-                    return (
-                      <Styled.districtDiv
-                        key={district}
-                        onClick={onDistrictHandler}
-                        active={
-                          districtActive.length &&
-                          districtActive[idx].toString()
-                        }
-                      >
-                        <span>{district}</span>
-                      </Styled.districtDiv>
-                    );
-                  })}
-                </Styled.districtiesDiv>
-              </Styled.cityContainerDiv>
+              <CityDistrictSelectorForm
+                cities={cities}
+                onCityHandler={onCityHandler}
+                cityActive={cityActive}
+                districts={districts}
+                onDistrictHandler={onDistrictHandler}
+                districtActive={districtActive}
+              />
               {/*errors.location && <p>{errors.location.message}</p>*/}
             </div>
           )}
-          <h2>제목</h2>
-          <Styled.Title type="text" {...register('title')} />
+          <TopicInputForm register={register} />
           {errors.title && <p>{errors.title.message}</p>}
-          <h2>내용</h2>
-          <ReactQuill
-            onChange={onContentsHandler}
-            /*style={{ height: '10rem' }}*/
-          />
+          <WebEditorForm onContentsHandler={onContentsHandler} />
           <Styled.ButtonDiv>
             <button type="submit">게시글 등록하기</button>
           </Styled.ButtonDiv>
