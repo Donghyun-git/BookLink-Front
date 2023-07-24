@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
+import { getDateDistance } from '../../../../utils/date';
 import * as Styled from './Styled';
 import * as bookService from '../../../../lib/apis/booksService';
 import RecommentCard from './RecommentCard';
@@ -67,7 +68,7 @@ const CommentCard = ({
     sub_reply_cnt: subReplyCnt,
   } = comment;
 
-  const formattedDate = date.split('T')[0].split('-').join('.');
+  const distance = getDateDistance(date);
 
   return (
     <Styled.CommentCardDiv>
@@ -78,7 +79,8 @@ const CommentCard = ({
         <div>
           <Styled.CommentListUserInfo>
             <div>
-              <span>{writer}</span> <span>{formattedDate}</span>
+              <span>{writer}</span>
+              <span>{distance} 전</span>
             </div>
             <div>
               <Styled.CommentOptionDiv

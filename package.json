@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "persist": "^0.2.7",
     "react": "^18.2.0",
@@ -29,6 +30,8 @@
     "redux-thunk": "^2.4.2",
     "redux-toolkit": "^1.1.2",
     "styled-components": "^6.0.0-rc.3",
+    "timeago-react": "^3.0.6",
+    "timeago.js": "^4.0.2",
     "yarn": "^1.22.19",
     "yup": "^1.2.0"
   },

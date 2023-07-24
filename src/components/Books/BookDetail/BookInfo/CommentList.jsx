@@ -20,7 +20,7 @@ const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
 
   return (
     <div>
-      {newComments.map((comment) => {
+      {[...newComments].reverse().map((comment) => {
         const { id, parent_id: parentId } = comment;
         return (
           <CommentCard

@@ -45,7 +45,7 @@ const BookDetail = () => {
       {error ? (
         <div>{error}</div>
       ) : isLoading ? (
-        <div>로딩중입니다.</div>
+        <Fragment></Fragment>
       ) : (
         <SideBar isLiked={isLiked} likes={likes} />
       )}
