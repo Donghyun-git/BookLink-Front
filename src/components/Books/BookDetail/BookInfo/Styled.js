@@ -470,3 +470,24 @@ export const ReCommentOptionDiv = styled.div`
     }
   }
 `;
+
+//[ 댓글 더보기 버튼 ]
+export const MoreCommentButton = styled.button`
+  display: flex;
+  justify-content: center;
+  border-radius: 1.71429rem;
+  background: #00e37d;
+  padding: 1.71rem 19.04rem;
+  margin: 10.29rem auto 0 auto;
+
+  div {
+    color: #fff;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-size: 1.71429rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+`;

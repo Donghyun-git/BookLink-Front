@@ -1,6 +1,14 @@
 import CommentCard from './CommentCard';
+import * as Styled from './Styled';
 
-const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
+const CommentList = ({
+  onSubmit,
+  onCancel,
+  commentInputRef,
+  comments,
+  showRepliesCount,
+  setShowRepliesCount,
+}) => {
   const commentMap = {};
 
   comments.reverse().forEach((comment) => {
@@ -20,19 +28,29 @@ const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
 
   return (
     <div>
-      {[...newComments].reverse().map((comment) => {
-        const { id, parent_id: parentId } = comment;
-        return (
-          <CommentCard
-            key={id}
-            onSubmit={onSubmit}
-            onCancel={onCancel}
-            commentInputRef={commentInputRef}
-            comment={comment}
-            parentId={parentId}
-          />
-        );
-      })}
+      {[...newComments]
+        .reverse()
+        .slice(0, showRepliesCount)
+        .map((comment) => {
+          const { id, parent_id: parentId } = comment;
+          return (
+            <CommentCard
+              key={id}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
+              commentInputRef={commentInputRef}
+              comment={comment}
+              parentId={parentId}
+            />
+          );
+        })}
+      {comments.length > showRepliesCount && (
+        <Styled.MoreCommentButton
+          onClick={() => setShowRepliesCount((prevCount) => prevCount + 12)}
+        >
+          <div>더보기</div>
+        </Styled.MoreCommentButton>
+      )}
     </div>
   );
 };
