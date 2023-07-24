@@ -8,7 +8,6 @@ import CommentList from './CommentList';
 
 const BookInfo = ({ book, isbn, comments, setComments }) => {
   const [replies, setReplies] = useState(comments);
-  const [showRepliesCount, setShowRepliesCount] = useState(12);
 
   const navigate = useNavigate();
   const commentInputRef = useRef();
@@ -126,8 +125,6 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
           onCancel={handleCommentCancel}
           commentInputRef={commentInputRef}
           comments={replies}
-          showRepliesCount={showRepliesCount}
-          setShowRepliesCount={setShowRepliesCount}
         />
       </Styled.BookReviewWrap>
     </Styled.BookInfoWrap>
