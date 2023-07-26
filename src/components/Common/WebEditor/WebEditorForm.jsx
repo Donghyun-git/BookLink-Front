@@ -4,10 +4,9 @@ import 'react-quill/dist/quill.snow.css';
 const WebEditorForm = ({ onContentsHandler }) => {
   return (
     <div>
-      <h2>내용</h2>
       <ReactQuill
         onChange={onContentsHandler}
-        /*style={{ height: '10rem' }}*/
+        style={{ height: '90.857rem' }}
       />
     </div>
   );
