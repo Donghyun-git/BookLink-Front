@@ -1,17 +1,13 @@
+import { useState } from 'react';
 import CommentCard from './CommentCard';
 import * as Styled from './Styled';
 
-const CommentList = ({
-  onSubmit,
-  onCancel,
-  commentInputRef,
-  comments,
-  showRepliesCount,
-  setShowRepliesCount,
-}) => {
+const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
   const commentMap = {};
+  const [showRepliesCount, setShowRepliesCount] = useState(12);
 
-  comments.reverse().forEach((comment) => {
+  //배열복사 안해서 개삽질...ㅠㅠ
+  [...comments].reverse().forEach((comment) => {
     const { id, parent_id: parentId } = comment;
 
     if (id === parentId) {
@@ -44,7 +40,7 @@ const CommentList = ({
             />
           );
         })}
-      {comments.length > showRepliesCount && (
+      {newComments.length > showRepliesCount && (
         <Styled.MoreCommentButton
           onClick={() => setShowRepliesCount((prevCount) => prevCount + 12)}
         >
