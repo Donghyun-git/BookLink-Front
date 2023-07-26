@@ -4,18 +4,16 @@ import {
   bookClubList,
   frees,
   bookReports,
-} from '../../lib/apis/communitiesService';
+} from '../../lib/apis/communities/communitiesService';
 import fire from '../../images/fire.png';
 import bell from '../../images/bell.png';
 import openbook from '../../images/openbook.png';
 import BookClubsCardForm from '../Common/Card/BookClubsCard/BookClubsCardForm';
 import BoardsCardForm from '../Common/Card/BoardsCard/BoardsCardForm';
-import { useNavigate } from 'react-router-dom';
 const CommunitiesForm = () => {
   const [freeList, setFreeList] = useState([]);
   const [bookReportList, setBookReportList] = useState([]);
   const [bookClubs, setBookClubs] = useState([]);
-  const navigate = useNavigate();
   const getFrees = async () => {
     const { data } = await frees();
     setFreeList(data);
@@ -59,7 +57,7 @@ const CommunitiesForm = () => {
           </Styled.TagDiv>
           <Styled.BookClubsContentSDiv>
             {bookClubs.map(
-              ({ location, reply_cnt, writer, date, title, content }) => {
+              ({ id, location, reply_cnt, writer, date, title, content }) => {
                 return (
                   <BookClubsCardForm
                     key={date}
@@ -69,9 +67,7 @@ const CommunitiesForm = () => {
                     date={date}
                     title={title}
                     content={content}
-                    onClick={() => {
-                      navigate('/communities/book-clubs');
-                    }}
+                    id={id}
                   />
                 );
               }
@@ -91,13 +87,14 @@ const CommunitiesForm = () => {
                   Date.parse(b.lastModifiedTime) -
                   Date.parse(a.lastModifiedTime)
               )
-              .map(({ lastModifiedTime, title, content }) => {
+              .map(({ id, lastModifiedTime, title, content }) => {
                 return (
                   <BoardsCardForm
                     key={lastModifiedTime}
                     lastModifiedTime={lastModifiedTime}
                     title={title}
                     content={content}
+                    id={id}
                   />
                 );
               })}

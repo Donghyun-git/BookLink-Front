@@ -8,7 +8,7 @@ import {
   freeRegister,
   bookClubRegister,
   reportRegister,
-} from '../../../lib/apis/communitiesService';
+} from '../../../lib/apis/communities/register/communitiesRegisterService';
 import { communitiesBookSearch } from '../../../lib/apis/searchService';
 import { data } from '../../../constants/sidoguInfo';
 import WebEditorForm from '../../Common/WebEditor/WebEditorForm';

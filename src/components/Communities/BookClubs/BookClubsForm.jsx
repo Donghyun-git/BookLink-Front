@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import * as Styled from './Styled';
-import { bookClubList } from '../../../lib/apis/communitiesService';
+import { bookClubList } from '../../../lib/apis/communities/communitiesService';
 import bell from '../../../images/bell.png';
 import BookClubsCardForm from '../../Common/Card/BookClubsCard/BookClubsCardForm';
 const BookClubsForm = () => {
@@ -48,7 +48,7 @@ const BookClubsForm = () => {
         </Styled.SelectDiv>
         <Styled.ContentsDiv>
           {bookClubs.map(
-            ({ location, reply_cnt, writer, date, title, content }) => {
+            ({ id, location, reply_cnt, writer, date, title, content }) => {
               return (
                 <BookClubsCardForm
                   key={date}
@@ -58,6 +58,7 @@ const BookClubsForm = () => {
                   date={date}
                   title={title}
                   content={content}
+                  id={id}
                 />
               );
             }

@@ -1,6 +1,9 @@
 //import React from 'react'
 import * as Styled from './Styled';
-import { frees, bookReports } from '../../../lib/apis/communitiesService';
+import {
+  frees,
+  bookReports,
+} from '../../../lib/apis/communities/communitiesService';
 import { useState, useEffect, useRef } from 'react';
 import BoardsCardForm from '../../Common/Card/BoardsCard/BoardsCardForm';
 import openbook from '../../../images/openbook.png';
@@ -63,23 +66,25 @@ const BoardsForm = () => {
         </Styled.SelectDiv>
         <Styled.ContentsDiv>
           {select
-            ? bookReportList.map(({ lastModifiedTime, title, content }) => {
+            ? bookReportList.map(({ id, lastModifiedTime, title, content }) => {
                 return (
                   <BoardsCardForm
                     key={lastModifiedTime}
                     lastModifiedTime={lastModifiedTime}
                     title={title}
                     content={content}
+                    id={id}
                   />
                 );
               })
-            : freeList.map(({ lastModifiedTime, title, content }) => {
+            : freeList.map(({ id, lastModifiedTime, title, content }) => {
                 return (
                   <BoardsCardForm
                     key={lastModifiedTime}
                     lastModifiedTime={lastModifiedTime}
                     title={title}
                     content={content}
+                    id={id}
                   />
                 );
               })}
