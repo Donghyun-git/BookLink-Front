@@ -64,7 +64,7 @@ const BookClubsDetailForm = () => {
   }, []);
   const {
     writer,
-    writer_image,
+    image,
     title,
     content,
     location,
@@ -84,7 +84,7 @@ const BookClubsDetailForm = () => {
     <>
       <p>{title}</p>
       <p>독서 모임 모집</p>
-      <img src={writer_image} />
+      <img src={image} />
       <p>{writer}</p>
       <p>{dateFormat(date)}</p>
       <p>{like_cnt}</p>
