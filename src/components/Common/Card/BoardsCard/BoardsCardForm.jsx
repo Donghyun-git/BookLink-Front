@@ -1,9 +1,16 @@
 import * as Styled from './Styled';
-
+import { useNavigate } from 'react-router-dom';
 import { dateFormat } from '../../../../utils/date';
-const BoardsCardForm = ({ lastModifiedTime, title, content }) => {
+const BoardsCardForm = ({ lastModifiedTime, title, content, id }) => {
+  const navigate = useNavigate();
   return (
-    <Styled.BoardsCardDiv key={lastModifiedTime}>
+    <Styled.BoardsCardDiv
+      key={lastModifiedTime}
+      onClick={() => {
+        console.log(1);
+        navigate(`/communities/boards/free-report/${id}`);
+      }}
+    >
       <Styled.BoardsCardContainerDiv>
         <Styled.BoardsCardHeaderDiv>
           <p>0</p>

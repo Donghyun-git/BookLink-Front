@@ -1,5 +1,6 @@
 import * as Styled from './Styled';
 import { dateFormat } from '../../../../utils/date';
+import { useNavigate } from 'react-router-dom';
 const BookClubsCardForm = ({
   date,
   location,
@@ -7,9 +8,15 @@ const BookClubsCardForm = ({
   writer,
   title,
   content,
+  id,
 }) => {
+  const navigate = useNavigate();
   return (
-    <Styled.BookClubsCardDiv>
+    <Styled.BookClubsCardDiv
+      onClick={() => {
+        navigate(`/communities/book-clubs/${id}`);
+      }}
+    >
       <Styled.BookClubsCardContainerDiv>
         <Styled.BookClubsCardHeaderDiv>
           <p>{location}</p>
