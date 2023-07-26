@@ -48,6 +48,43 @@ export const addComment = async ({ isbn, content, parentId }) => {
   }
 };
 
+//[ 댓글 수정 ]
+export const updateComment = async (isbn, id, content) => {
+  try {
+    const payload = {
+      content: content,
+    };
+    console.log(payload);
+    const { status, data } = await axiosJsonInstance.patch(
+      `/books/${isbn}/${id}`,
+      payload
+    );
+
+    if (status !== 200) throw new Error(data.message);
+
+    return { status, data };
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+};
+
+//[ 댓글 삭제 ]
+export const deleteComment = async (isbn, id) => {
+  try {
+    const { status, data } = await axiosJsonInstance.delete(
+      `/books/${isbn}/${id}`
+    );
+
+    if (status !== 204) throw new Error(data.message);
+
+    return { status, data };
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+};
+
 //[ 댓글 좋아요 ]
 export const addLikeComment = async (isbn, id) => {
   try {

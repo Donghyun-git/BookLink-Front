@@ -16,7 +16,6 @@ import { ko } from 'date-fns/locale';
 
 export const getDateDistance = (date) => {
   const localDate = parseISO(date);
-
   const adjustedDate = add(localDate, { hours: 9 });
 
   return formatDistanceToNow(adjustedDate, {

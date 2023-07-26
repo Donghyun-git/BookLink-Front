@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getDateDistance } from '../../../../utils/date';
 import * as Styled from './Styled';
 import * as bookService from '../../../../lib/apis/booksService';
@@ -18,13 +19,29 @@ const CommentCard = ({
   comment,
   parentId,
 }) => {
-  const [likes, setLikes] = useState(comment.like_cnt);
-  const [isLiked, setIsLiked] = useState(comment.liked);
+  const {
+    id,
+    content,
+    children,
+    like_cnt,
+    date,
+    image,
+    writer,
+    sub_reply_cnt: subReplyCnt,
+  } = comment;
+
+  const [likes, setLikes] = useState(like_cnt);
+  const [isLiked, setIsLiked] = useState(comment.isLiked);
   const [isRecommentClicked, setIsRecommentClicked] = useState(false);
   const [isShowRecomment, setIsShowRecomment] = useState(false);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
 
-  const { params } = useParams();
+  const [updatedContent, setUpdatedContent] = useState(content);
+  const [isUpdateClicked, setIsUpdateClicked] = useState(false);
+
+  const userNickName = useSelector((state) => state.USER.nickname);
+
+  const { isbn } = useParams();
 
   const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
@@ -38,9 +55,10 @@ const CommentCard = ({
     setIsShowRecomment(!isShowRecomment);
   }, [isShowRecomment]);
 
+  //[ 좋아요 취소, 등록 ]
   const handleLikeClick = useCallback(async () => {
     try {
-      const { data } = await bookService.addLikeComment(params, comment.id);
+      const { data } = await bookService.addLikeComment(isbn, id);
 
       console.log(data);
 
@@ -55,20 +73,57 @@ const CommentCard = ({
     } catch (error) {
       throw new Error(error.message);
     }
-  }, [params, comment.id, isLiked]);
+  }, [isbn, id, isLiked]);
+
+  //[ 댓글 수정 ]
+  const handleUpdateComment = useCallback(
+    async (content) => {
+      try {
+        const { data } = await bookService.updateComment(isbn, id, content);
+
+        console.log(data);
+
+        setUpdatedContent(data.data.content);
+        setIsUpdateClicked(!isUpdateClicked);
+        return;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    [id, isUpdateClicked, isbn]
+  );
+
+  const handleOpenUpdateComment = useCallback(() => {
+    setIsUpdateClicked(!isUpdateClicked);
+  }, [isUpdateClicked]);
+
+  const handleCancelUpdateComment = useCallback(() => {
+    setIsUpdateClicked(!isUpdateClicked);
+  }, [isUpdateClicked]);
+
+  //[ 댓글 삭제 ]
+  const handleDeleteComment = useCallback(async () => {
+    try {
+      const { status, data } = await bookService.deleteComment(isbn, id);
+
+      console.log(data);
+
+      return;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }, [isbn, id]);
 
   const recommentParentId = isRecommentClicked ? parentId : 0;
 
-  const {
-    content,
-    children,
-    date,
-    image,
-    writer,
-    sub_reply_cnt: subReplyCnt,
-  } = comment;
+  console.log('@@@comment', comment);
+  console.log('@@@date', date);
 
-  const distance = getDateDistance(date);
+  let distance = false;
+
+  if (date) {
+    distance = getDateDistance(date);
+  }
 
   return (
     <Styled.CommentCardDiv>
@@ -90,22 +145,42 @@ const CommentCard = ({
                 <div>
                   <img src={optionImage} alt="옵션 이미지" />
                   <ul>
-                    <li>
-                      <span>신고하기</span>
-                    </li>
-                    <li>
-                      <span>수정</span>
-                    </li>
-                    <li>
-                      <span>삭제</span>
-                    </li>
+                    {writer === userNickName ? (
+                      <Fragment>
+                        <li onClick={() => handleOpenUpdateComment()}>
+                          <span>수정</span>
+                        </li>
+                        <li onClick={() => handleDeleteComment()}>
+                          <span>삭제</span>
+                        </li>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <li>
+                          <span>신고하기</span>
+                        </li>
+                      </Fragment>
+                    )}
                   </ul>
                 </div>
               </Styled.CommentOptionDiv>
             </div>
           </Styled.CommentListUserInfo>
           <Styled.CommentListContentDiv>
-            <p>{content}</p>
+            {isUpdateClicked ? (
+              <Fragment>
+                <Styled.UpdateCommentInput
+                  id="comment"
+                  defaultValue={updatedContent}
+                  ref={commentInputRef}
+                  placeholder="댓글을 입력해주세요."
+                />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p>{updatedContent}</p>
+              </Fragment>
+            )}
           </Styled.CommentListContentDiv>
 
           <Styled.CommentReviewDiv>
@@ -115,7 +190,9 @@ const CommentCard = ({
                 alt="좋아요 이미지"
               />
             </Styled.CommentThumbsDiv>
-            <Styled.CommentThumbsCountDiv active={isLiked.toString()}>
+            <Styled.CommentThumbsCountDiv
+              active={isLiked !== null && isLiked.toString()}
+            >
               {likes}
             </Styled.CommentThumbsCountDiv>
             <Styled.CommentReviewWriteDiv
@@ -125,6 +202,18 @@ const CommentCard = ({
                 <span>답글 달기</span>
               </button>
             </Styled.CommentReviewWriteDiv>
+            {isUpdateClicked && (
+              <Styled.UpdateCommentButtonDiv>
+                <span onClick={() => handleCancelUpdateComment()}>취소</span>
+                <button
+                  onClick={() =>
+                    handleUpdateComment(commentInputRef.current.value)
+                  }
+                >
+                  <span className="write">수정하기</span>
+                </button>
+              </Styled.UpdateCommentButtonDiv>
+            )}
           </Styled.CommentReviewDiv>
           {subReplyCnt > 0 ? (
             <Styled.ShowCommentButtonDiv>
@@ -157,7 +246,7 @@ const CommentCard = ({
       </div>
       <div>
         {isRecommentClicked && (
-          <Styled.BookReviewWriteForm>
+          <Styled.BookReviewWriteForm style={{ justifyContent: 'center' }}>
             <Styled.BookReviewUserProfileDiv>
               <img src={image} alt="프로필 이미지" />
             </Styled.BookReviewUserProfileDiv>

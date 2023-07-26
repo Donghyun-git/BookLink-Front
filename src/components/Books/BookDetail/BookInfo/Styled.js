@@ -420,7 +420,7 @@ export const ReCommentListContentDiv = styled.div`
 export const ReCommentOptionDiv = styled.div`
   position: absolute;
   top: 0;
-  right: -4.9px;
+  right: -81.9px;
   padding: 0 1rem;
   cursor: pointer;
 
@@ -489,5 +489,51 @@ export const MoreCommentButton = styled.button`
     font-weight: 700;
     line-height: normal;
     text-transform: uppercase;
+  }
+`;
+
+export const UpdateCommentInput = styled.input`
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid #000;
+  background: 0;
+  width: 59.5rem;
+  height: 1.42857rem;
+  font-size: 0.85714rem;
+  padding-bottom: 0.11rem;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: #d9d9d9;
+    font-size: 0.85714rem;
+    font-weight: 400;
+  }
+`;
+
+export const UpdateCommentButtonDiv = styled.div`
+  margin-left: auto;
+  margin-right: 1.829rem;
+  span {
+    display: inline-block;
+    color: #d9d9d9;
+    font-size: 0.85714rem;
+    font-weight: 500;
+    margin-right: 2rem;
+    padding: 0.29rem 0.57rem;
+    cursor: pointer;
+  }
+
+  .write {
+    margin-right: 0;
+  }
+
+  button {
+    padding: 0.29rem 0.57rem;
+    border-radius: 0.92857rem;
+    background: #848484;
   }
 `;

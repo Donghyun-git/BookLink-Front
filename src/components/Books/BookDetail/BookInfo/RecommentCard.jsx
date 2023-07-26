@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getDateDistance } from '../../../../utils/date';
 import * as bookService from '../../../../lib/apis/booksService';
 import * as Styled from './Styled';
@@ -8,20 +9,28 @@ import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
 
 const RecommentCard = ({ comments }) => {
-  const [likes, setLikes] = useState(comments.like_cnt);
-  const [isLiked, setIsLiked] = useState(comments.liked);
+  const { id, content, date, like_cnt, image, writer } = comments;
+
+  const userNickName = useSelector((state) => state.USER.nickname);
+  const [likes, setLikes] = useState(like_cnt);
+  const [isLiked, setIsLiked] = useState(comments.isLiked);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
-  console.log(likes, isLiked);
-  const { params } = useParams();
+
+  // const [updatedContent, setUpdatedContent] = useState(content);
+  const [isUpdateClicked, setIsUpdateClicked] = useState(false);
+
+  const { isbn } = useParams();
 
   const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
   }, [isOptionClicked]);
 
+  //[ 좋아요 등록, 취소 ]
+
   const handleLikeClick = useCallback(
     async (id) => {
       try {
-        const { data } = await bookService.addLikeComment(params, id);
+        const { data } = await bookService.addLikeComment(isbn, id);
 
         console.log(data);
 
@@ -37,10 +46,26 @@ const RecommentCard = ({ comments }) => {
         throw new Error(error.message);
       }
     },
-    [params, isLiked]
+    [isbn, isLiked]
   );
 
-  const { id, content, date, image, writer } = comments;
+  // [ 댓글 수정 ]
+  const handleOpenUpdateComment = useCallback(() => {
+    setIsUpdateClicked(!isUpdateClicked);
+  }, [isUpdateClicked]);
+
+  //[ 댓글 삭제 ]
+  const handleDeleteComment = useCallback(async () => {
+    try {
+      const { status, data } = await bookService.deleteComment(isbn, id);
+
+      console.log(data);
+
+      return;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }, [isbn, id]);
 
   const distance = getDateDistance(date);
 
@@ -58,20 +83,27 @@ const RecommentCard = ({ comments }) => {
             <div>
               <Styled.ReCommentOptionDiv
                 active={isOptionClicked.toString()}
-                onClick={() => handleOptionClick}
+                onClick={() => handleOptionClick()}
               >
                 <div>
                   <img src={optionImage} alt="옵션 이미지" />
                   <ul>
-                    <li>
-                      <span>신고하기</span>
-                    </li>
-                    <li>
-                      <span>수정</span>
-                    </li>
-                    <li>
-                      <span>삭제</span>
-                    </li>
+                    {writer === userNickName ? (
+                      <Fragment>
+                        <li onClick={() => handleOpenUpdateComment()}>
+                          <span>수정</span>
+                        </li>
+                        <li onClick={() => handleDeleteComment()}>
+                          <span>삭제</span>
+                        </li>
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        <li>
+                          <span>신고하기</span>
+                        </li>
+                      </Fragment>
+                    )}
                   </ul>
                 </div>
               </Styled.ReCommentOptionDiv>
