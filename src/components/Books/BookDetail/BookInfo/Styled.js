@@ -224,16 +224,18 @@ export const CommentFilterDiv = styled.div`
   margin-top: 2.86rem;
   display: flex;
   align-items: center;
+
   div {
-    //활성화되면  color: #000;
-    color: #d9d9d9;
     font-size: 0.85714rem;
     font-weight: 500;
     cursor: pointer;
 
     &:first-child {
-      color: #000;
+      color: ${({ active }) => (active === 'like' ? '#000' : '#d9d9d9')};
       margin-right: 0.86rem;
+    }
+    &:last-child {
+      color: ${({ active }) => (active === 'date' ? '#000' : '#d9d9d9')};
     }
   }
 `;

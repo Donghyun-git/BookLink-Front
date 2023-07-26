@@ -1,12 +1,20 @@
 import { useState } from 'react';
+import { useDetailContext } from '../context/detailContext';
 import CommentCard from './CommentCard';
 import * as Styled from './Styled';
 
-const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
+const CommentList = ({
+  onSubmit,
+  onCancel,
+  commentInputRef,
+  isClickedLiked,
+  isClickedDate,
+}) => {
+  const comments = useDetailContext().value;
+
   const commentMap = {};
   const [showRepliesCount, setShowRepliesCount] = useState(12);
 
-  //배열복사 안해서 개삽질...ㅠㅠ
   [...comments].reverse().forEach((comment) => {
     const { id, parent_id: parentId } = comment;
 
@@ -20,7 +28,20 @@ const CommentList = ({ onSubmit, onCancel, commentInputRef, comments }) => {
     }
   });
 
-  const newComments = Object.values(commentMap);
+  let newComments = Object.values(commentMap);
+
+  if (isClickedLiked) {
+    newComments = [...newComments].sort((a, b) => {
+      return a.like_cnt - b.like_cnt;
+    });
+  }
+
+  if (isClickedDate) {
+    newComments = [...newComments].sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+  }
+  console.log(newComments);
 
   return (
     <div>

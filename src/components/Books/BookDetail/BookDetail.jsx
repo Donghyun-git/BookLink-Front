@@ -1,5 +1,7 @@
-import { useState, useEffect, useCallback, Fragment } from 'react';
+import { useState, useEffect, useCallback, useReducer, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { DetailContext } from './context/detailContext';
+import { detailReducer } from './context/detailReducer';
 import BookInfo from './BookInfo/BookInfo';
 import BookAside from './BookAside/BookAside';
 import SideBar from './SideBar';
@@ -15,6 +17,8 @@ const BookDetail = () => {
   const [error, setError] = useState(null);
 
   const { isbn } = useParams();
+
+  const [state, dispatch] = useReducer(detailReducer, comments);
 
   const updateCommentList = useCallback((comments) => {
     console.log(comments);
@@ -61,12 +65,17 @@ const BookDetail = () => {
               <h2>도서 정보</h2>
             </Styled.BookDetailTitle>
             <Styled.BookDetailWithFlexDiv>
-              <BookInfo
-                book={book}
-                isbn={isbn}
-                comments={comments}
-                setComments={updateCommentList}
-              />
+              <DetailContext.Provider
+                value={{ value: comments, state, dispatch }}
+              >
+                <BookInfo
+                  book={book}
+                  isbn={isbn}
+                  comments={comments}
+                  setComments={updateCommentList}
+                />
+              </DetailContext.Provider>
+
               <BookAside book={book} />
             </Styled.BookDetailWithFlexDiv>
           </Fragment>

@@ -8,9 +8,21 @@ import CommentList from './CommentList';
 
 const BookInfo = ({ book, isbn, comments, setComments }) => {
   const [replies, setReplies] = useState(comments);
+  const [isClickedDate, setIsClickedDate] = useState(false);
+  const [isClickedLiked, setIsClickedLiked] = useState(true);
 
   const navigate = useNavigate();
   const commentInputRef = useRef();
+
+  const handleClickFilterDate = useCallback(() => {
+    setIsClickedLiked(!isClickedLiked);
+    setIsClickedDate(true);
+  }, [isClickedLiked]);
+
+  const handleClickFilterLiked = useCallback(() => {
+    setIsClickedDate(!isClickedDate);
+    setIsClickedLiked(true);
+  }, [isClickedDate]);
 
   const handleCommentCancel = useCallback(() => {
     commentInputRef.current.value = '';
@@ -116,15 +128,18 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
             parentId={0}
           />
         </Styled.BookReviewWriteForm>
-        <Styled.CommentFilterDiv>
-          <div>공감순</div>
-          <div>최신순</div>
+        <Styled.CommentFilterDiv
+          active={isClickedLiked ? 'like' : isClickedDate ? 'date' : null}
+        >
+          <div onClick={() => handleClickFilterLiked()}>공감순</div>
+          <div onClick={() => handleClickFilterDate()}> 최신순</div>
         </Styled.CommentFilterDiv>
         <CommentList
           onSubmit={handleCommentSubmit}
           onCancel={handleCommentCancel}
           commentInputRef={commentInputRef}
-          comments={replies}
+          isClickedLiked={isClickedLiked}
+          isClickedDate={isClickedDate}
         />
       </Styled.BookReviewWrap>
     </Styled.BookInfoWrap>
