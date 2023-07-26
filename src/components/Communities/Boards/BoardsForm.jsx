@@ -66,28 +66,58 @@ const BoardsForm = () => {
         </Styled.SelectDiv>
         <Styled.ContentsDiv>
           {select
-            ? bookReportList.map(({ id, lastModifiedTime, title, content }) => {
-                return (
-                  <BoardsCardForm
-                    key={lastModifiedTime}
-                    lastModifiedTime={lastModifiedTime}
-                    title={title}
-                    content={content}
-                    id={id}
-                  />
-                );
-              })
-            : freeList.map(({ id, lastModifiedTime, title, content }) => {
-                return (
-                  <BoardsCardForm
-                    key={lastModifiedTime}
-                    lastModifiedTime={lastModifiedTime}
-                    title={title}
-                    content={content}
-                    id={id}
-                  />
-                );
-              })}
+            ? bookReportList.map(
+                ({
+                  category,
+                  reply_cnt,
+                  like_cnt,
+                  writer,
+                  id,
+                  lastModifiedTime,
+                  title,
+                  content,
+                }) => {
+                  return (
+                    <BoardsCardForm
+                      category={category}
+                      reply_cnt={reply_cnt}
+                      like_cnt={like_cnt}
+                      writer={writer}
+                      key={lastModifiedTime}
+                      lastModifiedTime={lastModifiedTime}
+                      title={title}
+                      content={content}
+                      id={id}
+                    />
+                  );
+                }
+              )
+            : freeList.map(
+                ({
+                  category,
+                  reply_cnt,
+                  like_cnt,
+                  writer,
+                  id,
+                  lastModifiedTime,
+                  title,
+                  content,
+                }) => {
+                  return (
+                    <BoardsCardForm
+                      category={category}
+                      reply_cnt={reply_cnt}
+                      like_cnt={like_cnt}
+                      writer={writer}
+                      key={lastModifiedTime}
+                      lastModifiedTime={lastModifiedTime}
+                      title={title}
+                      content={content}
+                      id={id}
+                    />
+                  );
+                }
+              )}
         </Styled.ContentsDiv>
       </Styled.MainContentsDiv>
     </Styled.MainContainerDiv>
