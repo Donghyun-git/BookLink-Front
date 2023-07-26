@@ -1,4 +1,4 @@
-import BookReportDetailForm from '../../components/Communities/Boards/BookReportDetail';
+import BookReportDetailForm from '../../components/Communities/Boards/BookReportDetail/BookReportDetailForm';
 
 const BookReportDetailPage = () => {
   return (

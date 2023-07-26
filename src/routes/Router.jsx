@@ -11,8 +11,9 @@ import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
 import BoardsPage from '../pages/Boards';
 import BookClubsDetailPage from '../pages/BookClubsDetail';
-import BookReportDetailPage from '../pages/BookClubsDetail';
-import FreeReportDetailPage from '../pages/BookClubsDetail';
+import BookReportDetailPage from '../pages/BookReportDetail';
+import FreeReportDetailPage from '../pages/FreeReportDetail';
+import BookClubsModifyPage from '../pages/BookClubsModify';
 import CommunitiesRegisterPage from '../pages/CommunitiesRegister';
 import AuthPage from '../pages/Auth';
 
@@ -32,7 +33,11 @@ function Router() {
           path="/communities/book-clubs/:id"
           element={<BookClubsDetailPage />}
         />
-        <Route path="/communities/boards" element={<BoardsPage />}></Route>
+        <Route
+          path="/communities/book-clubs/modify/:id"
+          element={<BookClubsModifyPage />}
+        />
+        <Route path="/communities/boards" element={<BoardsPage />} />
         <Route
           path="/communities/boards/book-report/:id"
           element={<BookReportDetailPage />}
