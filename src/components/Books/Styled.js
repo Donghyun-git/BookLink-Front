@@ -364,20 +364,30 @@ export const OptionsList = styled.ul`
   padding: 0;
   margin: 0;
   border: 1px solid #ccc;
-  width: 11.92857rem;
+  width: 45.92857rem;
   background-color: #fff;
   cursor: pointer;
   z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const OptionItem = styled.li`
   padding: 0.57rem 1.15rem;
   margin: 0 0.61rem;
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  /* border-bottom: 1px solid rgba(217, 217, 217, 1); */
   color: #848484;
   text-align: center;
   font-size: 0.85714rem;
   font-weight: 500;
+  display: flex;
+  width: 7.85714rem;
+  padding: 0.85714rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.71429rem;
 
   &:hover {
     color: #000;
