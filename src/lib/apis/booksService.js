@@ -13,6 +13,20 @@ export const getAllBooks = async () => {
   }
 };
 
+// [ 카테고리 및 검색 책 데이터 ]
+export const getCategoryBooks = async (category) => {
+  try {
+    const { status, data } = await axiosJsonInstance.get(
+      `/books/main/${category}`
+    );
+
+    if (status !== 200) throw new Error(data.message);
+    return { status, data };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 // [ 책 상세조회 ]
 export const getOneBooks = async (isbn) => {
   try {
