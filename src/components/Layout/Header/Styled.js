@@ -198,8 +198,14 @@ export const ProfileImgDiv = styled.div`
   width: 3.42857rem;
   height: 3.42857rem;
   border-radius: 3.42857rem;
-  background: #d9d9d9;
   margin-left: 0.86rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3.42857rem;
+  }
 `;
 
 export const HeaderAuthButton = styled.div`

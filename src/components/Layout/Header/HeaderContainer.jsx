@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, useCallback, Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as authActions from '../../../redux/actions/authActions';
@@ -14,31 +14,36 @@ const HeaderContainer = () => {
   const [pathName, setPathName] = useState(path);
 
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
+  const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('도서');
 
   const dispatch = useDispatch();
   const nickName = useSelector((state) => state.USER.nickname);
   const isLoggedIn = useSelector((state) => state.USER.isLoggedIn);
 
-  const handleSelectChange = (event) => {
+  const handleSelectChange = useCallback((event) => {
     setSelectedValue(event.target.value);
-  };
+  }, []);
 
-  const handleSelectClick = () => {
+  const handleClickProfileList = useCallback(() => {
+    setIsProfileListOpen(!isProfileListOpen);
+  }, [isProfileListOpen]);
+
+  const handleSelectClick = useCallback(() => {
     setIsCategoryListOpen(!isCategoryListOpen);
-  };
+  }, [isCategoryListOpen]);
 
-  const handleOptionClick = (value) => {
+  const handleOptionClick = useCallback((value) => {
     setSelectedValue(value);
     setIsCategoryListOpen(false);
-  };
+  }, []);
 
-  const handleLogOut = () => {
+  const handleLogOut = useCallback(() => {
     dispatch(authActions.logout());
     alert('로그아웃 되었습니다!');
     persistor.purge();
     navigate('/');
-  };
+  }, [dispatch, navigate]);
 
   useEffect(() => {
     setPathName(path);
@@ -119,8 +124,29 @@ const HeaderContainer = () => {
           <Fragment>
             <Styled.ProfileText>{nickName}님 환영합니다!</Styled.ProfileText>
             <Styled.ProfileImgDiv>
-              {/* <img src="" alt="프로필 이미지" /> */}
+              <img
+                src="https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png"
+                alt="프로필 이미지"
+              />
             </Styled.ProfileImgDiv>
+            <div style={{ position: 'relative' }}>
+              <button onClick={handleClickProfileList}>
+                <img src="" alt="" />
+              </button>
+              {isProfileListOpen && (
+                <Styled.OptionsList>
+                  <Styled.OptionItem onClick={() => handleOptionClick('도서')}>
+                    도서
+                  </Styled.OptionItem>
+                  <Styled.OptionItem
+                    onClick={() => handleOptionClick('게시글')}
+                  >
+                    게시글
+                  </Styled.OptionItem>
+                </Styled.OptionsList>
+              )}
+            </div>
+
             <button onClick={handleLogOut}>
               <div>로그아웃</div>
             </button>
