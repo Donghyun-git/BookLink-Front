@@ -6,6 +6,7 @@ export const bookClubList = async () => {
       `/communities/book-club`
     );
     const { data: data } = data1;
+    console.log(data);
     data.reverse();
     return { data, status };
   } catch (error) {
@@ -18,7 +19,7 @@ export const frees = async () => {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/board/free`
     );
-    console.log(data1);
+
     const { data: data } = data1;
     console.log(data);
     data.reverse();
@@ -33,7 +34,7 @@ export const bookReports = async () => {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/board/report`
     );
-    console.log(data1);
+
     const { data: data } = data1;
     console.log(data);
     data.reverse();

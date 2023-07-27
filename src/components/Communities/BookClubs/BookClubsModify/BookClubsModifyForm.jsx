@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import TopicContentForm from '../../../Common/TopicContent/TopicContentForm';
+import CityDistrictSelectorForm from '../../../Common/CityDistrictSelector/CityDistrictSelectorForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { data } from '../../../../constants/sidoguInfo';
 import { communitiesRegisterSchema } from '../../../../validators/communityValidator';
-import WebEditorForm from '../../../Common/WebEditor/WebEditorForm';
-import TopicInputForm from '../../../Common/Input/TopicInputForm';
-import CityDistrictSelectorForm from '../../../Common/CityDistrictSelector/CityDistrictSelectorForm';
+import { bookClubsModify } from '../../../../lib/apis/communities/modify/communitiesModify';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  MainContainerDiv,
+  MainContentsDiv,
+} from '../../../../styles/globalStyled';
 const BookClubsModifyForm = () => {
   const cities = Object.keys(data);
   const [cityActive, setCityActive] = useState(
@@ -13,6 +18,8 @@ const BookClubsModifyForm = () => {
   );
   const [districts, setDistricts] = useState([]);
   const [districtActive, setDistrictActive] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -24,7 +31,10 @@ const BookClubsModifyForm = () => {
     mode: 'onChange',
   });
   const onSubmit = async (data) => {
-    console.log(data);
+    const { title, content } = data;
+    const data1 = await bookClubsModify(title, content, id);
+    console.log(data1);
+    navigate(`/communities/book-clubs/${id}`);
   };
   const onCityHandler = (e) => {
     if (e.target.innerText) {
@@ -55,25 +65,27 @@ const BookClubsModifyForm = () => {
     trigger('content');
   };
   return (
-    <>
-      {' '}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <CityDistrictSelectorForm
-            cities={cities}
-            onCityHandler={onCityHandler}
-            cityActive={cityActive}
-            districts={districts}
-            onDistrictHandler={onDistrictHandler}
-            districtActive={districtActive}
-          />
-          <TopicInputForm register={register} />
-          {errors.title && <p>{errors.title.message}</p>}
-          <WebEditorForm onContentsHandler={onContentsHandler} />
-        </div>
-        <button type="submit">게시글 등록하기</button>
-      </form>
-    </>
+    <MainContainerDiv>
+      <MainContentsDiv>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <CityDistrictSelectorForm
+              cities={cities}
+              onCityHandler={onCityHandler}
+              cityActive={cityActive}
+              districts={districts}
+              onDistrictHandler={onDistrictHandler}
+              districtActive={districtActive}
+            />
+            <TopicContentForm
+              register={register}
+              onContentsHandler={onContentsHandler}
+            />
+          </div>
+          <button type="submit">수정하기</button>
+        </form>
+      </MainContentsDiv>
+    </MainContainerDiv>
   );
 };
 

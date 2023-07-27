@@ -11,8 +11,7 @@ import {
 } from '../../../lib/apis/communities/register/communitiesRegisterService';
 import { communitiesBookSearch } from '../../../lib/apis/searchService';
 import { data } from '../../../constants/sidoguInfo';
-import WebEditorForm from '../../Common/WebEditor/WebEditorForm';
-import TopicInputForm from '../../Common/Input/TopicInputForm';
+import TopicContentForm from '../../Common/TopicContent/TopicContentForm';
 import CityDistrictSelectorForm from '../../Common/CityDistrictSelector/CityDistrictSelectorForm';
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();
@@ -220,9 +219,10 @@ const CommunitiesRegisterForm = () => {
               {/*errors.location && <p>{errors.location.message}</p>*/}
             </div>
           )}
-          <TopicInputForm register={register} />
-          {errors.title && <p>{errors.title.message}</p>}
-          <WebEditorForm onContentsHandler={onContentsHandler} />
+          <TopicContentForm
+            register={register}
+            onContentsHandler={onContentsHandler}
+          />
           <Styled.ButtonDiv>
             <button type="submit">게시글 등록하기</button>
           </Styled.ButtonDiv>

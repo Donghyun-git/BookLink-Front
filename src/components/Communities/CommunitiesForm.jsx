@@ -57,11 +57,21 @@ const CommunitiesForm = () => {
           </Styled.TagDiv>
           <Styled.BookClubsContentSDiv>
             {bookClubs.map(
-              ({ id, location, reply_cnt, writer, date, title, content }) => {
+              ({
+                id,
+                location,
+                reply_cnt,
+                like_cnt,
+                writer,
+                date,
+                title,
+                content,
+              }) => {
                 return (
                   <BookClubsCardForm
                     key={date}
                     location={location}
+                    like_cnt={like_cnt}
                     reply_cnt={reply_cnt}
                     writer={writer}
                     date={date}
@@ -87,17 +97,32 @@ const CommunitiesForm = () => {
                   Date.parse(b.lastModifiedTime) -
                   Date.parse(a.lastModifiedTime)
               )
-              .map(({ id, lastModifiedTime, title, content }) => {
-                return (
-                  <BoardsCardForm
-                    key={lastModifiedTime}
-                    lastModifiedTime={lastModifiedTime}
-                    title={title}
-                    content={content}
-                    id={id}
-                  />
-                );
-              })}
+              .map(
+                ({
+                  id,
+                  writer,
+                  category,
+                  like_cnt,
+                  reply_cnt,
+                  lastModifiedTime,
+                  title,
+                  content,
+                }) => {
+                  return (
+                    <BoardsCardForm
+                      key={lastModifiedTime}
+                      category={category}
+                      writer={writer}
+                      like_cnt={like_cnt}
+                      reply_cnt={reply_cnt}
+                      lastModifiedTime={lastModifiedTime}
+                      title={title}
+                      content={content}
+                      id={id}
+                    />
+                  );
+                }
+              )}
           </Styled.BoardsContentsDiv>
         </Styled.BoardsDiv>
       </Styled.MainContentsDiv>

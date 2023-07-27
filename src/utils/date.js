@@ -31,3 +31,10 @@ export const dateFormat = (localDate) => {
   }
   return localDate;
 };
+/*export const dateFormat = (date) => {
+  const koreanDate = add(parseISO(date), { hours: 9 });
+  const formattedDate = format(koreanDate, 'yyyy-MM-dd HH:mm', {
+    locale: ko,
+  });
+  return formattedDate;
+};*/

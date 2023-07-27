@@ -2,9 +2,11 @@ import { axiosJsonInstance } from '../../config/axios';
 
 export const freeRegister = async (title, content) => {
   try {
+    const category = '자유글';
     const { data } = await axiosJsonInstance.post(`/communities/board/free`, {
       title,
       content,
+      category,
     });
     console.log(data);
     return data;
@@ -22,13 +24,15 @@ export const reportRegister = async (
   pud_date
 ) => {
   try {
+    const category = '독후감';
     const { data } = await axiosJsonInstance.post(`/communities/board/report`, {
       title,
-      contents: content,
+      content,
       book_title,
       authors,
       publisher,
       pud_date,
+      category,
     });
     console.log(data);
     return data;
