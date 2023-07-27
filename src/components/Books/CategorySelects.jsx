@@ -3,6 +3,7 @@ import * as Styled from './Styled';
 import { books } from '../../lib/books/books';
 import searchIcon from '../../images/search_icon.svg';
 
+console.log(books.length);
 const CategorySelects = ({ selectCategory }) => {
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('전체');
