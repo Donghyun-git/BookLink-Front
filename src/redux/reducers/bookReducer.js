@@ -12,9 +12,14 @@ export const bookReducer = (state = initialState, action) => {
         isLoading: true,
       };
     }
+    case 'BOOKS/FILTER': {
+      return {
+        books: action.payload.payload,
+        isLoading: false,
+      };
+    }
     case 'BOOKS/SUCCESS': {
       return {
-        ...state,
         books: action.payload.payload,
         isLoading: false,
       };

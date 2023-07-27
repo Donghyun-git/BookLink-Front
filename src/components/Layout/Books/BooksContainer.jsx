@@ -16,6 +16,8 @@ const BooksContainer = () => {
   const [sortLikes, setSortLikes] = useState(false);
   const [likeSortedBooks, setLikeSortedBooks] = useState([]);
   const [currentSortedBooks, setCurrentSortedBooks] = useState([]);
+  const [category, setCategory] = useState('전체');
+  const [CID, setCID] = useState(0);
 
   const handleClickBooks = useCallback(() => {
     setShowRentsComponent(false);
@@ -42,10 +44,9 @@ const BooksContainer = () => {
     setLikeSortedBooks([...likeSortedBooks]);
   }, [cards]);
 
-  const [category, setCategory] = useState('카테고리 선택');
-
-  const handleSelectCategory = useCallback((category) => {
+  const handleSelectCategory = useCallback((category, CID) => {
     setCategory(category);
+    setCID(CID);
   }, []);
 
   return (
@@ -107,6 +108,7 @@ const BooksContainer = () => {
           sortLikes={sortLikes}
           likeSortedBooks={likeSortedBooks}
           currentCategory={category}
+          currentCID={CID}
         />
       )}
       {showRentsComponent && <Rents />}

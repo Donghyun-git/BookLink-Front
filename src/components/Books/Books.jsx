@@ -12,6 +12,7 @@ const Books = ({
   sortLikes,
   likeSortedBooks,
   currentCategory,
+  currentCID,
 }) => {
   const navigate = useNavigate();
   const isLoading = useSelector((state) => state.BOOK.isLoading);
@@ -38,6 +39,7 @@ const Books = ({
           sortLikes={sortLikes}
           likeSortedBooks={likeSortedBooks}
           currentCategory={currentCategory}
+          currentCID={currentCID}
           goDetail={goToDetailPage}
         />
       ) : (
@@ -46,6 +48,7 @@ const Books = ({
           sortCurrent={sortCurrent}
           currentSortedBooks={currentSortedBooks}
           currentCategory={currentCategory}
+          currentCID={currentCID}
           goDetail={goToDetailPage}
         />
       )}
