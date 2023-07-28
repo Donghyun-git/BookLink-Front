@@ -9,29 +9,19 @@ import {
   bookClubRegister,
   reportRegister,
 } from '../../../lib/apis/communities/register/communitiesRegisterService';
-import { communitiesBookSearch } from '../../../lib/apis/searchService';
-import { data } from '../../../constants/sidoguInfo';
 import TopicContentForm from '../../Common/TopicContent/TopicContentForm';
 import CityDistrictSelectorForm from '../../Common/CityDistrictSelector/CityDistrictSelectorForm';
+import BookSearchForm from '../../Common/Search/BookSearch/BookSearchForm';
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();
   const [bookReportClick, setBookReportClick] = useState(false);
   const [bookClubsReportClick, setBookClubsReportClick] = useState(false);
-
-  const cities = Object.keys(data);
-  const [cityActive, setCityActive] = useState(
-    Array(cities.length).fill(false)
-  );
-  const [districts, setDistricts] = useState([]);
-  const [districtActive, setDistrictActive] = useState([]);
-
   const {
     register,
     handleSubmit,
     setValue,
-    getValues,
     trigger,
-    formState: { errors },
+    //formState: { errors },
   } = useForm({
     resolver: yupResolver(communitiesRegisterSchema),
     mode: 'onChange',
@@ -74,7 +64,6 @@ const CommunitiesRegisterForm = () => {
   };
 
   const onSelectHandler = (e) => {
-    console.log(e.target.checked);
     if (e.target.value == 'bookReport') {
       setBookReportClick(true);
       setBookClubsReportClick(false);
@@ -86,47 +75,6 @@ const CommunitiesRegisterForm = () => {
       setBookClubsReportClick(false);
     }
   };
-  const onBookInfoHandler = async (e) => {
-    console.log(e.target.value);
-    const { item } = await communitiesBookSearch(e.target.value);
-    if (item) {
-      const { cover, title, author, pubDate, publisher } = item[0];
-      console.log(item[0]);
-      setValue('book_title', title);
-      setValue('authors', author);
-      setValue('publisher', publisher);
-      setValue('pud_date', pubDate);
-      setValue('book_image', cover);
-    }
-  };
-  const onCityHandler = (e) => {
-    if (e.target.innerText) {
-      setValue('city', e.target.innerText);
-      setCityActive(
-        cities.map((city) => (city === e.target.innerText ? true : false))
-      );
-      console.log(cityActive);
-      setDistricts(data[e.target.innerText]);
-      console.log(districts);
-      setDistrictActive(new Array(data[e.target.innerText].length).fill(false));
-    }
-  };
-
-  const onDistrictHandler = (e) => {
-    if (e.target.innerText) {
-      setValue('district', e.target.innerText);
-      setDistrictActive(
-        districts.map((district) =>
-          district === e.target.innerText ? true : false
-        )
-      );
-    }
-  };
-  /*useEffect(() => {
-    setDistrictActive(new Array(districts.length).fill(false));
-    console.log(districts);
-    //console.log(districtActive);
-  }, [districts]);*/
 
   const onContentsHandler = (value) => {
     console.log(typeof value);
@@ -183,39 +131,12 @@ const CommunitiesRegisterForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {bookReportClick && (
             <div>
-              <Styled.BookContainerDiv>
-                <h2>도서명</h2>
-                <input
-                  type="search"
-                  placeholder="도서명 검색하세요"
-                  onChange={onBookInfoHandler}
-                />
-              </Styled.BookContainerDiv>
-              {getValues('book_title') && (
-                <div>
-                  <Styled.BookInfoDiv>
-                    <Styled.BookImg src={getValues('book_image')} />
-                    <Styled.BookDetailDiv>
-                      <p>{getValues('book_title')}</p>
-                      <p>{getValues('authors')}</p>
-                      <p>{getValues('publisher')}</p>
-                      <p>{getValues('pud_date')}</p>
-                    </Styled.BookDetailDiv>
-                  </Styled.BookInfoDiv>
-                </div>
-              )}
+              <BookSearchForm setValue={setValue} />
             </div>
           )}
           {bookClubsReportClick && (
             <div>
-              <CityDistrictSelectorForm
-                cities={cities}
-                onCityHandler={onCityHandler}
-                cityActive={cityActive}
-                districts={districts}
-                onDistrictHandler={onDistrictHandler}
-                districtActive={districtActive}
-              />
+              <CityDistrictSelectorForm setValue={setValue} />
               {/*errors.location && <p>{errors.location.message}</p>*/}
             </div>
           )}

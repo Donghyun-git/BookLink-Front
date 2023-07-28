@@ -24,14 +24,20 @@ const Content = styled.div`
   }
 `;
 
-const TopicContentForm = ({ register, onContentsHandler }) => {
+const TopicContentForm = ({
+  title = '',
+  content = '',
+  register,
+  onContentsHandler,
+}) => {
   return (
     <Container>
       <Tag>제목</Tag>
-      <Title type="text" {...register('title')} />
+      <Title type="text" defaultValue={title} {...register('title')} />
       <Tag>내용</Tag>
       <Content>
         <ReactQuill
+          defaultValue={content}
           onChange={onContentsHandler}
           style={{ height: '90.587rem' }}
         />

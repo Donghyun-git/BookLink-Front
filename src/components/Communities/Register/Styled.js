@@ -30,31 +30,6 @@ export const SelectDiv = styled.div`
     margin-left: 1.7rem;
   }
 `;
-export const BookContainerDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  input {
-    width: 95.5rem;
-    box-sizing: border-box;
-    border-radius: 0.8rem;
-  }
-`;
-export const BookInfoDiv = styled.div`
-  height: 11.286rem;
-  border: 1px solid black;
-  border-radius: 0.571rem;
-  display: flex;
-`;
-export const BookImg = styled.img`
-  width: 9.571rem;
-  height: 9.571rem;
-  margin: 0.857rem;
-`;
-export const BookDetailDiv = styled.div`
-  height: 9.571rem;
-  border: 1px solid black;
-  margin: 0.857rem;
-`;
 
 export const ButtonDiv = styled.div`
   display: flex;
