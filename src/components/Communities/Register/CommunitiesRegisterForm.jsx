@@ -34,6 +34,7 @@ const CommunitiesRegisterForm = () => {
       content,
       city,
       district,
+      book_image: cover,
       book_title,
       authors,
       publisher,
@@ -49,6 +50,7 @@ const CommunitiesRegisterForm = () => {
       const data1 = await reportRegister(
         title,
         content,
+        cover,
         book_title,
         authors,
         publisher,
