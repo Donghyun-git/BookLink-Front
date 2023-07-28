@@ -1,10 +1,36 @@
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { CommunitiesDetailContentsDiv } from '../../../styles/globalStyled';
+import Heart from '../../../images/heart.svg';
+import HeartGray from '../../../images/heart_gray.svg';
+import Share from '../../../images/share.svg';
 import {
   bookClubsDelete,
   freesDelete,
   bookReportsDelete,
 } from '../../../lib/apis/communities/delete/communitiesDeleteService';
+
+import { bookClubLike } from '../../../lib/apis/communities/like/communitiesLikeService';
+
+const LikeShare = styled.div`
+  width: 4.286rem;
+  height: 13.214rem;
+  margin-top: 20rem;
+  margin-right: 2.571rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+const LikeShareContainer = styled.div`
+  font-size: 0.857rem;
+  text-align: center;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+`;
+
 const Title = styled.div`
   margin-top: 7.286rem;
   width: 100%;
@@ -19,9 +45,50 @@ const Sub = styled.div`
   border-bottom: 0.071rem solid #d9d9d9;
 `;
 const SubLeft = styled.div`
+  display: flex;
   height: 3.428rem;
   width: 27.786rem;
 `;
+const WriterImg = styled.div`
+  width: 3.428rem;
+  height: 100%;
+  border-radius: 3.428rem;
+  margin-right: 0.857rem;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3.428rem;
+  }
+`;
+const SubDetail = styled.div`
+  height: 100%;
+  font-size: 1rem;
+`;
+const SubDetailTop = styled.div`
+  height: 50%;
+  font-weight: bold;
+  display: flex;
+`;
+const Writer = styled.div`
+  border-right: 0.071rem solid #848484;
+  padding-right: 0.571rem;
+`;
+const Category = styled.div`
+  padding: 0 0.571rem;
+`;
+
+const SubDetailBottom = styled.div`
+  height: 50%;
+  color: #848484;
+  display: flex;
+`;
+const Date = styled.div`
+  padding-right: 0.571rem;
+`;
+const View = styled(Category)``;
+const Like = styled(Category)``;
+const Reply = styled(Category)``;
 const SubRight = styled.div`
   display: flex;
   justify-content: space-between;
@@ -66,6 +133,7 @@ const Content = styled.div`
 `;
 const CommunitiesDetailForm = ({
   title,
+  image = 'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png',
   writer,
   category,
   date,
@@ -75,9 +143,19 @@ const CommunitiesDetailForm = ({
   content,
   bookInfo,
   location,
+  liked,
 }) => {
+  const [likeStatus, setLikeStatus] = useState(liked);
+  const [likeNum, setLikeNum] = useState(like_cnt);
   const { id } = useParams();
   const navigate = useNavigate();
+  const onImgHandler = async () => {
+    const { data } = await bookClubLike(id);
+    const { like_cnt } = data;
+    console.log(like_cnt);
+    setLikeNum(like_cnt);
+    setLikeStatus(!likeStatus);
+  };
   const onDelete = async () => {
     if (category === '자유글') {
       const { status } = await freesDelete(id);
@@ -109,48 +187,71 @@ const CommunitiesDetailForm = ({
       });
     }
   };
+  useEffect(() => {
+    setLikeNum(like_cnt);
+    setLikeStatus(liked);
+    console.log('초기렌더링');
+  }, [like_cnt]);
+
   return (
-    <div>
-      <Title>{title}</Title>
-      <Sub>
-        <SubLeft>
-          <div>
-            <span>{writer}</span>
-            <span>{category}</span>
-          </div>
-          <div>
-            <span>{date}</span>
-            <span>조회수{view_cnt}</span>
-            <span>좋아요{like_cnt}</span>
-            <span>댓글{reply_cnt}</span>
-          </div>
-        </SubLeft>
-        <SubRight>
-          <div>
-            <Button onClick={onModify}>수정</Button>
-            <Button onClick={onDelete}>삭제하기</Button>
-          </div>
-          <div>
-            <Button>신고하기</Button>
-          </div>
-        </SubRight>
-      </Sub>
-      <div>
-        {bookInfo && (
-          <BookInfo>
-            <BookImg src={''} />
-            <BookDetail>
-              <p>{bookInfo.book_title}</p>
-              <p>{bookInfo.authors}</p>
-              <p>{bookInfo.publisher}</p>
-              <p>{bookInfo.pud_date}</p>
-            </BookDetail>
-          </BookInfo>
-        )}
-        {location && <Location>{location}</Location>}
-        <Content dangerouslySetInnerHTML={{ __html: content }} />
-      </div>
-    </div>
+    <>
+      <LikeShare>
+        <LikeShareContainer>
+          <img src={likeStatus ? Heart : HeartGray} onClick={onImgHandler} />
+          <span>{likeNum}</span>
+        </LikeShareContainer>
+        <LikeShareContainer>
+          <img src={Share} />
+          <span>공유하기</span>
+        </LikeShareContainer>
+      </LikeShare>
+      <CommunitiesDetailContentsDiv>
+        <Title>{title}</Title>
+        <Sub>
+          <SubLeft>
+            <WriterImg>
+              <img src={image} />
+            </WriterImg>
+            <SubDetail>
+              <SubDetailTop>
+                <Writer>{writer}</Writer>
+                <Category>{category}</Category>
+              </SubDetailTop>
+              <SubDetailBottom>
+                <Date>{date}</Date>
+                <View>조회수{view_cnt}</View>
+                <Like>좋아요{likeNum}</Like>
+                <Reply>댓글{reply_cnt}</Reply>
+              </SubDetailBottom>
+            </SubDetail>
+          </SubLeft>
+          <SubRight>
+            <div>
+              <Button onClick={onModify}>수정</Button>
+              <Button onClick={onDelete}>삭제하기</Button>
+            </div>
+            <div>
+              <Button>신고하기</Button>
+            </div>
+          </SubRight>
+        </Sub>
+        <div>
+          {bookInfo && (
+            <BookInfo>
+              <BookImg src={bookInfo.cover} />
+              <BookDetail>
+                <p>{bookInfo.book_title}</p>
+                <p>{bookInfo.authors}</p>
+                <p>{bookInfo.publisher}</p>
+                <p>{bookInfo.pud_date}</p>
+              </BookDetail>
+            </BookInfo>
+          )}
+          {location && <Location>{location}</Location>}
+          <Content dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
+      </CommunitiesDetailContentsDiv>
+    </>
   );
 };
 
