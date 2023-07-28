@@ -94,8 +94,7 @@ const CommunitiesForm = () => {
             {[...freeList, ...bookReportList]
               .sort(
                 (a, b) =>
-                  Date.parse(b.lastModifiedTime) -
-                  Date.parse(a.lastModifiedTime)
+                  Date.parse(b.localDateTime) - Date.parse(a.localDateTime)
               )
               .map(
                 ({
@@ -104,18 +103,18 @@ const CommunitiesForm = () => {
                   category,
                   like_cnt,
                   reply_cnt,
-                  lastModifiedTime,
+                  localDateTime,
                   title,
                   content,
                 }) => {
                   return (
                     <BoardsCardForm
-                      key={lastModifiedTime}
+                      key={localDateTime}
                       category={category}
                       writer={writer}
                       like_cnt={like_cnt}
                       reply_cnt={reply_cnt}
-                      lastModifiedTime={lastModifiedTime}
+                      localDateTime={localDateTime}
                       title={title}
                       content={content}
                       id={id}

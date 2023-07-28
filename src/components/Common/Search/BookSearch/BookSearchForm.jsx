@@ -43,11 +43,12 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
   const [bookinfo, setBookinfo] = useState(bookInfo);
 
   if (Object.keys(bookInfo).length) {
-    const { book_title, authors, publisher, pud_date } = bookInfo;
+    const { cover, book_title, authors, publisher, pud_date } = bookInfo;
     setValue('book_title', book_title);
     setValue('authors', authors);
     setValue('publisher', publisher);
     setValue('pud_date', pud_date);
+    setValue('book_image', cover);
   }
   const onBookInfoHandler = async (e) => {
     setSearch(e.target.value);
@@ -85,7 +86,7 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
       <div>
         {search && (
           <BookInfoDiv>
-            <BookImg src={bookinfo.book_image} />
+            <BookImg src={bookinfo.cover} />
             <BookDetailDiv>
               <p>{bookinfo.book_title}</p>
               <p>{bookinfo.authors}</p>

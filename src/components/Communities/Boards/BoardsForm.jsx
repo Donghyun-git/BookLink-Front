@@ -73,18 +73,18 @@ const BoardsForm = () => {
                   like_cnt,
                   writer,
                   id,
-                  lastModifiedTime,
+                  localDateTime,
                   title,
                   content,
                 }) => {
                   return (
                     <BoardsCardForm
+                      key={localDateTime}
                       category={category}
                       reply_cnt={reply_cnt}
                       like_cnt={like_cnt}
                       writer={writer}
-                      key={lastModifiedTime}
-                      lastModifiedTime={lastModifiedTime}
+                      localDateTime={localDateTime}
                       title={title}
                       content={content}
                       id={id}
@@ -99,7 +99,7 @@ const BoardsForm = () => {
                   like_cnt,
                   writer,
                   id,
-                  lastModifiedTime,
+                  localDateTime,
                   title,
                   content,
                 }) => {
@@ -109,8 +109,8 @@ const BoardsForm = () => {
                       reply_cnt={reply_cnt}
                       like_cnt={like_cnt}
                       writer={writer}
-                      key={lastModifiedTime}
-                      lastModifiedTime={lastModifiedTime}
+                      key={localDateTime}
+                      localDateTime={localDateTime}
                       title={title}
                       content={content}
                       id={id}
