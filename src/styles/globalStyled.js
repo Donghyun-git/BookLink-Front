@@ -9,3 +9,6 @@ export const MainContentsDiv = styled.div`
   width: 102.857rem;
   height: 100%;
 `;
+export const CommunitiesDetailContentsDiv = styled(MainContentsDiv)`
+  width: 77.143rem;
+`;
