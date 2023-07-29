@@ -1,6 +1,9 @@
 import * as Styled from './Styled';
 import { dateFormat } from '../../../../utils/date';
 import { useNavigate } from 'react-router-dom';
+import locationUrl from '../../../../images/location.png';
+import replyUrl from '../../../../images/comment.png';
+import threePointUrl from '../../../../images/threePoints.png';
 const BookClubsCardForm = ({
   date,
   location,
@@ -19,8 +22,15 @@ const BookClubsCardForm = ({
     >
       <Styled.BookClubsCardContainerDiv>
         <Styled.BookClubsCardHeaderDiv>
-          <p>{location}</p>
-          <p>{reply_cnt}</p>
+          <Styled.LocationDiv>
+            <Styled.LocationImg src={locationUrl} />
+            <div>{location}</div>
+          </Styled.LocationDiv>
+          <Styled.replyDiv>
+            <Styled.replyImg src={replyUrl} />
+            <div>{reply_cnt}</div>
+            <Styled.PointsImg src={threePointUrl} />
+          </Styled.replyDiv>
         </Styled.BookClubsCardHeaderDiv>
         <Styled.BookClubsCardInfoDiv>
           <Styled.BookClubsCardInfoWriterDiv>

@@ -32,6 +32,41 @@ export const BookClubsCardHeaderDiv = styled.div`
   width: 100%;
   height: 2.571rem;
 `;
+export const LocationDiv = styled.div`
+  height: 100%;
+  font-size: 1.286rem;
+  font-weight: bold;
+  display: flex;
+  div {
+    margin-top: 0.287rem;
+    height: 66.7%;
+  }
+`;
+export const LocationImg = styled.img`
+  height: 75%;
+  margin-top: 0.287rem;
+  margin-right: 0.857rem;
+`;
+export const replyDiv = styled.div`
+  height: 100%;
+  font-size: 1rem;
+  color: #848484;
+  display: flex;
+  div {
+    height: 1rem;
+    margin: 0.571rem 0.871rem 0 0;
+  }
+`;
+export const replyImg = styled.img`
+  height: 1rem;
+  margin-top: 0.857rem;
+  margin-right: 0.571rem;
+`;
+export const PointsImg = styled.img`
+  height: 1.286rem;
+  margin-top: 0.857rem;
+`;
+
 export const BookClubsCardInfoDiv = styled.div`
   display: flex;
   font-size: 1rem;
