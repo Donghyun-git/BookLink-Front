@@ -5,6 +5,8 @@ import { CommunitiesDetailContentsDiv } from '../../../styles/globalStyled';
 import Heart from '../../../images/heart.svg';
 import HeartGray from '../../../images/heart_gray.svg';
 import Share from '../../../images/share.svg';
+import threePointUrl from '../../../images/threePoints.png';
+import locationUrl from '../../../images/location.png';
 import {
   bookClubsDelete,
   freesDelete,
@@ -91,16 +93,24 @@ const Like = styled(Category)``;
 const Reply = styled(Category)``;
 const SubRight = styled.div`
   display: flex;
-  justify-content: space-between;
   height: 4.571rem;
+  font-size: 0.857rem;
+  color: #3a3a3a;
+  div {
+    margin-right: 0.571rem;
+  }
+  img {
+    height: 1.286rem;
+    margin-top: 0.286rem;
+  }
 `;
 
 const Button = styled.div`
-  height:1.286rem
-  width:3.214rem
-  font-size:0.857rem;
+  height: 1.857rem;
+  width: 4.357rem;
   border: 0.071rem solid #d9d9d9;
-  text-align:center;  
+  border-radius: 0.286rem 0.286rem 0 0;
+  text-align: center;
 `;
 const BookInfo = styled.div`
   margin-top: 2.571rem;
@@ -121,8 +131,15 @@ const BookDetail = styled.div`
 `;
 const Location = styled.div`
   margin-top: 2.571rem;
+  height: 3.429rem;
   font-size: 1.714rem;
   font-weight: bold;
+  img {
+    margin-right: 1.714rem;
+  }
+  span {
+    padding: 0.857rem 0;
+  }
 `;
 
 const Content = styled.div`
@@ -233,6 +250,7 @@ const CommunitiesDetailForm = ({
             <div>
               <Button>신고하기</Button>
             </div>
+            <img src={threePointUrl} />
           </SubRight>
         </Sub>
         <div>
@@ -247,7 +265,12 @@ const CommunitiesDetailForm = ({
               </BookDetail>
             </BookInfo>
           )}
-          {location && <Location>{location}</Location>}
+          {location && (
+            <Location>
+              <img src={locationUrl} />
+              <span>{location}</span>
+            </Location>
+          )}
           <Content dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </CommunitiesDetailContentsDiv>
