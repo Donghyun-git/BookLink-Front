@@ -32,6 +32,26 @@ export const BoardsCardHeaderDiv = styled.div`
   width: 100%;
   height: 2.571rem;
 `;
+export const BoardsCardHeaderLeft = styled.div`
+  display: flex;
+  font-size: 1rem;
+  color: #848484;
+  div {
+    height: 50%;
+    margin: 0.571rem 0.857rem 0 0;
+  }
+  img {
+    height: 1rem;
+    margin: 0.857rem 0.571rem 0 0;
+  }
+`;
+export const BoardsCardHeaderRight = styled.div`
+  img {
+    height: 1.286rem;
+    margin-top: 0.571rem;
+  }
+`;
+
 export const BoardsCardInfoDiv = styled.div`
   display: flex;
   font-size: 1rem;

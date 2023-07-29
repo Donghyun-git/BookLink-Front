@@ -1,6 +1,9 @@
 import * as Styled from './Styled';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from '../../../../utils/date';
+import heartUrl from '../../../../images/grayheart.png';
+import replyUrl from '../../../../images/comment.png';
+import threePointUrl from '../../../../images/threePoints.png';
 const BoardsCardForm = ({
   category,
   reply_cnt,
@@ -25,8 +28,15 @@ const BoardsCardForm = ({
     >
       <Styled.BoardsCardContainerDiv>
         <Styled.BoardsCardHeaderDiv>
-          <p>{like_cnt}</p>
-          <p>{reply_cnt}</p>
+          <Styled.BoardsCardHeaderLeft>
+            <img src={heartUrl} />
+            <div>{like_cnt}</div>
+            <img src={replyUrl} />
+            <div>{reply_cnt}</div>
+          </Styled.BoardsCardHeaderLeft>
+          <Styled.BoardsCardHeaderRight>
+            <img src={threePointUrl} />
+          </Styled.BoardsCardHeaderRight>
         </Styled.BoardsCardHeaderDiv>
         <Styled.BoardsCardInfoDiv>
           <Styled.BoardsCardInfoWriterDiv>
