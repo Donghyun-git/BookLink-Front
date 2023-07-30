@@ -1,153 +1,16 @@
-import styled from 'styled-components';
+import * as Styled from './Styled';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CommunitiesDetailContentsDiv } from '../../../styles/globalStyled';
-import Heart from '../../../images/heart.svg';
-import HeartGray from '../../../images/heart_gray.svg';
-import Share from '../../../images/share.svg';
+
 import threePointUrl from '../../../images/threePoints.png';
 import locationUrl from '../../../images/location.png';
+
 import {
   bookClubsDelete,
   freesDelete,
   bookReportsDelete,
 } from '../../../lib/apis/communities/delete/communitiesDeleteService';
 
-import { bookClubLike } from '../../../lib/apis/communities/like/communitiesLikeService';
-
-const LikeShare = styled.div`
-  width: 4.286rem;
-  height: 13.214rem;
-  margin-top: 20rem;
-  margin-right: 2.571rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-const LikeShareContainer = styled.div`
-  font-size: 0.857rem;
-  text-align: center;
-  width: 100%;
-  img {
-    width: 100%;
-  }
-`;
-
-const Title = styled.div`
-  margin-top: 7.286rem;
-  width: 100%;
-  font-size: 3.428rem;
-  font-weight: bold;
-`;
-const Sub = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2.571rem;
-  height: 5rem;
-  border-bottom: 0.071rem solid #d9d9d9;
-`;
-const SubLeft = styled.div`
-  display: flex;
-  height: 3.428rem;
-  width: 27.786rem;
-`;
-const WriterImg = styled.div`
-  width: 3.428rem;
-  height: 100%;
-  border-radius: 3.428rem;
-  margin-right: 0.857rem;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 3.428rem;
-  }
-`;
-const SubDetail = styled.div`
-  height: 100%;
-  font-size: 1rem;
-`;
-const SubDetailTop = styled.div`
-  height: 50%;
-  font-weight: bold;
-  display: flex;
-`;
-const Writer = styled.div`
-  border-right: 0.071rem solid #848484;
-  padding-right: 0.571rem;
-`;
-const Category = styled.div`
-  padding: 0 0.571rem;
-`;
-
-const SubDetailBottom = styled.div`
-  height: 50%;
-  color: #848484;
-  display: flex;
-`;
-const Date = styled.div`
-  padding-right: 0.571rem;
-`;
-const View = styled(Category)``;
-const Like = styled(Category)``;
-const Reply = styled(Category)``;
-const SubRight = styled.div`
-  display: flex;
-  height: 4.571rem;
-  font-size: 0.857rem;
-  color: #3a3a3a;
-  div {
-    margin-right: 0.571rem;
-  }
-  img {
-    height: 1.286rem;
-    margin-top: 0.286rem;
-  }
-`;
-
-const Button = styled.div`
-  height: 1.857rem;
-  width: 4.357rem;
-  border: 0.071rem solid #d9d9d9;
-  border-radius: 0.286rem 0.286rem 0 0;
-  text-align: center;
-`;
-const BookInfo = styled.div`
-  margin-top: 2.571rem;
-  height: 11.286rem;
-  border: 1px solid black;
-  border-radius: 0.571rem;
-  display: flex;
-`;
-const BookImg = styled.img`
-  width: 9.571rem;
-  height: 9.571rem;
-  margin: 0.857rem;
-`;
-const BookDetail = styled.div`
-  height: 9.571rem;
-  border: 1px solid black;
-  margin: 0.857rem;
-`;
-const Location = styled.div`
-  margin-top: 2.571rem;
-  height: 3.429rem;
-  font-size: 1.714rem;
-  font-weight: bold;
-  img {
-    margin-right: 1.714rem;
-  }
-  span {
-    padding: 0.857rem 0;
-  }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  margin-top: 2.571rem;
-  min-height: 40.071rem;
-  border-bottom: 0.071rem solid #d9d9d9;
-`;
 const CommunitiesDetailForm = ({
   title,
   image = 'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png',
@@ -160,19 +23,13 @@ const CommunitiesDetailForm = ({
   content,
   bookInfo,
   location,
-  liked,
 }) => {
-  const [likeStatus, setLikeStatus] = useState(liked);
   const [likeNum, setLikeNum] = useState(like_cnt);
+  const [commentNum, setCommentNum] = useState(reply_cnt);
+
   const { id } = useParams();
   const navigate = useNavigate();
-  const onImgHandler = async () => {
-    const { data } = await bookClubLike(id);
-    const { like_cnt } = data;
-    console.log(like_cnt);
-    setLikeNum(like_cnt);
-    setLikeStatus(!likeStatus);
-  };
+
   const onDelete = async () => {
     if (category === '자유글') {
       const { status } = await freesDelete(id);
@@ -204,76 +61,67 @@ const CommunitiesDetailForm = ({
       });
     }
   };
+
   useEffect(() => {
     setLikeNum(like_cnt);
-    setLikeStatus(liked);
-    console.log('초기렌더링');
   }, [like_cnt]);
+
+  useEffect(() => {
+    setCommentNum(reply_cnt);
+  }, [reply_cnt]);
 
   return (
     <>
-      <LikeShare>
-        <LikeShareContainer>
-          <img src={likeStatus ? Heart : HeartGray} onClick={onImgHandler} />
-          <span>{likeNum}</span>
-        </LikeShareContainer>
-        <LikeShareContainer>
-          <img src={Share} />
-          <span>공유하기</span>
-        </LikeShareContainer>
-      </LikeShare>
-      <CommunitiesDetailContentsDiv>
-        <Title>{title}</Title>
-        <Sub>
-          <SubLeft>
-            <WriterImg>
-              <img src={image} />
-            </WriterImg>
-            <SubDetail>
-              <SubDetailTop>
-                <Writer>{writer}</Writer>
-                <Category>{category}</Category>
-              </SubDetailTop>
-              <SubDetailBottom>
-                <Date>{date}</Date>
-                <View>조회수{view_cnt}</View>
-                <Like>좋아요{likeNum}</Like>
-                <Reply>댓글{reply_cnt}</Reply>
-              </SubDetailBottom>
-            </SubDetail>
-          </SubLeft>
-          <SubRight>
-            <div>
-              <Button onClick={onModify}>수정</Button>
-              <Button onClick={onDelete}>삭제하기</Button>
-            </div>
-            <div>
-              <Button>신고하기</Button>
-            </div>
-            <img src={threePointUrl} />
-          </SubRight>
-        </Sub>
-        <div>
-          {bookInfo && (
-            <BookInfo>
-              <BookImg src={bookInfo.cover} />
-              <BookDetail>
-                <p>{bookInfo.book_title}</p>
-                <p>{bookInfo.authors}</p>
-                <p>{bookInfo.publisher}</p>
-                <p>{bookInfo.pud_date}</p>
-              </BookDetail>
-            </BookInfo>
-          )}
-          {location && (
-            <Location>
-              <img src={locationUrl} />
-              <span>{location}</span>
-            </Location>
-          )}
-          <Content dangerouslySetInnerHTML={{ __html: content }} />
-        </div>
-      </CommunitiesDetailContentsDiv>
+      <Styled.Title>{title}</Styled.Title>
+      <Styled.Sub>
+        <Styled.SubLeft>
+          <Styled.WriterImg>
+            <img src={image} />
+          </Styled.WriterImg>
+          <Styled.SubDetail>
+            <Styled.SubDetailTop>
+              <Styled.Writer>{writer}</Styled.Writer>
+              <Styled.Category>{category}</Styled.Category>
+            </Styled.SubDetailTop>
+            <Styled.SubDetailBottom>
+              <Styled.Date>{date}</Styled.Date>
+              <Styled.View>조회수{view_cnt}</Styled.View>
+              <Styled.Like>좋아요{likeNum}</Styled.Like>
+              <Styled.Reply>댓글{commentNum}</Styled.Reply>
+            </Styled.SubDetailBottom>
+          </Styled.SubDetail>
+        </Styled.SubLeft>
+        <Styled.SubRight>
+          <div>
+            <Styled.Button onClick={onModify}>수정</Styled.Button>
+            <Styled.Button onClick={onDelete}>삭제하기</Styled.Button>
+          </div>
+          {/*<div>
+              <Styled.Button>신고하기</Styled.Button>
+             </div>*/}
+          <img src={threePointUrl} />
+        </Styled.SubRight>
+      </Styled.Sub>
+      <div>
+        {bookInfo && (
+          <Styled.BookInfo>
+            <Styled.BookImg src={bookInfo.cover} />
+            <Styled.BookDetail>
+              <p>{bookInfo.book_title}</p>
+              <p>{bookInfo.authors}</p>
+              <p>{bookInfo.publisher}</p>
+              <p>{bookInfo.pud_date}</p>
+            </Styled.BookDetail>
+          </Styled.BookInfo>
+        )}
+        {location && (
+          <Styled.Location>
+            <img src={locationUrl} />
+            <span>{location}</span>
+          </Styled.Location>
+        )}
+        <Styled.Content dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
     </>
   );
 };
