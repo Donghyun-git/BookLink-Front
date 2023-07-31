@@ -13,7 +13,7 @@ export const getAllBooks = async () => {
   }
 };
 
-// [ 카테고리 및 검색 책 데이터 ]
+// [ 카테고리 선택 책 데이터 ]
 export const getCategoryBooks = async (category) => {
   try {
     const { status, data } = await axiosJsonInstance.get(
@@ -21,6 +21,26 @@ export const getCategoryBooks = async (category) => {
     );
 
     if (status !== 200) throw new Error(data.message);
+    return { status, data };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+//[ 카테고리 및 검색한 책 데이터 ]
+export const getSearchBooks = async (keyword, category) => {
+  try {
+    if (!keyword) {
+      const { status, data } = await getCategoryBooks(category);
+
+      if (status !== 200) throw new Error(data.message);
+      return { status, data };
+    }
+    const { status, data } = await axiosJsonInstance.get(
+      `/books/main/${category}?search=${keyword}`
+    );
+    if (status !== 200) throw new Error(data.message);
+
     return { status, data };
   } catch (error) {
     throw new Error(error.message);
@@ -68,13 +88,13 @@ export const updateComment = async (isbn, id, content) => {
     const payload = {
       content: content,
     };
-    console.log(payload);
+
     const { status, data } = await axiosJsonInstance.patch(
       `/books/${isbn}/${id}`,
       payload
     );
 
-    if (status !== 200) throw new Error(data.message);
+    if (status !== 201) throw new Error(data.message);
 
     return { status, data };
   } catch (error) {

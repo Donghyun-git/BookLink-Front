@@ -5,9 +5,11 @@ import * as Styled from './Styled';
 import * as bookService from '../../../../lib/apis/booksService';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import { useDetailContext } from '../context/detailContext';
 
-const BookInfo = ({ book, isbn, comments, setComments }) => {
-  const [replies, setReplies] = useState(comments);
+const BookInfo = ({ isbn }) => {
+  const { state, dispatch } = useDetailContext();
+
   const [isClickedDate, setIsClickedDate] = useState(false);
   const [isClickedLiked, setIsClickedLiked] = useState(true);
 
@@ -48,8 +50,7 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
 
         const { data } = await bookService.getOneBooks(isbn);
 
-        setReplies([...data.data.replies]);
-        setComments([...data.data.replies]);
+        dispatch({ type: 'ADD_COMMENT', payload: data.data.replies });
 
         commentInputRef.current.value = '';
       } catch (error) {
@@ -65,7 +66,7 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
         }
       }
     },
-    [isbn, navigate, setComments]
+    [dispatch, isbn, navigate]
   );
 
   return (
@@ -74,7 +75,7 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
         <Styled.BookInfoLeftDiv>
           <Styled.BookImageBackgroundDiv>
             <Styled.BookImageDiv className="book-image">
-              <img src={book.cover} alt="책 이미지" />
+              <img src={state.book.item[0].cover} alt="책 이미지" />
             </Styled.BookImageDiv>
           </Styled.BookImageBackgroundDiv>
           <Styled.BookInfoButtonDiv>
@@ -88,32 +89,32 @@ const BookInfo = ({ book, isbn, comments, setComments }) => {
         </Styled.BookInfoLeftDiv>
 
         <Styled.BookInfoRightDiv>
-          <h3>{book.title}</h3>
+          <h3>{state.book.item[0].title}</h3>
           <div>
             <ul>
               <li>
                 <span>저자</span>
-                <strong>{book.title}</strong>
+                <strong>{state.book.item[0].title}</strong>
               </li>
               <li>
                 <span>출판</span>
-                <strong>{book.publisher}</strong>
+                <strong>{state.book.item[0].publisher}</strong>
               </li>
               <li>
                 <span>출판일</span>
-                <strong>{book.pubDate}</strong>
+                <strong>{state.book.item[0].pubDate}</strong>
               </li>
             </ul>
           </div>
           <Styled.BookInfoDescriptionDiv>
             <h4>책 소개</h4>
-            <p>{book.description}</p>
+            <p>{state.book.item[0].description}</p>
           </Styled.BookInfoDescriptionDiv>
         </Styled.BookInfoRightDiv>
       </Styled.BookInfoContainer>
       <Styled.BookReviewWrap>
         <h2>도서 후기</h2>
-        <span>{replies.length}개</span>
+        <span>{state.book.replies.length}개</span>
         <Styled.BookReviewWriteForm>
           <Styled.BookReviewUserProfileDiv>
             <img

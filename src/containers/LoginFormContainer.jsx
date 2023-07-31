@@ -9,26 +9,29 @@ const LoginFormContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleOnSubmit = useCallback(async (user) => {
-    try {
-      const { email, password } = user;
+  const handleOnSubmit = useCallback(
+    async (user) => {
+      try {
+        const { email, password } = user;
 
-      const { status, data } = await login({ email, password });
+        const { status, data } = await login({ email, password });
 
-      if (status !== 200) throw new Error(data.message);
+        if (status !== 200) throw new Error(data.message);
 
-      dispatch({
-        ...authActions.login(),
-        payload: { ...data.data, isLoggedIn: true },
-      });
+        dispatch({
+          ...authActions.login(),
+          payload: { ...data.data, isLoggedIn: true },
+        });
 
-      alert(data.message);
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-      console.log(error.message);
-    }
-  }, []);
+        alert(data.message);
+        navigate('/');
+      } catch (error) {
+        console.error(error);
+        console.log(error.message);
+      }
+    },
+    [dispatch, navigate]
+  );
 
   return <LoginForm onSubmit={handleOnSubmit} />;
 };

@@ -10,7 +10,8 @@ const CommentList = ({
   isClickedLiked,
   isClickedDate,
 }) => {
-  const comments = useDetailContext().value;
+  const { state } = useDetailContext();
+  const comments = state.book.replies;
 
   const commentMap = {};
   const [showRepliesCount, setShowRepliesCount] = useState(12);
@@ -41,7 +42,6 @@ const CommentList = ({
       return new Date(a.date) - new Date(b.date);
     });
   }
-  console.log(newComments);
 
   return (
     <div>

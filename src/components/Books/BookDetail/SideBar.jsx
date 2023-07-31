@@ -1,30 +1,27 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import * as Styled from './Styled';
 import * as bookService from '../../../lib/apis/booksService';
 import heart from '../../../images/heart.svg';
 import heartGray from '../../../images/heart_gray.svg';
 import share from '../../../images/share.svg';
+import { useDetailContext } from './context/detailContext';
 
-const SideBar = ({ isLiked, likes }) => {
+const SideBar = () => {
+  const { state, dispatch } = useDetailContext();
+  const { liked, like_cnt: likeCnt } = state.book.item[0];
   const { isbn } = useParams();
-
-  const [likeCnt, setLikeCnt] = useState(likes);
-  const [liked, setLiked] = useState(isLiked);
 
   const handleLikeBook = useCallback(async () => {
     try {
-      const { data } = await bookService.addLikeBook(isbn);
+      await bookService.addLikeBook(isbn);
 
-      console.log(data);
-      setLikeCnt(data.data.like_cnt);
-      setLiked(!liked);
+      dispatch({ type: 'TOGGLE_BOOK_LIKE' });
     } catch (error) {
       console.error(error);
     }
-  }, [isbn, liked]);
+  }, [dispatch, isbn]);
 
-  console.log(likeCnt, liked);
   return (
     <Styled.SideBarDiv>
       <div>

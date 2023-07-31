@@ -32,6 +32,13 @@ export const bookReducer = (state = initialState, action) => {
       };
     }
 
+    case 'BOOKS/SEARCH': {
+      return {
+        books: action.payload.payload,
+        isLoading: false,
+      };
+    }
+
     default: {
       return {
         ...state,
