@@ -4,6 +4,7 @@ const BOOKS_REQUEST = 'BOOKS/REQUEST';
 const BOOKS_SUCCESS = 'BOOKS/SUCCESS';
 const BOOKS_FAILURE = 'BOOKS/FAILURE';
 const BOOKS_FILTER = 'BOOKS/FILTER';
+const BOOKS_SEARCH = 'BOOKS/SEARCH';
 
 export const REQUEST = createAction(BOOKS_REQUEST);
 
@@ -17,4 +18,8 @@ export const FAILURE = createAction(BOOKS_FAILURE, (error) => ({
 
 export const FILTER = createAction(BOOKS_FILTER, (books) => ({
   payload: books,
+}));
+
+export const SEARCH = createAction(BOOKS_SEARCH, (search) => ({
+  payload: search,
 }));

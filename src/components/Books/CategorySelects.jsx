@@ -3,8 +3,7 @@ import * as Styled from './Styled';
 import { books } from '../../lib/books/books';
 import searchIcon from '../../images/search_icon.svg';
 
-console.log(books.length);
-const CategorySelects = ({ selectCategory }) => {
+const CategorySelects = ({ selectCategory, handleKeyDownSearch }) => {
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('전체');
   const [selectedCID, setSelectedCID] = useState(0);
@@ -24,6 +23,17 @@ const CategorySelects = ({ selectCategory }) => {
     setSelectedCID(CID);
     setIsCategoryListOpen(false);
   }, []);
+
+  const handleSearchKeyword = useCallback(
+    (e) => {
+      const { value } = searchInputRef.current;
+      console.log('키워드>', value);
+      handleKeyDownSearch(value, e);
+
+      return () => (searchInputRef.current.value = '');
+    },
+    [handleKeyDownSearch]
+  );
 
   useEffect(() => {
     selectCategory(selectedValue, selectedCID);
@@ -93,12 +103,14 @@ const CategorySelects = ({ selectCategory }) => {
               type="search"
               placeholder="검색어를 입력해보세요."
               ref={searchInputRef}
+              onKeyUp={handleSearchKeyword}
             />
-            <Styled.SearchIcon>
+            <Styled.SearchIcon onClick={() => handleSearchKeyword()}>
               <img
                 src={searchIcon}
                 alt="검색 이미지"
                 style={{ width: '100%' }}
+                // onKeyDown={}
               />
             </Styled.SearchIcon>
           </Styled.SearchDiv>
