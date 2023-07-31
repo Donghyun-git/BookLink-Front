@@ -1,33 +1,40 @@
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './Styled';
 
 const SelfDevelopCard = ({ book }) => {
+  const navigate = useNavigate();
+
+  const handleNavigateRecommendDetail = useCallback(() => {
+    navigate(`/books/${book.isbn13}`);
+  }, [book.isbn13, navigate]);
   return (
     <>
-      <Styled.AsideCard1>
+      <Styled.AsideCard1 onClick={handleNavigateRecommendDetail}>
         <div>
           <Styled.AsideCard1_ImageDiv>
             <img src={book.cover} alt="책 이미지" />
           </Styled.AsideCard1_ImageDiv>
         </div>
         <Styled.AsideCard1_ContentDiv>
-          <h3>도파민 네이션</h3>
+          <h3>{book.title}</h3>
           <ul>
             <li>
               <span>저자</span>
-              <strong>에나 최대 몇글자 헴키</strong>
+              <strong>{book.author}</strong>
             </li>
             <li>
-              <span>출판사</span> <strong>흐름 몇글자 출한</strong>
+              <span>출판사</span> <strong>{book.publisher}</strong>
             </li>
           </ul>
           <ul>
             <li>
               <span>출판일</span>
-              <strong>2023.06.23</strong>
+              <strong>{book.pubDate}</strong>
             </li>
             <li>
               <span>정가</span>
-              <strong>18,000원</strong>
+              <strong>{book.priceStandard}</strong>
             </li>
           </ul>
         </Styled.AsideCard1_ContentDiv>

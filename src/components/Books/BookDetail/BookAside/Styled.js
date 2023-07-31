@@ -46,6 +46,7 @@ export const AsideCard1 = styled.li`
   height: 6.85714rem;
   margin-top: 1.71rem;
   margin-bottom: 0.86rem;
+  cursor: pointer;
 
   &:last-child {
     margin-bottom: 0;
@@ -67,17 +68,27 @@ export const AsideCard1_ImageDiv = styled.div`
 `;
 
 export const AsideCard1_ContentDiv = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   h3 {
     color: #3a3a3a;
     font-size: 1.14286rem;
     font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+
   ul {
     display: flex;
     align-items: center;
 
     li {
       span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         color: #848484;
         font-size: 0.85714rem;
         font-weight: 400;
@@ -200,10 +211,21 @@ export const AsideCard3_UserInfoDiv = styled.div`
   align-items: center;
 
   div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 1.28571rem;
     height: 1.28571rem;
     border-radius: 50%;
-    background-color: #d9d9d9;
     margin-right: 0.57rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 2px;
+    }
   }
 `;

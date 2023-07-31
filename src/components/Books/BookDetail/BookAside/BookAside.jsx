@@ -1,9 +1,16 @@
+import { Fragment } from 'react';
+import { useDetailContext } from '../context/detailContext';
 import SelfDevelopCard from './SelfDevelopCard';
 import RentInfoCard from './RentInfoCard';
 import RelationCard from './RelationCard';
 import * as Styled from './Styled';
 
-const BookAside = ({ book }) => {
+const BookAside = () => {
+  const { state } = useDetailContext();
+
+  const recommended = state.book.recommended_books;
+  const relatedPosts = state.book.related_posts;
+
   return (
     <Styled.BookAside>
       <Styled.BookAsideSection>
@@ -15,9 +22,13 @@ const BookAside = ({ book }) => {
         </Styled.AsideCardTitle>
         <div>
           <ul>
-            <SelfDevelopCard book={book} />
-            <SelfDevelopCard book={book} />
-            <SelfDevelopCard book={book} />
+            {recommended.map((book) => {
+              return (
+                <Fragment key={book.isbn13}>
+                  <SelfDevelopCard book={book} />
+                </Fragment>
+              );
+            })}
           </ul>
         </div>
       </Styled.BookAsideSection>
@@ -44,9 +55,18 @@ const BookAside = ({ book }) => {
           </button>
         </Styled.AsideCardTitle>
         <div>
-          <RelationCard />
-          <RelationCard />
-          <RelationCard />
+          {relatedPosts.length === 0 ? (
+            <div>아직 관련된 게시글이 없어요.</div>
+          ) : (
+            relatedPosts.map((post, idx) => {
+              return (
+                // 일단 idx
+                <Fragment key={idx}>
+                  <RelationCard post={post} />
+                </Fragment>
+              );
+            })
+          )}
         </div>
       </Styled.BookAsideSection>
     </Styled.BookAside>

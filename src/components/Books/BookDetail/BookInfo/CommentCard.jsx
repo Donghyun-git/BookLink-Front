@@ -11,6 +11,7 @@ import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
 import upToggleImage from '../../../../images/up_toggle.svg';
 import downToggleImage from '../../../../images/down_toggle.svg';
+import { useDetailContext } from '../context/detailContext';
 
 const CommentCard = ({
   commentInputRef,
@@ -23,20 +24,18 @@ const CommentCard = ({
     id,
     content,
     children,
-    like_cnt,
+    like_cnt: likeCnt,
+    isLiked,
     date,
     image,
     writer,
     sub_reply_cnt: subReplyCnt,
   } = comment;
 
-  const [likes, setLikes] = useState(like_cnt);
-  const [isLiked, setIsLiked] = useState(comment.isLiked);
+  const { state, dispatch } = useDetailContext();
   const [isRecommentClicked, setIsRecommentClicked] = useState(false);
   const [isShowRecomment, setIsShowRecomment] = useState(false);
   const [isOptionClicked, setIsOptionClicked] = useState(false);
-
-  const [updatedContent, setUpdatedContent] = useState(content);
   const [isUpdateClicked, setIsUpdateClicked] = useState(false);
 
   const userNickName = useSelector((state) => state.USER.nickname);
@@ -59,21 +58,16 @@ const CommentCard = ({
   const handleLikeClick = useCallback(async () => {
     try {
       const { data } = await bookService.addLikeComment(isbn, id);
-
       console.log(data);
 
-      setLikes((prevLikes) => {
-        if (isLiked) return prevLikes - 1;
+      dispatch({ type: 'TOGGLE_COMMENT_LIKE', payload: { id } });
 
-        return prevLikes + 1;
-      });
-
-      setIsLiked(!isLiked);
       return;
     } catch (error) {
       throw new Error(error.message);
     }
-  }, [isbn, id, isLiked]);
+  }, [isbn, id, dispatch]);
+  console.log('컨텍스트 상태', state.book.replies);
 
   //[ 댓글 수정 ]
   const handleUpdateComment = useCallback(
@@ -81,16 +75,18 @@ const CommentCard = ({
       try {
         const { data } = await bookService.updateComment(isbn, id, content);
 
-        console.log(data);
+        dispatch({
+          type: 'UPDATE_COMMENT',
+          payload: { id: id, content: data.data.content },
+        });
 
-        setUpdatedContent(data.data.content);
         setIsUpdateClicked(!isUpdateClicked);
         return;
       } catch (error) {
         throw new Error(error.message);
       }
     },
-    [id, isUpdateClicked, isbn]
+    [dispatch, id, isUpdateClicked, isbn]
   );
 
   const handleOpenUpdateComment = useCallback(() => {
@@ -104,20 +100,16 @@ const CommentCard = ({
   //[ 댓글 삭제 ]
   const handleDeleteComment = useCallback(async () => {
     try {
-      const { status, data } = await bookService.deleteComment(isbn, id);
+      await bookService.deleteComment(isbn, id);
 
-      console.log(data);
-
+      dispatch({ type: 'DELETE_COMMENT', payload: { id } });
       return;
     } catch (error) {
       throw new Error(error.message);
     }
-  }, [isbn, id]);
+  }, [isbn, id, dispatch]);
 
   const recommentParentId = isRecommentClicked ? parentId : 0;
-
-  console.log('@@@comment', comment);
-  console.log('@@@date', date);
 
   let distance = false;
 
@@ -171,14 +163,14 @@ const CommentCard = ({
               <Fragment>
                 <Styled.UpdateCommentInput
                   id="comment"
-                  defaultValue={updatedContent}
+                  defaultValue={content}
                   ref={commentInputRef}
                   placeholder="댓글을 입력해주세요."
                 />
               </Fragment>
             ) : (
               <Fragment>
-                <p>{updatedContent}</p>
+                <p>{content}</p>
               </Fragment>
             )}
           </Styled.CommentListContentDiv>
@@ -193,7 +185,7 @@ const CommentCard = ({
             <Styled.CommentThumbsCountDiv
               active={isLiked !== null && isLiked.toString()}
             >
-              {likes}
+              {likeCnt}
             </Styled.CommentThumbsCountDiv>
             <Styled.CommentReviewWriteDiv
               active={isRecommentClicked.toString()}
@@ -235,7 +227,7 @@ const CommentCard = ({
                 <RecommentCard
                   key={reComment.id}
                   comments={reComment}
-                  isRecommentClicked={isRecommentClicked}
+                  handleRecommentClick={handleRecommentClick}
                 />
               );
             })
