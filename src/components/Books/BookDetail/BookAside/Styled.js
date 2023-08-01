@@ -103,6 +103,10 @@ export const AsideCard1_ContentDiv = styled.div`
 
       &:first-child {
         margin-right: 1.14rem;
+        width: 8.286rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
@@ -179,6 +183,7 @@ export const AsideCard3 = styled.ul`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  cursor: pointer;
 
   li:first-child {
     display: flex;
