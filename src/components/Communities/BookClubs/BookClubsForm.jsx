@@ -33,7 +33,7 @@ const BookClubsForm = () => {
           <Styled.bellImg src={bell} />
           <Styled.tag>독서 모임 모집</Styled.tag>
         </Styled.TagDiv>
-        <Styled.SelectDiv>
+        {/*<Styled.SelectDiv>
           <Styled.select onChange={onSelectHandler}>
             <option value="전체보기">전체보기</option>
             <option value="서울">서울</option>
@@ -45,25 +45,34 @@ const BookClubsForm = () => {
             ref={inputRef}
             onKeyDown={onSearchHandler}
           />
-        </Styled.SelectDiv>
-        <Styled.ContentsDiv>
-          {bookClubs.map(
-            ({ id, location, reply_cnt, writer, date, title, content }) => {
-              return (
-                <BookClubsCardForm
-                  key={date}
-                  location={location}
-                  reply_cnt={reply_cnt}
-                  writer={writer}
-                  date={date}
-                  title={title}
-                  content={content}
-                  id={id}
-                />
-              );
-            }
-          )}
-        </Styled.ContentsDiv>
+          </Styled.SelectDiv>*/}
+        <Styled.MainDiv>
+          <Styled.ContentsDiv>
+            {bookClubs.map(
+              ({ id, location, reply_cnt, writer, date, title, content }) => {
+                return (
+                  <BookClubsCardForm
+                    key={date}
+                    location={location}
+                    reply_cnt={reply_cnt}
+                    writer={writer}
+                    date={date}
+                    title={title}
+                    content={content}
+                    id={id}
+                  />
+                );
+              }
+            )}
+          </Styled.ContentsDiv>
+          <Styled.AsideDiv>
+            <Styled.searchInput placeholder="키워드나 장소를 검색해보세요" />
+            <Styled.Btn>인기글</Styled.Btn>
+            <Styled.Btn>독서 모임</Styled.Btn>
+            <Styled.Btn>게시판</Styled.Btn>
+            <Styled.WriteBtn>글쓰기</Styled.WriteBtn>
+          </Styled.AsideDiv>
+        </Styled.MainDiv>
       </Styled.MainContentsDiv>
     </Styled.MainContainerDiv>
   );

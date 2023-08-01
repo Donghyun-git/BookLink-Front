@@ -12,7 +12,6 @@ export const MainContentsDiv = styled.div`
 `;
 export const TagDiv = styled.div`
   margin-top: 5.286rem;
-  height: 4.571rem;
   display: flex;
 `;
 export const bellImg = styled.img`
@@ -26,7 +25,7 @@ export const tag = styled.div`
   font-weight: bold;
 `;
 
-export const SelectDiv = styled.div`
+/*export const SelectDiv = styled.div`
   display: flex;
   height: 2.571rem;
 `;
@@ -42,17 +41,54 @@ export const searchInput = styled.input`
   width: 25.714rem;
   border: 0.143rem solid #848484;
   border-radius: 0.571rem;
+`;*/
+export const MainDiv = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 export const ContentsDiv = styled.div`
-  width: 100%;
-  margin-top: 2.571rem;
+  width: 78.429rem;
+  margin-top: 1.714rem;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  }
+  div{
+    &:nth-child(3n + 1) {
+      margin-left: 0;
+    }
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+`;
+export const AsideDiv = styled.div`
+  margin-left: 1.714rem;
+  margin-top: 2.571rem;
+  width: 24.429rem;
+`;
+export const searchInput = styled.input`
+  width: 100%;
+  height: 3.143rem;
+  font-size: 1rem;
+  border: 0.143rem solid #848484;
+  border-radius: 0.571rem;
+  margin-bottom: 1.714rem;
+`;
+export const Btn = styled.button`
+  width: 100%;
+  box-sizing: border-box;
+  border: 0.071rem solid #d9d9d9;
+  border-radius: 0.571rem;
+  height: 3.143rem;
+  text-align: center;
+`;
+export const WriteBtn = styled(Btn)`
+  height: 3.786rem;
 `;
 
-export const CardDiv = styled.div`
+/*export const CardDiv = styled.div`
   width: 24.426rem;
   height: 20rem;
   display: flex;
@@ -62,10 +98,10 @@ export const CardDiv = styled.div`
   border: 0.071rem solid #d9d9d9;
   border-radius: 0.857rem;
   margin: 0.857rem;
-  &:nth-child(4n + 1) {
+  &:nth-child(3n + 1) {
     margin-left: 0;
   }
-  &:nth-child(4n) {
+  &:nth-child(3n) {
     margin-right: 0;
   }
 `;
@@ -105,4 +141,4 @@ export const CardContentDiv = styled.div`
   width: 100%;
   margin-top: 0.571rem;
   font-size: 0.857rem;
-`;
+`;*/
