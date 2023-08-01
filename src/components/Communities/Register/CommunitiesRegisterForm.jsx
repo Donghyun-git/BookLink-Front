@@ -34,7 +34,7 @@ const CommunitiesRegisterForm = () => {
       content,
       city,
       district,
-      book_image: cover,
+      cover,
       book_title,
       authors,
       publisher,
@@ -47,6 +47,7 @@ const CommunitiesRegisterForm = () => {
       console.log(data1);
       navigate('/communities/book-clubs');
     } else if (bookReportClick) {
+      console.log(cover);
       const data1 = await reportRegister(
         title,
         content,
