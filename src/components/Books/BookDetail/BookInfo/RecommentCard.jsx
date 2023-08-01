@@ -20,7 +20,7 @@ const RecommentCard = ({ comments }) => {
     writer,
   } = comments;
 
-  const { state, dispatch } = useDetailContext();
+  const { dispatch } = useDetailContext();
 
   const userNickName = useSelector((state) => state.USER.nickname);
 
