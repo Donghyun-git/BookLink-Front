@@ -12,7 +12,6 @@ export const MainContentsDiv = styled.div`
 `;
 export const TagDiv = styled.div`
   margin-top: 5.286rem;
-  height: 4.571rem;
   display: flex;
 `;
 export const openbookImg = styled.img`
@@ -45,9 +44,17 @@ export const searchInput = styled.input`
 `;
 
 export const ContentsDiv = styled.div`
-  width: 100%;
-  margin-top: 2.571rem;
+  width: 78.429rem;
+  margin-top: 1.714rem;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  div {
+    &:nth-child(3n + 1) {
+      margin-left: 0;
+    }
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
 `;

@@ -52,7 +52,7 @@ const BoardsForm = () => {
           <Styled.openbookImg src={openbook} />
           <Styled.tag>게시글</Styled.tag>
         </Styled.TagDiv>
-        <Styled.SelectDiv>
+        {/*<Styled.SelectDiv>
           <Styled.select onChange={onSelectHandler}>
             <option value="자유글">자유글</option>
             <option value="독후감">독후감</option>
@@ -63,7 +63,7 @@ const BoardsForm = () => {
             ref={inputRef}
             onKeyDown={onSearchHandler}
           />
-        </Styled.SelectDiv>
+        </Styled.SelectDiv>*/}
         <Styled.ContentsDiv>
           {select
             ? bookReportList.map(
