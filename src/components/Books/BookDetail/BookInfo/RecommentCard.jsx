@@ -1,4 +1,4 @@
-import { useState, useCallback, Fragment } from 'react';
+import { useState, useCallback, useRef, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDateDistance } from '../../../../utils/date';
@@ -7,23 +7,37 @@ import * as Styled from './Styled';
 import optionImage from '../../../../images/comment_option.svg';
 import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
+import { useDetailContext } from '../context/detailContext';
 
 const RecommentCard = ({ comments }) => {
-  const { id, content, date, like_cnt, image, writer } = comments;
+  const {
+    id,
+    content,
+    date,
+    isLiked,
+    like_cnt: likeCnt,
+    image,
+    writer,
+  } = comments;
+
+  const { state, dispatch } = useDetailContext();
 
   const userNickName = useSelector((state) => state.USER.nickname);
-  const [likes, setLikes] = useState(like_cnt);
-  const [isLiked, setIsLiked] = useState(comments.isLiked);
-  const [isOptionClicked, setIsOptionClicked] = useState(false);
-
-  // const [updatedContent, setUpdatedContent] = useState(content);
-  const [isUpdateClicked, setIsUpdateClicked] = useState(false);
 
   const { isbn } = useParams();
+
+  const [isOptionClicked, setIsOptionClicked] = useState(false);
+  const [isUpdateClicked, setIsUpdateClicked] = useState(false);
+
+  const commentInputRef = useRef();
 
   const handleOptionClick = useCallback(() => {
     setIsOptionClicked(!isOptionClicked);
   }, [isOptionClicked]);
+
+  const handleCancelUpdateComment = useCallback(() => {
+    setIsUpdateClicked(!isUpdateClicked);
+  }, [isUpdateClicked]);
 
   //[ 좋아요 등록, 취소 ]
 
@@ -34,38 +48,51 @@ const RecommentCard = ({ comments }) => {
 
         console.log(data);
 
-        setLikes((prevLikes) => {
-          if (isLiked) return prevLikes - 1;
-
-          return prevLikes + 1;
-        });
-
-        setIsLiked(!isLiked);
+        dispatch({ type: 'TOGGLE_COMMENT_LIKE', payload: { id } });
         return;
       } catch (error) {
         throw new Error(error.message);
       }
     },
-    [isbn, isLiked]
+    [isbn, dispatch]
   );
 
-  // [ 댓글 수정 ]
+  // [ 답글 수정 ]
   const handleOpenUpdateComment = useCallback(() => {
     setIsUpdateClicked(!isUpdateClicked);
   }, [isUpdateClicked]);
 
-  //[ 댓글 삭제 ]
+  const handleUpdateComment = useCallback(
+    async (content) => {
+      try {
+        const { data } = await bookService.updateComment(isbn, id, content);
+
+        dispatch({
+          type: 'UPDATE_COMMENT',
+          payload: { id: id, content: data.data.content },
+        });
+
+        setIsUpdateClicked(!isUpdateClicked);
+
+        return;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    [dispatch, id, isUpdateClicked, isbn]
+  );
+
+  //[ 답글 삭제 ]
   const handleDeleteComment = useCallback(async () => {
     try {
-      const { status, data } = await bookService.deleteComment(isbn, id);
+      await bookService.deleteComment(isbn, id);
 
-      console.log(data);
-
+      dispatch({ type: 'DELETE_COMMENT', payload: { id } });
       return;
     } catch (error) {
       throw new Error(error.message);
     }
-  }, [isbn, id]);
+  }, [isbn, id, dispatch]);
 
   const distance = getDateDistance(date);
 
@@ -110,7 +137,20 @@ const RecommentCard = ({ comments }) => {
             </div>
           </Styled.CommentListUserInfo>
           <Styled.ReCommentListContentDiv>
-            <p>{content}</p>
+            {isUpdateClicked ? (
+              <Fragment>
+                <Styled.UpdateCommentInput
+                  id="comment"
+                  defaultValue={content}
+                  ref={commentInputRef}
+                  placeholder="댓글을 입력해주세요."
+                />
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p>{content}</p>
+              </Fragment>
+            )}
           </Styled.ReCommentListContentDiv>
 
           <Styled.CommentReviewDiv>
@@ -124,8 +164,20 @@ const RecommentCard = ({ comments }) => {
               />
             </Styled.CommentThumbsDiv>
             <Styled.CommentThumbsCountDiv active={isLiked.toString()}>
-              {likes}
+              {likeCnt}
             </Styled.CommentThumbsCountDiv>
+            {isUpdateClicked && (
+              <Styled.UpdateCommentButtonDiv>
+                <span onClick={() => handleCancelUpdateComment()}>취소</span>
+                <button
+                  onClick={() =>
+                    handleUpdateComment(commentInputRef.current.value)
+                  }
+                >
+                  <span className="write">수정하기</span>
+                </button>
+              </Styled.UpdateCommentButtonDiv>
+            )}
           </Styled.CommentReviewDiv>
         </div>
       </div>
