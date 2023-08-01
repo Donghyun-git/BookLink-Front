@@ -10,12 +10,6 @@ export const BookClubsCardDiv = styled.div`
   border: 0.071rem solid #d9d9d9;
   border-radius: 0.857rem;
   margin: 0.857rem;
-  &:nth-child(4n + 1) {
-    margin-left: 0;
-  }
-  &:nth-child(4n) {
-    margin-right: 0;
-  }
   &:hover {
     transform: translateY(-8px);
     /* box-shadow: rgba(0, 0, 0, 0.08) 0px 12px 20px; */

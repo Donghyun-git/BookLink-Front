@@ -57,6 +57,14 @@ export const ContentsDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  div {
+    &:nth-child(4n + 1) {
+      margin-left: 0;
+    }
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
 `;
 export const PopularContentSDiv = styled(ContentsDiv)`
   height: 33rem;
