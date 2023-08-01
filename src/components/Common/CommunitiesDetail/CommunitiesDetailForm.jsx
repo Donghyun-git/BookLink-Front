@@ -1,7 +1,7 @@
 import * as Styled from './Styled';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { CommunitiesDetailContext } from '../../../context/communitiesDetailContext';
 import threePointUrl from '../../../images/threePoints.png';
 import locationUrl from '../../../images/location.png';
 
@@ -11,22 +11,21 @@ import {
   bookReportsDelete,
 } from '../../../lib/apis/communities/delete/communitiesDeleteService';
 
-const CommunitiesDetailForm = ({
-  title,
-  image = 'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png',
-  writer,
-  category,
-  date,
-  view_cnt,
-  reply_cnt,
-  like_cnt,
-  content,
-  bookInfo,
-  location,
-}) => {
-  const [likeNum, setLikeNum] = useState(like_cnt);
-  const [commentNum, setCommentNum] = useState(reply_cnt);
-
+const CommunitiesDetailForm = () => {
+  const { info } = useContext(CommunitiesDetailContext);
+  const {
+    writer,
+    image,
+    title,
+    content,
+    category,
+    date,
+    view_cnt,
+    reply_cnt,
+    like_cnt,
+    location,
+    bookInfo,
+  } = info;
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -62,14 +61,6 @@ const CommunitiesDetailForm = ({
     }
   };
 
-  useEffect(() => {
-    setLikeNum(like_cnt);
-  }, [like_cnt]);
-
-  useEffect(() => {
-    setCommentNum(reply_cnt);
-  }, [reply_cnt]);
-
   return (
     <>
       <Styled.Title>{title}</Styled.Title>
@@ -86,8 +77,8 @@ const CommunitiesDetailForm = ({
             <Styled.SubDetailBottom>
               <Styled.Date>{date}</Styled.Date>
               <Styled.View>조회수{view_cnt}</Styled.View>
-              <Styled.Like>좋아요{likeNum}</Styled.Like>
-              <Styled.Reply>댓글{commentNum}</Styled.Reply>
+              <Styled.Like>좋아요{like_cnt}</Styled.Like>
+              <Styled.Reply>댓글{reply_cnt}</Styled.Reply>
             </Styled.SubDetailBottom>
           </Styled.SubDetail>
         </Styled.SubLeft>
