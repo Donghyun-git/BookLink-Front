@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import * as Styled from './Styled';
 import DOMPurify from 'dompurify';
 
@@ -10,27 +11,29 @@ const RelationCard = ({ post }) => {
     .documentElement.textContent;
 
   return (
-    <Styled.AsideCard3>
-      <li>
-        <Styled.AsideCard3_UserInfoDiv>
+    <Link to={`/communities/boards/book-report/${post.id}`}>
+      <Styled.AsideCard3>
+        <li>
+          <Styled.AsideCard3_UserInfoDiv>
+            <div>
+              <img src={post.image} alt="프로필 이미지" />
+            </div>
+            <div>
+              <span>{post.writer}</span>
+            </div>
+          </Styled.AsideCard3_UserInfoDiv>
           <div>
-            <img src={post.image} alt="프로필 이미지" />
+            <span>{splitDate}</span>
           </div>
-          <div>
-            <span>{post.writer}</span>
-          </div>
-        </Styled.AsideCard3_UserInfoDiv>
-        <div>
-          <span>{splitDate}</span>
-        </div>
-      </li>
-      <li>
-        <h4>{post.title}</h4>
-      </li>
-      <li>
-        <p>{parsedText}</p>
-      </li>
-    </Styled.AsideCard3>
+        </li>
+        <li>
+          <h4>{post.title}</h4>
+        </li>
+        <li>
+          <p>{parsedText}</p>
+        </li>
+      </Styled.AsideCard3>
+    </Link>
   );
 };
 
