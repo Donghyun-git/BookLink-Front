@@ -1,32 +1,24 @@
 import { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import * as Styled from './Styled';
-import BookContainer from '../../../containers/BookContainer';
+import Books from '../../Books/Books';
 import Rents from '../../Books/Rents';
 import CategorySelects from '../../Books/CategorySelects';
 import rentButtonLogo from '../../../images/rent_logo.svg';
 import bookStoreLogo from '../../../images/bookstore_logo.svg';
 
-const BooksContainer = () => {
-  const cards = useSelector((state) => state.BOOK.books);
+const BooksContainer = ({
+  handleCategorySelect,
+  handleCategorySearchWithKeyword,
+  handleSortedCurrent,
+  handleSortedLikes,
+}) => {
+  const isSortCurrent = useSelector((state) => state.BOOK.isCurrent);
+  const isSortLikes = useSelector((state) => state.BOOK.isLikes);
 
   //책방, 대여 관련
   const [showBooksComponent, setShowBooksComponent] = useState(true);
   const [showRentsComponent, setShowRentsComponent] = useState(false);
-
-  //sorting 관련
-  const [sortCurrent, setSortCurrent] = useState(true);
-  const [sortLikes, setSortLikes] = useState(false);
-  const [likeSortedBooks, setLikeSortedBooks] = useState([]);
-  const [currentSortedBooks, setCurrentSortedBooks] = useState([]);
-
-  //카테고리 피렅링 관련
-  const [category, setCategory] = useState('전체');
-  const [CID, setCID] = useState(0);
-
-  //검색 관련
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [isPressEnter, setIsPressEnter] = useState(false);
 
   const handleClickBooks = useCallback(() => {
     setShowRentsComponent(false);
@@ -38,38 +30,18 @@ const BooksContainer = () => {
     setShowRentsComponent(true);
   }, []);
 
-  const handleClickSortCurrent = useCallback(() => {
-    setSortLikes(false);
-    setSortCurrent(true);
-  }, []);
-
-  const handleClickSortLikes = useCallback(() => {
-    setSortCurrent(false);
-    setSortLikes(true);
-    const likeSortedBooks = [...cards].sort((a, b) => {
-      return b.like_cnt - a.like_cnt;
-    });
-
-    setLikeSortedBooks([...likeSortedBooks]);
-  }, [cards]);
-
-  const handleSelectCategory = useCallback((category, CID) => {
-    setCategory(category);
-    setCID(CID);
-  }, []);
-
+  //[ 엔터키 여부 ]
   const handleKeyDownSearch = useCallback(
-    async (keyword, e = { key: 'Not' }) => {
+    async (keyword, e = { key: 'Not' }, CID) => {
       if (e.key === 'Enter') {
-        setSearchKeyword(keyword);
-        setIsPressEnter(true);
+        handleCategorySearchWithKeyword(true, keyword, CID);
+        return;
+      } else {
+        handleCategorySearchWithKeyword(false, keyword, CID);
         return;
       }
-      setSearchKeyword(keyword);
-      setIsPressEnter(false);
-      return;
     },
-    []
+    [handleCategorySearchWithKeyword]
   );
 
   return (
@@ -108,14 +80,14 @@ const BooksContainer = () => {
         <div>
           <Styled.NavSortUl>
             <Styled.NavSortLi
-              onClick={handleClickSortCurrent}
-              active={sortCurrent.toString()}
+              onClick={handleSortedCurrent}
+              active={isSortCurrent.toString()}
             >
-              최신순
+              관련도순(기본)
             </Styled.NavSortLi>
             <Styled.NavSortLi
-              onClick={handleClickSortLikes}
-              active={sortLikes.toString()}
+              onClick={handleSortedLikes}
+              active={isSortLikes.toString()}
             >
               좋아요
             </Styled.NavSortLi>
@@ -123,22 +95,10 @@ const BooksContainer = () => {
         </div>
       </Styled.NavDiv>
       <CategorySelects
-        selectCategory={handleSelectCategory}
+        handleCategorySelect={handleCategorySelect}
         handleKeyDownSearch={handleKeyDownSearch}
       />
-      {showBooksComponent && (
-        <BookContainer
-          isBooks={showBooksComponent}
-          sortCurrent={sortCurrent}
-          currentSortedBooks={currentSortedBooks}
-          sortLikes={sortLikes}
-          likeSortedBooks={likeSortedBooks}
-          currentCategory={category}
-          currentCID={CID}
-          searchKeyword={searchKeyword}
-          isPressEnter={isPressEnter}
-        />
-      )}
+      {showBooksComponent && <Books isBooks={showBooksComponent} />}
       {showRentsComponent && <Rents />}
     </Styled.BooksContainer>
   );

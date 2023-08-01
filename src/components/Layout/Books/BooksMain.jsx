@@ -1,10 +1,10 @@
 import * as Styled from './Styled';
-import BooksContainer from './BooksContainer';
+import BookContainer from '../../../containers/BookContainer';
 
 const BooksMain = () => {
   return (
     <Styled.BooksMain>
-      <BooksContainer />
+      <BookContainer />
     </Styled.BooksMain>
   );
 };

@@ -3,11 +3,11 @@ import * as Styled from './Styled';
 import { books } from '../../lib/books/books';
 import searchIcon from '../../images/search_icon.svg';
 
-const CategorySelects = ({ selectCategory, handleKeyDownSearch }) => {
+const CategorySelects = ({ handleCategorySelect, handleKeyDownSearch }) => {
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
+
   const [selectedValue, setSelectedValue] = useState('전체');
   const [selectedCID, setSelectedCID] = useState(0);
-
   const searchInputRef = useRef();
 
   const handleSelectChange = useCallback((e) => {
@@ -27,17 +27,23 @@ const CategorySelects = ({ selectCategory, handleKeyDownSearch }) => {
   const handleSearchKeyword = useCallback(
     (e) => {
       const { value } = searchInputRef.current;
-      console.log('키워드>', value);
-      handleKeyDownSearch(value, e);
+      console.log('키워드', value);
+      handleKeyDownSearch(value, e, selectedCID);
 
       return () => (searchInputRef.current.value = '');
     },
-    [handleKeyDownSearch]
+    [handleKeyDownSearch, selectedCID]
   );
 
+  const handleCheckEnter = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchKeyword(e);
+    }
+  };
+
   useEffect(() => {
-    selectCategory(selectedValue, selectedCID);
-  }, [selectCategory, selectedCID, selectedValue]);
+    handleCategorySelect(selectedCID);
+  }, [handleCategorySelect, selectedCID]);
 
   return (
     <Styled.SelectMain>
@@ -103,14 +109,13 @@ const CategorySelects = ({ selectCategory, handleKeyDownSearch }) => {
               type="search"
               placeholder="검색어를 입력해보세요."
               ref={searchInputRef}
-              onKeyUp={handleSearchKeyword}
+              onKeyUp={handleCheckEnter}
             />
             <Styled.SearchIcon onClick={() => handleSearchKeyword()}>
               <img
                 src={searchIcon}
                 alt="검색 이미지"
                 style={{ width: '100%' }}
-                // onKeyDown={}
               />
             </Styled.SearchIcon>
           </Styled.SearchDiv>

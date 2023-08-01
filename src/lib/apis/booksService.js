@@ -5,8 +5,6 @@ export const getAllBooks = async () => {
   try {
     const { status, data } = await axiosJsonInstance.get('/books/main');
 
-    if (status !== 200) throw new Error(data.message);
-
     return { status, data };
   } catch (error) {
     throw new Error(error.message);
@@ -20,7 +18,6 @@ export const getCategoryBooks = async (category) => {
       `/books/main/${category}`
     );
 
-    if (status !== 200) throw new Error(data.message);
     return { status, data };
   } catch (error) {
     throw new Error(error.message);
@@ -33,13 +30,11 @@ export const getSearchBooks = async (keyword, category) => {
     if (!keyword) {
       const { status, data } = await getCategoryBooks(category);
 
-      if (status !== 200) throw new Error(data.message);
       return { status, data };
     }
     const { status, data } = await axiosJsonInstance.get(
       `/books/main/${category}?search=${keyword}`
     );
-    if (status !== 200) throw new Error(data.message);
 
     return { status, data };
   } catch (error) {
@@ -51,8 +46,6 @@ export const getSearchBooks = async (keyword, category) => {
 export const getOneBooks = async (isbn) => {
   try {
     const { status, data } = await axiosJsonInstance.get(`/books/${isbn}`);
-
-    if (status !== 200) throw new Error(data.message);
 
     return { status, data };
   } catch (error) {
@@ -73,8 +66,6 @@ export const addComment = async ({ isbn, content, parentId }) => {
       payload
     );
 
-    if (status !== 200) throw new Error(status);
-
     return { status, data };
   } catch (error) {
     console.log(error);
@@ -94,8 +85,6 @@ export const updateComment = async (isbn, id, content) => {
       payload
     );
 
-    if (status !== 201) throw new Error(data.message);
-
     return { status, data };
   } catch (error) {
     console.error(error);
@@ -110,8 +99,6 @@ export const deleteComment = async (isbn, id) => {
       `/books/${isbn}/${id}`
     );
 
-    if (status !== 204) throw new Error(data.message);
-
     return { status, data };
   } catch (error) {
     console.error(error);
@@ -122,11 +109,7 @@ export const deleteComment = async (isbn, id) => {
 //[ 댓글 좋아요 ]
 export const addLikeComment = async (isbn, id) => {
   try {
-    const { status, data } = await axiosJsonInstance.post(
-      `/books/${isbn}/${id}/like`
-    );
-
-    if (status !== 200) throw new Error(data.message);
+    const { data } = await axiosJsonInstance.post(`/books/${isbn}/${id}/like`);
 
     return { data };
   } catch (error) {
@@ -139,11 +122,7 @@ export const addLikeComment = async (isbn, id) => {
 
 export const addLikeBook = async (isbn) => {
   try {
-    const { status, data } = await axiosJsonInstance.post(
-      `/books/${isbn}/like`
-    );
-
-    if (status !== 200) throw new Error(data.message);
+    const { data } = await axiosJsonInstance.post(`/books/${isbn}/like`);
 
     return { data };
   } catch (error) {
