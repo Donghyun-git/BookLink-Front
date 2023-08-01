@@ -32,7 +32,6 @@ export const CommentInputForm = styled.input`
   margin-left: 0.857rem;
   height: 1.714rem;
   font-size: 0.857rem;
-  color: #d9d9d9;
   width: 72rem;
   border-bottom: 0.143rem solid #848484;
 `;
