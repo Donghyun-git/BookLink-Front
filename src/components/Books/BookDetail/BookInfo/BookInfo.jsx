@@ -53,7 +53,8 @@ const BookInfo = ({ isbn }) => {
         dispatch({ type: 'ADD_COMMENT', payload: data.data.replies });
 
         commentInputRef.current.value = '';
-        handleRecommentClick();
+
+        if (parentId !== 0) return handleRecommentClick();
       } catch (error) {
         console.error(error);
         const { message } = error;
