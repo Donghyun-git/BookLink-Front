@@ -31,7 +31,7 @@ const BookInfo = ({ isbn }) => {
   }, []);
 
   const handleCommentSubmit = useCallback(
-    (parentId) => async (e) => {
+    (parentId, handleRecommentClick) => async (e) => {
       e.preventDefault();
       console.log('부모아이디', parentId);
       const content = commentInputRef.current.value;
@@ -53,6 +53,7 @@ const BookInfo = ({ isbn }) => {
         dispatch({ type: 'ADD_COMMENT', payload: data.data.replies });
 
         commentInputRef.current.value = '';
+        handleRecommentClick();
       } catch (error) {
         console.error(error);
         const { message } = error;

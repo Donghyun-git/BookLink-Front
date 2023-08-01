@@ -223,13 +223,7 @@ const CommentCard = ({
           {subReplyCnt > 0 && isShowRecomment ? (
             children.length > 0 &&
             children.map((reComment) => {
-              return (
-                <RecommentCard
-                  key={reComment.id}
-                  comments={reComment}
-                  handleRecommentClick={handleRecommentClick}
-                />
-              );
+              return <RecommentCard key={reComment.id} comments={reComment} />;
             })
           ) : (
             <></>
@@ -247,6 +241,7 @@ const CommentCard = ({
               onCancel={onCancel}
               commentInputRef={commentInputRef}
               parentId={recommentParentId}
+              handleRecommentClick={handleRecommentClick}
             />
           </Styled.BookReviewWriteForm>
         )}
