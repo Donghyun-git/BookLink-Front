@@ -58,10 +58,9 @@ const BookAside = () => {
           {relatedPosts.length === 0 ? (
             <div>아직 관련된 게시글이 없어요.</div>
           ) : (
-            relatedPosts.map((post, idx) => {
+            relatedPosts.map((post) => {
               return (
-                // 일단 idx
-                <Fragment key={idx}>
+                <Fragment key={post.id}>
                   <RelationCard post={post} />
                 </Fragment>
               );
