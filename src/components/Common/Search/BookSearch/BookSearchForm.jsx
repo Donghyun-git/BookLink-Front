@@ -48,7 +48,7 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
     setValue('authors', authors);
     setValue('publisher', publisher);
     setValue('pud_date', pud_date);
-    setValue('book_image', cover);
+    setValue('cover', cover);
   }
   const onBookInfoHandler = async (e) => {
     setSearch(e.target.value);
@@ -62,16 +62,16 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
         authors: author,
         publisher,
         pud_date: pubDate,
-        book_image: cover,
+        cover,
       });
       setValue('book_title', title);
       setValue('authors', author);
       setValue('publisher', publisher);
       setValue('pud_date', pubDate);
-      setValue('book_image', cover);
+      setValue('cover', cover);
     }
   };
-
+  console.log(bookInfo.cover);
   return (
     <>
       <BookContainerDiv>

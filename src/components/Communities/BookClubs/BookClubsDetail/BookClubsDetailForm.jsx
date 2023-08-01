@@ -9,21 +9,25 @@ import {
 } from '../../../../styles/globalStyled';
 import { dateFormat } from '../../../../utils/date';
 import { useParams } from 'react-router-dom';
+import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
 const BookClubsDetailForm = () => {
-  const [info, SetInfo] = useState({});
+  const [info, setInfo] = useState({});
   const { id } = useParams();
   const getDetail = async () => {
     const { data } = await bookClubsDetail(Number(id));
-    SetInfo(data);
+    data.category = '독서 모임';
+    data.date = dateFormat(data.date);
+    setInfo(data);
   };
   useEffect(() => {
     getDetail();
   }, []);
-  const {
+  /*const {
     writer,
     image,
     title,
     content,
+    category
     location,
     date,
     reply_cnt,
@@ -31,27 +35,17 @@ const BookClubsDetailForm = () => {
     like_cnt,
     liked,
     replies,
-  } = info;
+  } = info;*/
 
   return (
     <MainContainerDiv>
-      <LikeShareForm like_cnt={like_cnt} liked={liked} category={'독서 모임'} />
-      <CommunitiesDetailContentsDiv>
-        <CommunitiesDetailForm
-          title={title}
-          writer={writer}
-          image={image}
-          category={'독서 모임'}
-          date={dateFormat(date)}
-          view_cnt={view_cnt}
-          reply_cnt={reply_cnt}
-          like_cnt={like_cnt}
-          content={content}
-          location={location}
-          liked={liked}
-        />
-        <CommunitiesCommentForm replies={replies} category={'독서 모임'} />
-      </CommunitiesDetailContentsDiv>
+      <CommunitiesDetailContext.Provider value={{ info, setInfo }}>
+        <LikeShareForm />
+        <CommunitiesDetailContentsDiv>
+          <CommunitiesDetailForm />
+          <CommunitiesCommentForm />
+        </CommunitiesDetailContentsDiv>
+      </CommunitiesDetailContext.Provider>
     </MainContainerDiv>
   );
 };

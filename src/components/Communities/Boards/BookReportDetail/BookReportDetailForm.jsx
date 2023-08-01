@@ -2,48 +2,55 @@ import { useState, useEffect } from 'react';
 import { bookReportsDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
 import { dateFormat } from '../../../../utils/date';
 import { useParams } from 'react-router-dom';
-import { MainContainerDiv } from '../../../../styles/globalStyled';
+import {
+  MainContainerDiv,
+  CommunitiesDetailContentsDiv,
+} from '../../../../styles/globalStyled';
+import LikeShareForm from '../../../Common/LikeShare/LikeShareForm';
 import CommunitiesDetailForm from '../../../Common/CommunitiesDetail/CommunitiesDetailForm';
+import CommunitiesCommentForm from '../../../Common/CommunitiesComment/CommunitiesCommentForm';
+import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
 const BookReportDetailForm = () => {
-  const [info, SetInfo] = useState({});
+  const [info, setInfo] = useState({});
   const { id } = useParams();
   const getDetail = async () => {
     const { data } = await bookReportsDetail(Number(id));
     console.log(data);
-    SetInfo(data);
+    const { date, cover, book_title, authors, publisher, pud_date, ...data1 } =
+      data;
+
+    setInfo({
+      ...data1,
+      date: dateFormat(date),
+      bookInfo: { cover, book_title, authors, publisher, pud_date },
+    });
   };
   useEffect(() => {
     getDetail();
   }, []);
-  const {
-    title,
+  /*const {
     writer,
+    title,
+    content,
     category,
-    localDateTime,
+    date,
     view_cnt,
     reply_cnt,
     like_cnt,
-    cover,
-    book_title,
-    authors,
-    publisher,
-    pud_date,
-    content,
-  } = info;
+    liked,
+    bookInfo,
+    replies,
+  } = info;*/
 
   return (
     <MainContainerDiv>
-      <CommunitiesDetailForm
-        title={title}
-        writer={writer}
-        category={category}
-        date={dateFormat(localDateTime)}
-        view_cnt={view_cnt}
-        reply_cnt={reply_cnt}
-        like_cnt={like_cnt}
-        content={content}
-        bookInfo={{ cover, book_title, authors, publisher, pud_date }}
-      />
+      <CommunitiesDetailContext.Provider value={{ info, setInfo }}>
+        <LikeShareForm />
+        <CommunitiesDetailContentsDiv>
+          <CommunitiesDetailForm />
+          <CommunitiesCommentForm />
+        </CommunitiesDetailContentsDiv>
+      </CommunitiesDetailContext.Provider>
     </MainContainerDiv>
   );
 };
