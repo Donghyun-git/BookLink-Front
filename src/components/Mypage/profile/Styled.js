@@ -6,10 +6,12 @@ export const ProfileMain = styled.div`
   align-items: center;
   margin-bottom: 4.29rem;
 `;
+
 export const ProfileLeft = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const ProfileImageDiv = styled.div`
   display: flex;
   align-items: center;
@@ -25,6 +27,7 @@ export const ProfileImageDiv = styled.div`
     object-fit: cover;
   }
 `;
+
 export const ProfileInfoDiv = styled.div`
   h3 {
     font-size: 1.71429rem;
@@ -32,6 +35,7 @@ export const ProfileInfoDiv = styled.div`
     margin-right: 0.86rem;
   }
 `;
+
 export const ProfileInfo = styled.div`
   display: flex;
   align-items: center;
@@ -42,6 +46,7 @@ export const ProfileInfo = styled.div`
     font-weight: 400;
   }
 `;
+
 export const ProfileAddress = styled.div`
   span {
     display: inline-block;
@@ -50,6 +55,7 @@ export const ProfileAddress = styled.div`
     font-weight: 500;
   }
 `;
+
 export const ProfileActiveLabel = styled.div`
   ul {
     display: flex;
@@ -73,6 +79,7 @@ export const ProfileActiveLabel = styled.div`
     }
   }
 `;
+
 export const ProfileRight = styled.div`
   display: flex;
   align-items: center;

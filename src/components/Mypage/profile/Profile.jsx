@@ -41,6 +41,7 @@ const Profile = () => {
       </Styled.ProfileLeft>
       <Styled.ProfileRight>
         <div>
+          {/* 로그아웃 함수 커스텀훅으로 빼기 */}
           <span>로그아웃</span>
           <img src={logoutImage} alt="logout" />
         </div>
