@@ -189,9 +189,9 @@ export const HeaderProfileDiv = styled.div`
 export const ProfileText = styled.span`
   color: #000;
   font-size: 1.14286rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  user-select: none;
+  cursor: pointer;
 `;
 
 export const ProfileImgDiv = styled.div`
@@ -199,12 +199,28 @@ export const ProfileImgDiv = styled.div`
   height: 3.42857rem;
   border-radius: 3.42857rem;
   margin-left: 0.86rem;
-
+  margin-right: 0.86rem;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 3.42857rem;
+  }
+`;
+
+export const ProfileToggleDiv = styled.div`
+  position: relative;
+
+  div {
+    img {
+      transform: ${({ active }) =>
+        active === 'true'
+          ? 'rotate3d(0,0,0,180deg)'
+          : 'rotate3d(0,0,-1,180deg)'};
+      width: 1.28571rem;
+      height: 1.28571rem;
+      transition: all 0.1s ease-in;
+    }
   }
 `;
 
