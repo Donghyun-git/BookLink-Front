@@ -78,6 +78,7 @@ const Rents = () => {
     },
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const [cards, setCards] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -96,8 +97,8 @@ const Rents = () => {
           const {
             key,
             image,
-            name,
-            location,
+            // name,
+            // location,
             title,
             author,
             publish,
