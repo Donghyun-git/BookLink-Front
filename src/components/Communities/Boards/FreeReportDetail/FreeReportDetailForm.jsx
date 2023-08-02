@@ -16,8 +16,8 @@ const FreeReportDetailForm = () => {
   const getDetail = async () => {
     const { data } = await freesDetail(Number(id));
     console.log(data);
-    const { localDateTime, ...data1 } = data;
-    setInfo({ ...data1, date: dateFormat(localDateTime) });
+    const { date, ...data1 } = data;
+    setInfo({ ...data1, date: dateFormat(date) });
   };
   useEffect(() => {
     getDetail();
