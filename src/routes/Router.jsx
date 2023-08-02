@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import MainPage from '../pages/Main';
 import LoginPage from '../pages/Login/Login';
 import RegisterPage from '../pages/Register';
+import Mypage from '../pages/Mypage';
 import BooksPage from '../pages/Books/Books';
 import BookDetailPage from '../pages/BookDetail';
 import SearchPage from '../pages/Search/Search';
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/mybooklink" element={<Mypage />}></Route>
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
         <Route path="/search" element={<SearchPage />} />
