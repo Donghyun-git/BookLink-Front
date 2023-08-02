@@ -154,9 +154,9 @@ const HeaderContainer = () => {
             <button onClick={handleLogOut}>
               <div>로그아웃</div>
             </button>
-            <butotn onClick={handleNavigateMypage}>
+            <button onClick={handleNavigateMypage}>
               <div style={{ cursor: 'pointer' }}>마이페이지</div>
-            </butotn>
+            </button>
           </Fragment>
         ) : (
           <Fragment>
