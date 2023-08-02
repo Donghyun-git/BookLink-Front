@@ -5,6 +5,7 @@ import * as Styled from './Styled';
 import { generateUniqueKey } from '../../utils/generateUnique';
 import likesLogo from '../../images/likes.svg';
 import commentsLogo from '../../images/comments.svg';
+import Loading from '../Loading/Loading';
 
 const Books = ({ isBooks }) => {
   const navigate = useNavigate();
@@ -21,21 +22,26 @@ const Books = ({ isBooks }) => {
     [navigate]
   );
 
-  console.log(card, current);
   return (
     <Styled.BooksComponentDiv>
       {error ? (
         <div>{error}</div>
       ) : isLoading ? (
-        <div>로딩중입니다.</div>
-      ) : isLikes ? (
+        <Loading />
+      ) : isLikes ? ( //후에 컴포넌트 분리할것.
         card.map((card) => {
-          const { isbn13, cover, title, author, publisher, priceStandard } =
-            card;
+          const {
+            isbn13,
+            cover,
+            title,
+            author,
+            publisher,
+            priceStandard,
+            like_cnt: likes,
+            owner_cnt: owners,
+            reply_cnt: reviews,
+          } = card;
 
-          const likes = card.like_cnt;
-          const owners = card.owner_cnt;
-          const reviews = card.reply_cnt;
           const formattedPrice = priceStandard.toLocaleString('ko-KR');
 
           return (
@@ -94,12 +100,18 @@ const Books = ({ isBooks }) => {
         })
       ) : (
         current.map((card) => {
-          const { isbn13, cover, title, author, publisher, priceStandard } =
-            card;
+          const {
+            isbn13,
+            cover,
+            title,
+            author,
+            publisher,
+            priceStandard,
+            like_cnt: likes,
+            owner_cnt: owners,
+            reply_cnt: reviews,
+          } = card;
 
-          const likes = card.like_cnt;
-          const owners = card.owner_cnt;
-          const reviews = card.reply_cnt;
           const formattedPrice = priceStandard.toLocaleString('ko-KR');
 
           return (

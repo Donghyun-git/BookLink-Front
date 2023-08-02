@@ -5,6 +5,7 @@ import { detailReducer, initialState } from './context/detailReducer';
 import BookInfo from './BookInfo/BookInfo';
 import BookAside from './BookAside/BookAside';
 import SideBar from './SideBar';
+import Loading from '../../Loading/Loading';
 import * as bookService from '../../../lib/apis/booksService';
 import * as Styled from './Styled';
 
@@ -37,19 +38,13 @@ const BookDetail = () => {
   return (
     <DetailContext.Provider value={{ state, dispatch }}>
       <Styled.BookDetailWrap>
-        {error ? (
-          <div>{error}</div>
-        ) : isLoading ? (
-          <Fragment></Fragment>
-        ) : (
-          <SideBar />
-        )}
+        {error ? <div>{error}</div> : isLoading ? <></> : <SideBar />}
 
         <Styled.BookDetailContainer>
           {error ? (
             <div>{error}</div>
           ) : isLoading ? (
-            <div>로딩중입니다.</div>
+            <Loading />
           ) : (
             <Fragment>
               <Styled.BookDetailTitle>

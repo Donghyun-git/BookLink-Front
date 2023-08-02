@@ -1,0 +1,168 @@
+.lines {
+  margin: 0.625rem;
+}
+
+.layout {
+  display: flex;
+  width: 102.857rem;
+  gap: 0.625rem;
+}
+
+.first .book-report-card-loding:nth-child(n + 1) {
+  animation: loding 10s ease-in-out infinite;
+}
+
+.first .book-report-card-loding:nth-child(n + 2) {
+  animation: loding 10s ease-in-out 0.5s infinite;
+}
+
+.first .book-report-card-loding:nth-child(n + 3) {
+  animation: loding 10s ease-in-out 1s infinite;
+}
+
+.first .book-report-card-loding:nth-child(n + 4) {
+  animation: loding 10s ease-in-out 1.5s infinite;
+}
+
+.second .book-report-card-loding:nth-child(n + 1) {
+  animation: loding 10s ease-in-out 1.5s infinite;
+}
+
+.second .book-report-card-loding:nth-child(2) {
+  animation: loding 10s ease-in-out 0s infinite;
+}
+
+.second .book-report-card-loding:nth-child(3) {
+  animation: loding 10s ease-in-out 0.5s infinite;
+}
+
+.second .book-report-card-loding:nth-child(4) {
+  animation: loding 10s ease-in-out 1s infinite;
+}
+
+.third .book-report-card-loding:nth-child(n + 1) {
+  animation: loding 10s ease-in-out 1s infinite;
+}
+
+.third .book-report-card-loding:nth-child(2) {
+  animation: loding 10s ease-in-out 1.5s infinite;
+}
+
+.third .book-report-card-loding:nth-child(3) {
+  animation: loding 10s ease-in-out 0s infinite;
+}
+
+.third .book-report-card-loding:nth-child(4) {
+  animation: loding 10s ease-in-out 0.5s infinite;
+}
+
+.book-report-card-loding {
+  display: inline-flex;
+  padding: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 12px;
+  border: 1px solid #d9d9d9;
+  background: #fafbfa;
+  width: 230px;
+  opacity: 20%;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.circle {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  border-radius: 18px;
+}
+
+.line1 {
+  width: 180px;
+  height: 36px;
+  flex-shrink: 0;
+
+  border-radius: 18px;
+}
+
+.line2 {
+  width: 220px;
+  height: 24px;
+
+  border-radius: 12px;
+}
+
+.line3 {
+  width: 240px;
+  height: 36px;
+
+  border-radius: 18px;
+}
+
+.line4 {
+  width: 180px;
+  height: 36px;
+
+  border-radius: 18px;
+}
+
+.line5 {
+  width: 220px;
+  height: 28px;
+
+  border-radius: 14px;
+  transition: 300ms;
+}
+
+.circle,
+.line1,
+.line2,
+.line3,
+.line4,
+.line5 {
+  background-color: #d9d9d9;
+}
+
+@keyframes loding {
+  0% {
+    opacity: 20%;
+  }
+  10% {
+    opacity: 40%;
+  }
+  20% {
+    opacity: 20%;
+  }
+  30% {
+    opacity: 40%;
+  }
+  40% {
+    opacity: 20%;
+  }
+  50% {
+    opacity: 40%;
+  }
+  60% {
+    opacity: 20%;
+  }
+  70% {
+    opacity: 40%;
+  }
+  40% {
+    opacity: 20%;
+  }
+  90% {
+    opacity: 40%;
+  }
+
+  100% {
+    opacity: 20%;
+  }
+}

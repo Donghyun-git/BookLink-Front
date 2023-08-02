@@ -193,7 +193,6 @@ export const AsideCard3 = styled.ul`
 
   border-radius: 0.85714rem;
   border: 1px solid #d9d9d9;
-  width: 33.14286rem;
   margin-top: 1.71rem;
   margin-bottom: 0.86rem;
 
