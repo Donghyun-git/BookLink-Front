@@ -45,6 +45,10 @@ const HeaderContainer = () => {
     navigate('/');
   }, [dispatch, navigate]);
 
+  const handleNavigateMypage = useCallback(() => {
+    navigate('/mybooklink');
+  }, [navigate]);
+
   useEffect(() => {
     setPathName(path);
   }, [path]);
@@ -150,6 +154,9 @@ const HeaderContainer = () => {
             <button onClick={handleLogOut}>
               <div>로그아웃</div>
             </button>
+            <butotn onClick={handleNavigateMypage}>
+              <div style={{ cursor: 'pointer' }}>마이페이지</div>
+            </butotn>
           </Fragment>
         ) : (
           <Fragment>
