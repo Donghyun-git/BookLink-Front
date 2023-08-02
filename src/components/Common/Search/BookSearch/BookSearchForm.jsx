@@ -43,7 +43,9 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
   const [bookinfo, setBookinfo] = useState(bookInfo);
 
   if (Object.keys(bookInfo).length) {
-    const { cover, book_title, authors, publisher, pud_date } = bookInfo;
+    const { isbn13, cover, book_title, authors, publisher, pud_date } =
+      bookInfo;
+    setValue('isbn', isbn13);
     setValue('book_title', book_title);
     setValue('authors', authors);
     setValue('publisher', publisher);
@@ -54,16 +56,18 @@ const BookSearchForm = ({ bookInfo = {}, setValue }) => {
     setSearch(e.target.value);
     const { item } = await communitiesBookSearch(e.target.value);
     if (item) {
-      const { cover, title, author, pubDate, publisher } = item[0];
+      const { isbn13, cover, title, author, pubDate, publisher } = item[0];
       console.log(item[0]);
       setBookinfo({
         ...bookinfo,
+        isbn: isbn13,
         book_title: title,
         authors: author,
         publisher,
         pud_date: pubDate,
         cover,
       });
+      setValue('isbn', isbn13);
       setValue('book_title', title);
       setValue('authors', author);
       setValue('publisher', publisher);

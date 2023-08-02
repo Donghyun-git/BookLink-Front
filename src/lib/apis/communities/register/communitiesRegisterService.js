@@ -18,6 +18,7 @@ export const freeRegister = async (title, content) => {
 export const reportRegister = async (
   title,
   content,
+  isbn,
   cover,
   book_title,
   authors,
@@ -29,6 +30,7 @@ export const reportRegister = async (
     const { data } = await axiosJsonInstance.post(`/communities/board/report`, {
       title,
       content,
+      isbn,
       cover,
       book_title,
       authors,
