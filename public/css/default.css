@@ -277,7 +277,7 @@ input[type='radio'] {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
 }
-input[type='radio']:checked {
+/*input[type='radio']:checked {
   border-color: #003c74;
 }
 input[type='radio']:checked:after {
@@ -292,11 +292,11 @@ input[type='radio']:checked:after {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-}
+}*/
 input[type='radio'] + label {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 5px;
+  /*margin-left: 5px;*/
   cursor: pointer;
 }
 
