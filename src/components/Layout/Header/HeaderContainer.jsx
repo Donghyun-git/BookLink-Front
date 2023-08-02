@@ -1,15 +1,13 @@
 import { useState, useEffect, useCallback, Fragment } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import * as authActions from '../../../redux/actions/authActions';
-import { persistor } from '../../../main';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import UserToggle from '../../Header/UserToggle';
 import Logo from '../../../images/BookLink_Logo.svg';
 import searchLogo from '../../../images/search_icon.svg';
+import toggleImage from '../../../images/toggle.svg';
 import * as Styled from './Styled';
 
 const HeaderContainer = () => {
-  const navigate = useNavigate();
-
   const path = useLocation().pathname;
   const [pathName, setPathName] = useState(path);
 
@@ -17,7 +15,6 @@ const HeaderContainer = () => {
   const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('도서');
 
-  const dispatch = useDispatch();
   const nickName = useSelector((state) => state.USER.nickname);
   const isLoggedIn = useSelector((state) => state.USER.isLoggedIn);
 
@@ -37,17 +34,6 @@ const HeaderContainer = () => {
     setSelectedValue(value);
     setIsCategoryListOpen(false);
   }, []);
-
-  const handleLogOut = useCallback(() => {
-    dispatch(authActions.logout());
-    alert('로그아웃 되었습니다!');
-    persistor.purge();
-    navigate('/');
-  }, [dispatch, navigate]);
-
-  const handleNavigateMypage = useCallback(() => {
-    navigate('/mybooklink');
-  }, [navigate]);
 
   useEffect(() => {
     setPathName(path);
@@ -123,9 +109,9 @@ const HeaderContainer = () => {
           </div>
         </Styled.SearchDiv>
       </div>
-      <Styled.HeaderProfileDiv>
+      <Styled.HeaderProfileDiv onClick={handleClickProfileList}>
         {isLoggedIn ? (
-          <Fragment>
+          <>
             <Styled.ProfileText>{nickName}님 환영합니다!</Styled.ProfileText>
             <Styled.ProfileImgDiv>
               <img
@@ -133,31 +119,13 @@ const HeaderContainer = () => {
                 alt="프로필 이미지"
               />
             </Styled.ProfileImgDiv>
-            <div style={{ position: 'relative' }}>
-              <button onClick={handleClickProfileList}>
-                <img src="" alt="" />
-              </button>
-              {isProfileListOpen && (
-                <Styled.OptionsList>
-                  <Styled.OptionItem onClick={() => handleOptionClick('도서')}>
-                    도서
-                  </Styled.OptionItem>
-                  <Styled.OptionItem
-                    onClick={() => handleOptionClick('게시글')}
-                  >
-                    게시글
-                  </Styled.OptionItem>
-                </Styled.OptionsList>
-              )}
-            </div>
-
-            <button onClick={handleLogOut}>
-              <div>로그아웃</div>
-            </button>
-            <button onClick={handleNavigateMypage}>
-              <div style={{ cursor: 'pointer' }}>마이페이지</div>
-            </button>
-          </Fragment>
+            <Styled.ProfileToggleDiv active={isProfileListOpen.toString()}>
+              <div>
+                <img src={toggleImage} alt="toggle" />
+              </div>
+              {isProfileListOpen && <UserToggle />}
+            </Styled.ProfileToggleDiv>
+          </>
         ) : (
           <Fragment>
             <Styled.HeaderAuthButton>
