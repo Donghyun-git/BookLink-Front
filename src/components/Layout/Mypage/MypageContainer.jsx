@@ -1,6 +1,6 @@
 import * as Styled from './Styled';
 import Profile from '../../Mypage/profile/Profile';
-import NavMenu from '../../Mypage/Menu/navMenu';
+import NavMenu from '../../Mypage/Menu/NavMenu';
 import ActivityStatus from '../../Mypage/MyActive/activityStatus';
 
 const MypageContainer = () => {
