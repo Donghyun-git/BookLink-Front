@@ -14,8 +14,8 @@ import CityDistrictSelectorForm from '../../Common/CityDistrictSelector/CityDist
 import BookSearchForm from '../../Common/Search/BookSearch/BookSearchForm';
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();
-  const [bookReportClick, setBookReportClick] = useState(false);
-  const [bookClubsReportClick, setBookClubsReportClick] = useState(false);
+  const [click, setClick] = useState([1, 0, 0]); // [자유글,독후감,독서모임] 선택 순서 1일때:선택 0일때:선택x
+
   const {
     register,
     handleSubmit,
@@ -32,6 +32,7 @@ const CommunitiesRegisterForm = () => {
     const {
       title,
       content,
+      isbn,
       city,
       district,
       cover,
@@ -40,17 +41,18 @@ const CommunitiesRegisterForm = () => {
       publisher,
       pud_date,
     } = data;
-    if (bookClubsReportClick) {
+    if (click[2]) {
       const location = city + ' ' + district;
       console.log(location);
       const data1 = await bookClubRegister(title, content, location);
       console.log(data1);
       navigate('/communities/book-clubs');
-    } else if (bookReportClick) {
+    } else if (click[1]) {
       console.log(cover);
       const data1 = await reportRegister(
         title,
         content,
+        isbn,
         cover,
         book_title,
         authors,
@@ -67,15 +69,13 @@ const CommunitiesRegisterForm = () => {
   };
 
   const onSelectHandler = (e) => {
-    if (e.target.value == 'bookReport') {
-      setBookReportClick(true);
-      setBookClubsReportClick(false);
-    } else if (e.target.value == 'bookClubsReport') {
-      setBookClubsReportClick(true);
-      setBookReportClick(false);
+    console.log(e.target.checked);
+    if (e.target.value === '2') {
+      setClick(() => [0, 0, 1]);
+    } else if (e.target.value === '1') {
+      setClick(() => [0, 1, 0]);
     } else {
-      setBookReportClick(false);
-      setBookClubsReportClick(false);
+      setClick(() => [1, 0, 0]);
     }
   };
 
@@ -87,57 +87,55 @@ const CommunitiesRegisterForm = () => {
   return (
     <Styled.MainContainerDiv>
       <Styled.MainContentsDiv>
-        <div>
-          <Styled.SelectContainerDiv>
-            <Styled.SelectDiv>
-              <input
+        <Styled.SelectDiv>
+          <Styled.SelectContainerDiv isClicked={click[0] === 1}>
+            <Styled.SelectContentDiv>
+              <Styled.Input
                 type="radio"
                 name="writing"
-                value="freeReport"
+                value="0"
                 onChange={onSelectHandler}
+                checked={click[0] === 1}
               />
-              <label htmlFor="freeReport">자유글 작성하기</label>
+              <label htmlFor="0">자유글 작성하기</label>
               <p>자유롭게 글을 작성해보세요</p>
-            </Styled.SelectDiv>
+            </Styled.SelectContentDiv>
           </Styled.SelectContainerDiv>
-          <div>
-            <Styled.SelectContainerDiv>
-              <Styled.SelectDiv>
-                <input
-                  type="radio"
-                  name="writing"
-                  value="bookReport"
-                  onChange={onSelectHandler}
-                />
-                <label htmlFor="bookReport">독후감 작성하기</label>
-                <p>책에 대한 독후감을 작성하여 의견을 나눠보세요!</p>
-              </Styled.SelectDiv>
-            </Styled.SelectContainerDiv>
-          </div>
-          <div>
-            <Styled.SelectContainerDiv>
-              <Styled.SelectDiv>
-                <input
-                  type="radio"
-                  name="writing"
-                  value="bookClubsReport"
-                  onChange={onSelectHandler}
-                />
-                <label htmlFor="bookClubsReport">
-                  독서 모임 모집글 작성하기
-                </label>
-                <p>게시글을 통해 직접 독서 모임을 만들어보세요!</p>
-              </Styled.SelectDiv>
-            </Styled.SelectContainerDiv>
-          </div>
-        </div>
+          <Styled.SelectContainerDiv isClicked={click[1] === 1}>
+            <Styled.SelectContentDiv>
+              <Styled.Input
+                type="radio"
+                name="writing"
+                value="1"
+                onChange={onSelectHandler}
+                checked={click[1] === 1}
+              />
+              <label htmlFor="1">독후감 작성하기</label>
+              <p>책에 대한 독후감을 작성하여 의견을 나눠보세요!</p>
+            </Styled.SelectContentDiv>
+          </Styled.SelectContainerDiv>
+          <Styled.SelectContainerDiv isClicked={click[2] === 1}>
+            <Styled.SelectContentDiv>
+              <Styled.Input
+                type="radio"
+                name="writing"
+                value="2"
+                onChange={onSelectHandler}
+                checked={click[2] === 1}
+              />
+              <label htmlFor="2">독서 모임 모집글 작성하기</label>
+              <p>게시글을 통해 직접 독서 모임을 만들어보세요!</p>
+            </Styled.SelectContentDiv>
+          </Styled.SelectContainerDiv>
+        </Styled.SelectDiv>
+
         <form onSubmit={handleSubmit(onSubmit)}>
-          {bookReportClick && (
+          {click[1] > 0 && (
             <div>
               <BookSearchForm setValue={setValue} />
             </div>
           )}
-          {bookClubsReportClick && (
+          {click[2] > 0 && (
             <div>
               <CityDistrictSelectorForm setValue={setValue} />
               {/*errors.location && <p>{errors.location.message}</p>*/}
