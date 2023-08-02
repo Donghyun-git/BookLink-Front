@@ -38,7 +38,7 @@ const CommunitiesForm = () => {
       <Styled.MainContentsDiv>
         <Styled.PopularDiv>
           <Styled.TagDiv>
-            <Styled.fireImg src={fire} />
+            <Styled.fireImg src={fire} alt="불" />
             <Styled.tag>주간 인기글</Styled.tag>
             <Styled.link href="/communities/popular">전체보기</Styled.link>
           </Styled.TagDiv>
@@ -51,7 +51,7 @@ const CommunitiesForm = () => {
         </Styled.PopularDiv>
         <Styled.BookClubsDiv>
           <Styled.TagDiv>
-            <Styled.bellImg src={bell} />
+            <Styled.bellImg src={bell} alt="벨" />
             <Styled.tag>독서 모임 모집</Styled.tag>
             <Styled.link href="/communities/book-clubs">전체보기</Styled.link>
           </Styled.TagDiv>
@@ -86,7 +86,7 @@ const CommunitiesForm = () => {
         </Styled.BookClubsDiv>
         <Styled.BoardsDiv>
           <Styled.TagDiv>
-            <Styled.openbookImg src={openbook} />
+            <Styled.openbookImg src={openbook} alt="책" />
             <Styled.tag>게시판</Styled.tag>
             <Styled.link href="/communities/boards">전체보기</Styled.link>
           </Styled.TagDiv>

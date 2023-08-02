@@ -57,7 +57,7 @@ export const ContentsDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  div {
+  > div {
     &:nth-child(4n + 1) {
       margin-left: 0;
     }

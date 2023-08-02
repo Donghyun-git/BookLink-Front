@@ -53,8 +53,7 @@ export const ContentsDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  }
-  div{
+  > div {
     &:nth-child(3n + 1) {
       margin-left: 0;
     }
@@ -76,13 +75,23 @@ export const searchInput = styled.input`
   border-radius: 0.571rem;
   margin-bottom: 1.714rem;
 `;
-export const Btn = styled.button`
+export const Nav = styled.div`
+  margin-bottom: 1.714rem;
+`;
+const Btn = styled.button`
   width: 100%;
   box-sizing: border-box;
+  background: #ffffff;
   border: 0.071rem solid #d9d9d9;
   border-radius: 0.571rem;
-  height: 3.143rem;
   text-align: center;
+`;
+export const NavBtn = styled(Btn)`
+  height: 3.143rem;
+  &:nth-child(2) {
+    border-color: #00e37d;
+    color: #00e37d;
+  }
 `;
 export const WriteBtn = styled(Btn)`
   height: 3.786rem;

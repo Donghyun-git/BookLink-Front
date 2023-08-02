@@ -3,27 +3,36 @@ import * as Styled from './Styled';
 import { bookClubList } from '../../../lib/apis/communities/communitiesService';
 import bell from '../../../images/bell.png';
 import BookClubsCardForm from '../../Common/Card/BookClubsCard/BookClubsCardForm';
+import { useNavigate } from 'react-router-dom';
 const BookClubsForm = () => {
+  const navigate = useNavigate();
   const [bookClubs, setBookClubs] = useState([]);
-  const [select, setSelect] = useState('전체보기');
+  /*const [select, setSelect] = useState('전체보기');*/
+  const [searchWord, setSearchWord] = useState('');
   const inputRef = useRef(null);
   const getBookClubs = async () => {
     let { data } = await bookClubList();
-    if (select && select !== '전체보기') {
-      data = data.filter((info) => info.location.split(' ')[0] === select);
+    if (searchWord) {
+      data = data.filter(
+        (info) =>
+          info.title.includes(searchWord) || info.location.includes(searchWord)
+      );
     }
+    /*if (select && select !== '전체보기') {
+      data = data.filter((info) => info.location.split(' ')[0] === select);
+    }*/
     setBookClubs(data);
   };
   useEffect(() => {
     getBookClubs();
-  }, [select]);
-  const onSelectHandler = (e) => {
+  }, [searchWord]);
+  /*const onSelectHandler = (e) => {
     const { value } = e.target;
     setSelect(value);
-  };
+  };*/
   const onSearchHandler = (e) => {
     if (e.key === 'Enter') {
-      setSelect(inputRef.current.value);
+      setSearchWord(inputRef.current.value);
     }
   };
   return (
@@ -39,12 +48,6 @@ const BookClubsForm = () => {
             <option value="서울">서울</option>
             <option value="인천">인천</option>
           </Styled.select>
-          <Styled.searchInput
-            type="search"
-            placeholder="독서 모임 위치로 검색해 보세요"
-            ref={inputRef}
-            onKeyDown={onSearchHandler}
-          />
           </Styled.SelectDiv>*/}
         <Styled.MainDiv>
           <Styled.ContentsDiv>
@@ -66,11 +69,22 @@ const BookClubsForm = () => {
             )}
           </Styled.ContentsDiv>
           <Styled.AsideDiv>
-            <Styled.searchInput placeholder="키워드나 장소를 검색해보세요" />
-            <Styled.Btn>인기글</Styled.Btn>
-            <Styled.Btn>독서 모임</Styled.Btn>
-            <Styled.Btn>게시판</Styled.Btn>
-            <Styled.WriteBtn>글쓰기</Styled.WriteBtn>
+            <Styled.searchInput
+              type="search"
+              placeholder="키워드나 장소를 검색해보세요"
+              ref={inputRef}
+              onKeyDown={onSearchHandler}
+            />
+            <Styled.Nav>
+              <Styled.NavBtn>인기글</Styled.NavBtn>
+              <Styled.NavBtn>독서 모임</Styled.NavBtn>
+              <Styled.NavBtn onClick={() => navigate('/communities/boards')}>
+                게시판
+              </Styled.NavBtn>
+            </Styled.Nav>
+            <Styled.WriteBtn onClick={() => navigate('/communities/write')}>
+              글쓰기
+            </Styled.WriteBtn>
           </Styled.AsideDiv>
         </Styled.MainDiv>
       </Styled.MainContentsDiv>
