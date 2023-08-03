@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import * as Styled from './Styled';
 import {
@@ -13,25 +13,18 @@ const CommunitiesCommentForm = () => {
   const commentRef = useRef(null);
   const { info, setInfo } = useContext(CommunitiesDetailContext);
   const { category, replies, reply_cnt } = info;
-  /*{
-    "id": 24,
-    "parent_id": 24,
-    "writer": "SCY",
-    "content": "수정된 댓글",
-    "date": "2023-07-27T01:31:02.980184",
-    "image": "https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png",
-    "like_cnt": 0,
-    "sub_reply_cnt": 0,
-    "isLiked": false,
-    "isUpdated": true
+  const [sortStatus, setSortStatus] = useState(0); //[기본은 공감순, 0일씨 공감순, 1일씨 최신순]
+
+  console.log(info);
+
+  const onSortHandler = (e) => {
+    if (e.target.value === 0) {
+      setSortStatus(0);
+    } else {
+      setSortStatus(1);
     }
-        "data": {
-        "replyId": 1,
-        "date": "2023-07-25T01:11:54.7072866",
-        "content": "부모댓글",
-        "writer": "SCY",
-        "image": "https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png"
-    }*/
+  };
+
   const onCommentPost = async (e) => {
     let data1;
     if (e.key === 'Enter') {
@@ -66,7 +59,7 @@ const CommunitiesCommentForm = () => {
       setInfo({ ...info, reply_cnt: reply_cnt + 1, replies });
     }
   };
-
+  console.log(replies);
   return (
     <>
       <Styled.CommentTag>
@@ -82,13 +75,20 @@ const CommunitiesCommentForm = () => {
           onKeyDown={onCommentPost}
         />
       </Styled.CommentPostForm>
-      <Styled.CommentSortForm>
-        <span>공감순</span>
-        <span>최신순</span>
+      <Styled.CommentSortForm onClick={onSortHandler}>
+        <Styled.Sort isClicked={sortStatus === 0} value="0">
+          공감순
+        </Styled.Sort>
+        <Styled.Sort isClicked={sortStatus === 1} value="1">
+          최신순
+        </Styled.Sort>
       </Styled.CommentSortForm>
       <Styled.CommentListForm>
         {replies &&
-          replies
+          (sortStatus === 0
+            ? replies.sort((a, b) => b.like_cnt - a.like_cnt)
+            : replies.sort((a, b) => b.id - a.id)
+          )
             .filter(({ id, parent_id }) => id === parent_id)
             .map(
               ({

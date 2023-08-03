@@ -80,31 +80,29 @@ const RegisterForm = () => {
     console.log(data1);
   };
   return (
-    <Styled.MainDiv>
-      <Styled.RegisterDiv>
-        <h1>회원가입</h1>
+    <Styled.MainContainerDiv>
+      <Styled.MainContentsDiv>
+        <Styled.MainTag>회원가입</Styled.MainTag>
         <Styled.RegisterForm onSubmit={handleSubmit(onSubmit)}>
           <Styled.buttonIncludedDiv>
-            <h4>아이디</h4>
+            <Styled.Tag>아이디</Styled.Tag>
             <Styled.Input
               type="text"
               {...register('email')}
-              //{...emailRegister}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleEmailCheck();
               }}
-              //ref={emailRef}
               placeholder="이메일을 입력해주세요"
             />
             {errors.email && <p>{errors.email.message}</p>}
             {doubleEmailCheck ? (
-              <button type="button" onClick={handleAuthNum}>
+              <Styled.Btn type="button" onClick={handleAuthNum}>
                 인증번호 전송
-              </button>
+              </Styled.Btn>
             ) : (
-              <button type="button" onClick={handleEmailCheck}>
+              <Styled.Btn type="button" onClick={handleEmailCheck}>
                 중복확인
-              </button>
+              </Styled.Btn>
             )}
           </Styled.buttonIncludedDiv>
           <Styled.noTagDiv>
@@ -117,22 +115,22 @@ const RegisterForm = () => {
               //ref={authNumRef}
             />
             {errors.authNum && <p>{errors.authNum.message}</p>}
-            <button type="button" onClick={handleAuthNumConfirm}>
+            <Styled.Btn type="button" onClick={handleAuthNumConfirm}>
               인증번호 확인
-            </button>
+            </Styled.Btn>
           </Styled.noTagDiv>
           <Styled.Div>
-            <h4>비밀번호</h4>
+            <Styled.Tag>비밀번호</Styled.Tag>
             <Styled.Input type="password" {...register('password')} />
             {errors.password && <p>{errors.password.message}</p>}
           </Styled.Div>
           <Styled.Div>
-            <h4>비밀번호 확인</h4>
+            <Styled.Tag>비밀번호 확인</Styled.Tag>
             <Styled.Input type="password" {...register('checkpw')} />
             {errors.checkpw && <p>{errors.checkpw.message}</p>}
           </Styled.Div>
           <Styled.buttonIncludedDiv>
-            <h4>닉네임</h4>
+            <Styled.Tag>닉네임</Styled.Tag>
             <Styled.Input
               type="text"
               {...register('nickname')}
@@ -142,45 +140,31 @@ const RegisterForm = () => {
               //ref={nicknameRef}
             />
             {errors.nickname && <p>{errors.nickname.message}</p>}
-            <button type="button" onClick={nicknameCheck}>
+            <Styled.Btn type="button" onClick={nicknameCheck}>
               중복확인
-            </button>
+            </Styled.Btn>
           </Styled.buttonIncludedDiv>
           <Styled.Div>
-            <h4>이름</h4>
+            <Styled.Tag>이름</Styled.Tag>
             <Styled.Input type="text" {...register('name')} />
             {errors.name && <p>{errors.name.message}</p>}
           </Styled.Div>
-          {/*<Styled.Div>
-            <h4>성별</h4>
-            <Styled.genderDiv>
-              <input
-                type="radio"
-                value="남성"
-                {...register('gender')}
-                checked
-              />
-              <label htmlFor="male">남성</label>
-              <input type="radio" value="여성" {...register('gender')} />
-              <label htmlFor="female">여성</label>
-            </Styled.genderDiv>
-            </Styled.Div>*/}
           <Styled.Div>
-            <h4>생년월일</h4>
+            <Styled.Tag>생년월일</Styled.Tag>
             <Styled.Input type="date" {...register('birth')} />
             {errors.birth && <p>{errors.birth.message}</p>}
           </Styled.Div>
           <Styled.searchDiv>
-            <h4>주소</h4>
+            <Styled.Tag>주소</Styled.Tag>
             <Styled.Input type="search" placeholder="도로명 검색" />
-            <button
+            <Styled.Btn
               type="button"
               onClick={() => {
                 setSearchBtnClick(!searchBtnClick);
               }}
             >
               검색하기
-            </button>
+            </Styled.Btn>
             {searchBtnClick && (
               <AddressSearchForm onAddressClick={handleAddressClick} />
             )}
@@ -203,8 +187,8 @@ const RegisterForm = () => {
           </Styled.Div>
           <Styled.RegisterBtn type="sumbit">가입하기</Styled.RegisterBtn>
         </Styled.RegisterForm>
-      </Styled.RegisterDiv>
-    </Styled.MainDiv>
+      </Styled.MainContentsDiv>
+    </Styled.MainContainerDiv>
   );
 };
 

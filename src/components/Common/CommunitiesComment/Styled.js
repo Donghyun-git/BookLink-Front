@@ -35,11 +35,17 @@ export const CommentInputForm = styled.input`
   width: 72rem;
   border-bottom: 0.143rem solid #848484;
 `;
-export const CommentSortForm = styled.div`
+export const CommentSortForm = styled.ul`
   margin-top: 2.857rem;
-  span {
-    margin-right: 0.857rem;
-  }
+  font-size: 0.857rem;
+  display: flex;
+  color: #d9d9d9;
+  font-size: bold;
+`;
+export const Sort = styled.li`
+  margin-right: 0.857rem;
+  color: ${({ isClicked }) => isClicked && 'black'};
+  }};
 `;
 export const CommentListForm = styled.div`
   margin-top: 1.5rem;
