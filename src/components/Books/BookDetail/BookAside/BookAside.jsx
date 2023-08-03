@@ -8,6 +8,7 @@ import * as Styled from './Styled';
 const BookAside = () => {
   const { state } = useDetailContext();
 
+  const recommendedCategoryName = state.book.item[0].categoryName;
   const recommended = state.book.recommended_books;
   const relatedPosts = state.book.related_posts;
 
@@ -15,7 +16,7 @@ const BookAside = () => {
     <Styled.BookAside>
       <Styled.BookAsideSection>
         <Styled.AsideCardTitle>
-          <h2>자기계발 추천도서</h2>
+          <h2>{`"${recommendedCategoryName}"`} 추천도서</h2>
           <button>
             <div>더보기</div>
           </button>
