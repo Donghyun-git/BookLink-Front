@@ -12,3 +12,8 @@ export const MypageContainer = styled.div`
   min-height: 86rem;
   margin: 4.29rem auto 0 auto;
 `;
+
+export const MypageCardTitle = styled.h2`
+  font-size: 1.71429rem;
+  font-weight: 500;
+`;
