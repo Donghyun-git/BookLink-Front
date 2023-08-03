@@ -89,7 +89,7 @@ const BooksContainer = ({
               onClick={handleSortedLikes}
               active={isSortLikes.toString()}
             >
-              좋아요
+              인기순
             </Styled.NavSortLi>
           </Styled.NavSortUl>
         </div>
