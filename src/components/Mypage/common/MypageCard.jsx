@@ -1,7 +1,13 @@
-import { Fragment } from 'react';
+import { useState, useCallback, Fragment } from 'react';
 import * as Styled from './Styled';
 
 const MypageCard = ({ title, list, table }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleClickLeftList = useCallback((id) => {
+    setActiveIndex(id);
+  }, []);
+
   return (
     <Styled.MypageCard>
       <Styled.MypageCardTitle>
@@ -13,7 +19,10 @@ const MypageCard = ({ title, list, table }) => {
             {list.map((list, idx) => {
               return (
                 <Fragment key={idx}>
-                  <li>
+                  <li
+                    className={idx === activeIndex ? 'active' : ''}
+                    onClick={() => handleClickLeftList(idx)}
+                  >
                     <span>{list}</span>
                   </li>
                 </Fragment>
@@ -25,34 +34,34 @@ const MypageCard = ({ title, list, table }) => {
           <table>
             <thead>
               <tr>
-                {table.map((title) => {
+                {table.map((title, idx) => {
                   return (
-                    <>
+                    <Fragment key={idx}>
                       <th
                         className={
-                          title === '내용' || ('결제정보' && 'content')
+                          (title === '내용' || '결제정보') && 'content'
                         }
                       >
                         {title}
                       </th>
-                    </>
+                    </Fragment>
                   );
                 })}
               </tr>
             </thead>
             <tbody>
               <tr>
-                {table.map((title) => {
+                {table.map((title, idx) => {
                   return (
-                    <>
+                    <Fragment key={idx}>
                       <td
                         className={
-                          title === '내용' || ('결제정보' && 'content')
+                          (title === '내용' || '결제정보') && 'content'
                         }
                       >
                         {title}
                       </td>
-                    </>
+                    </Fragment>
                   );
                 })}
               </tr>
