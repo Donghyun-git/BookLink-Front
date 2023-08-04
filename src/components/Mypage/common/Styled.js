@@ -38,15 +38,31 @@ export const LeftList = styled.div`
     li {
       border-radius: 0rem 0.28571rem 0.28571rem 0rem;
       padding: 0.85714rem 0rem;
-      background: #00e37d;
+      background: #fff;
       text-align: center;
       width: 8.573rem;
       cursor: pointer;
 
+      &.active {
+        background: #00e37d;
+        span {
+          color: #fff;
+          font-size: 1.14286rem;
+          font-weight: 700;
+        }
+      }
+
       span {
-        color: #fff;
+        color: #d9d9d9;
+        text-align: center;
         font-size: 1.14286rem;
-        font-weight: 700;
+        font-weight: 500;
+
+        &.active {
+          color: #fff;
+          font-size: 1.14286rem;
+          font-weight: 700;
+        }
       }
     }
   }

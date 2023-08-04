@@ -13,6 +13,7 @@ const MypageContainer = () => {
       <div>
         <Styled.MypageCardTitle>관리</Styled.MypageCardTitle>
       </div>
+      s
       <MypageCard
         title={'대여'}
         list={['결제내역', '연체된 도서']}
@@ -22,7 +23,6 @@ const MypageContainer = () => {
         title={'커뮤니티 활동'}
         list={['후기', '자유글', '독후감', '독서 모임', '댓글']}
         table={['no', '유형', '도서명', '내용', '작성일', '좋아요', '답글']}
-        // content={['1', '세이노의']}
       />
     </Styled.MypageContainer>
   );
