@@ -7,7 +7,7 @@ import RegisterPage from '../pages/Register';
 import Mypage from '../pages/Mypage';
 import BooksPage from '../pages/Books/Books';
 import BookDetailPage from '../pages/BookDetail';
-import SearchPage from '../pages/Search/Search';
+import SearchPage from '../pages/Search';
 import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
 import BoardsPage from '../pages/Boards';

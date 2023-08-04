@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, Fragment } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useRef, useEffect, useCallback, Fragment } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import UserToggle from '../../Header/UserToggle';
 import Logo from '../../../images/BookLink_Logo.svg';
@@ -9,11 +9,14 @@ import * as Styled from './Styled';
 
 const HeaderContainer = () => {
   const path = useLocation().pathname;
+  const navigate = useNavigate();
   const [pathName, setPathName] = useState(path);
 
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
   const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('도서');
+
+  const searchRef = useRef(null);
 
   const nickName = useSelector((state) => state.USER.nickname);
   const isLoggedIn = useSelector((state) => state.USER.isLoggedIn);
@@ -34,6 +37,12 @@ const HeaderContainer = () => {
     setSelectedValue(value);
     setIsCategoryListOpen(false);
   }, []);
+
+  const onSearchHandler = (e) => {
+    if (e.key === 'Enter') {
+      navigate(`/search?query=${searchRef.current.value}`);
+    }
+  };
 
   useEffect(() => {
     setPathName(path);
@@ -91,6 +100,8 @@ const HeaderContainer = () => {
             <Styled.SearchInput
               type="search"
               placeholder="책을 검색해보세요!"
+              ref={searchRef}
+              onKeyDown={onSearchHandler}
             />
             <div
               style={{
