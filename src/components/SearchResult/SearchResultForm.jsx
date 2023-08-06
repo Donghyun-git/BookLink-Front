@@ -14,14 +14,14 @@ const SearchResultForm = () => {
     setResults(item);
   };
   useEffect(() => {
-    getResults(); //카테고리,책소개가 필요
+    getResults();
   }, []);
 
   return (
     <MainContainerDiv>
       <MainContentsDiv>
         <Styled.TopicResultTag>
-          <Styled.TopicResult>{topic} 관련 도서 검색 결과</Styled.TopicResult>
+          <Styled.TopicResult>"{topic}" 관련 도서 검색 결과</Styled.TopicResult>
           <Styled.Cnt>{results.length}개</Styled.Cnt>
         </Styled.TopicResultTag>
         <Styled.ResultTag>
@@ -49,6 +49,8 @@ const SearchResultForm = () => {
           ({
             isbn13,
             cover,
+            categoryName,
+            description,
             title,
             author,
             publisher,
@@ -66,16 +68,16 @@ const SearchResultForm = () => {
                     onClick={() => navigate(`/books/${isbn13}`)}
                   />
                 </Styled.CoverContent>
-                <Styled.CategoryContent>카테고리</Styled.CategoryContent>
+                <Styled.CategoryContent>{categoryName}</Styled.CategoryContent>
                 <Styled.TopicContent>{title}</Styled.TopicContent>
                 <Styled.AuthorContent>{author}</Styled.AuthorContent>
                 <Styled.PublishContent>{publisher}</Styled.PublishContent>
                 <Styled.PriceContent>{priceStandard}</Styled.PriceContent>
-                <Styled.IntroduceContent>책소개</Styled.IntroduceContent>
+                <Styled.IntroduceContent>{description}</Styled.IntroduceContent>
                 <Styled.DetailCntContent>{reply_cnt}</Styled.DetailCntContent>
                 <Styled.DetailCntContent>{like_cnt}</Styled.DetailCntContent>
+                <Styled.DetailCntContent>조회수</Styled.DetailCntContent>
                 <Styled.DetailCntContent>{owner_cnt}</Styled.DetailCntContent>
-                <Styled.DetailCntContent>소장된수</Styled.DetailCntContent>
                 <Styled.RegisterContent>
                   <Styled.Btn>소장 등록하기</Styled.Btn>
                   <Styled.Btn>대여정보 확인하기</Styled.Btn>
