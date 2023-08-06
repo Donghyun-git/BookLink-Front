@@ -49,6 +49,11 @@ export const tag = styled.div`
   font-size: 1.714rem;
   font-weight: bold;
 `;
+export const week = styled.div`
+  margin: 0.571rem;
+  color: #848484;
+  font-size: 1.143rem;
+`;
 export const link = styled.a`
   margin: 0.571rem;
   color: #848484;
