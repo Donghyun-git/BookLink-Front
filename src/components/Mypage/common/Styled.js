@@ -21,6 +21,7 @@ export const MypageCardTitle = styled.div`
   align-items: center;
   align-self: stretch;
   border-bottom: 0.5px solid #848484;
+
   h3 {
     text-align: center;
     font-size: 1.42857rem;

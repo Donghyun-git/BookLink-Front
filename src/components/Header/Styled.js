@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const UserToggleDiv = styled.div`
+  pointer-events: ${({ active }) => {
+    console.log('로그인여부', active);
+    return active === 'true' ? 'auto' : 'none';
+  }};
   ul {
     border: 2px solid transparent;
     border-radius: 0.571rem;

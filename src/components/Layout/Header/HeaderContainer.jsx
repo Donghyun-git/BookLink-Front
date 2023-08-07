@@ -6,13 +6,14 @@ import Logo from '../../../images/BookLink_Logo.svg';
 import searchLogo from '../../../images/search_icon.svg';
 import toggleImage from '../../../images/toggle.svg';
 import * as Styled from './Styled';
+import { useToggleList } from '../../../hooks/Header/useToggleList';
 
 const HeaderContainer = () => {
+  const { isProfileListOpen, handleClickProfileList } = useToggleList();
   const path = useLocation().pathname;
-  const [pathName, setPathName] = useState(path);
 
+  const [pathName, setPathName] = useState(path);
   const [isCategoryListOpen, setIsCategoryListOpen] = useState(false);
-  const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('도서');
 
   const nickName = useSelector((state) => state.USER.nickname);
@@ -21,10 +22,6 @@ const HeaderContainer = () => {
   const handleSelectChange = useCallback((event) => {
     setSelectedValue(event.target.value);
   }, []);
-
-  const handleClickProfileList = useCallback(() => {
-    setIsProfileListOpen(!isProfileListOpen);
-  }, [isProfileListOpen]);
 
   const handleSelectClick = useCallback(() => {
     setIsCategoryListOpen(!isCategoryListOpen);
@@ -123,7 +120,9 @@ const HeaderContainer = () => {
               <div>
                 <img src={toggleImage} alt="toggle" />
               </div>
-              {isProfileListOpen && <UserToggle />}
+              {isProfileListOpen && (
+                <UserToggle active={isLoggedIn.toString()} />
+              )}
             </Styled.ProfileToggleDiv>
           </>
         ) : (
