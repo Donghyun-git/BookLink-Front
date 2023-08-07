@@ -1,7 +1,7 @@
 import { useToggleList } from '../../hooks/Header/useToggleList';
 import * as Styled from './Styled';
 
-const UserToggle = () => {
+const UserToggle = ({ active }) => {
   const {
     isHovered,
     handleMouseEnter,
@@ -11,7 +11,7 @@ const UserToggle = () => {
   } = useToggleList();
 
   return (
-    <Styled.UserToggleDiv>
+    <Styled.UserToggleDiv active={active}>
       <ul>
         <li>
           <button onClick={handleNavigateMypage}>마이페이지</button>
