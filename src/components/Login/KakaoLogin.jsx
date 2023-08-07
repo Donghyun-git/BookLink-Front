@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { axiosAuthInstance } from '../../lib/apis/config/axios';
+import * as authService from '../../lib/apis/authService';
 import * as env from '../../../env.config';
 
 const KakaoLogin = () => {
@@ -17,7 +17,7 @@ const KakaoLogin = () => {
         }
         // 백엔드 서버로 인가 코드 보내서 서버에서 http 요청 보내기.
         //cors.
-        const uri = 'https://kauth.kakao.com/oauth/token';
+        // const uri = 'https://kauth.kakao.com/oauth/token';
 
         const payload = {
           grant_type: 'authorization_code',
@@ -26,9 +26,9 @@ const KakaoLogin = () => {
           code: code,
           client_secret: env.VITE_APP_CLIENT_SECRET,
         };
+        const { status } = await authService.kakaoLogin(code);
 
-        const response = await axiosAuthInstance.post(uri, payload);
-        console.log(response);
+        console.log(status);
       } catch (error) {
         alert(error.message);
         navigate('/login');

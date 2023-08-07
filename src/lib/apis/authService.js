@@ -1,4 +1,5 @@
 import { axiosJsonInstance } from './config/axios';
+import axios from 'axios';
 
 // [ 회원가입 ]
 export const signUp = async (user) => {
@@ -70,6 +71,25 @@ export const login = async (user) => {
     const response = await axiosJsonInstance.post(`/members/login`, user);
     console.log(response);
     return response;
+  } catch (error) {
+    console.error(error);
+    return error.response;
+  }
+};
+
+//[ 소셜 로그인 - 카카오 ]
+export const kakaoLogin = async (code) => {
+  try {
+    console.log(code);
+    const payload = { code: code };
+    console.log('@@@@@@@@@@@@@@페이로드~', payload);
+    const { status, data } = await axios.post(
+      `http://43.202.83.3:8080/login/oauth2/code/kakao?code=${code}`
+    );
+
+    console.log(status, data);
+
+    return { status };
   } catch (error) {
     console.error(error);
     return error.response;
