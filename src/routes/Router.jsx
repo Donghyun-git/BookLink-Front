@@ -8,6 +8,7 @@ import Mypage from '../pages/Mypage';
 import MyInfoModifyPage from '../pages/MyInfoModify';
 import BooksPage from '../pages/Books/Books';
 import BookDetailPage from '../pages/BookDetail';
+import BookRegisterPage from '../pages/BookRegister';
 import SearchPage from '../pages/Search';
 import CommunitiesPage from '../pages/Communities';
 import BookClubsPage from '../pages/BookClubs';
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/mybooklink/modify" element={<MyInfoModifyPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
+        <Route path="/books/:isbn/register" element={<BookRegisterPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/communities/book-clubs" element={<BookClubsPage />} />
