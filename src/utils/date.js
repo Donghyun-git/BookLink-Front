@@ -1,6 +1,5 @@
-import { format, parseISO, formatDistanceToNow, add } from 'date-fns';
+import { parseISO, formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import moment from 'moment';
 
 /*export const formatted = (date) => {
   const localDate = parseISO(date);
@@ -17,9 +16,7 @@ import moment from 'moment';
 
 export const getDateDistance = (date) => {
   const localDate = parseISO(date);
-  const adjustedDate = add(localDate, { hours: 9 });
-
-  return formatDistanceToNow(adjustedDate, {
+  return formatDistanceToNow(localDate, {
     locale: ko,
   });
 };
