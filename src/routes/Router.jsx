@@ -21,6 +21,7 @@ import BookReportModifyPage from '../pages/BookReportModify';
 import FreeReportModifyPage from '../pages/FreeReportModify';
 import CommunitiesRegisterPage from '../pages/CommunitiesRegister';
 import AuthPage from '../pages/Auth';
+import Map from '../pages/Map';
 
 function Router() {
   return (
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
         <Route path="/books/:isbn/register" element={<BookRegisterPage />} />
+        <Route path="/books/library-info" element={<Map />}></Route>
         <Route path="/search" element={<SearchPage />} />
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/communities/book-clubs" element={<BookClubsPage />} />
