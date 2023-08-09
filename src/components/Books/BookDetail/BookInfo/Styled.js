@@ -261,6 +261,8 @@ export const CommentCardUserProfileDiv = styled.div`
   margin-right: 1.71rem;
 
   img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
   }
