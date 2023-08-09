@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './Styled';
 import BackDrop from './modal/BackDrop';
 
@@ -78,6 +79,8 @@ const Rents = () => {
     },
   ];
 
+  const navigate = useNavigate();
+
   // eslint-disable-next-line no-unused-vars
   const [cards, setCards] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,6 +92,10 @@ const Rents = () => {
   const closeRentsModal = useCallback(() => {
     setIsModalOpen(false);
   }, []);
+
+  const goToMap = useCallback(() => {
+    navigate('/books/library-info');
+  }, [navigate]);
 
   return (
     <Styled.RentsComponentDiv>
@@ -158,7 +165,7 @@ const Rents = () => {
                     <Styled.RentsCardButton onClick={openRentsModal}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
-                    <Styled.RentsCardButton>
+                    <Styled.RentsCardButton onClick={goToMap}>
                       내 주변 도서관 찾기
                     </Styled.RentsCardButton>
                   </Styled.RentsCardFooterButtonDiv>
