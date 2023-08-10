@@ -1,38 +1,38 @@
-import { useState, useEffect, useRef } from 'react';
 import * as Styled from './Styled';
+
+import { useQuery } from 'react-query';
+
 import { bookClubList } from '../../../lib/apis/communities/communitiesService';
+
 import bell from '../../../images/bell.png';
+
 import BookClubsCardForm from '../../Common/Card/BookClubsCard/BookClubsCardForm';
+
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const BookClubsForm = () => {
   const navigate = useNavigate();
-  const [bookClubs, setBookClubs] = useState([]);
-  /*const [select, setSelect] = useState('전체보기');*/
-  const [searchWord, setSearchWord] = useState('');
+
   const inputRef = useRef(null);
-  const getBookClubs = async () => {
-    let { data } = await bookClubList();
-    if (searchWord) {
-      data = data.filter(
-        (info) =>
-          info.title.includes(searchWord) || info.location.includes(searchWord)
-      );
-    }
-    /*if (select && select !== '전체보기') {
+  let { data: bookClubData } = useQuery('bookclubs', bookClubList);
+  const [bookClubs, setBookClubs] = useState(bookClubData);
+
+  /*if (select && select !== '전체보기') {
       data = data.filter((info) => info.location.split(' ')[0] === select);
-    }*/
-    setBookClubs(data);
+    }
   };
-  useEffect(() => {
-    getBookClubs();
-  }, [searchWord]);
-  /*const onSelectHandler = (e) => {
+  const onSelectHandler = (e) => {
     const { value } = e.target;
     setSelect(value);
   };*/
   const onSearchHandler = (e) => {
     if (e.key === 'Enter') {
-      setSearchWord(inputRef.current.value);
+      const search = inputRef.current.value;
+      const filteredData = bookClubData.filter(
+        (info) => info.title.includes(search) || info.location.includes(search)
+      );
+      setBookClubs(filteredData);
     }
   };
   return (
