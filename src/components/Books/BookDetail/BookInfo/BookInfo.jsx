@@ -10,7 +10,8 @@ import { useGoToMap } from '../../../../hooks/Map/useGotoMap';
 
 const BookInfo = ({ isbn }) => {
   const { state, dispatch } = useDetailContext();
-
+  const { cover, isbn13, author, title, publisher, pubDate, description } =
+    state.book.item[0];
   const [isClickedDate, setIsClickedDate] = useState(false);
   const [isClickedLiked, setIsClickedLiked] = useState(true);
 
@@ -80,11 +81,15 @@ const BookInfo = ({ isbn }) => {
         <Styled.BookInfoLeftDiv>
           <Styled.BookImageBackgroundDiv>
             <Styled.BookImageDiv className="book-image">
-              <img src={state.book.item[0].cover} alt="책 이미지" />
+              <img src={cover} alt="책 이미지" />
             </Styled.BookImageDiv>
           </Styled.BookImageBackgroundDiv>
           <Styled.BookInfoButtonDiv>
-            <button onClick={() => goToMap(state.book.item[0].isbn13)}>
+            <button
+              onClick={() =>
+                goToMap({ isbn13, title, author, pubDate, publisher, cover })
+              }
+            >
               <div>대여정보 확인하기</div>
             </button>
             <button>
@@ -94,26 +99,26 @@ const BookInfo = ({ isbn }) => {
         </Styled.BookInfoLeftDiv>
 
         <Styled.BookInfoRightDiv>
-          <h3>{state.book.item[0].title}</h3>
+          <h3>{title}</h3>
           <div>
             <ul>
               <li>
                 <span>저자</span>
-                <strong>{state.book.item[0].title}</strong>
+                <strong>{author}</strong>
               </li>
               <li>
                 <span>출판</span>
-                <strong>{state.book.item[0].publisher}</strong>
+                <strong>{publisher}</strong>
               </li>
               <li>
                 <span>출판일</span>
-                <strong>{state.book.item[0].pubDate}</strong>
+                <strong>{pubDate}</strong>
               </li>
             </ul>
           </div>
           <Styled.BookInfoDescriptionDiv>
             <h4>책 소개</h4>
-            <p>{state.book.item[0].description}</p>
+            <p>{description}</p>
           </Styled.BookInfoDescriptionDiv>
         </Styled.BookInfoRightDiv>
       </Styled.BookInfoContainer>
