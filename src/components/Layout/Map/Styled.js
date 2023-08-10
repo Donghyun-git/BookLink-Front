@@ -67,7 +67,7 @@ export const MapSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 76.71429rem;
+  width: 100%;
   height: fit-content;
   padding: 0.86rem;
   border-radius: 0.85714rem;
@@ -75,13 +75,13 @@ export const MapSection = styled.div`
 `;
 
 export const MapCategory = styled.div`
-  width: 20rem;
+  width: 30rem;
   height: 40rem;
   box-sizing: border-box;
   overflow-y: scroll;
   div {
     ul {
-      margin-right: 4.64rem;
+      margin-right: 3.64rem;
 
       li:first-child {
         display: flex;

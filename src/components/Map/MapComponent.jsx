@@ -1,41 +1,109 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Fragment } from 'react';
+import { useMapContext } from '../../context/MapContext/mapContext';
+import { getLibraries } from '../../lib/apis/booksService';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { calculateHaversineDistance } from '../../utils/calculateHaversine';
+import { generateUniqueKey } from '../../utils/generateUnique';
 import * as Styled from './Styled';
 
-const MapComponent = () => {
+const MapComponent = ({ isbn13 }) => {
   const { geolocation } = navigator;
-  const [currentLocation, setCurrentLocation] = useState({
-    lat: 0,
-    lng: 0,
-  });
-  // const [showMarkerInfo, setShowMarkerInfo] = useState(null);  매개변수로 마커 고유값 전달 해서 비교연산자로 조건부렌더링
-  const [showMarkerInfo, setShowMarkerInfo] = useState(false);
 
-  const handleShowMarkerInfo = useCallback(() => {
-    setShowMarkerInfo(!showMarkerInfo);
-  }, [showMarkerInfo]);
+  const [librariesData, setLibrariesData] = useState([]);
+
+  const { state, dispatch } = useMapContext();
+
+  const { markers, currentLocation, isMove, moveLocation } = state;
+
+  const handleShowMarkerInfo = useCallback(
+    (name) => {
+      dispatch({ type: 'MAP/SHOW_MARKER_INFO', payload: name });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     geolocation.getCurrentPosition((locate) => {
       const { latitude, longitude } = locate.coords;
-      setCurrentLocation({ lat: latitude, lng: longitude });
+      dispatch({
+        type: 'MAP/CURRENT',
+        payload: { lat: latitude, lng: longitude },
+      });
     });
-  }, [geolocation]);
+  }, [dispatch, geolocation]);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getLibraries(isbn13);
+
+        setLibrariesData(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [dispatch, isbn13]);
+
+  useEffect(() => {
+    const caculateDistance = librariesData.map((library) => {
+      const libraryLocation = {
+        lat: library.LBRRY_LA,
+        lng: library.LBRRY_LO,
+      };
+
+      const distance = calculateHaversineDistance(
+        currentLocation,
+        libraryLocation
+      );
+
+      return {
+        id: generateUniqueKey(),
+        name: library.LBRRY_NM,
+        address: library.LBRRY_ADDR,
+        distance,
+        lat: library.LBRRY_LA,
+        lng: library.LBRRY_LO,
+        showMarkerInfo: false,
+      };
+    });
+
+    const sortedDistance = caculateDistance.sort(
+      (a, b) => a.distance - b.distance
+    );
+
+    const filteredDistance20 = sortedDistance.filter((library) => {
+      return library.distance < 11;
+    });
+
+    dispatch({ type: 'MAP/MARKERS', payload: filteredDistance20 });
+  }, [currentLocation, dispatch, librariesData]);
+
+  console.log(state);
   return (
     <Map
-      center={currentLocation}
+      center={isMove ? moveLocation : currentLocation}
+      level={isMove ? 3 : 10}
       style={{
-        width: '63.42857rem',
-        height: '40.28571rem',
+        width: '72.42857rem',
+        height: '41.28571rem',
       }}
     >
-      <MapMarker position={currentLocation} onClick={handleShowMarkerInfo}>
-        {showMarkerInfo && <Styled.MarkerDiv>Hello World!</Styled.MarkerDiv>}
-      </MapMarker>
-      <MapMarker position={currentLocation} onClick={handleShowMarkerInfo}>
-        {showMarkerInfo && <Styled.MarkerDiv>Hello World!</Styled.MarkerDiv>}
-      </MapMarker>
+      {markers &&
+        markers.length > 0 &&
+        markers.map((library) => {
+          return (
+            <Fragment key={library.id}>
+              <MapMarker
+                position={{ lat: library.lat, lng: library.lng }}
+                onClick={() => handleShowMarkerInfo(library.name)}
+              >
+                {library.showMarkerInfo && (
+                  <Styled.MarkerDiv>{library.name}</Styled.MarkerDiv>
+                )}
+              </MapMarker>
+            </Fragment>
+          );
+        })}
     </Map>
   );
 };

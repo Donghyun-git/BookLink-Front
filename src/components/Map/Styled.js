@@ -12,6 +12,18 @@ export const MarkerDiv = styled.div`
 //[ 도서관 리스트 ]
 export const LibraryList = styled.li`
   margin-bottom: 0.79rem;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 0.79rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d9d9d9;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   div:first-child {
     display: flex;
@@ -30,6 +42,9 @@ export const LibraryList = styled.li`
     color: #767676;
     font-size: 0.85714rem;
     font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 `;
 

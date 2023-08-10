@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as Styled from './Styled';
 import BackDrop from './modal/BackDrop';
+import { useGoToMap } from '../../hooks/Map/useGotoMap';
 
 const Rents = () => {
   const initialState = [
@@ -15,6 +15,7 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
     {
@@ -27,6 +28,7 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
     {
@@ -39,6 +41,7 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
     {
@@ -51,6 +54,7 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
     {
@@ -63,6 +67,7 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
     {
@@ -75,12 +80,12 @@ const Rents = () => {
       author: '발자타르 그라시안',
       publish: '다른상상',
       price: '18,000원',
+      isbn13: 9791198044839,
       max_during_date: 2,
     },
   ];
 
-  const navigate = useNavigate();
-
+  const { goToMap } = useGoToMap();
   // eslint-disable-next-line no-unused-vars
   const [cards, setCards] = useState(initialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,10 +97,6 @@ const Rents = () => {
   const closeRentsModal = useCallback(() => {
     setIsModalOpen(false);
   }, []);
-
-  const goToMap = useCallback(() => {
-    navigate('/books/library-info');
-  }, [navigate]);
 
   return (
     <Styled.RentsComponentDiv>
@@ -110,31 +111,12 @@ const Rents = () => {
             author,
             publish,
             price,
+            isbn13,
             max_during_date,
           } = card;
           return (
             <Styled.CardDiv key={key}>
               <Styled.RentsCardContainer>
-                {/* <Styled.CardHeaderDiv>
-                  <div>
-                    <Styled.CardProfileImageDiv>
-                      <Styled.CardProfileImage
-                        src={image}
-                        alt="카드 프로필 이미지"
-                      />
-                    </Styled.CardProfileImageDiv>
-                  </div>
-                  <Styled.CardProfileInfoDiv>
-                    <Styled.CardProfileInfoUl>
-                      <Styled.CardProfileInfoLi>
-                        {name}
-                      </Styled.CardProfileInfoLi>
-                      <Styled.CardProfileInfoLi>
-                        {location}
-                      </Styled.CardProfileInfoLi>
-                    </Styled.CardProfileInfoUl>
-                  </Styled.CardProfileInfoDiv>
-                </Styled.CardHeaderDiv> */}
                 <Styled.CardContentsDiv>
                   <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
                   <Styled.ContentsAuthorDiv>
@@ -165,7 +147,7 @@ const Rents = () => {
                     <Styled.RentsCardButton onClick={openRentsModal}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
-                    <Styled.RentsCardButton onClick={goToMap}>
+                    <Styled.RentsCardButton onClick={() => goToMap(isbn13)}>
                       내 주변 도서관 찾기
                     </Styled.RentsCardButton>
                   </Styled.RentsCardFooterButtonDiv>
