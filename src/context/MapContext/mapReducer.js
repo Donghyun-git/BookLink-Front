@@ -52,6 +52,18 @@ export const mapReducer = (state = initialState, action) => {
         markers: updatedMarkers,
       };
     }
+
+    case 'MAP/SHOW_LIST_INFO': {
+      const updatedMarkers = state.markers.map((marker) => ({
+        ...marker,
+        showListInfo:
+          marker.name === action.payload ? !marker.showListInfo : false,
+      }));
+      return {
+        ...state,
+        markers: updatedMarkers,
+      };
+    }
     default: {
       return state;
     }

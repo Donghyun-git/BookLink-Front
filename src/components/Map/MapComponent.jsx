@@ -61,9 +61,13 @@ const MapComponent = ({ isbn13 }) => {
         name: library.LBRRY_NM,
         address: library.LBRRY_ADDR,
         distance,
+        type: library.LBRRY_TY_NM,
+        open: library.OPNNG_TIME,
+        tel: library.TEL_NO,
         lat: library.LBRRY_LA,
         lng: library.LBRRY_LO,
         showMarkerInfo: false,
+        showListInfo: false,
       };
     });
 
@@ -71,14 +75,13 @@ const MapComponent = ({ isbn13 }) => {
       (a, b) => a.distance - b.distance
     );
 
-    const filteredDistance20 = sortedDistance.filter((library) => {
+    const filteredDistance10 = sortedDistance.filter((library) => {
       return library.distance < 11;
     });
 
-    dispatch({ type: 'MAP/MARKERS', payload: filteredDistance20 });
+    dispatch({ type: 'MAP/MARKERS', payload: filteredDistance10 });
   }, [currentLocation, dispatch, librariesData]);
 
-  console.log(state);
   return (
     <Map
       center={isMove ? moveLocation : currentLocation}
