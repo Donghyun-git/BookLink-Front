@@ -53,15 +53,31 @@ export const ProfileImageDiv = styled.div`
     object-fit: cover;
   }
 `;
-export const ProfileInput = styled(Input)`
+export const profileName = styled(Input)`
   width: 34.714rem;
 `;
+export const ProfileBtn = styled.label`
+  width: 7.571rem;
+  height: 4.286rem;
+  border-radius: 1.714rem;
+  margin-left: 0.857rem;
+  border: 1px solid #d9d9d9;
+  color: ${({ theme }) => theme.color.middleGray};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const ProfileInput = styled(Input)`
+  display: none;
+`;
+
 export const ModifyBtn = styled.button`
   width: 7.571rem;
   height: 4.286rem;
   border-radius: 1.714rem;
   margin-left: 0.857rem;
 `;
+
 export const RegisterBtn = styled.button`
   width: 42.857rem;
   height: 6.071rem;

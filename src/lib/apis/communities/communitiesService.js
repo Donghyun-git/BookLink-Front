@@ -8,13 +8,13 @@ export const bookClubList = async () => {
     const { data: data } = data1;
     console.log(data);
     data.reverse();
-    return { data, status };
+    return data;
   } catch (error) {
     console.log(error.response);
   }
 };
 
-export const frees = async () => {
+export const freeReports = async () => {
   try {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/board/free`
@@ -23,7 +23,7 @@ export const frees = async () => {
     const { data: data } = data1;
     console.log(data);
     data.reverse();
-    return { data, status };
+    return data;
   } catch (error) {
     console.log(error.response);
   }
@@ -38,7 +38,7 @@ export const bookReports = async () => {
     const { data: data } = data1;
     console.log(data);
     data.reverse();
-    return { data, status };
+    return data;
   } catch (error) {
     console.log(error.response);
   }

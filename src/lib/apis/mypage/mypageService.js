@@ -28,15 +28,17 @@ export const myInfoAuth = async () => {
   }
 };
 
-export const myInfoModify = async (data) => {
-  const { image, updateInfo } = data;
+export const myInfoModify = async (data1) => {
+  console.log(data1);
+  const { image, ...data } = data1;
   const formData = new FormData();
-  const blob = new Blob([JSON.stringify(updateInfo)], {
+  const blob = new Blob([JSON.stringify(data)], {
     type: 'application/json',
   });
   formData.append('image', image[0]);
-  formData.append('updateInfo', blob);
-
+  formData.append('data', blob);
+  console.log(image[0]);
+  console.log(blob);
   try {
     const { data, status } = await axiosFormInstance.patch(
       `/mypage/account`,

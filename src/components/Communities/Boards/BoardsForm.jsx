@@ -1,53 +1,63 @@
 //import React from 'react'
 import * as Styled from './Styled';
+
+import { useQuery } from 'react-query';
+
 import {
-  frees,
+  freeReports,
   bookReports,
 } from '../../../lib/apis/communities/communitiesService';
-import { useState, useEffect, useRef } from 'react';
+
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import BoardsCardForm from '../../Common/Card/BoardsCard/BoardsCardForm';
+
 import openbook from '../../../images/openbook.png';
+
 const BoardsForm = () => {
-  const [freeList, setFreeList] = useState([]);
-  const [bookReportList, setBookReportList] = useState([]);
-  const [select, setSelect] = useState(0); //상태가 0일시 자유글, 상태가 1일시 독후감
-  const navigate = useNavigate();
-  const [searchWord, setSearchWord] = useState('');
+  const { data: bookData } = useQuery('books', bookReports);
+  const { data: freeData } = useQuery('frees', freeReports);
+
   const inputRef = useRef(null);
-  const getFrees = async () => {
-    let { data } = await frees();
+  const [boardList, setBoardList] = useState(freeData);
+  //const [freeList, setFreeList] = useState(freeData);
+  //const [bookReportList, setBookReportList] = useState(bookData);
+  const [select, setSelect] = useState(0); //상태가 0일시 자유글, 상태가 1일시 독후감
+
+  const navigate = useNavigate();
+
+  /*const getFrees = async () => {
+    let data = await freeReports();
     if (searchWord) {
       data = data.filter((info) => info.title.includes(searchWord));
     }
     setFreeList(data);
   };
   const getBookReports = async () => {
-    let { data } = await bookReports();
+    let data = await bookReports();
     if (searchWord) {
       data = data.filter((info) => info.title.includes(searchWord));
     }
     setBookReportList(data);
-  };
+  };*/
   const onSelectHandler = (e) => {
     if (e.target.value === 0) {
       setSelect(0);
+      setBoardList(freeData);
     } else if (e.target.value === 1) {
       setSelect(1);
+      setBoardList(bookData);
     }
   };
-  useEffect(() => {
-    getFrees();
-    getBookReports();
-  }, [select]);
-  useEffect(() => {
-    getFrees();
-    getBookReports();
-  }, [searchWord]);
 
   const onSearchHandler = (e) => {
     if (e.key === 'Enter') {
-      setSearchWord(inputRef.current.value);
+      const search = inputRef.current.value;
+      const filteredData = boardList.filter((info) =>
+        info.title.includes(search)
+      );
+      setBoardList(filteredData);
     }
   };
 
@@ -70,7 +80,7 @@ const BoardsForm = () => {
         </Styled.SelectDiv>
         <Styled.MainDiv>
           <Styled.ContentsDiv>
-            {(select > 0 ? bookReportList : freeList).map(
+            {boardList.map(
               ({
                 category,
                 reply_cnt,
