@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
 import { freesDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
-import { dateFormat } from '../../../../utils/date';
+
 import { useParams } from 'react-router-dom';
+
 import {
   MainContainerDiv,
   CommunitiesDetailContentsDiv,
@@ -9,19 +11,16 @@ import {
 import CommunitiesDetailForm from '../../../Common/CommunitiesDetail/CommunitiesDetailForm';
 import LikeShareForm from '../../../Common/LikeShare/LikeShareForm';
 import CommunitiesCommentForm from '../../../Common/CommunitiesComment/CommunitiesCommentForm';
+
 import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
+
+import { useQuery } from 'react-query';
+
 const FreeReportDetailForm = () => {
-  const [info, setInfo] = useState({});
   const { id } = useParams();
-  const getDetail = async () => {
-    const { data } = await freesDetail(Number(id));
-    console.log(data);
-    const { date, ...data1 } = data;
-    setInfo({ ...data1, date: dateFormat(date) });
-  };
-  useEffect(() => {
-    getDetail();
-  }, []);
+  const { data } = useQuery(['frees', id], () => freesDetail(Number(id)));
+  const [info, setInfo] = useState(data);
+
   /*const {
     writer,
     title,

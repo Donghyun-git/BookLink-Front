@@ -1,10 +1,20 @@
-//import React from 'react'
-import FreeReportDetailForm from '../../components/Communities/Boards/FreeReportDetail/FreeReportDetailForm';
+import { Suspense, lazy } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import Loading from '../../components/Loading/Loading';
+
+const FreeReportDetailForm = lazy(() =>
+  import(
+    '../../components/Communities/Boards/FreeReportDetail/FreeReportDetailForm'
+  )
+);
 const FreeReportDetailPage = () => {
   return (
-    <div>
-      <FreeReportDetailForm />
-    </div>
+    <ErrorBoundary fallback={<h2>에러</h2>}>
+      <Suspense fallback={<Loading />}>
+        <FreeReportDetailForm />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
