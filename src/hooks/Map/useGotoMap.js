@@ -5,8 +5,10 @@ export const useGoToMap = () => {
   const navigate = useNavigate();
 
   const goToMap = useCallback(
-    (isbn13) => {
-      navigate('/books/library-info', { state: { isbn13 } });
+    ({ isbn13, title, author, pubDate, publisher, cover }) => {
+      navigate('/books/library-info', {
+        state: { isbn13, title, author, pubDate, publisher, cover },
+      });
       console.log(isbn13);
     },
     [navigate]
