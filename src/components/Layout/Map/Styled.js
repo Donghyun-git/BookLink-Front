@@ -20,7 +20,9 @@ export const MapContainer = styled.div`
 
 export const InfoSection = styled.section`
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 //[RentsComponent]
@@ -67,10 +69,11 @@ export const MapSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 98.34%;
   height: fit-content;
   padding: 0.86rem;
-  border-radius: 0.85714rem;
+  border-bottom-left-radius: 0.85714rem;
+  border-bottom-right-radius: 0.85714rem;
   background: #fff;
 `;
 

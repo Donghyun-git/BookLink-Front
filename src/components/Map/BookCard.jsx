@@ -1,41 +1,29 @@
+import { useLocation } from 'react-router-dom';
 import * as Styled from './Styled';
 
 const BookCard = () => {
+  const location = useLocation();
+  const { title, author, pubDate, publisher, cover } = location.state;
   return (
-    <Styled.CardDiv>
-      <Styled.RentsCardContainer>
-        <Styled.CardContentsDiv>
-          <Styled.ContentsTitleDiv>제목</Styled.ContentsTitleDiv>
-          <Styled.ContentsAuthorDiv>
-            <Styled.ContentSpan>저자</Styled.ContentSpan>
-            <Styled.ContentSpanRight>저자</Styled.ContentSpanRight>
-          </Styled.ContentsAuthorDiv>
-          <Styled.ContentsPublishDiv>
-            <Styled.ContentSpan>출판</Styled.ContentSpan>
-            <Styled.ContentSpanRight>출판</Styled.ContentSpanRight>
-          </Styled.ContentsPublishDiv>
-        </Styled.CardContentsDiv>
+    <Styled.CardWrap>
+      <Styled.CardContainer>
         <Styled.CardImageDiv>
-          <Styled.CardImage
-            src="https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg"
-            alt="책 이미지"
-          />
+          <img src={cover} alt="book-image" />
         </Styled.CardImageDiv>
-
-        <Styled.CardFooterDiv>
+        <Styled.CardInfoDiv>
+          <h2>{title}</h2>
           <ul>
-            <Styled.RentsLi>
-              <Styled.RentsLiSpan>정가</Styled.RentsLiSpan>
-              <span>10000원</span>
-            </Styled.RentsLi>
-            <Styled.RentsLi>
-              <Styled.RentsLiSpan>북링크의 대여료</Styled.RentsLiSpan>
-              <span>1000원 ~</span>
-            </Styled.RentsLi>
+            <li>
+              저자 <span>{author}</span>
+            </li>
+            <li>
+              출판 <span>{publisher}</span>
+            </li>
+            <li>{pubDate}</li>
           </ul>
-        </Styled.CardFooterDiv>
-      </Styled.RentsCardContainer>
-    </Styled.CardDiv>
+        </Styled.CardInfoDiv>
+      </Styled.CardContainer>
+    </Styled.CardWrap>
   );
 };
 

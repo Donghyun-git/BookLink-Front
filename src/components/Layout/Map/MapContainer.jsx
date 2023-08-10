@@ -1,11 +1,11 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMapContext } from '../../../context/MapContext/mapContext';
 import { generateUniqueKey } from '../../../utils/generateUnique';
 import * as Styled from './Styled';
-import BookCard from '../../Map/BookCard';
 import LibraryList from '../../Map/LibraryList';
 import MapComponent from '../../Map/MapComponent';
+import BookCard from '../../Map/BookCard';
 
 const MapContainer = () => {
   const location = useLocation();
@@ -14,16 +14,15 @@ const MapContainer = () => {
   const { state } = useMapContext();
   const { markers, isLoading } = state;
 
+  const [activeIndex, setActiveIndex] = useState(-1);
+
   return (
     <Styled.MapContainer>
       <div>
-        <h2>대여 정보</h2>
+        <h2>내 주변 도서관 찾기</h2>
       </div>
       <Styled.InfoSection>
-        {/* <div>
-          <BookCard />
-        </div> */}
-
+        <BookCard>책정보</BookCard>
         <Styled.MapSection>
           <Styled.MapCategory>
             <div>
@@ -41,7 +40,7 @@ const MapContainer = () => {
                 {isLoading ? (
                   <li>로딩중</li>
                 ) : (
-                  markers.map((library) => {
+                  markers.map((library, index) => {
                     return (
                       <Fragment key={generateUniqueKey()}>
                         <LibraryList info={library} />
