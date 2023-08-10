@@ -9,21 +9,20 @@ import * as Styled from './Styled';
 import Profile from '../profile/Profile';
 import { myInfo, myInfoModify } from '../../../lib/apis/mypage/mypageService';
 const MyInfoModifyForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    //formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: 'onSubmit',
   });
 
   const [imgUrl, setImgUrl] = useState(
     'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
   );
+  const [imgName, setImgName] = useState(
+    'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
+  );
   const getInfo = async () => {
     const { data } = await myInfo();
-    //setImgUrl(data.image);
+    setImgUrl(data.image);
+    console.log(data);
     reset(data);
   };
   useEffect(() => {
@@ -33,10 +32,10 @@ const MyInfoModifyForm = () => {
   const onImgHandler = (e) => {
     const file = e.target.files[0];
     const image = URL.createObjectURL(file);
+    setImgName(file.name);
     setImgUrl(image);
   };
   const onSubmit = async (data) => {
-    console.log(data.image);
     const { data: data1 } = await myInfoModify(data);
     console.log(data1);
   };
@@ -54,12 +53,15 @@ const MyInfoModifyForm = () => {
                 <Styled.ProfileImageDiv>
                   <img src={imgUrl} alt="profile" />
                 </Styled.ProfileImageDiv>
+                <Styled.profileName value={imgName} />
+                <Styled.ProfileBtn for="profile">파일선택</Styled.ProfileBtn>
                 <Styled.ProfileInput
                   type="file"
+                  name="profile"
+                  id="profile"
                   {...register('image')}
                   onChange={onImgHandler}
                 />
-                <Styled.ModifyBtn>수정하기</Styled.ModifyBtn>
               </Styled.InputForm>
               <Styled.Tag>이름</Styled.Tag>
               <Styled.InputForm>
