@@ -1,27 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { bookClubsDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
+
 import LikeShareForm from '../../../Common/LikeShare/LikeShareForm';
 import CommunitiesDetailForm from '../../../Common/CommunitiesDetail/CommunitiesDetailForm';
 import CommunitiesCommentForm from '../../../Common/CommunitiesComment/CommunitiesCommentForm';
+
 import {
   MainContainerDiv,
   CommunitiesDetailContentsDiv,
 } from '../../../../styles/globalStyled';
-import { dateFormat } from '../../../../utils/date';
+
 import { useParams } from 'react-router-dom';
+
 import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
+
+import { useQuery } from 'react-query';
+
 const BookClubsDetailForm = () => {
-  const [info, setInfo] = useState({});
   const { id } = useParams();
-  const getDetail = async () => {
-    const { data } = await bookClubsDetail(Number(id));
-    data.category = '독서 모임';
-    data.date = dateFormat(data.date);
-    setInfo(data);
-  };
-  useEffect(() => {
-    getDetail();
-  }, []);
+  const { data } = useQuery(['bookClubs', id], () =>
+    bookClubsDetail(Number(id))
+  );
+
+  console.log(data);
+  const [info, setInfo] = useState(data);
+
   /*const {
     writer,
     image,
