@@ -1,13 +1,14 @@
 import { axiosJsonInstance } from '../../config/axios';
-
+import { dateFormat } from '../../../../utils/date';
 export const bookClubsDetail = async (id) => {
   try {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/book-club/${id}`
     );
     const { data } = data1;
-    console.log(data);
-    return { data, status };
+    data.category = '독서 모임';
+    data.date = dateFormat(data.date);
+    return data;
   } catch (error) {
     console.log(error.response);
   }
@@ -19,8 +20,8 @@ export const freesDetail = async (id) => {
       `/communities/board/free/${id}`
     );
     const { data } = data1;
-    console.log(data);
-    return { data, status };
+    data.date = dateFormat(data.date);
+    return data;
   } catch (error) {
     console.log(error.response);
   }
@@ -31,9 +32,13 @@ export const bookReportsDetail = async (id) => {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/board/report/${id}`
     );
-    const { data } = data1;
-    console.log(data);
-    return { data, status };
+    let { data } = data1;
+    const { date, cover, book_title, authors, publisher, pud_date, ...data2 } =
+      data;
+    data2.date = dateFormat(date);
+    data2.bookInfo = { cover, book_title, authors, publisher, pud_date };
+    data = data2;
+    return data;
   } catch (error) {
     console.log(error.response);
   }
