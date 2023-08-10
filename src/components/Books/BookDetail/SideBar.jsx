@@ -5,7 +5,7 @@ import * as bookService from '../../../lib/apis/booksService';
 import heart from '../../../images/heart.svg';
 import heartGray from '../../../images/heart_gray.svg';
 import share from '../../../images/share.svg';
-import { useDetailContext } from './context/detailContext';
+import { useDetailContext } from '../../../context/BookDetailContext/detailContext';
 
 const SideBar = () => {
   const { state, dispatch } = useDetailContext();

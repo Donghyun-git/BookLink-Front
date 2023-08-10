@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { useDetailContext } from '../context/detailContext';
+import { useDetailContext } from '../../../../context/BookDetailContext/detailContext';
 import SelfDevelopCard from './SelfDevelopCard';
 import RentInfoCard from './RentInfoCard';
 import RelationCard from './RelationCard';

@@ -7,7 +7,7 @@ import * as Styled from './Styled';
 import optionImage from '../../../../images/comment_option.svg';
 import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
-import { useDetailContext } from '../context/detailContext';
+import { useDetailContext } from '../../../../context/BookDetailContext/detailContext';
 
 const RecommentCard = ({ comments }) => {
   const {

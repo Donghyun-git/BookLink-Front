@@ -11,7 +11,7 @@ import thumbsImage from '../../../../images/thumbs.svg';
 import likedThumbsImage from '../../../../images/liked_thumbs.svg';
 import upToggleImage from '../../../../images/up_toggle.svg';
 import downToggleImage from '../../../../images/down_toggle.svg';
-import { useDetailContext } from '../context/detailContext';
+import { useDetailContext } from '../../../../context/BookDetailContext/detailContext';
 
 const CommentCard = ({
   commentInputRef,

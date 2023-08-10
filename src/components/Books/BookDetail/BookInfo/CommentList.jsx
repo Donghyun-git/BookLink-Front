@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDetailContext } from '../context/detailContext';
+import { useDetailContext } from '../../../../context/BookDetailContext/detailContext';
 import CommentCard from './CommentCard';
 import * as Styled from './Styled';
 

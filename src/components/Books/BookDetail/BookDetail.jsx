@@ -1,7 +1,10 @@
 import { useEffect, useReducer, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { DetailContext } from './context/detailContext';
-import { detailReducer, initialState } from './context/detailReducer';
+import { DetailContext } from '../../../context/BookDetailContext/detailContext';
+import {
+  detailReducer,
+  initialState,
+} from '../../../context/BookDetailContext/detailReducer';
 import BookInfo from './BookInfo/BookInfo';
 import BookAside from './BookAside/BookAside';
 import SideBar from './SideBar';

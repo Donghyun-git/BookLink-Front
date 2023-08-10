@@ -5,7 +5,8 @@ import * as Styled from './Styled';
 import * as bookService from '../../../../lib/apis/booksService';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
-import { useDetailContext } from '../context/detailContext';
+import { useDetailContext } from '../../../../context/BookDetailContext/detailContext';
+import { useGoToMap } from '../../../../hooks/Map/useGotoMap';
 
 const BookInfo = ({ isbn }) => {
   const { state, dispatch } = useDetailContext();
@@ -15,6 +16,8 @@ const BookInfo = ({ isbn }) => {
 
   const navigate = useNavigate();
   const commentInputRef = useRef();
+
+  const { goToMap } = useGoToMap();
 
   const handleClickFilterDate = useCallback(() => {
     setIsClickedLiked(!isClickedLiked);
@@ -81,7 +84,7 @@ const BookInfo = ({ isbn }) => {
             </Styled.BookImageDiv>
           </Styled.BookImageBackgroundDiv>
           <Styled.BookInfoButtonDiv>
-            <button>
+            <button onClick={() => goToMap(state.book.item[0].isbn13)}>
               <div>대여정보 확인하기</div>
             </button>
             <button>
