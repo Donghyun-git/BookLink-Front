@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMapContext } from '../../../context/MapContext/mapContext';
 import { generateUniqueKey } from '../../../utils/generateUnique';
@@ -13,8 +13,6 @@ const MapContainer = () => {
 
   const { state } = useMapContext();
   const { markers, isLoading } = state;
-
-  const [activeIndex, setActiveIndex] = useState(-1);
 
   return (
     <Styled.MapContainer>
@@ -40,7 +38,7 @@ const MapContainer = () => {
                 {isLoading ? (
                   <li>로딩중</li>
                 ) : (
-                  markers.map((library, index) => {
+                  markers.map((library) => {
                     return (
                       <Fragment key={generateUniqueKey()}>
                         <LibraryList info={library} />
