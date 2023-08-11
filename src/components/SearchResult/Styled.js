@@ -98,6 +98,7 @@ export const Introduce = styled.div`
 `;
 export const IntroduceContent = styled(Content)`
   width: 19.5rem;
+  overflow-y: scroll;
 `;
 export const DetailCnt = styled.div`
   width: 4rem;
@@ -106,13 +107,14 @@ export const DetailCntContent = styled(Content)`
   width: 4rem;
 `;
 export const Register = styled.div`
-  width: 9.071rem;
+  width: 13.071rem;
 `;
 export const RegisterContent = styled(Content)`
   flex-direction: column;
-  width: 9.071rem;
+  width: 13.071rem;
 `;
 export const Btn = styled.div`
+  margin-top: 0.571rem;
   height: 2rem;
   width: 8.5rem;
   border: 0.071rem solid #848484;

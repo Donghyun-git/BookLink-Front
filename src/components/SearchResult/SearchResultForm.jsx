@@ -1,28 +1,31 @@
-import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
 import { HeaderBookSearch } from '../../lib/apis/searchService/';
 import * as Styled from './Styled';
 import { MainContainerDiv, MainContentsDiv } from '../../styles/globalStyled';
+import PagingForm from '../Paging/PagingForm';
 const SearchResultForm = () => {
   const navigate = useNavigate();
-  const [searchParams /*setSearchParams*/] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page');
   const topic = searchParams.get('query');
-  console.log(topic);
-  const [results, setResults] = useState([]);
-  const getResults = async () => {
-    const { item } = await HeaderBookSearch(topic);
-    setResults(item);
+  const [currentPage, setCurrentPage] = useState(page);
+  const { data } = useQuery(
+    ['headerSearch', { query: topic, page: currentPage }],
+    () => HeaderBookSearch(topic, currentPage)
+  );
+  const onHandlePage = (page) => {
+    console.log(page);
+    navigate(`/search?query=${topic}&page=${page}`);
+    setCurrentPage(page);
   };
-  useEffect(() => {
-    getResults();
-  }, []);
-
   return (
     <MainContainerDiv>
       <MainContentsDiv>
         <Styled.TopicResultTag>
           <Styled.TopicResult>"{topic}" 관련 도서 검색 결과</Styled.TopicResult>
-          <Styled.Cnt>{results.length}개</Styled.Cnt>
+          <Styled.Cnt>{data.length}개</Styled.Cnt>
         </Styled.TopicResultTag>
         <Styled.ResultTag>
           <Styled.Result>도서 검색 결과 </Styled.Result>
@@ -41,11 +44,10 @@ const SearchResultForm = () => {
           <Styled.Introduce>책 소개</Styled.Introduce>
           <Styled.DetailCnt>후기</Styled.DetailCnt>
           <Styled.DetailCnt>좋아요</Styled.DetailCnt>
-          <Styled.DetailCnt>조회수</Styled.DetailCnt>
           <Styled.DetailCnt>소장</Styled.DetailCnt>
           <Styled.Register>등록</Styled.Register>
         </Styled.InfoDiv>
-        {results.map(
+        {data.map(
           ({
             isbn13,
             cover,
@@ -76,7 +78,6 @@ const SearchResultForm = () => {
                 <Styled.IntroduceContent>{description}</Styled.IntroduceContent>
                 <Styled.DetailCntContent>{reply_cnt}</Styled.DetailCntContent>
                 <Styled.DetailCntContent>{like_cnt}</Styled.DetailCntContent>
-                <Styled.DetailCntContent>조회수</Styled.DetailCntContent>
                 <Styled.DetailCntContent>{owner_cnt}</Styled.DetailCntContent>
                 <Styled.RegisterContent>
                   <Styled.Btn>소장 등록하기</Styled.Btn>
@@ -86,6 +87,12 @@ const SearchResultForm = () => {
             );
           }
         )}
+        <PagingForm
+          activePage={Number(currentPage)}
+          itemsCountPerPage={8}
+          totalItemsCount={31}
+          onChange={onHandlePage}
+        />
       </MainContentsDiv>
     </MainContainerDiv>
   );

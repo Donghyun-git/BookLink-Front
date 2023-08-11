@@ -9,6 +9,7 @@ import * as Styled from './Styled';
 import { useToggleList } from '../../../hooks/Header/useToggleList';
 
 const HeaderContainer = () => {
+  const navigate = useNavigate();
   const { isProfileListOpen, handleClickProfileList } = useToggleList();
   const path = useLocation().pathname;
 
@@ -36,7 +37,7 @@ const HeaderContainer = () => {
 
   const onSearchHandler = (e) => {
     if (e.key === 'Enter') {
-      navigate(`/search?query=${searchRef.current.value}`);
+      navigate(`/search?query=${searchRef.current.value}&page=1`);
     }
   };
 
