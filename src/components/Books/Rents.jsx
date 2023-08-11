@@ -147,7 +147,7 @@ const Rents = () => {
                     <Styled.RentsCardButton onClick={openRentsModal}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
-                    <Styled.RentsCardButton onClick={() => goToMap(isbn13)}>
+                    <Styled.RentsCardButton onClick={() => goToMap({ isbn13 })}>
                       내 주변 도서관 찾기
                     </Styled.RentsCardButton>
                   </Styled.RentsCardFooterButtonDiv>
