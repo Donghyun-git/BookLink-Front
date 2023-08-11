@@ -85,15 +85,15 @@ const BookInfo = ({ isbn }) => {
             </Styled.BookImageDiv>
           </Styled.BookImageBackgroundDiv>
           <Styled.BookInfoButtonDiv>
+            <button>
+              <div>독서 기록하기</div>
+            </button>
             <button
               onClick={() =>
                 goToMap({ isbn13, title, author, pubDate, publisher, cover })
               }
             >
-              <div>대여정보 확인하기</div>
-            </button>
-            <button>
-              <div>소장 등록하기</div>
+              <div>이 책이 있는 주변 도서관</div>
             </button>
           </Styled.BookInfoButtonDiv>
         </Styled.BookInfoLeftDiv>
