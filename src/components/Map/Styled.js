@@ -111,3 +111,30 @@ export const CardInfoDiv = styled.div`
     left: 0;
   }
 `;
+
+export const CustomOverlay = styled.div`
+  position: relative;
+  border-radius: 0.57143rem;
+  border: 2px solid #00ab61;
+  background: #fff;
+
+  span {
+    display: inline-block;
+    padding: 0.57143rem 0.85714rem;
+    text-align: center;
+    color: #000;
+    font-size: 1.14286rem;
+    font-weight: 500;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    border-top: 7px solid #00ab61;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    margin-left: -4px;
+  }
+`;

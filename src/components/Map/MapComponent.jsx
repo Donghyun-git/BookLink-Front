@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, Fragment } from 'react';
 import { useMapContext } from '../../context/MapContext/mapContext';
 import { getLibraries } from '../../lib/apis/booksService';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { calculateHaversineDistance } from '../../utils/calculateHaversine';
 import { generateUniqueKey } from '../../utils/generateUnique';
 import * as Styled from './Styled';
@@ -99,11 +99,36 @@ const MapComponent = ({ isbn13 }) => {
               <MapMarker
                 position={{ lat: library.lat, lng: library.lng }}
                 onClick={() => handleShowMarkerInfo(library.name)}
-              >
-                {library.showMarkerInfo && (
-                  <Styled.MarkerDiv>{library.name}</Styled.MarkerDiv>
-                )}
-              </MapMarker>
+                image={{
+                  src: 'https://soccerquick.s3.ap-northeast-2.amazonaws.com/locationIcon.png',
+                  size: {
+                    width: 30,
+                    height: 38,
+                  },
+                  options: {
+                    offset: {
+                      x: 27,
+                      y: 69,
+                    },
+                  },
+                }}
+              ></MapMarker>
+              {library.showMarkerInfo && (
+                <>
+                  <CustomOverlayMap
+                    position={{
+                      lat: library.lat,
+                      lng: library.lng,
+                    }}
+                    xAnchor={0.6}
+                    yAnchor={3.5}
+                  >
+                    <Styled.CustomOverlay>
+                      <span>{library.name}</span>
+                    </Styled.CustomOverlay>
+                  </CustomOverlayMap>
+                </>
+              )}
             </Fragment>
           );
         })}
