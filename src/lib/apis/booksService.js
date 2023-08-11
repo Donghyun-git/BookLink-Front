@@ -1,4 +1,5 @@
 import { axiosJsonInstance } from './config/axios';
+import { VITE_LIBRARY_SERVER_URL } from '../../../env.config';
 import axios from 'axios';
 
 // [ 모든 책 데이터 ]
@@ -134,9 +135,9 @@ export const addLikeBook = async (isbn) => {
 //[ 도서관 가져오기 ]
 export const getLibraries = async (isbn13) => {
   try {
-    console.log(isbn13);
-    const uri = 'http://localhost:8800/api/v1/libraries';
-    const { data } = await axios.get(`${uri}/${isbn13}`);
+    const { data } = await axios.get(
+      `${VITE_LIBRARY_SERVER_URL}/libraries/${isbn13}`
+    );
 
     return { data };
   } catch (error) {
