@@ -210,6 +210,7 @@ export const CommunityBannerDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   border-radius: 1.71429rem;
+  margin: 8.57rem 0;
 `;
 
 export const CommunityBannerTitleDiv = styled.div`
@@ -243,6 +244,89 @@ export const CommunityBannerButtonDiv = styled.div`
       color: #00162c;
       text-align: center;
       font-size: 1rem;
+      font-weight: 700;
+    }
+  }
+`;
+
+//[ reports - Main ]
+export const MainReports = styled.div``;
+
+export const MainReportTitle = styled.div`
+  margin-bottom: 0.86rem;
+`;
+
+export const MainReportContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.57rem;
+`;
+
+export const MainReportImageDiv = styled.div`
+  width: 55.28571rem;
+  height: 33.71429rem;
+  border-radius: 1.71429rem;
+  border: 4px solid #003c74;
+  background: #00a779;
+  box-shadow: 0px 0px 120px 0px rgba(0, 60, 116, 0.35) inset;
+`;
+
+export const MainReportListDiv = styled.div`
+  margin-left: 3.43rem;
+  ul {
+    li {
+      &:nth-child(2) {
+        margin: 1.71rem 0;
+      }
+
+      &:last-child {
+        margin-bottom: 1.71rem;
+      }
+
+      div {
+        position: relative;
+
+        h3 {
+          font-size: 1.71429rem;
+          font-weight: 700;
+          margin-bottom: 0.43rem;
+          p {
+            font-size: 1.14286rem;
+            font-weight: 500;
+          }
+        }
+
+        &::before {
+          content: '';
+          width: 0.85714rem;
+          height: 0.85714rem;
+          border-radius: 50%;
+          background-color: #003c74;
+          position: absolute;
+          top: 8px;
+          left: -18px;
+        }
+      }
+    }
+  }
+`;
+
+export const MainReportButtonDiv = styled.div`
+  margin-top: 2px;
+  button {
+    border-radius: 1.71429rem;
+    background: #00e37d;
+    transition: all 0.1s ease;
+    &:hover {
+      background: #00ff9b;
+    }
+    span {
+      display: inline-block;
+      padding: 1.71rem 16.5rem;
+      color: #00162c;
+      text-align: center;
+      font-size: 1.71429rem;
       font-weight: 700;
     }
   }
