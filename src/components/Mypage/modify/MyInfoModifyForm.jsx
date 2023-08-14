@@ -7,35 +7,31 @@ import {
 } from '../../../styles/globalStyled';
 import * as Styled from './Styled';
 import Profile from '../profile/Profile';
+import { useQuery } from 'react-query';
 import { myInfo, myInfoModify } from '../../../lib/apis/mypage/mypageService';
 const MyInfoModifyForm = () => {
-  const { register, handleSubmit, reset } = useForm({
-    mode: 'onSubmit',
+  const { register, handleSubmit, setValue, getValues, reset } = useForm({
+    mode: 'onChange',
   });
+  const { data } = useQuery('myInfo', myInfo);
+  const [imgUrl, setImgUrl] = useState('');
+  const [imgName, setImgName] = useState('');
 
-  const [imgUrl, setImgUrl] = useState(
-    'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
-  );
-  const [imgName, setImgName] = useState(
-    'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
-  );
-  const getInfo = async () => {
-    const { data } = await myInfo();
-    setImgUrl(data.image);
-    console.log(data);
-    reset(data);
-  };
   useEffect(() => {
-    getInfo();
-  }, []);
+    setImgUrl(data.image);
+    setImgName(data.image);
+    reset(data);
+  }, [data]);
 
   const onImgHandler = (e) => {
     const file = e.target.files[0];
     const image = URL.createObjectURL(file);
     setImgName(file.name);
     setImgUrl(image);
+    setValue('image', file);
   };
   const onSubmit = async (data) => {
+    console.log(data);
     const { data: data1 } = await myInfoModify(data);
     console.log(data1);
   };
@@ -54,7 +50,9 @@ const MyInfoModifyForm = () => {
                   <img src={imgUrl} alt="profile" />
                 </Styled.ProfileImageDiv>
                 <Styled.profileName value={imgName} />
-                <Styled.ProfileBtn for="profile">파일선택</Styled.ProfileBtn>
+                <Styled.ProfileBtn htmlFor="profile">
+                  파일선택
+                </Styled.ProfileBtn>
                 <Styled.ProfileInput
                   type="file"
                   name="profile"

@@ -8,7 +8,7 @@ export const myInfo = async () => {
     const { data: data } = data1;
     console.log(data);
 
-    return { data, status };
+    return data;
   } catch (error) {
     console.log(error.response);
   }
@@ -35,9 +35,9 @@ export const myInfoModify = async (data1) => {
   const blob = new Blob([JSON.stringify(data)], {
     type: 'application/json',
   });
-  formData.append('image', image[0]);
+  formData.append('image', image);
   formData.append('data', blob);
-  console.log(image[0]);
+  console.log(image);
   console.log(blob);
   try {
     const { data, status } = await axiosFormInstance.patch(
