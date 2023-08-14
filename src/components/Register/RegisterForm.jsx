@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Styled from './Styled';
-import { useState /*useRef, useEffect */ } from 'react';
+import { useState } from 'react';
 import AddressSearchForm from '../AddressSearch/AddressSearchForm';
 import { registerSchema } from '../../validators/authValidator';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import {
   emailDoubleCheck,
   nicknameDoubleCheck,
 } from '../../lib/apis/authService';
-
+import { alertForm } from '../../utils/alert';
 const RegisterForm = () => {
   const {
     register,
@@ -24,9 +24,11 @@ const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
     mode: 'onChange',
   });
+
   const navigate = useNavigate();
   const [doubleEmailCheck, setDoubleEmailCheck] = useState(false);
   const [searchBtnClick, setSearchBtnClick] = useState(false);
+
   const onSubmit = async (data) => {
     const {
       email,
@@ -47,6 +49,12 @@ const RegisterForm = () => {
       address,
     });
     console.log(data1);
+    alertForm({
+      title: '회원가입 완료',
+      text: '북링크에 오신걸 환영합니다',
+      icon: 'success',
+      confirmButtonText: '로그인하고 시작하기',
+    });
     navigate('/login');
   };
   const handleAddressClick = (address) => {

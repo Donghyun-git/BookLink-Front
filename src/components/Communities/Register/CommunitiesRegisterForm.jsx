@@ -15,7 +15,6 @@ import BookSearchForm from '../../Common/Search/BookSearch/BookSearchForm';
 const CommunitiesRegisterForm = () => {
   const navigate = useNavigate();
   const [click, setClick] = useState([1, 0, 0]); // [자유글,독후감,독서모임] 선택 순서 1일때:선택 0일때:선택x
-
   const {
     register,
     handleSubmit,
@@ -32,9 +31,9 @@ const CommunitiesRegisterForm = () => {
     const {
       title,
       content,
-      isbn,
       city,
       district,
+      isbn,
       cover,
       book_title,
       authors,
