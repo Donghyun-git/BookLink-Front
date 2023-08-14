@@ -10,8 +10,17 @@ import { useGoToMap } from '../../../../hooks/Map/useGotoMap';
 
 const BookInfo = ({ isbn }) => {
   const { state, dispatch } = useDetailContext();
-  const { cover, isbn13, author, title, publisher, pubDate, description } =
-    state.book.item[0];
+  console.log(state.book.item[0]);
+  const {
+    cover,
+    categoryName,
+    isbn13,
+    author,
+    title,
+    publisher,
+    pubDate,
+    description,
+  } = state.book.item[0];
   const [isClickedDate, setIsClickedDate] = useState(false);
   const [isClickedLiked, setIsClickedLiked] = useState(true);
 
@@ -85,7 +94,23 @@ const BookInfo = ({ isbn }) => {
             </Styled.BookImageDiv>
           </Styled.BookImageBackgroundDiv>
           <Styled.BookInfoButtonDiv>
-            <button>
+            <button
+              onClick={() =>
+                navigate(`register`, {
+                  state: {
+                    bookInfo: {
+                      isbn13,
+                      cover,
+                      categoryName,
+                      book_title: title,
+                      authors: author,
+                      publisher,
+                      pud_date: pubDate,
+                    },
+                  },
+                })
+              }
+            >
               <div>독서 기록하기</div>
             </button>
             <button
