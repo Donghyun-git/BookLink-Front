@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from './config/axios';
+import { axiosJsonInstance, axiosFormInstance } from './config/axios';
 import { VITE_LIBRARY_SERVER_URL } from '../../../env.config';
 import axios from 'axios';
 
@@ -142,5 +142,27 @@ export const getLibraries = async (isbn13) => {
     return { data };
   } catch (error) {
     throw new Error(error.message);
+  }
+};
+
+//[ 도서 등록 ]
+export const bookRegister = async (image, bookDto) => {
+  const formData = new FormData();
+  const blob = new Blob([JSON.stringify(bookDto)], {
+    type: 'application/json',
+  });
+  formData.append('image', image);
+  formData.append('bookDto', blob);
+  console.log(image);
+  console.log(blob);
+  try {
+    const { data, status } = await axiosFormInstance.post(
+      `/books/register`,
+      formData
+    );
+
+    return { data, status };
+  } catch (error) {
+    console.log(error.response);
   }
 };

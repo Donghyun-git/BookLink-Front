@@ -46,6 +46,13 @@ export const Upload = styled.div`
   width: 100%;
   height: 10rem;
   border: 1px solid #d9d9d9;
+  display: flex;
+  align-items: center;
+`;
+export const img = styled.img`
+  width: 6.871rem;
+  height: 8.286rem;
+  margin-right: 0.871rem;
 `;
 export const RentalFee = styled.div`
   display: flex;
