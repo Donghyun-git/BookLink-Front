@@ -64,7 +64,10 @@ function Router() {
           path="/communities/boards/free-report/modify/:id"
           element={<FreeReportModifyPage />}
         />
-        <Route path="communities/write" element={<CommunitiesRegisterPage />} />
+        <Route
+          path="/communities/write"
+          element={<CommunitiesRegisterPage />}
+        />
       </Route>
       <Route path="/auth" element={<AuthPage />} />
     </Routes>

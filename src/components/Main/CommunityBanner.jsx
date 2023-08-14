@@ -1,6 +1,8 @@
+import { useNavigatePage } from '../../hooks/useNavigatePage';
 import * as Styled from './Styled';
 
 const CommunityBanner = () => {
+  const { navigateToPage } = useNavigatePage();
   return (
     <Styled.CommunityBannerDiv>
       <Styled.CommunityBannerTitleDiv>
@@ -11,7 +13,7 @@ const CommunityBanner = () => {
         </div>
       </Styled.CommunityBannerTitleDiv>
       <Styled.CommunityBannerButtonDiv>
-        <button>
+        <button onClick={() => navigateToPage('/books/register')}>
           <span>독서 모임 모집하기</span>
         </button>
       </Styled.CommunityBannerButtonDiv>

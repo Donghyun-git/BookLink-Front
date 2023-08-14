@@ -1,8 +1,10 @@
+import { useNavigatePage } from '../../hooks/useNavigatePage';
 import * as Styled from './Styled';
 import logoImage from '../../images/BookLink_Logo.svg';
 import bannerLogoImage from '../../images/banner_logo.png';
 
 const BannerContent = () => {
+  const { navigateToPage } = useNavigatePage();
   return (
     <Styled.BannerContent>
       <Styled.BannerLeft>
@@ -23,7 +25,7 @@ const BannerContent = () => {
               <button>
                 <span>북링크 알아보기</span>
               </button>
-              <button>
+              <button onClick={() => navigateToPage('/register')}>
                 <span>회원 가입하기</span>
               </button>
             </Styled.BannerButtonDiv>
@@ -32,7 +34,7 @@ const BannerContent = () => {
                 <li>
                   <span>이미 함께하고 계신가요?</span>
                 </li>
-                <li>
+                <li onClick={() => navigateToPage('/login')}>
                   <span>로그인 바로가기</span>
                 </li>
               </ul>

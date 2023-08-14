@@ -1,8 +1,11 @@
+import { useNavigatePage } from '../../hooks/useNavigatePage';
 import BookCard from '../Card/BookCard';
 import * as Styled from './Styled';
 import mainBooksLogo from '../../images/main_books_logo.png';
 
 const RedirectBooks = () => {
+  const { navigateToPage } = useNavigatePage();
+
   return (
     <Styled.MainBooks>
       <Styled.MainBooksTitle>
@@ -19,7 +22,7 @@ const RedirectBooks = () => {
           </div>
           <p>더 많은 책을 찾고싶을 땐?</p>
           <Styled.MainBooksButtonDiv>
-            <button>
+            <button onClick={() => navigateToPage('/books')}>
               <span>책방 바로가기</span>
             </button>
           </Styled.MainBooksButtonDiv>

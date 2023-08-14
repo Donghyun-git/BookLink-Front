@@ -1,6 +1,8 @@
+import { useNavigatePage } from '../../hooks/useNavigatePage';
 import * as Styled from './Styled';
 
 const RedirectReport = () => {
+  const { navigateToPage } = useNavigatePage();
   return (
     <Styled.MainReports>
       <Styled.MainReportTitle>
@@ -43,7 +45,7 @@ const RedirectReport = () => {
             </li>
           </ul>
           <Styled.MainReportButtonDiv>
-            <button>
+            <button onClick={() => navigateToPage('/communities/write')}>
               <span>독서 기록하기</span>
             </button>
           </Styled.MainReportButtonDiv>
