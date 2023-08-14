@@ -3,9 +3,9 @@ import { VITE_SERVER_URL } from '../../../../env.config';
 
 const getAxiosInstance = (contentType) => {
   const config = {
-    baseURL: `${VITE_SERVER_URL}`,
+    baseURL: '/api/v1',
     headers: {
-      // 'Access-Control-Allow-Origin': '*',
+      //'Access-Control-Allow-Origin': '*',
       'content-Type': contentType,
     },
     withCredentials: true,

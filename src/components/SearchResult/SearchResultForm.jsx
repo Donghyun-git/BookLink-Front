@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { HeaderBookSearch } from '../../lib/apis/searchService/';
 import * as Styled from './Styled';
 import { MainContainerDiv, MainContentsDiv } from '../../styles/globalStyled';
-import PagingForm from '../Paging/PagingForm';
+import PagingForm from '../UI/Paging/PagingForm';
 const SearchResultForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -90,7 +90,7 @@ const SearchResultForm = () => {
         <PagingForm
           activePage={Number(currentPage)}
           itemsCountPerPage={8}
-          totalItemsCount={31}
+          totalItemsCount={32}
           onChange={onHandlePage}
         />
       </MainContentsDiv>

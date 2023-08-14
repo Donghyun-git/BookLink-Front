@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-
 import Loading from '../../components/Loading/Loading';
 
 const CommunitiesForm = lazy(() =>

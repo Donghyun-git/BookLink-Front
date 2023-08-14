@@ -58,9 +58,7 @@ const RegisterForm = () => {
     navigate('/login');
   };
   const handleAddressClick = (address) => {
-    console.log(getValues('basicAddress'));
     setValue('basicAddress', address, { shouldValidate: true });
-    console.log(getValues('basicAddress'));
     setSearchBtnClick(false);
   };
   const handleEmailCheck = async () => {
