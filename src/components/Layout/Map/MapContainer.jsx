@@ -12,7 +12,7 @@ const MapContainer = () => {
   const isbn13 = location.state.isbn13;
 
   const { state } = useMapContext();
-  const { markers, isLoading } = state;
+  const { markers, isLoading, isMapLoading, error } = state;
 
   return (
     <Styled.MapContainer>
@@ -26,7 +26,7 @@ const MapContainer = () => {
             <div>
               <ul>
                 <li>
-                  {isLoading ? (
+                  {isMapLoading && isLoading ? (
                     <></>
                   ) : (
                     <>
@@ -35,8 +35,10 @@ const MapContainer = () => {
                     </>
                   )}
                 </li>
-                {isLoading ? (
+                {isMapLoading && isLoading ? (
                   <li>로딩중</li>
+                ) : error || markers.length < 1 ? (
+                  <li>{error}</li>
                 ) : (
                   markers.map((library) => {
                     return (

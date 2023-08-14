@@ -39,7 +39,10 @@ const MapComponent = ({ isbn13 }) => {
 
         setLibrariesData(data.data);
       } catch (error) {
-        console.error(error);
+        dispatch({
+          type: 'MAP/ERROR',
+          payload: '책이 있는 근처 도서관이 없어요.',
+        });
       }
     })();
   }, [dispatch, isbn13]);
@@ -57,7 +60,7 @@ const MapComponent = ({ isbn13 }) => {
       );
 
       return {
-        id: generateUniqueKey(),
+        id: library.LBRRY_CD,
         name: library.LBRRY_NM,
         address: library.LBRRY_ADDR,
         distance,
@@ -79,7 +82,16 @@ const MapComponent = ({ isbn13 }) => {
       return library.distance < 11;
     });
 
-    dispatch({ type: 'MAP/MARKERS', payload: filteredDistance10 });
+    const uniqueIds = new Set();
+    const uniqueFilteredDistance10 = filteredDistance10.filter((obj) => {
+      if (!uniqueIds.has(obj.id)) {
+        uniqueIds.add(obj.id);
+        return true;
+      }
+      return false;
+    });
+
+    dispatch({ type: 'MAP/MARKERS', payload: uniqueFilteredDistance10 });
   }, [currentLocation, dispatch, librariesData]);
 
   return (
@@ -90,6 +102,7 @@ const MapComponent = ({ isbn13 }) => {
         width: '72.42857rem',
         height: '41.28571rem',
       }}
+      onCenterChanged={() => dispatch({ type: 'MAP/MAP' })}
     >
       {markers &&
         markers.length > 0 &&

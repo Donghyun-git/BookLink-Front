@@ -1,6 +1,7 @@
 export const initialState = {
   markers: [],
   isLoading: true,
+  isMapLoading: true,
   currentLocation: {
     lat: 0,
     lng: 0,
@@ -20,6 +21,13 @@ export const mapReducer = (state = initialState, action) => {
         ...state,
         markers: action.payload,
         isLoading: false,
+        error: null,
+      };
+    }
+    case 'MAP/MAP': {
+      return {
+        ...state,
+        isMapLoading: true,
       };
     }
     case 'MAP/CURRENT': {
@@ -62,6 +70,13 @@ export const mapReducer = (state = initialState, action) => {
       return {
         ...state,
         markers: updatedMarkers,
+      };
+    }
+
+    case 'MAP/ERROR': {
+      return {
+        ...state,
+        error: action.payload,
       };
     }
     default: {
