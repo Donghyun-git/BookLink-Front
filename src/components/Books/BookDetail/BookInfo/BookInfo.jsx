@@ -18,6 +18,7 @@ const BookInfo = ({ isbn }) => {
     author,
     title,
     publisher,
+    priceStandard,
     pubDate,
     description,
   } = state.book.item[0];
@@ -105,6 +106,7 @@ const BookInfo = ({ isbn }) => {
                       book_title: title,
                       authors: author,
                       publisher,
+                      priceStandard,
                       pud_date: pubDate,
                     },
                   },
