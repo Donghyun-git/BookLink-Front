@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.1.1",
+    "@mui/material": "^5.14.4",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "dompurify": "^3.0.5",
@@ -36,6 +39,7 @@
     "redux-thunk": "^2.4.2",
     "redux-toolkit": "^1.1.2",
     "styled-components": "^6.0.0-rc.3",
+    "sweetalert2": "^11.7.22",
     "timeago-react": "^3.0.6",
     "timeago.js": "^4.0.2",
     "yarn": "^1.22.19",
