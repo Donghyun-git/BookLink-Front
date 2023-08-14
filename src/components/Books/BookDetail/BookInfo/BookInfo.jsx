@@ -93,7 +93,7 @@ const BookInfo = ({ isbn }) => {
                 goToMap({ isbn13, title, author, pubDate, publisher, cover })
               }
             >
-              <div>이 책이 있는 주변 도서관</div>
+              <div>책이 있는 주변 도서관</div>
             </button>
           </Styled.BookInfoButtonDiv>
         </Styled.BookInfoLeftDiv>
