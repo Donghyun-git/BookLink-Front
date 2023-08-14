@@ -1,7 +1,7 @@
 import { useState, useCallback, Fragment } from 'react';
 import * as Styled from './Styled';
 
-const MypageCard = ({ title, list, table }) => {
+const MypageCommunityCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClickLeftList = useCallback((id) => {
@@ -11,30 +11,33 @@ const MypageCard = ({ title, list, table }) => {
   return (
     <Styled.MypageCard>
       <Styled.MypageCardTitle>
-        <h3>{title}</h3>
+        <h3>커뮤니티</h3>
       </Styled.MypageCardTitle>
       <Styled.ListDiv>
         <Styled.LeftList>
           <ul>
-            {list.map((list, idx) => {
-              return (
-                <Fragment key={idx}>
-                  <li
-                    className={idx === activeIndex ? 'active' : ''}
-                    onClick={() => handleClickLeftList(idx)}
-                  >
-                    <span>{list}</span>
-                  </li>
-                </Fragment>
-              );
-            })}
+            <li>
+              <span>후기</span>
+            </li>
+            <li>
+              <span>자유글</span>
+            </li>
+            <li>
+              <span>독후감</span>
+            </li>
+            <li>
+              <span>독서모임</span>
+            </li>
+            <li>
+              <span>댓글</span>
+            </li>
           </ul>
         </Styled.LeftList>
         <Styled.RightList>
           <table>
             <thead>
               <tr>
-                {table.map((title, idx) => {
+                {/* {table.map((title, idx) => {
                   return (
                     <Fragment key={idx}>
                       <th
@@ -46,12 +49,12 @@ const MypageCard = ({ title, list, table }) => {
                       </th>
                     </Fragment>
                   );
-                })}
+                })} */}
               </tr>
             </thead>
             <tbody>
               <tr>
-                {table.map((title, idx) => {
+                {/* {table.map((title, idx) => {
                   return (
                     <Fragment key={idx}>
                       <td
@@ -63,7 +66,7 @@ const MypageCard = ({ title, list, table }) => {
                       </td>
                     </Fragment>
                   );
-                })}
+                })} */}
               </tr>
 
               {/* <tr>
@@ -100,4 +103,4 @@ const MypageCard = ({ title, list, table }) => {
   );
 };
 
-export default MypageCard;
+export default MypageCommunityCard;
