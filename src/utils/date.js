@@ -29,6 +29,12 @@ export const dateFormat = (localDate) => {
   }
   return localDate;
 };
+
+export const dateFormatYear = (localDate) => {
+  const date = localDate.split('T')[0];
+  return date;
+};
+
 /*export const dateFormat = (date) => {
   const koreanDate = add(parseISO(date), { hours: 9 });
   const formattedDate = format(koreanDate, 'yyyy-MM-dd HH:mm', {
