@@ -25,6 +25,7 @@ export const CardDiv = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 
   &:nth-child(4n + 1) {
     margin-left: 0;
@@ -84,6 +85,7 @@ export const CardImage = styled.img`
 export const CardContentsDiv = styled.div`
   padding: ${({ isbooks }) =>
     isbooks === 'true' ? '1.71rem 0 0.57rem 0' : '0 0 0.57rem 0'};
+
   border-bottom: 0.07143rem solid #d9d9d9;
 `;
 
