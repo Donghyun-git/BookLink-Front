@@ -12,4 +12,5 @@ export const RentDetailCotent = styled.section`
   flex-direction: column;
   align-items: flex-start;
   gap: 4.28571rem;
+  width: 58rem;
 `;

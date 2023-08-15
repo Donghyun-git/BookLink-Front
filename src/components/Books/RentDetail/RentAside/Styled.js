@@ -236,6 +236,11 @@ export const RentSubmitDiv = styled.div`
     text-align: center;
     font-size: 1.14286rem;
     font-weight: 500;
+    border: 1px solid #00e37d;
+
+    &:focus {
+      outline: 1px solid #00e37d;
+    }
   }
 
   button {
