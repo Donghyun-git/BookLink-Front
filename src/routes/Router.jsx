@@ -1,4 +1,3 @@
-//import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../components/Layout';
 import MainPage from '../pages/Main';
@@ -22,6 +21,8 @@ import FreeReportModifyPage from '../pages/FreeReportModify';
 import CommunitiesRegisterPage from '../pages/CommunitiesRegister';
 import AuthPage from '../pages/Auth';
 import Map from '../pages/Map';
+import RentDetail from '../pages/RentDetail';
+import NotFound from '../pages/NotFound/NotFound';
 
 function Router() {
   return (
@@ -36,6 +37,7 @@ function Router() {
         <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
         <Route path="/books/:isbn/register" element={<BookRegisterPage />} />
         <Route path="/books/library-info" element={<Map />}></Route>
+        <Route path="/rent/:id" element={<RentDetail />}></Route>
         <Route path="/search" element={<SearchPage />} />
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/communities/book-clubs" element={<BookClubsPage />} />
@@ -68,6 +70,7 @@ function Router() {
           path="/communities/write"
           element={<CommunitiesRegisterPage />}
         />
+        <Route path="*" element={<NotFound />}></Route>
       </Route>
       <Route path="/auth" element={<AuthPage />} />
     </Routes>

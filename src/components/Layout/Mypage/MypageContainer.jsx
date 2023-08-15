@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useMypageContext } from '../../../context/MypageContext/mypageContext';
 import { getMyBookLink } from '../../../lib/apis/mypage/mypageService';
 import * as Styled from './Styled';
-import Profile from '../../Mypage/Profile/Profile';
+import Profile from '../../Profile/Profile';
 import NavMenu from '../../Mypage/Menu/NavMenu';
 import ActivityStatus from '../../Mypage/MyActive/ActivityStatus';
 import MypageRentCard from '../../Mypage/card/MypageRentCard';
@@ -10,6 +11,9 @@ import MypageCommunityCard from '../../Mypage/card/MypageCommunityCard';
 
 const MypageContainer = () => {
   const { state, dispatch } = useMypageContext();
+
+  const name = useSelector((state) => state.USER.nickname);
+  const email = useSelector((state) => state.USER.email);
 
   useEffect(() => {
     (async () => {
@@ -26,7 +30,7 @@ const MypageContainer = () => {
   console.log(state);
   return (
     <Styled.MypageContainer>
-      <Profile />
+      <Profile name={name} email={email} />
       <NavMenu />
       <ActivityStatus />
       <div>

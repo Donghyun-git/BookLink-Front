@@ -5,7 +5,8 @@ export const useGoToMap = () => {
   const navigate = useNavigate();
 
   const goToMap = useCallback(
-    ({ isbn13, title, author, pubDate, publisher, cover }) => {
+    ({ isbn13, title, author, pubDate, publisher, cover }, e) => {
+      e.stopPropagation();
       navigate('/books/library-info', {
         state: { isbn13, title, author, pubDate, publisher, cover },
       });

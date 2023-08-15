@@ -6,7 +6,7 @@ import {
   MainContentsDiv,
 } from '../../../styles/globalStyled';
 import * as Styled from './Styled';
-import Profile from '../profile/Profile';
+import Profile from '../../Profile/Profile';
 import { useQuery } from 'react-query';
 import { myInfo, myInfoModify } from '../../../lib/apis/mypage/mypageService';
 const MyInfoModifyForm = () => {

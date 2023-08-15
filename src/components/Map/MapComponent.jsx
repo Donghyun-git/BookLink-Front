@@ -3,7 +3,6 @@ import { useMapContext } from '../../context/MapContext/mapContext';
 import { getLibraries } from '../../lib/apis/booksService';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { calculateHaversineDistance } from '../../utils/calculateHaversine';
-import { generateUniqueKey } from '../../utils/generateUnique';
 import * as Styled from './Styled';
 
 const MapComponent = ({ isbn13 }) => {

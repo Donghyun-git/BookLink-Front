@@ -116,8 +116,8 @@ const BookInfo = ({ isbn }) => {
               <div>독서 기록하기</div>
             </button>
             <button
-              onClick={() =>
-                goToMap({ isbn13, title, author, pubDate, publisher, cover })
+              onClick={(e) =>
+                goToMap({ isbn13, title, author, pubDate, publisher, cover }, e)
               }
             >
               <div>책이 있는 주변 도서관</div>
