@@ -1,11 +1,21 @@
 import { useLocation } from 'react-router-dom';
+import { useRentContext } from '../../context/RentContext/rentContext';
 import * as Styled from './Styled';
 import logoutImage from '../../images/logout.svg';
 import updateImage from '../../images/update.svg';
 
 const Profile = ({ name, email }) => {
   const { pathname } = useLocation();
-  console.log(pathname);
+  const { state } = useRentContext();
+
+  const { detail } = state;
+
+  const {
+    record_cnt: recordCnt,
+    rent_available_cnt: rentAvailableCnt,
+    renting_cnt: rentingCnt,
+  } = detail;
+
   return (
     <Styled.ProfileMain>
       <Styled.ProfileLeft className="profile">
@@ -26,13 +36,13 @@ const Profile = ({ name, email }) => {
           <Styled.ProfileActiveLabel>
             <ul>
               <li>
-                <span>기록한 도서 2</span>
+                <span>기록한 도서 {recordCnt}</span>
               </li>
               <li>
-                <span>대여 가능한 도서 1</span>
+                <span>대여 가능한 도서 {rentAvailableCnt}</span>
               </li>
               <li>
-                <span>대여중인 도서 11</span>
+                <span>대여중인 도서 {rentingCnt}</span>
               </li>
             </ul>
           </Styled.ProfileActiveLabel>
