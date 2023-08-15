@@ -1,93 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useRentContext } from '../../context/RentContext/rentContext';
 import * as Styled from './Styled';
 import BackDrop from './modal/BackDrop';
 import { useGoToMap } from '../../hooks/Map/useGotoMap';
+import { useNavigatePage } from '../../hooks/useNavigatePage';
+import { getAllRent } from '../../lib/apis/rentService';
+import { generateUniqueKey } from '../../utils/generateUnique';
 
 const Rents = () => {
-  const initialState = [
-    {
-      key: 1,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-    {
-      key: 2,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-    {
-      key: 3,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-    {
-      key: 4,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-    {
-      key: 5,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-    {
-      key: 6,
-      image:
-        'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1687880142215.jpeg',
-      name: '길동아',
-      location: '서울 관악구',
-      title: '삶의 무기가 되는 한마디',
-      author: '발자타르 그라시안',
-      publish: '다른상상',
-      price: '18,000원',
-      isbn13: 9791198044839,
-      max_during_date: 2,
-    },
-  ];
-
+  const { state, dispatch } = useRentContext();
+  const { rents } = state;
   const { goToMap } = useGoToMap();
-  // eslint-disable-next-line no-unused-vars
-  const [cards, setCards] = useState(initialState);
+  const { navigateToPage } = useNavigatePage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openRentsModal = useCallback(() => {
@@ -98,24 +22,37 @@ const Rents = () => {
     setIsModalOpen(false);
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await getAllRent();
+        dispatch({ type: 'RENT/GETDATA', payload: data.data });
+      } catch (error) {
+        console.error(error);
+        dispatch({ type: 'RENT/ERROR', payload: '대여 데이터가 없어요.' });
+      }
+    })();
+  }, [dispatch]);
+
   return (
     <Styled.RentsComponentDiv>
       <Styled.BooksComponentDiv>
-        {cards.map((card) => {
+        {rents.map((card) => {
           const {
-            key,
-            image,
-            // name,
-            // location,
+            rent_id: id,
+            authors: author,
             title,
-            author,
-            publish,
-            price,
-            isbn13,
-            max_during_date,
+            avg_rental_fee: rentalFee,
+            cover,
+            isbn: isbn13,
+            rent_period: rentDuringDate,
+            publisher,
           } = card;
           return (
-            <Styled.CardDiv key={key}>
+            <Styled.CardDiv
+              key={generateUniqueKey()}
+              onClick={() => navigateToPage(`/rent/${id}`)}
+            >
               <Styled.RentsCardContainer>
                 <Styled.CardContentsDiv>
                   <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
@@ -125,29 +62,35 @@ const Rents = () => {
                   </Styled.ContentsAuthorDiv>
                   <Styled.ContentsPublishDiv>
                     <Styled.ContentSpan>출판</Styled.ContentSpan>
-                    <Styled.ContentSpanRight>{publish}</Styled.ContentSpanRight>
+                    <Styled.ContentSpanRight>
+                      {publisher}
+                    </Styled.ContentSpanRight>
                   </Styled.ContentsPublishDiv>
                 </Styled.CardContentsDiv>
                 <Styled.CardImageDiv>
-                  <Styled.CardImage src={image} alt="책 이미지" />
+                  <Styled.CardImage src={cover} alt="책 이미지" />
                 </Styled.CardImageDiv>
 
                 <Styled.CardFooterDiv>
                   <ul>
                     <Styled.RentsLi>
                       <Styled.RentsLiSpan>대여료</Styled.RentsLiSpan>
-                      <span>{price}</span>
+                      <span>{rentalFee}원</span>
                     </Styled.RentsLi>
                     <Styled.RentsLi>
                       <Styled.RentsLiSpan>대여 가능 시간</Styled.RentsLiSpan>
-                      <span>최대 {max_during_date}개월</span>
+                      <span>최대 {rentDuringDate}일</span>
                     </Styled.RentsLi>
                   </ul>
                   <Styled.RentsCardFooterButtonDiv>
                     <Styled.RentsCardButton onClick={openRentsModal}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
-                    <Styled.RentsCardButton onClick={() => goToMap({ isbn13 })}>
+                    <Styled.RentsCardButton
+                      onClick={(e) =>
+                        goToMap({ isbn13, title, author, publisher, cover }, e)
+                      }
+                    >
                       내 주변 도서관 찾기
                     </Styled.RentsCardButton>
                   </Styled.RentsCardFooterButtonDiv>

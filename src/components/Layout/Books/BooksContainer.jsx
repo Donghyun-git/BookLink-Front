@@ -1,5 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useReducer } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  rentReducer,
+  initialState,
+} from '../../../context/RentContext/rentReducer';
+import { RentContext } from '../../../context/RentContext/rentContext';
 import * as Styled from './Styled';
 import Books from '../../Books/Books';
 import Rents from '../../Books/Rents';
@@ -16,6 +21,8 @@ const BooksContainer = ({
   const isSortCurrent = useSelector((state) => state.BOOK.isCurrent);
   const isSortLikes = useSelector((state) => state.BOOK.isLikes);
 
+  // Rent Provider
+  const [state, dispatch] = useReducer(rentReducer, initialState);
   //책방, 대여 관련
   const [showBooksComponent, setShowBooksComponent] = useState(true);
   const [showRentsComponent, setShowRentsComponent] = useState(false);
@@ -99,7 +106,11 @@ const BooksContainer = ({
         handleKeyDownSearch={handleKeyDownSearch}
       />
       {showBooksComponent && <Books isBooks={showBooksComponent} />}
-      {showRentsComponent && <Rents />}
+      {showRentsComponent && (
+        <RentContext.Provider value={{ state, dispatch }}>
+          <Rents />
+        </RentContext.Provider>
+      )}
     </Styled.BooksContainer>
   );
 };

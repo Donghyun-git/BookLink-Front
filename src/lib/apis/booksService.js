@@ -141,6 +141,6 @@ export const getLibraries = async (isbn13) => {
 
     return { data };
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error);
   }
 };

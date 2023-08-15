@@ -37,8 +37,7 @@ export const CardContainerDiv = styled.div`
 
 export const CardHeaderDiv = styled.div`
   display: flex;
-  justify-content: ${({ isbooks }) =>
-    isbooks === 'true' ? 'space-between' : 'flex-start'};
+  justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
   margin-bottom: 0.71rem;
@@ -73,8 +72,7 @@ export const CardImage = styled.img`
 `;
 
 export const CardContentsDiv = styled.div`
-  padding: ${({ isbooks }) =>
-    isbooks === 'true' ? '1.71rem 0 0.57rem 0' : '0 0 0.57rem 0'};
+  padding: 1.71rem 0 0.57rem 0;
   border-bottom: 0.07143rem solid #d9d9d9;
 `;
 
@@ -260,5 +258,78 @@ export const RentsCardButton = styled.button`
   &:hover {
     color: #000;
     background-color: #f5f5f5;
+  }
+`;
+
+// [ 대여 카드]
+export const RentsModalCardDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 24.42857rem;
+  height: 16.57143rem;
+  border-radius: 0.85714rem;
+  background: #fff;
+  margin: 0 1.71rem 1.71rem 0;
+  padding: 0.86rem 1.71rem;
+  cursor: pointer;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  &:nth-child(4n + 1) {
+    margin-left: 0;
+  }
+`;
+
+export const ProfileDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.71rem;
+`;
+
+export const ProfileImageDiv = styled.div`
+  width: 3.71429rem;
+  height: 3.71429rem;
+  background-color: #00e37d;
+  border-radius: 50%;
+  margin-right: 0.86rem;
+`;
+
+export const UserProfileDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  div {
+    &:last-child {
+      font-size: 0.85714rem;
+      font-weight: 400;
+    }
+  }
+`;
+
+export const RentsInfoDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.86rem;
+
+    li {
+      font-size: 1.14286rem;
+      font-weight: 400;
+
+      &:last-child {
+        color: #000;
+        text-align: right;
+        font-size: 1.14286rem;
+        font-weight: 500;
+      }
+    }
   }
 `;
