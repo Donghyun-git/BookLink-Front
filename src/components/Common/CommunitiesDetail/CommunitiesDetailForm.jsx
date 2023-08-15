@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CommunitiesDetailContext } from '../../../context/communitiesDetailContext';
 import threePointUrl from '../../../images/threePoints.png';
 import locationUrl from '../../../images/location.png';
-
+import BookInfoForm from '../../UI/BookInfo/BookInfoForm';
 import {
   bookClubsDelete,
   freesDelete,
@@ -95,15 +95,13 @@ const CommunitiesDetailForm = () => {
       </Styled.Sub>
       <div>
         {bookInfo && (
-          <Styled.BookInfo>
-            <Styled.BookImg src={bookInfo.cover} />
-            <Styled.BookDetail>
-              <p>{bookInfo.book_title}</p>
-              <p>{bookInfo.authors}</p>
-              <p>{bookInfo.publisher}</p>
-              <p>{bookInfo.pud_date}</p>
-            </Styled.BookDetail>
-          </Styled.BookInfo>
+          <BookInfoForm
+            cover={bookInfo.cover}
+            book_title={bookInfo.book_title}
+            authors={bookInfo.authors}
+            publisher={bookInfo.publisher}
+            pud_date={bookInfo.pud_date}
+          />
         )}
         {location && (
           <Styled.Location>

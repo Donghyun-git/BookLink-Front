@@ -97,23 +97,6 @@ export const Button = styled.div`
   border-radius: 0.286rem 0.286rem 0 0;
   text-align: center;
 `;
-export const BookInfo = styled.div`
-  margin-top: 2.571rem;
-  height: 11.286rem;
-  border: 1px solid black;
-  border-radius: 0.571rem;
-  display: flex;
-`;
-export const BookImg = styled.img`
-  width: 9.571rem;
-  height: 9.571rem;
-  margin: 0.857rem;
-`;
-export const BookDetail = styled.div`
-  height: 9.571rem;
-  border: 1px solid black;
-  margin: 0.857rem;
-`;
 export const Location = styled.div`
   margin-top: 2.571rem;
   height: 3.429rem;
