@@ -38,7 +38,7 @@ const MapContainer = () => {
                 {isMapLoading && isLoading ? (
                   <li>로딩중</li>
                 ) : error || markers.length < 1 ? (
-                  <li>{error}</li>
+                  <li>{error || '책을 찾지 못했어요.. 열심히 찾아볼게요.'} </li>
                 ) : (
                   markers.map((library) => {
                     return (
