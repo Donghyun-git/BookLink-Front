@@ -1,6 +1,3 @@
-//import React from 'react'
-//import WebEditorForm from '../../../Common/WebEditor/WebEditorForm';
-//import TopicInputForm from '../../../Common/Input/TopicInputForm';
 import TopicContentForm from '../../../Common/TopicContent/TopicContentForm';
 import BookSearchForm from '../../../Common/Search/BookSearch/BookSearchForm';
 import { useForm } from 'react-hook-form';
@@ -12,23 +9,29 @@ import {
   MainContainerDiv,
   MainContentsDiv,
 } from '../../../../styles/globalStyled';
+import { useEffect } from 'react';
 const BookReportModifyForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { title, content, bookInfo } = location.state;
+  useEffect(() => {
+    reset({ ...bookInfo, title, content });
+  }, []);
 
   const {
     register,
     handleSubmit,
     setValue,
     trigger,
+    reset,
     //formState: { errors },
   } = useForm({
     resolver: yupResolver(communitiesRegisterSchema),
     mode: 'onChange',
   });
   const onSubmit = async (data) => {
+    console.log(data);
     const { title, content } = data;
     const { status } = await bookReportsModify(title, content, id);
     console.log(status);
