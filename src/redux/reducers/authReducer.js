@@ -2,18 +2,20 @@ const initialState = {
   email: '',
   name: '',
   nickname: '',
+  address: '',
   isLoggedIn: false,
 };
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'AUTH/LOGIN': {
-      const { email, name, nickname, isLoggedIn } = action.payload;
+      const { email, name, nickname, address, isLoggedIn } = action.payload;
       return {
         ...state,
         email,
         name,
         nickname,
+        address,
         isLoggedIn,
       };
     }
@@ -24,6 +26,7 @@ export const authReducer = (state = initialState, action) => {
         email: '',
         name: '',
         nickname: '',
+        address: '',
         isLoggedIn,
       };
     }
