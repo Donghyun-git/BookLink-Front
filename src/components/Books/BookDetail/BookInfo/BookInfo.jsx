@@ -97,16 +97,16 @@ const BookInfo = ({ isbn }) => {
           <Styled.BookInfoButtonDiv>
             <button
               onClick={() =>
-                navigate(`register`, {
+                navigate(`/books/register`, {
                   state: {
                     bookInfo: {
-                      isbn13,
+                      isbn: isbn13,
                       cover,
-                      categoryName,
+                      category_name: categoryName,
                       book_title: title,
                       authors: author,
                       publisher,
-                      priceStandard,
+                      price_sales: priceStandard,
                       pud_date: pubDate,
                     },
                   },
