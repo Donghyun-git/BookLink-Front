@@ -35,7 +35,7 @@ function Router() {
         <Route path="/mybooklink/modify" element={<MyInfoModifyPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
-        <Route path="/books/:isbn/register" element={<BookRegisterPage />} />
+        <Route path="/books/register" element={<BookRegisterPage />} />
         <Route path="/books/library-info" element={<Map />}></Route>
         <Route path="/rent/:id" element={<RentDetail />}></Route>
         <Route path="/search" element={<SearchPage />} />
