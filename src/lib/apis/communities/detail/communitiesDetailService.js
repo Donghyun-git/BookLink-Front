@@ -32,15 +32,23 @@ export const bookReportsDetail = async (id) => {
     const { data: data1, status } = await axiosJsonInstance.get(
       `/communities/board/report/${id}`
     );
-    console.log(data);
+    console.log(data1);
     let { data } = data1;
-    const { date, cover, book_title, authors, publisher, pud_date, ...data2 } =
-      data;
+    const {
+      date,
+      cover,
+      book_title,
+      authors,
+      publisher,
+      pud_date,
+      isbn,
+      ...data2
+    } = data;
     data2.date = dateFormat(date);
-    data2.bookInfo = { cover, book_title, authors, publisher, pud_date };
+    data2.bookInfo = { cover, book_title, authors, publisher, pud_date, isbn };
     data = data2;
     return data;
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 };

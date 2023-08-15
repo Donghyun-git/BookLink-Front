@@ -146,14 +146,15 @@ export const getLibraries = async (isbn13) => {
 };
 
 //[ 도서 등록 ]
-export const bookRegister = async (image, bookDto) => {
+export const bookRegister = async (images, bookDto) => {
   const formData = new FormData();
   const blob = new Blob([JSON.stringify(bookDto)], {
     type: 'application/json',
   });
-  formData.append('image', image);
+  for (let image of images) {
+    formData.append('image', image);
+  }
   formData.append('bookDto', blob);
-  console.log(image);
   console.log(blob);
   try {
     const { data, status } = await axiosFormInstance.post(
