@@ -50,13 +50,14 @@ export const ProfileInfo = styled.div`
 export const ProfileAddress = styled.div`
   span {
     display: inline-block;
-    margin: 0.86rem 0;
+
     font-size: 1rem;
     font-weight: 500;
   }
 `;
 
 export const ProfileActiveLabel = styled.div`
+  margin: 0.86rem 0;
   ul {
     display: flex;
     justify-content: center;
