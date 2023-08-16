@@ -26,26 +26,16 @@ const RegisterForm = () => {
   });
 
   const navigate = useNavigate();
+  console.log(errors);
   const [doubleEmailCheck, setDoubleEmailCheck] = useState(false);
+  const [authCheck, setAuthCheck] = useState(false);
   const [searchBtnClick, setSearchBtnClick] = useState(false);
 
   const onSubmit = async (data) => {
-    const {
-      email,
-      password,
-      nickname,
-      birth,
-      name,
-      basicAddress,
-      detailAddress,
-    } = data;
+    const { basicAddress, detailAddress, ...rest } = data;
     const address = basicAddress + ' ' + detailAddress;
     const data1 = await signUp({
-      email,
-      password,
-      nickname,
-      name,
-      birth,
+      ...rest,
       address,
     });
     console.log(data1);
@@ -62,14 +52,16 @@ const RegisterForm = () => {
     setSearchBtnClick(false);
   };
   const handleEmailCheck = async () => {
-    console.log(getValues('email'));
-    const data1 = await emailDoubleCheck(getValues('email'));
-    if (data1) setDoubleEmailCheck(true);
-    console.log(data1);
+    if (getValues('email') && !errors.email) {
+      const data1 = await emailDoubleCheck(getValues('email'));
+      if (data1) setDoubleEmailCheck(true);
+      console.log(data1);
+    }
   };
   const handleAuthNum = async () => {
     console.log(getValues('email'));
     const data1 = await emailAuth(getValues('email'));
+    if (data1) setAuthCheck(true);
     console.log(data1);
   };
   const handleAuthNumConfirm = async () => {
@@ -81,9 +73,10 @@ const RegisterForm = () => {
     console.log(data1);
   };
   const nicknameCheck = async () => {
-    console.log(getValues('nickname'));
-    const data1 = await nicknameDoubleCheck(getValues('nickname'));
-    console.log(data1);
+    if (getValues('nickname')) {
+      const data1 = await nicknameDoubleCheck(getValues('nickname'));
+      console.log(data1);
+    }
   };
   return (
     <Styled.MainContainerDiv>
@@ -100,7 +93,9 @@ const RegisterForm = () => {
               }}
               placeholder="이메일을 입력해주세요"
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <Styled.Error>{errors.email.message}</Styled.Error>
+            )}
             {doubleEmailCheck ? (
               <Styled.Btn type="button" onClick={handleAuthNum}>
                 인증번호 전송
@@ -111,29 +106,37 @@ const RegisterForm = () => {
               </Styled.Btn>
             )}
           </Styled.buttonIncludedDiv>
-          <Styled.noTagDiv>
-            <Styled.Input
-              type="text"
-              {...register('authNum')}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleAuthNumConfirm();
-              }}
-              //ref={authNumRef}
-            />
-            {errors.authNum && <p>{errors.authNum.message}</p>}
-            <Styled.Btn type="button" onClick={handleAuthNumConfirm}>
-              인증번호 확인
-            </Styled.Btn>
-          </Styled.noTagDiv>
+          {authCheck && (
+            <Styled.noTagDiv>
+              <Styled.Input
+                type="text"
+                {...register('authNum')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleAuthNumConfirm();
+                }}
+              />
+              {errors.authNum && (
+                <Styled.Error>{errors.authNum.message}</Styled.Error>
+              )}
+              <Styled.Btn type="button" onClick={handleAuthNumConfirm}>
+                인증번호 확인
+              </Styled.Btn>
+            </Styled.noTagDiv>
+          )}
+
           <Styled.Div>
             <Styled.Tag>비밀번호</Styled.Tag>
             <Styled.Input type="password" {...register('password')} />
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && (
+              <Styled.Error>{errors.password.message}</Styled.Error>
+            )}
           </Styled.Div>
           <Styled.Div>
             <Styled.Tag>비밀번호 확인</Styled.Tag>
             <Styled.Input type="password" {...register('checkpw')} />
-            {errors.checkpw && <p>{errors.checkpw.message}</p>}
+            {errors.checkpw && (
+              <Styled.Error>{errors.checkpw.message}</Styled.Error>
+            )}
           </Styled.Div>
           <Styled.buttonIncludedDiv>
             <Styled.Tag>닉네임</Styled.Tag>
@@ -143,9 +146,10 @@ const RegisterForm = () => {
               onKeyDown={(e) => {
                 if (e.key === 'Enter') nicknameCheck();
               }}
-              //ref={nicknameRef}
             />
-            {errors.nickname && <p>{errors.nickname.message}</p>}
+            {errors.nickname && (
+              <Styled.Error>{errors.nickname.message}</Styled.Error>
+            )}
             <Styled.Btn type="button" onClick={nicknameCheck}>
               중복확인
             </Styled.Btn>
@@ -153,12 +157,14 @@ const RegisterForm = () => {
           <Styled.Div>
             <Styled.Tag>이름</Styled.Tag>
             <Styled.Input type="text" {...register('name')} />
-            {errors.name && <p>{errors.name.message}</p>}
+            {errors.name && <Styled.Error>{errors.name.message}</Styled.Error>}
           </Styled.Div>
           <Styled.Div>
             <Styled.Tag>생년월일</Styled.Tag>
             <Styled.Input type="date" {...register('birth')} />
-            {errors.birth && <p>{errors.birth.message}</p>}
+            {errors.birth && (
+              <Styled.Error>{errors.birth.message}</Styled.Error>
+            )}
           </Styled.Div>
           <Styled.searchDiv>
             <Styled.Tag>주소</Styled.Tag>
@@ -176,12 +182,10 @@ const RegisterForm = () => {
             )}
           </Styled.searchDiv>
           <Styled.Div>
-            <Styled.Input
-              {...register('basicAddress')}
-              //ref={basicAddressRef}
-              type="text"
-            />
-            {errors.basicAddress && <p>{errors.basicAddress.message}</p>}
+            <Styled.Input {...register('basicAddress')} type="text" />
+            {errors.basicAddress && (
+              <Styled.Error>{errors.basicAddress.message}</Styled.Error>
+            )}
           </Styled.Div>
           <Styled.Div>
             <Styled.Input
@@ -189,7 +193,6 @@ const RegisterForm = () => {
               placeholder="상세 주소 입력하기"
               {...register('detailAddress')}
             />
-            {errors.detailAddress && <p>{errors.detailAddress.message}</p>}
           </Styled.Div>
           <Styled.RegisterBtn type="sumbit">가입하기</Styled.RegisterBtn>
         </Styled.RegisterForm>

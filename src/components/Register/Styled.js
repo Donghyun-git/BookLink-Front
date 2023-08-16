@@ -32,6 +32,11 @@ export const RegisterForm = styled.form`
   align-items: flex-start;
   width: 50%;
 `;
+export const Error = styled.p`
+  font-size: 1.143rem;
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: ${({ theme }) => theme.color.red};
+`;
 export const Div = styled.div`
   margin-top: 2.571rem;
   width: 100%;
