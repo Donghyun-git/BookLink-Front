@@ -39,11 +39,9 @@ const CommunitiesForm = () => {
           <Styled.PopularContentSDiv>
             {boardData
               .filter(
-                (date) =>
-                  Date.parse(moment().startOf('week')) <=
-                    Date.parse(date.localDateTime) &&
-                  Date.parse(date.localDateTime) <=
-                    Date.parse(moment().endOf('week'))
+                ({ date }) =>
+                  Date.parse(moment().startOf('week')) <= Date.parse(date) &&
+                  Date.parse(date) <= Date.parse(moment().endOf('week'))
               )
               .slice(0, 4)
               .sort(
@@ -57,18 +55,18 @@ const CommunitiesForm = () => {
                   category,
                   like_cnt,
                   reply_cnt,
-                  localDateTime,
+                  date,
                   title,
                   content,
                 }) => {
                   return (
                     <BoardsCardForm
-                      key={localDateTime}
+                      key={date}
                       category={category}
                       writer={writer}
                       like_cnt={like_cnt}
                       reply_cnt={reply_cnt}
-                      localDateTime={localDateTime}
+                      date={date}
                       title={title}
                       content={content}
                       id={id}
@@ -123,10 +121,7 @@ const CommunitiesForm = () => {
           </Styled.TagDiv>
           <Styled.BoardsContentsDiv>
             {boardData
-              .sort(
-                (a, b) =>
-                  Date.parse(b.localDateTime) - Date.parse(a.localDateTime)
-              )
+              .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
               .map(
                 ({
                   id,
@@ -134,18 +129,18 @@ const CommunitiesForm = () => {
                   category,
                   like_cnt,
                   reply_cnt,
-                  localDateTime,
+                  date,
                   title,
                   content,
                 }) => {
                   return (
                     <BoardsCardForm
-                      key={localDateTime}
+                      key={date}
                       category={category}
                       writer={writer}
                       like_cnt={like_cnt}
                       reply_cnt={reply_cnt}
-                      localDateTime={localDateTime}
+                      date={date}
                       title={title}
                       content={content}
                       id={id}

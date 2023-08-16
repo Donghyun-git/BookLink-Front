@@ -9,7 +9,7 @@ const BoardsCardForm = ({
   reply_cnt,
   like_cnt,
   writer,
-  localDateTime,
+  date,
   title,
   content,
   id,
@@ -17,7 +17,7 @@ const BoardsCardForm = ({
   const navigate = useNavigate();
   return (
     <Styled.BoardsCardDiv
-      key={localDateTime}
+      key={date}
       onClick={() => {
         if (category === '자유글') {
           navigate(`/communities/boards/free-report/${id}`);
@@ -46,7 +46,7 @@ const BoardsCardForm = ({
             {category}
           </Styled.BoardsCardInfoCategoryDiv>
           <Styled.BoardsCardInfoDateDiv>
-            {dateFormat(localDateTime)}
+            {dateFormat(date)}
           </Styled.BoardsCardInfoDateDiv>
         </Styled.BoardsCardInfoDiv>
         <Styled.BoardsCardTitleDiv>{title}</Styled.BoardsCardTitleDiv>
