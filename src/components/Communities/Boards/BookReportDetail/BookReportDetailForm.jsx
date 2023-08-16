@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { bookReportsDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
 
@@ -20,20 +20,11 @@ import { useQuery } from 'react-query';
 const BookReportDetailForm = () => {
   const { id } = useParams();
   const { data } = useQuery(['books', id], () => bookReportsDetail(Number(id)));
+
   const [info, setInfo] = useState(data);
-  /*const {
-    writer,
-    title,
-    content,
-    category,
-    date,
-    view_cnt,
-    reply_cnt,
-    like_cnt,
-    liked,
-    bookInfo,
-    replies,
-  } = info;*/
+  useEffect(() => {
+    setInfo(data);
+  }, [data]);
 
   return (
     <MainContainerDiv>

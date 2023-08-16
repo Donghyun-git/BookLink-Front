@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { bookClubsDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
 
 import LikeShareForm from '../../../Common/LikeShare/LikeShareForm';
@@ -22,8 +22,10 @@ const BookClubsDetailForm = () => {
     bookClubsDetail(Number(id))
   );
 
-  console.log(data);
   const [info, setInfo] = useState(data);
+  useEffect(() => {
+    setInfo(data);
+  }, [data]);
 
   /*const {
     writer,

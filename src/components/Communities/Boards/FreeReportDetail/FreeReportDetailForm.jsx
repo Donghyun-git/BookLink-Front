@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { freesDetail } from '../../../../lib/apis/communities/detail/communitiesDetailService';
 
@@ -20,19 +20,10 @@ const FreeReportDetailForm = () => {
   const { id } = useParams();
   const { data } = useQuery(['frees', id], () => freesDetail(Number(id)));
   const [info, setInfo] = useState(data);
+  useEffect(() => {
+    setInfo(data);
+  }, [data]);
 
-  /*const {
-    writer,
-    title,
-    content,
-    category,
-    localDateTime,
-    view_cnt,
-    reply_cnt,
-    like_cnt,
-    liked,
-    replies,
-  } = info;*/
   return (
     <MainContainerDiv>
       <CommunitiesDetailContext.Provider value={{ info, setInfo }}>

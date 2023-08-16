@@ -87,18 +87,18 @@ const BoardsForm = () => {
                 like_cnt,
                 writer,
                 id,
-                localDateTime,
+                date,
                 title,
                 content,
               }) => {
                 return (
                   <BoardsCardForm
-                    key={localDateTime}
+                    key={date}
                     category={category}
                     reply_cnt={reply_cnt}
                     like_cnt={like_cnt}
                     writer={writer}
-                    localDateTime={localDateTime}
+                    date={date}
                     title={title}
                     content={content}
                     id={id}
