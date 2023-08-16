@@ -15,22 +15,32 @@ const MypageContainer = () => {
   const name = useSelector((state) => state.USER.nickname);
   const email = useSelector((state) => state.USER.email);
 
+  const { myInfo } = state || {};
+  const { address, canRent, image, renting, likedBooks } = myInfo || {};
+
   useEffect(() => {
     (async () => {
       try {
         const { data } = await getMyBookLink();
 
-        console.log('useEffect', data);
         dispatch({ type: 'MYPAGE/MYBOOKLINK', payload: data.data });
       } catch (error) {
         console.error(error);
       }
     })();
   }, [dispatch]);
-  console.log(state);
+
   return (
     <Styled.MypageContainer>
-      <Profile name={name} email={email} />
+      <Profile
+        name={name}
+        email={email}
+        address={address}
+        image={image}
+        rentAvailableCnt={canRent}
+        rentingCnt={renting}
+        recordCnt={likedBooks}
+      />
       <NavMenu />
       <ActivityStatus />
       <div>
