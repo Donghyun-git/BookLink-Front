@@ -98,7 +98,7 @@ export const Introduce = styled.div`
 `;
 export const IntroduceContent = styled(Content)`
   width: 19.5rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 export const DetailCnt = styled.div`
   width: 4rem;
