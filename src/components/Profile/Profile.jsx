@@ -1,38 +1,41 @@
 import { useLocation } from 'react-router-dom';
-import { useRentContext } from '../../context/RentContext/rentContext';
 import * as Styled from './Styled';
 import logoutImage from '../../images/logout.svg';
 import updateImage from '../../images/update.svg';
 
-const Profile = ({ name, email }) => {
+const Profile = ({
+  name,
+  email,
+  address,
+  image,
+  recordCnt,
+  rentAvailableCnt,
+  rentingCnt,
+}) => {
   const { pathname } = useLocation();
-  const { state } = useRentContext();
-
-  const { detail } = state;
-
-  const {
-    record_cnt: recordCnt,
-    rent_available_cnt: rentAvailableCnt,
-    renting_cnt: rentingCnt,
-  } = detail;
 
   return (
     <Styled.ProfileMain>
       <Styled.ProfileLeft className="profile">
         <Styled.ProfileImageDiv>
           <img
-            src="https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png"
+            src={
+              image ||
+              'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
+            }
             alt="profile"
           />
         </Styled.ProfileImageDiv>
         <Styled.ProfileInfoDiv>
           <Styled.ProfileInfo>
             <h3>{name}</h3>
-            <address>{email}</address>
+            {email && <address>{email}</address>}
           </Styled.ProfileInfo>
-          <Styled.ProfileAddress>
-            <span>캐치카페 화장시 하수구 1동 1호</span>
-          </Styled.ProfileAddress>
+          {address && (
+            <Styled.ProfileAddress>
+              <span>{address}</span>
+            </Styled.ProfileAddress>
+          )}
           <Styled.ProfileActiveLabel>
             <ul>
               <li>

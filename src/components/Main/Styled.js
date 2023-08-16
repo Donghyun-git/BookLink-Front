@@ -1,5 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import communityBannerImage from '../../images/community_banner.png';
+
+const rotateAnimation = keyframes`
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+`;
 
 //[ banner ]
 export const BannerContent = styled.div`
@@ -105,6 +114,8 @@ export const BannerRight = styled.div`
   div {
     width: 43.71429rem;
     height: 36.71429rem;
+    animation: ${rotateAnimation} 3s ease-in-out infinite alternate;
+
     img {
       width: 100%;
       height: 100%;
