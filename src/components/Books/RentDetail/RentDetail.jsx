@@ -17,7 +17,7 @@ const RentDetail = () => {
   const bookRentInfoDtoList = detail.bookRentInfoDtoList || [];
   const bookRecordDtoList = detail.bookRecordDtoList || [];
 
-  const { created_time: createdTime, writer } =
+  const { writer } =
     bookRentInfoDtoList.length > 0 ? bookRentInfoDtoList[0] : {};
 
   const imageUrls = detail.image_urls || [];
@@ -32,6 +32,7 @@ const RentDetail = () => {
     rent_location: rentLocation,
     rent_method: rentMethod,
     rental_fee: rentalFee,
+    created_time: createdTime,
     title,
     authors,
   } = detail;
