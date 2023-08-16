@@ -56,7 +56,6 @@ const BookClubsModifyForm = () => {
               onContentsHandler={onContentsHandler}
             />
           </div>
-          <button type="submit">수정하기</button>
         </form>
       </MainContentsDiv>
     </MainContainerDiv>

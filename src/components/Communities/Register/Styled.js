@@ -44,18 +44,3 @@ export const Input = styled.input`
     background-color: #00e37d;
   }
 `;
-
-export const ButtonDiv = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 2.071rem;
-  button {
-    box-sizing: border-box;
-    font-weight: bold;
-    width: 13rem;
-    background-color: #ffffff;
-    height: 3.857rem;
-    border: 0.143rem solid #00e37d;
-    border-radius: 0.571rem;
-  }
-`;

@@ -23,6 +23,20 @@ const Content = styled.div`
     }
   }
 `;
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2.071rem;
+  button {
+    box-sizing: border-box;
+    font-weight: bold;
+    width: 13rem;
+    background-color: #ffffff;
+    height: 3.857rem;
+    border: 0.143rem solid #00e37d;
+    border-radius: 0.571rem;
+  }
+`;
 
 const TopicContentForm = ({
   title = '',
@@ -42,6 +56,9 @@ const TopicContentForm = ({
           style={{ height: '90.587rem' }}
         />
       </Content>
+      <ButtonDiv>
+        <button type="submit">게시글 등록하기</button>
+      </ButtonDiv>
     </Container>
   );
 };

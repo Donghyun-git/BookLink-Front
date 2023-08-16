@@ -48,7 +48,6 @@ const FreeReportModifyForm = () => {
               register={register}
               onContentsHandler={onContentsHandler}
             />
-            <button type="submit">수정하기</button>
           </div>
         </form>
       </MainContentsDiv>

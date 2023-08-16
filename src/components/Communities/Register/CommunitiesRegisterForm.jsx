@@ -144,9 +144,6 @@ const CommunitiesRegisterForm = () => {
             register={register}
             onContentsHandler={onContentsHandler}
           />
-          <Styled.ButtonDiv>
-            <button type="submit">게시글 등록하기</button>
-          </Styled.ButtonDiv>
         </form>
       </Styled.MainContentsDiv>
     </Styled.MainContainerDiv>
