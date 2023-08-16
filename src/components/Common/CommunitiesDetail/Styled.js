@@ -64,6 +64,10 @@ export const Writer = styled.div`
 export const Category = styled.div`
   padding: 0 0.571rem;
 `;
+export const Updated = styled.div`
+  border-left: 0.071rem solid #848484;
+  padding: 0 0.571rem;
+`;
 
 export const SubDetailBottom = styled.div`
   height: 50%;

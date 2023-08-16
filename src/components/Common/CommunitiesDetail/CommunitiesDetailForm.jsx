@@ -19,6 +19,7 @@ const CommunitiesDetailForm = () => {
     title,
     content,
     category,
+    updated,
     date,
     view_cnt,
     reply_cnt,
@@ -26,6 +27,7 @@ const CommunitiesDetailForm = () => {
     location,
     bookInfo,
   } = info;
+  console.log(info);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -73,6 +75,7 @@ const CommunitiesDetailForm = () => {
             <Styled.SubDetailTop>
               <Styled.Writer>{writer}</Styled.Writer>
               <Styled.Category>{category}</Styled.Category>
+              {updated && <Styled.Updated>수정됨</Styled.Updated>}
             </Styled.SubDetailTop>
             <Styled.SubDetailBottom>
               <Styled.Date>{date}</Styled.Date>
