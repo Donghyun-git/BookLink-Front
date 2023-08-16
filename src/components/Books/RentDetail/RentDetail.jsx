@@ -14,11 +14,7 @@ const RentDetail = () => {
 
   const { isDetailLoading, detail } = state;
 
-  const bookRentInfoDtoList = detail.bookRentInfoDtoList || [];
   const bookRecordDtoList = detail.bookRecordDtoList || [];
-
-  const { writer } =
-    bookRentInfoDtoList.length > 0 ? bookRentInfoDtoList[0] : {};
 
   const imageUrls = detail.image_urls || [];
   const {
@@ -35,6 +31,7 @@ const RentDetail = () => {
     created_time: createdTime,
     title,
     authors,
+    writer,
   } = detail;
 
   useEffect(() => {
