@@ -8,6 +8,7 @@ const UserToggle = ({ active }) => {
     handleMouseLeave,
     handleLogOut,
     handleNavigateMypage,
+    handleChat,
   } = useToggleList();
 
   return (
@@ -17,7 +18,7 @@ const UserToggle = ({ active }) => {
           <button onClick={handleNavigateMypage}>마이페이지</button>
         </li>
         <li>
-          <button>1:1 채팅</button>
+          <button onClick={handleChat}>1:1 채팅</button>
         </li>
         <li>
           <button>소장 도서</button>
