@@ -48,7 +48,7 @@ const RegisterForm = () => {
     navigate('/login');
   };
   const handleAddressClick = (address) => {
-    setValue('basicAddress', address, { shouldValidate: true });
+    setValue('basicAddress', address);
     setSearchBtnClick(false);
   };
   const handleEmailCheck = async () => {
@@ -182,7 +182,7 @@ const RegisterForm = () => {
             )}
           </Styled.searchDiv>
           <Styled.Div>
-            <Styled.Input {...register('basicAddress')} type="text" />
+            <Styled.Input value={getValues('basicAddress')} type="text" />
             {errors.basicAddress && (
               <Styled.Error>{errors.basicAddress.message}</Styled.Error>
             )}
