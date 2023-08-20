@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   MainContainerDiv,
   MainContentsDiv,
@@ -10,8 +10,9 @@ import { useLocation } from 'react-router-dom';
 import { bookRegister } from '../../../lib/apis/booksService';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { NumericFormat } from 'react-number-format';
 const BookRegisterForm = () => {
-  const { register, handleSubmit, setValue, reset } = useForm({
+  const { register, handleSubmit, setValue, getValues, reset } = useForm({
     mode: 'onChange',
   });
   const address = useSelector((state) => state.USER.address);
@@ -23,6 +24,7 @@ const BookRegisterForm = () => {
   const [imgUrls, setImgUrls] = useState([]);
   const [imgFiles, setImgFiles] = useState([]);
   const [addressClick, setAddressClick] = useState(false);
+  const feeRef = useRef(null);
 
   useEffect(() => {
     reset({ ...bookInfo, rent_signal: true, rent_location: address });
@@ -30,10 +32,13 @@ const BookRegisterForm = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
+    const localStringFee = feeRef.current.value;
+    const fee = Number(localStringFee.split(',').join(''));
+    setValue('rental_fee', fee);
     const { images, ...bookDto } = data;
     bookDto.min_date = Number(bookDto.min_date);
     bookDto.max_date = Number(bookDto.max_date);
-    bookDto.rental_fee = Number(bookDto.rental_fee);
+    console.log(bookDto);
     const { data: data1 } = await bookRegister(images, bookDto);
     console.log(data1);
   };
@@ -191,25 +196,33 @@ const BookRegisterForm = () => {
               />
               <Styled.RentalFee>
                 <Styled.RentalTag>대여료</Styled.RentalTag>
-                <Styled.RentalPriceInput
-                  type="number"
-                  min="1000"
-                  step="100"
-                  {...register('rental_fee')}
+                <NumericFormat
+                  allowLeadingZeros
+                  thousandSeparator=","
+                  getInputRef={feeRef}
                 />
                 원
               </Styled.RentalFee>
               <Styled.RentalTime>
-                <Styled.RentalTag>대여기간</Styled.RentalTag>
+                <Styled.RentalTag>대여 가능 기간</Styled.RentalTag>
+                <span>최소</span>
                 <Styled.Select {...register('min_date')}>
-                  <option>14</option>
+                  <option value={14}>2주</option>
+                  <option value={21}>3주</option>
+                  <option value={28}>4주</option>
+                  <option value={35}>5주</option>
                 </Styled.Select>
+                <Styled.Range>~</Styled.Range>
+                <span>최대</span>
                 <Styled.Select {...register('max_date')}>
-                  <option>84</option>
+                  <option value={14}>2주</option>
+                  <option value={21}>3주</option>
+                  <option value={28}>4주</option>
+                  <option value={35}>5주</option>
                 </Styled.Select>
               </Styled.RentalTime>
               <Styled.Tag>대여장소</Styled.Tag>
-              <Styled.Address {...register('rent_location')} />
+              <Styled.Address value={getValues('rent_location')} />
               <button
                 type="button"
                 onClick={() => setAddressClick((state) => !state)}

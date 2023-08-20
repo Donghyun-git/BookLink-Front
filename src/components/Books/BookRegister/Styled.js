@@ -80,21 +80,28 @@ export const RentalFee = styled.div`
   display: flex;
   margin-top: 3.429rem;
   align-items: center;
+  input {
+    border: 2px solid #d9d9d9;
+    border-radius: 0.871rem;
+    width: 18.429rem;
+    height: 4.286rem;
+  }
 `;
 export const RentalTag = styled(Tag)`
   margin-top: 0;
   margin-right: 2.5rem;
 `;
-export const RentalPriceInput = styled.input`
-  border: 2px solid #d9d9d9;
-  border-radius: 0.871rem;
-  width: 18.429rem;
-  height: 4.286rem;
-`;
+
 export const RentalTime = styled.div`
   display: flex;
   margin-top: 3.429rem;
   align-items: center;
+  span {
+    margin-right: 0.857rem;
+  }
+`;
+export const Range = styled.div`
+  margin: 0 1.714rem;
 `;
 export const Select = styled.select`
   width: 10rem;
