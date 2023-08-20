@@ -3,3 +3,9 @@
 
 # DEMO
 > https://www.book-link.store
+
+## DEMO ID
+- 아이디
+  - test@test.com
+- 비밀번호
+  - asdf1234@ 
