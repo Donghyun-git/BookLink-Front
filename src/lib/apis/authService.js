@@ -76,6 +76,17 @@ export const login = async (user) => {
     return error.response;
   }
 };
+// [ 로그아웃 ]
+export const logout = async () => {
+  try {
+    const response = await axiosJsonInstance.post(`/members/logout`);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return error.response;
+  }
+};
 
 //[ 소셜 로그인 - 카카오 ]
 export const kakaoLogin = async (code) => {
