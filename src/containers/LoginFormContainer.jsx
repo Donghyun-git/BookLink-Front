@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as authActions from '../redux/actions/authActions';
 import { login } from '../lib/apis/authService';
+import { alertForm } from '../utils/alert';
 
 const LoginFormContainer = () => {
   const dispatch = useDispatch();
@@ -22,8 +23,13 @@ const LoginFormContainer = () => {
           ...authActions.login(),
           payload: { ...data.data, isLoggedIn: true },
         });
+        alertForm({
+          title: '로그인 완료',
+          text: '북링크 이용을 시작해보세요',
+          icon: 'success',
+          confirmButtonText: '홈으로 이동',
+        });
 
-        alert(data.message);
         navigate('/');
       } catch (error) {
         console.error(error);
