@@ -6,6 +6,7 @@ import Thumbs from '../../../../images/thumbs.svg';
 import LikeThumbs from '../../../../images/liked_thumbs.svg';
 import DownToggle from '../../../../images/down_toggle.svg';
 import UpToggle from '../../../../images/up_toggle.svg';
+import { useSelector } from 'react-redux';
 import { getDateDistance } from '../../../../utils/date';
 import {
   bookClubsCommentRegister,
@@ -38,6 +39,7 @@ const CommunitiesCommentCardForm = ({
   const contentRef = useRef(null);
   const replyRef = useRef(null);
   const { id } = useParams();
+  const { isLoggedIn, nickname } = useSelector((state) => state.USER);
 
   const [contentEditable, setContentEditable] = useState(false);
   const [replyStatus, setReplyStatus] = useState(false);
@@ -45,6 +47,7 @@ const CommunitiesCommentCardForm = ({
   const [toggleStatus, setToggleStatus] = useState(false);
   const [likeStatus, setLikeStatus] = useState(isLiked);
   const [likeNum, setLikeNum] = useState(like_cnt);
+  const [threePointClick, setThreePointClick] = useState(false);
 
   const onCommentModify = async (e) => {
     let data1;
@@ -152,16 +155,35 @@ const CommunitiesCommentCardForm = ({
           </Styled.CommentInfoHeaderLeft>
           <Styled.CommentInfoHeaderRight>
             <div>
-              <Styled.Button
-                onClick={() => {
-                  setContentEditable(!contentEditable);
-                }}
-              >
-                수정
-              </Styled.Button>
-              <Styled.Button onClick={onCommentDelete}>삭제하기</Styled.Button>
+              {threePointClick && (
+                <>
+                  {writer === nickname ? (
+                    <div>
+                      <Styled.Button
+                        onClick={() => {
+                          setContentEditable(!contentEditable);
+                        }}
+                      >
+                        수정
+                      </Styled.Button>
+                      <Styled.Button onClick={onCommentDelete}>
+                        삭제하기
+                      </Styled.Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Styled.Button>신고하기</Styled.Button>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
-            <img src={threePointUrl} />
+            <img
+              src={threePointUrl}
+              onClick={() => {
+                setThreePointClick((state) => !state);
+              }}
+            />
           </Styled.CommentInfoHeaderRight>
         </Styled.CommentInfoHeader>
         <Styled.CommentInfoMain

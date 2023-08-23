@@ -1,5 +1,7 @@
 import { useState, useContext, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams /*useNavigate*/ } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { alertForm } from '../../../utils/alert';
 import * as Styled from './Styled';
 import {
   bookClubsCommentRegister,
@@ -11,9 +13,11 @@ import { CommunitiesDetailContext } from '../../../context/communitiesDetailCont
 const CommunitiesCommentForm = () => {
   const { id } = useParams();
   const commentRef = useRef(null);
+  //const navigate = useNavigate();
   const { info, setInfo } = useContext(CommunitiesDetailContext);
   const { category, replies, reply_cnt } = info;
   const [sortStatus, setSortStatus] = useState(0); //[기본은 공감순, 0일씨 공감순, 1일씨 최신순]
+  const { isLoggedIn } = useSelector((state) => state.USER);
 
   console.log(info);
 
@@ -28,35 +32,37 @@ const CommunitiesCommentForm = () => {
   const onCommentPost = async (e) => {
     let data1;
     if (e.key === 'Enter') {
-      const Content = commentRef.current.value;
-      if (category === '독서 모임') {
-        const { data } = await bookClubsCommentRegister(Content, id, 0);
-        data1 = data;
-      } else if (category === '독후감') {
-        const { data } = await bookReportCommentRegister(Content, id, 0);
-        data1 = data;
-      } else {
-        const { data } = await freeReportCommentRegister(Content, id, 0);
-        data1 = data;
+      if (isLoggedIn) {
+        const Content = commentRef.current.value;
+        if (category === '독서 모임') {
+          const { data } = await bookClubsCommentRegister(Content, id, 0);
+          data1 = data;
+        } else if (category === '독후감') {
+          const { data } = await bookReportCommentRegister(Content, id, 0);
+          data1 = data;
+        } else {
+          const { data } = await freeReportCommentRegister(Content, id, 0);
+          data1 = data;
+        }
+        console.log(data1);
+        const { replyId, date, content, writer, image } = data1;
+        const replies = [
+          {
+            id: replyId,
+            parent_id: replyId,
+            writer,
+            content,
+            date,
+            image,
+            like_cnt: 0,
+            sub_reply_cnt: 0,
+            isLiked: false,
+            isUpdated: false,
+          },
+          ...info.replies,
+        ];
+        setInfo({ ...info, reply_cnt: reply_cnt + 1, replies });
       }
-      console.log(data1);
-      const { replyId, date, content, writer, image } = data1;
-      const replies = [
-        {
-          id: replyId,
-          parent_id: replyId,
-          writer,
-          content,
-          date,
-          image,
-          like_cnt: 0,
-          sub_reply_cnt: 0,
-          isLiked: false,
-          isUpdated: false,
-        },
-        ...info.replies,
-      ];
-      setInfo({ ...info, reply_cnt: reply_cnt + 1, replies });
     }
   };
   console.log(replies);
