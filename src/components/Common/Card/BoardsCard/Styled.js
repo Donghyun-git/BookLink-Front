@@ -34,10 +34,14 @@ export const BoardsCardHeaderLeft = styled.div`
     height: 50%;
     margin: 0.571rem 0.857rem 0 0;
   }
-  img {
-    height: 1rem;
-    margin: 0.857rem 0.571rem 0 0;
-  }
+`;
+export const BoardsCardHeaderLeftImg = styled.img`
+  height: 1rem;
+  margin: 0.857rem 0.571rem 0 0;
+`;
+export const bookReportImg = styled(BoardsCardHeaderLeftImg)`
+  height: 1.5rem;
+  margin-top: 0.571rem;
 `;
 export const BoardsCardHeaderRight = styled.div`
   img {

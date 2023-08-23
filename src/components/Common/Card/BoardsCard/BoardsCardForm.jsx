@@ -1,9 +1,11 @@
 import * as Styled from './Styled';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from '../../../../utils/date';
+import { useState } from 'react';
 import heartUrl from '../../../../images/grayheart.png';
 import replyUrl from '../../../../images/comment.png';
 import threePointUrl from '../../../../images/threePoints.png';
+import bookReportUrl from '../../../../images/bookReport.png';
 const BoardsCardForm = ({
   category,
   reply_cnt,
@@ -15,6 +17,8 @@ const BoardsCardForm = ({
   id,
 }) => {
   const navigate = useNavigate();
+  //const [threePointClick,setThreePointClick]=useState(false);
+
   return (
     <Styled.BoardsCardDiv
       key={date}
@@ -29,13 +33,21 @@ const BoardsCardForm = ({
       <Styled.BoardsCardContainerDiv>
         <Styled.BoardsCardHeaderDiv>
           <Styled.BoardsCardHeaderLeft>
-            <img src={heartUrl} />
+            {category === '독후감' && (
+              <Styled.bookReportImg src={bookReportUrl} />
+            )}
+            <Styled.BoardsCardHeaderLeftImg src={heartUrl} />
             <div>{like_cnt}</div>
-            <img src={replyUrl} />
+            <Styled.BoardsCardHeaderLeftImg src={replyUrl} />
             <div>{reply_cnt}</div>
           </Styled.BoardsCardHeaderLeft>
           <Styled.BoardsCardHeaderRight>
-            <img src={threePointUrl} />
+            <img
+              src={threePointUrl}
+              onClick={() => {
+                setThreePointClick((state) => !state);
+              }}
+            />
           </Styled.BoardsCardHeaderRight>
         </Styled.BoardsCardHeaderDiv>
         <Styled.BoardsCardInfoDiv>
