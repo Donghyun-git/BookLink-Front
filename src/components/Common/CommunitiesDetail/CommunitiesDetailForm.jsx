@@ -1,5 +1,5 @@
 import * as Styled from './Styled';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CommunitiesDetailContext } from '../../../context/communitiesDetailContext';
 import threePointUrl from '../../../images/threePoints.png';
@@ -10,6 +10,7 @@ import {
   freesDelete,
   bookReportsDelete,
 } from '../../../lib/apis/communities/delete/communitiesDeleteService';
+import { useSelector } from 'react-redux';
 
 const CommunitiesDetailForm = () => {
   const { info } = useContext(CommunitiesDetailContext);
@@ -30,6 +31,8 @@ const CommunitiesDetailForm = () => {
   console.log(info);
   const { id } = useParams();
   const navigate = useNavigate();
+  const { nickname } = useSelector((state) => state.USER);
+  const [threePointClick, setThreePointClick] = useState(false);
 
   const onDelete = async () => {
     if (category === '자유글') {
@@ -86,14 +89,27 @@ const CommunitiesDetailForm = () => {
           </Styled.SubDetail>
         </Styled.SubLeft>
         <Styled.SubRight>
-          <div>
-            <Styled.Button onClick={onModify}>수정</Styled.Button>
-            <Styled.Button onClick={onDelete}>삭제하기</Styled.Button>
-          </div>
-          {/*<div>
-              <Styled.Button>신고하기</Styled.Button>
-             </div>*/}
-          <img src={threePointUrl} />
+          {threePointClick && (
+            <>
+              {writer === nickname ? (
+                <div>
+                  <Styled.Button onClick={onModify}>수정</Styled.Button>
+                  <Styled.Button onClick={onDelete}>삭제하기</Styled.Button>
+                </div>
+              ) : (
+                <div>
+                  <Styled.Button>신고하기</Styled.Button>
+                </div>
+              )}
+            </>
+          )}
+
+          <img
+            src={threePointUrl}
+            onClick={() => {
+              setThreePointClick((state) => !state);
+            }}
+          />
         </Styled.SubRight>
       </Styled.Sub>
       <div>
