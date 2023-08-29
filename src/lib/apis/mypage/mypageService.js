@@ -54,8 +54,9 @@ export const myInfoModify = async (data1) => {
 // [ 마이페이지 나의 활동 ]
 export const getMyBookLink = async () => {
   try {
-    const { status, data } = await axiosJsonInstance.get('/mypage');
-    console.log(data);
+    const { status, data: data1 } = await axiosJsonInstance.get('/mypage');
+    console.log(data1);
+    const { data } = data1;
     return { status, data };
   } catch (error) {
     console.error(error);
