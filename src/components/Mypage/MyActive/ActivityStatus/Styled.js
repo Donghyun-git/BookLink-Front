@@ -6,18 +6,34 @@ export const ActivityStatusDiv = styled.div`
   align-items: center;
   margin-top: 1.93rem;
 `;
+export const ActivityDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 1.714rem;
+`;
+
+export const Tag = styled.div`
+  font-size: 1.143rem;
+`;
+export const Activity = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 23.286rem;
+  flex-wrap: wrap;
+`;
 
 export const StatusBoxDiv = styled.div`
-  width: 12.85714rem;
+  width: 10.286rem;
   border-radius: 0.57143rem;
   border: 1px solid #00e37d;
-  margin: 0 0.855rem;
+  margin: 0.857rem 0.857rem 0 0;
 
   div {
     text-align: center;
     padding: 0.86rem 0;
 
-    h3 {
+    h4 {
       font-size: 0.85714rem;
       font-weight: 500;
     }

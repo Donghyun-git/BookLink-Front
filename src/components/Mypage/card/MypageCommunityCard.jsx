@@ -1,12 +1,49 @@
 import { useState, useCallback, Fragment } from 'react';
 import * as Styled from './Styled';
 
-const MypageCommunityCard = () => {
+const MypageCommunityCard = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClickLeftList = useCallback((id) => {
     setActiveIndex(id);
   }, []);
+  /*
+   "communityHistory": [
+            {
+                "type": null,
+                "postId": 6,
+                "title": "test",
+                "content": "<p>test</p>",
+                "date": "2023-08-07T18:32:52.598783",
+                "location": null,
+                "like_cnt": 0,
+                "reply_cnt": 2,
+                "view_cnt": 31
+            },
+            {
+                "type": null,
+                "postId": 5,
+                "title": "서버 시간 변경",
+                "content": "<p><strong>서버 시간 변경 테스트 ‼️</strong></p>",
+                "date": "2023-08-07T18:15:35.563622",
+                "location": null,
+                "like_cnt": 0,
+                "reply_cnt": 0,
+                "view_cnt": 8
+            },
+            {
+                "type": null,
+                "postId": 2,
+                "title": "로그아웃 구현해주세요...............",
+                "content": "<h1>로그아웃 구현해주세요...............</h1><h2>로그아웃 구현해주세요...............</h2><p><br></p><h3>로그아웃 구현해주세요...............</h3><p><br></p><p>로그아웃 구현해주세요...............</p><p><br></p><p>우와 신기하다</p><p><br></p><p>우와</p><p><br></p><p>우</p><p>와</p>",
+                "date": "2023-08-03T17:14:37.180422",
+                "location": null,
+                "like_cnt": 1,
+                "reply_cnt": 4,
+                "view_cnt": 3
+            }
+        ]
+  */
 
   return (
     <Styled.MypageCard>

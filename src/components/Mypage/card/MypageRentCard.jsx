@@ -1,12 +1,28 @@
 import { useState, useCallback, Fragment } from 'react';
 import * as Styled from './Styled';
 
-const MypageCard = ({ title, list, table }) => {
+const MypageRentCard = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClickLeftList = useCallback((id) => {
     setActiveIndex(id);
   }, []);
+  /*"rentHistory": [
+            {
+                "date": "2023-07-26T16:42:00",
+                "type": "결제",
+                "content": "대여료 결제",
+                "price": 3000,
+                "info_title": "피프티 피플",
+                "info_author": "정세랑",
+                "info_publisher": "창비",
+                "info_owner": "길동아",
+                "info_rent_from": "2023-07-26",
+                "info_rent_to": "2023-08-25",
+                "info_card_name": "초록현대카드",
+                "return_location": null
+            }
+        ], */
 
   return (
     <Styled.MypageCard>
@@ -94,4 +110,4 @@ const MypageCard = ({ title, list, table }) => {
   );
 };
 
-export default MypageCard;
+export default MypageRentCard;
