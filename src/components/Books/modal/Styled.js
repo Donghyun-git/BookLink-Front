@@ -1,24 +1,6 @@
 import styled from 'styled-components';
 
-//[BackDropLayer]
-export const BackDropDiv = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
 //[RentsModal]
-export const BackDropLayer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9997;
-`;
 
 export const RentsModalDiv = styled.div`
   position: fixed;
