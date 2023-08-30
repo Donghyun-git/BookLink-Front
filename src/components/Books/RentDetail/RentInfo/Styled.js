@@ -15,7 +15,6 @@ export const RentInfoImageDiv = styled.div`
   padding: 2.21429rem;
   border-radius: 0.85714rem;
   background: lightgray;
-  z-index: 9999;
 
   img {
     width: 70%;
@@ -43,8 +42,7 @@ export const RentInfoImageDiv = styled.div`
 export const RentInfoContentBody = styled.div`
   display: flex;
   height: 32.57143rem;
-  padding: 1.01429rem 0.85714rem 1.01429rem 6rem;
-  margin-left: -5rem;
+  padding: 1.01429rem 0.85714rem 1.01429rem 1rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;

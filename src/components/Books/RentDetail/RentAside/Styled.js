@@ -259,3 +259,154 @@ export const RentSubmitDiv = styled.div`
     }
   }
 `;
+
+//[ RentApplyModal ]
+export const RentApplyModal = styled.div`
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 2.57143rem;
+  background: #fafbfa;
+  margin: auto; //top: 30.86rem
+  padding: 4.29rem 5.71rem 3.64rem 5.71rem;
+  inset: 0;
+  z-index: 10000;
+`;
+
+export const RentApplyContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  /* margin: 0 auto;
+  text-align: center; */
+`;
+
+export const Title = styled.div`
+  h1 {
+    text-align: center;
+    font-size: 1.143rem;
+    font-weight: 700;
+  }
+`;
+
+export const RentApplyInfo = styled.div`
+  h2 {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+`;
+
+export const RentApplyInfoImgDiv = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+export const MockImg = styled.div`
+  // 이미지 나오기 전 mock 스타일
+  width: 24.125rem;
+  height: 15rem;
+  border-radius: 0.5rem;
+  background: #d9d9d9;
+  margin: 0.75rem 0;
+`;
+
+export const Description = styled.div`
+  p {
+    font-size: 0.625rem;
+    font-weight: 400;
+  }
+
+  &:last-child {
+    margin-top: 1.5rem;
+  }
+`;
+
+export const Caution = styled.div`
+  text-align: center;
+
+  h3 {
+    color: #e30000;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 0.625rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+  }
+`;
+
+export const RentInfoBox = styled.div`
+  ul {
+    li {
+      width: 18rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      h4 {
+        color: #3a3a3a;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      span {
+        color: #3a3a3a;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+
+        span {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+      }
+
+      select {
+        border-radius: 0.5rem;
+        border: 1px solid #d9d9d9;
+        padding: 0.375rem 0.75rem;
+        width: 8.92857rem;
+        height: fit-content;
+        text-align: center;
+        font-size: 1.14286rem;
+        font-weight: 500;
+
+        &:focus {
+          outline: 1px solid #00e37d;
+        }
+      }
+    }
+  }
+`;
+
+export const RentApplyButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  button {
+    width: 100%;
+    padding: 0.75rem 0rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    border: 1px solid #d9d9d9;
+    background: 0;
+
+    span {
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: #e7ecf1;
+    }
+  }
+`;
