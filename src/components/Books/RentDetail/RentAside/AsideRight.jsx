@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import * as Styled from './Styled';
 import { ko } from 'date-fns/locale';
+import BackDrop from '../../../Common/BackDropLayer/BackDrop';
+import { useModal } from '../../../../hooks/Modal/useModal';
 
 const AsideRight = ({
+  title,
   rentalFee,
   rentLocation,
   rentMethod,
@@ -10,6 +13,12 @@ const AsideRight = ({
   minDate,
 }) => {
   const [durationOptions, setDurationOptions] = useState([]);
+  const [selectDurate, setSelectDurate] = useState(0);
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal(false);
+
+  const handleSelectDurateChange = (e) => {
+    setSelectDurate(e.target.value);
+  };
 
   useEffect(() => {
     const durationArray = [];
@@ -41,7 +50,11 @@ const AsideRight = ({
           <label htmlFor="rentDuration" className="hidden">
             대여 기간 선택
           </label>
-          <select name="rentDuration" id="rentDuration">
+          <select
+            name="rentDuration"
+            id="rentDuration"
+            onChange={handleSelectDurateChange}
+          >
             <option value="대여 기간 선택">대여 기간 선택</option>
             {durationOptions.map((count) => {
               return (
@@ -57,11 +70,21 @@ const AsideRight = ({
           <span>{rentalFee.toLocaleString(ko)}원</span>
         </div>
         <div>
-          <button>
+          <button onClick={() => handleOpenModal(selectDurate)}>
             <span>대여 신청하기</span>
           </button>
         </div>
       </Styled.RentSubmitDiv>
+      {isModalOpen && (
+        <BackDrop
+          closeModal={handleCloseModal}
+          target={'chat'}
+          duration={durationOptions}
+          title={title}
+          rentalFee={rentalFee}
+          selectDate={selectDurate}
+        />
+      )}
     </Styled.AsideRightDiv>
   );
 };
