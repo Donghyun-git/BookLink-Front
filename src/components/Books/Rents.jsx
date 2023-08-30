@@ -1,26 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useRentContext } from '../../context/RentContext/rentContext';
 import * as Styled from './Styled';
-import BackDrop from './modal/BackDrop';
+import BackDrop from '../Common/BackDropLayer/BackDrop';
 import { useGoToMap } from '../../hooks/Map/useGotoMap';
 import { useNavigatePage } from '../../hooks/useNavigatePage';
 import { getAllRent } from '../../lib/apis/rentService';
 import { generateUniqueKey } from '../../utils/generateUnique';
+import { useModal } from '../../hooks/Modal/useModal';
 
 const Rents = () => {
   const { state, dispatch } = useRentContext();
   const { rents } = state;
   const { goToMap } = useGoToMap();
   const { navigateToPage } = useNavigatePage();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openRentsModal = useCallback(() => {
-    setIsModalOpen(true);
-  }, []);
-
-  const closeRentsModal = useCallback(() => {
-    setIsModalOpen(false);
-  }, []);
+  const { isModalOpen, handleOpenModal, handleCloseModal } = useModal(false);
 
   useEffect(() => {
     (async () => {
@@ -49,29 +42,27 @@ const Rents = () => {
             publisher,
           } = card;
           return (
-            <Styled.CardDiv
-              key={generateUniqueKey()}
-              onClick={() => navigateToPage(`/rent/${id}`)}
-            >
+            <Styled.CardDiv key={generateUniqueKey()}>
               <Styled.RentsCardContainer>
-                <Styled.CardContentsDiv>
-                  <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
-                  <Styled.ContentsAuthorDiv>
-                    <Styled.ContentSpan>저자</Styled.ContentSpan>
-                    <Styled.ContentSpanRight>{author}</Styled.ContentSpanRight>
-                  </Styled.ContentsAuthorDiv>
-                  <Styled.ContentsPublishDiv>
-                    <Styled.ContentSpan>출판</Styled.ContentSpan>
-                    <Styled.ContentSpanRight>
-                      {publisher}
-                    </Styled.ContentSpanRight>
-                  </Styled.ContentsPublishDiv>
-                </Styled.CardContentsDiv>
-                <Styled.CardImageDiv>
-                  <Styled.CardImage src={cover} alt="책 이미지" />
-                </Styled.CardImageDiv>
-
-                <Styled.CardFooterDiv>
+                <div onClick={() => navigateToPage(`/rent/${id}`)}>
+                  <Styled.CardContentsDiv>
+                    <Styled.ContentsTitleDiv>{title}</Styled.ContentsTitleDiv>
+                    <Styled.ContentsAuthorDiv>
+                      <Styled.ContentSpan>저자</Styled.ContentSpan>
+                      <Styled.ContentSpanRight>
+                        {author}
+                      </Styled.ContentSpanRight>
+                    </Styled.ContentsAuthorDiv>
+                    <Styled.ContentsPublishDiv>
+                      <Styled.ContentSpan>출판</Styled.ContentSpan>
+                      <Styled.ContentSpanRight>
+                        {publisher}
+                      </Styled.ContentSpanRight>
+                    </Styled.ContentsPublishDiv>
+                  </Styled.CardContentsDiv>
+                  <Styled.CardImageDiv>
+                    <Styled.CardImage src={cover} alt="책 이미지" />
+                  </Styled.CardImageDiv>
                   <ul>
                     <Styled.RentsLi>
                       <Styled.RentsLiSpan>대여료</Styled.RentsLiSpan>
@@ -82,8 +73,11 @@ const Rents = () => {
                       <span>최대 {rentDuringDate}일</span>
                     </Styled.RentsLi>
                   </ul>
+                </div>
+
+                <Styled.CardFooterDiv>
                   <Styled.RentsCardFooterButtonDiv>
-                    <Styled.RentsCardButton onClick={openRentsModal}>
+                    <Styled.RentsCardButton onClick={() => handleOpenModal()}>
                       대여정보 확인하기
                     </Styled.RentsCardButton>
                     <Styled.RentsCardButton
@@ -100,7 +94,9 @@ const Rents = () => {
           );
         })}
       </Styled.BooksComponentDiv>
-      {isModalOpen && <BackDrop onClose={closeRentsModal} />}
+      {isModalOpen && (
+        <BackDrop closeModal={handleCloseModal} target={'rent'} />
+      )}
     </Styled.RentsComponentDiv>
   );
 };
