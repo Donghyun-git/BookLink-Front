@@ -1,6 +1,6 @@
 import * as Styled from './Styled';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   bookClubList,

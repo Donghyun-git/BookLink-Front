@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from '../../config/axios';
+import { axiosJsonInstance } from '../../common';
 export const bookClubsModify = async (title, content, id) => {
   try {
     const { data: data1, status } = await axiosJsonInstance.patch(

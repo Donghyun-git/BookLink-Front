@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from '../../config/axios';
+import { axiosJsonInstance } from '../../common';
 import { dateFormat } from '../../../../utils/date';
 export const bookClubsDetail = async (id) => {
   try {

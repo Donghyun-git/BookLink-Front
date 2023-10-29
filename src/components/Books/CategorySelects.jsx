@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import * as Styled from './Styled';
-import { books } from '../../lib/books/books';
+import { books } from '../../constants/books';
 import searchIcon from '../../images/search_icon.svg';
 
 const CategorySelects = ({ handleCategorySelect, handleKeyDownSearch }) => {

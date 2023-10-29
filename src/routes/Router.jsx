@@ -3,7 +3,6 @@ import Layout from '../components/Layout';
 import MainPage from '../pages/Main';
 import LoginPage from '../pages/Login/Login';
 import RegisterPage from '../pages/Register';
-import Mypage from '../pages/Mypage';
 import MyInfoModifyPage from '../pages/MyInfoModify';
 import BooksPage from '../pages/Books/Books';
 import BookDetailPage from '../pages/BookDetail';
@@ -23,6 +22,7 @@ import AuthPage from '../pages/Auth';
 import Map from '../pages/Map';
 import RentDetail from '../pages/RentDetail';
 import NotFound from '../pages/NotFound/NotFound';
+import MyBookLink from '../pages/Mypage';
 
 function Router() {
   return (
@@ -31,13 +31,13 @@ function Router() {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/mybooklink" element={<Mypage />}></Route>
+        <Route path="/mybooklink" element={<MyBookLink />} />
         <Route path="/mybooklink/modify" element={<MyInfoModifyPage />} />
         <Route path="/books" element={<BooksPage />} />
-        <Route path="/books/:isbn" element={<BookDetailPage />}></Route>
+        <Route path="/books/:isbn" element={<BookDetailPage />} />
         <Route path="/books/register" element={<BookRegisterPage />} />
-        <Route path="/books/library-info" element={<Map />}></Route>
-        <Route path="/rent/:id" element={<RentDetail />}></Route>
+        <Route path="/books/library-info" element={<Map />} />
+        <Route path="/rent/:id" element={<RentDetail />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/communities/book-clubs" element={<BookClubsPage />} />
@@ -70,7 +70,7 @@ function Router() {
           path="/communities/write"
           element={<CommunitiesRegisterPage />}
         />
-        <Route path="*" element={<NotFound />}></Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/auth" element={<AuthPage />} />
     </Routes>

@@ -1,4 +1,4 @@
-import { axiosJsonInstance, axiosFormInstance } from './config/axios';
+import { axiosJsonInstance, axiosFormInstance } from './common';
 import { VITE_LIBRARY_SERVER_URL } from '../../../env.config';
 import axios from 'axios';
 

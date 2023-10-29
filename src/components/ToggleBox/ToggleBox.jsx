@@ -1,7 +1,7 @@
 import { useToggleList } from '../../hooks/Header/useToggleList';
-import * as Styled from './Styled';
+import * as S from './style';
 
-const UserToggle = ({ active }) => {
+const ToggleBox = ({ active }) => {
   const {
     isHovered,
     handleMouseEnter,
@@ -12,7 +12,7 @@ const UserToggle = ({ active }) => {
   } = useToggleList();
 
   return (
-    <Styled.UserToggleDiv active={active}>
+    <S.ToggleBox active={active}>
       <ul>
         <li>
           <button onClick={handleNavigateMypage}>마이페이지</button>
@@ -42,8 +42,8 @@ const UserToggle = ({ active }) => {
           </button>
         </li>
       </ul>
-    </Styled.UserToggleDiv>
+    </S.ToggleBox>
   );
 };
 
-export default UserToggle;
+export default ToggleBox;

@@ -1,6 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { useUserStore } from '../../store/useUserStore';
+import { loginPostFetch } from '../../lib/apis/auth/loginPostFetch';
 import * as env from '../../../env.config';
 import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
@@ -8,24 +13,38 @@ import Logo from '../../images/BookLink_Logo.svg';
 import showPasswordImg from '../../images/password_eye.svg';
 import kakaoLogo from '../../images/kakao.svg';
 
-const LoginForm = ({ onSubmit }) => {
-  const [showPassword, setShowPassword] = useState(false);
+const LoginForm = () => {
+  const navigate = useNavigate();
 
-  const handleShowPassword = useCallback(() => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  }, []);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const setIsLogin = useUserStore((state) => state.setIsLogin);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
     watch,
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
-  const watchEmail = watch('email');
-  const watchPassword = watch('password');
+  const handleLogin = handleSubmit(async () => {
+    try {
+      const res = await loginPostFetch(getValues());
+      setUserInfo(res.data.data);
+      setIsLogin(true);
+      alert('로그인 성공');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  const handleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <Styled.LoginDiv>
@@ -33,7 +52,7 @@ const LoginForm = ({ onSubmit }) => {
         <Styled.Img src={Logo} />
       </Styled.LogoDiv>
       <Styled.LoginFormDiv>
-        <Styled.LoginForm onSubmit={handleSubmit(onSubmit)}>
+        <Styled.LoginForm onSubmit={handleLogin}>
           <Styled.InputDiv>
             <Styled.Label htmlFor="email">아이디</Styled.Label>
             <Styled.LoginInput
@@ -42,7 +61,7 @@ const LoginForm = ({ onSubmit }) => {
               placeholder="example@gmail.com"
               {...register('email')}
             />
-            {watchEmail && errors.email && (
+            {watch('email') && errors.email && (
               <Styled.ErrorMessage>{errors.email.message}</Styled.ErrorMessage>
             )}
           </Styled.InputDiv>
@@ -58,7 +77,7 @@ const LoginForm = ({ onSubmit }) => {
               src={showPasswordImg}
               onClick={handleShowPassword}
             />
-            {watchPassword && errors.password && (
+            {watch('password') && errors.password && (
               <Styled.ErrorMessage>
                 {errors.password.message}
               </Styled.ErrorMessage>

@@ -1,8 +1,8 @@
-import { axiosJsonInstance } from '../config/axios';
+import { axiosJsonInstance } from '../common';
 
 export const bookClubList = async () => {
   try {
-    const { data: data1, status } = await axiosJsonInstance.get(
+    const { data: data1 } = await axiosJsonInstance.get(
       `/communities/book-club`
     );
     const { data: data } = data1;

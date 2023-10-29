@@ -1,16 +1,14 @@
 import axios from 'axios';
-import { VITE_SERVER_URL } from '../../../../env.config';
 
 const getAxiosInstance = (contentType) => {
   const config = {
     baseURL: '/api/v1',
     headers: {
-      //'Access-Control-Allow-Origin': '*',
-      'content-Type': contentType,
+      'Content-Type': contentType,
     },
     withCredentials: true,
   };
-  console.log(VITE_SERVER_URL);
+
   const instance = axios.create(config);
   instance.defaults.timeout = 12000;
 

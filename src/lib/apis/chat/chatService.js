@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from '../config/axios';
+import { axiosJsonInstance } from '../common';
 
 export const getChatRooms = async () => {
   try {

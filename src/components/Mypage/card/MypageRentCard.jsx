@@ -1,112 +1,104 @@
-import { useState, useCallback, Fragment } from 'react';
-import * as Styled from './Styled';
+import { useState } from 'react';
+import * as S from './style';
 
-const MypageRentCard = ({ data }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+import { ListGroup } from '../ListGroup';
+import { ListButton } from '../ListButton';
+import { ListInfo } from '../ListInfo';
 
-  const handleClickLeftList = useCallback((id) => {
-    setActiveIndex(id);
-  }, []);
-  /*"rentHistory": [
-            {
-                "date": "2023-07-26T16:42:00",
-                "type": "결제",
-                "content": "대여료 결제",
-                "price": 3000,
-                "info_title": "피프티 피플",
-                "info_author": "정세랑",
-                "info_publisher": "창비",
-                "info_owner": "길동아",
-                "info_rent_from": "2023-07-26",
-                "info_rent_to": "2023-08-25",
-                "info_card_name": "초록현대카드",
-                "return_location": null
-            }
-        ], */
+const MypageRentCard = ({ title, list }) => {
+  const [rentListValue, setRentListValue] = useState('1');
+  const [communityListValue, setCommunityListValue] = useState('1');
+
+  const handleChangeRentListValue = (value) => {
+    setRentListValue(value);
+  };
+
+  const handleChangeCommunityListValue = (value) => {
+    setCommunityListValue(value);
+  };
 
   return (
-    <Styled.MypageCard>
-      <Styled.MypageCardTitle>
-        <h3>대여</h3>
-      </Styled.MypageCardTitle>
-      <Styled.ListDiv>
-        <Styled.LeftList>
-          <ul>
-            <li>
-              <span>결제 내역</span>
-            </li>
-            <li>
-              <span>연체된 도서</span>
-            </li>
-          </ul>
-        </Styled.LeftList>
-        <Styled.RightList>
-          <table>
-            <thead>
-              <tr>
-                {/* {table.map((title, idx) => {
-                  return (
-                    <Fragment key={idx}>
-                      <th
-                        className={
-                          (title === '내용' || '결제정보') && 'content'
-                        }
-                      >
-                        {title}
-                      </th>
-                    </Fragment>
-                  );
-                })} */}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {/* {table.map((title, idx) => {
-                  return (
-                    <Fragment key={idx}>
-                      <td
-                        className={
-                          (title === '내용' || '결제정보') && 'content'
-                        }
-                      >
-                        {title}
-                      </td>
-                    </Fragment>
-                  );
-                })} */}
-              </tr>
-
-              {/* <tr>
-                <td>
-                  <strong>1</strong>
-                </td>
-                <td>
-                  <span>후기</span>
-                </td>
-                <td>
-                  <span>세이노의 가르침</span>
-                </td>
-                <td className="content">
-                  <p>
-                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                  </p>
-                </td>
-                <td>
-                  <span>2023.07.26 16:42</span>
-                </td>
-                <td>
-                  <span>1</span>
-                </td>
-                <td>
-                  <span>2</span>
-                </td>
-              </tr> */}
-            </tbody>
-          </table>
-        </Styled.RightList>
-      </Styled.ListDiv>
-      <Styled.Pagination>1</Styled.Pagination>
-    </Styled.MypageCard>
+    <S.Wrapper>
+      <S.Contents>
+        <S.MypageCardTitle>
+          <h3>{title}</h3>
+        </S.MypageCardTitle>
+        <S.ListDiv>
+          <S.LeftList>
+            {title === '대여' ? (
+              <ListGroup
+                name="rent"
+                value={rentListValue}
+                onChange={handleChangeRentListValue}
+              >
+                <ListButton label="결제 내역" value="1" />
+                <ListButton label="연체된 도서" value="2" />
+              </ListGroup>
+            ) : (
+              <ListGroup
+                name="rent"
+                value={communityListValue}
+                onChange={handleChangeCommunityListValue}
+              >
+                <ListButton label="후기" value="1" />
+                <ListButton label="자유글" value="2" />
+                <ListButton label="독후감" value="3" />
+                <ListButton label="독서모임" value="4" />
+                <ListButton label="댓글" value="5" />
+              </ListGroup>
+            )}
+          </S.LeftList>
+          <S.RightList>
+            {title === '대여' && rentListValue === '1' ? (
+              <ListInfo count={6} list={list}>
+                <li>
+                  <span>no</span>
+                </li>
+                <li>
+                  <span>결제일</span>
+                </li>
+                <li>
+                  <span>유형</span>
+                </li>
+                <li>
+                  <span>내용</span>
+                </li>
+                <li>
+                  <span>금액</span>
+                </li>
+                <li className="price-info">
+                  <span>결제정보</span>
+                </li>
+              </ListInfo>
+            ) : title === '대여' && rentListValue === '2' ? (
+              <ListInfo count={7}>
+                <li>
+                  <span>no</span>
+                </li>
+                <li>
+                  <span>상태</span>
+                </li>
+                <li>
+                  <span>도서명</span>
+                </li>
+                <li>
+                  <span>대여한 책방</span>
+                </li>
+                <li>
+                  <span>도서 반납일</span>
+                </li>
+                <li>
+                  <span>추가 대여로</span>
+                </li>
+                <li>
+                  <span>반납 장소</span>
+                </li>
+              </ListInfo>
+            ) : null}
+          </S.RightList>
+        </S.ListDiv>
+      </S.Contents>
+    </S.Wrapper>
   );
 };
 

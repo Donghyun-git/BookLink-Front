@@ -3,16 +3,12 @@ import * as Styled from './Styled';
 import logoutImage from '../../images/logout.svg';
 import updateImage from '../../images/update.svg';
 
-const Profile = ({
-  name,
-  email,
-  address,
-  image,
-  recordCnt,
-  rentAvailableCnt,
-  rentingCnt,
-}) => {
+const Profile = ({ data }) => {
   const { pathname } = useLocation();
+  console.log(data);
+  const { name, email, address, image } = data.profile;
+  const { register, report } = data.myBook;
+  const { renting } = data.myRent;
 
   return (
     <Styled.ProfileMain>
@@ -39,13 +35,13 @@ const Profile = ({
           <Styled.ProfileActiveLabel>
             <ul>
               <li>
-                <span>기록한 도서 {recordCnt}</span>
+                <span>기록한 도서 {report}</span>
               </li>
               <li>
-                <span>대여 가능한 도서 {rentAvailableCnt}</span>
+                <span>대여 가능한 도서 {register}</span>
               </li>
               <li>
-                <span>대여중인 도서 {rentingCnt}</span>
+                <span>대여중인 도서 {renting}</span>
               </li>
             </ul>
           </Styled.ProfileActiveLabel>

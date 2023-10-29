@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-export const UserToggleDiv = styled.div`
-  pointer-events: ${({ active }) => {
-    console.log('로그인여부', active);
-    return active === 'true' ? 'auto' : 'none';
-  }};
-  ul {
+export const ToggleBox = styled.div`
+  pointer-events: ${({ active }) => (active === 'true' ? 'auto' : 'none')};
+
+  & ul {
     border: 2px solid transparent;
     border-radius: 0.571rem;
     background-image: linear-gradient(#fff, #fff),
@@ -22,7 +20,7 @@ export const UserToggleDiv = styled.div`
     align-items: center;
     flex-direction: column;
 
-    li {
+    & li {
       width: 11.42857rem;
 
       margin: 0 0.61rem;
@@ -35,13 +33,13 @@ export const UserToggleDiv = styled.div`
       &:hover button {
         color: #003c74;
 
-        img {
+        & img {
           fill: #003c74;
           color: #003c74;
         }
       }
 
-      button {
+      & button {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -55,12 +53,12 @@ export const UserToggleDiv = styled.div`
         background: 0;
         border: 0;
 
-        img {
+        & img {
           width: 1.14286rem;
           height: 1rem;
         }
 
-        span {
+        & span {
           margin-right: 0.57rem;
         }
       }

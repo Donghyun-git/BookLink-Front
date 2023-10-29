@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from './config/axios';
+import { axiosJsonInstance } from './common';
 
 //[ 대여 정보 ]
 export const getAllRent = async () => {

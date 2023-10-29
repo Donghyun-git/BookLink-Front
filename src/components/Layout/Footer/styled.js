@@ -12,7 +12,7 @@ export const FooterMain = styled.footer`
 //[ FooterContainer ]
 export const FooterContainer = styled.div`
   margin: 0 auto;
-  padding: 6rem 17.14rem;
+  padding: 6rem 5.14rem;
   width: 103.71429rem;
   min-height: 22.28593rem;
   display: flex;

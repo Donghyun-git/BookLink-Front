@@ -1,11 +1,11 @@
-import MypageMain from '../../components/Layout/Mypage/MypageMain';
+import { Mypage } from '../../components/Layout/Mypage';
 
-function Mypage() {
+function MyBookLink() {
   return (
     <>
-      <MypageMain />
+      <Mypage />
     </>
   );
 }
 
-export default Mypage;
+export default MyBookLink;

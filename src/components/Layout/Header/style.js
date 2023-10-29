@@ -3,20 +3,18 @@ import { Link } from 'react-router-dom';
 import ToggleLogo from '../../../images/select_arrow.png';
 
 // [ Header(index)]
-export const Header = styled.header`
+export const Wrapper = styled.header`
   width: 100%;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-`;
 
-// [ HeaderContainer ]
-export const HeaderContainer = styled.div`
-  width: 102.857rem;
-  margin: 0 auto;
-  /* padding: 1rem 2.286rem; */
-  text-align: center;
-  display: flex;
-  align-items: center;
+  & .container {
+    width: 102.857rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const LogoDiv = styled.div`

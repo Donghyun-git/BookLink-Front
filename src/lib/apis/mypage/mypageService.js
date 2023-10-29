@@ -1,4 +1,4 @@
-import { axiosJsonInstance, axiosFormInstance } from '../config/axios';
+import { axiosJsonInstance, axiosFormInstance } from '../common';
 
 export const myInfo = async () => {
   try {
@@ -48,18 +48,5 @@ export const myInfoModify = async (data1) => {
     return { data, status };
   } catch (error) {
     console.log(error.response);
-  }
-};
-
-// [ 마이페이지 나의 활동 ]
-export const getMyBookLink = async () => {
-  try {
-    const { status, data: data1 } = await axiosJsonInstance.get('/mypage');
-    console.log(data1);
-    const { data } = data1;
-    return { status, data };
-  } catch (error) {
-    console.error(error);
-    throw new Error(error.response);
   }
 };

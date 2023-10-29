@@ -56,26 +56,9 @@ const ChatForm = ({ room_id = 1, sender = '캐치카페' }) => {
         console.error(error.response);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stompClient]);
 
-  /*return (
-    <div>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message.content}</div>
-        ))}
-      </div>
-      <div>
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </div>
-  );
-};*/
   return (
     <Styled.ChatContainer>
       <Styled.Header>1:1 채팅</Styled.Header>

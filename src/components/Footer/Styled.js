@@ -7,7 +7,7 @@ export const FooterContents = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 6.43rem;
+  margin-left: 10rem;
 `;
 
 export const FooterHeaderNavDiv = styled.div``;

@@ -1,8 +1,8 @@
-import { axiosJsonInstance } from './config/axios';
+import { axiosJsonInstance } from './common';
 
 export const HeaderBookSearch = async (keyword, page) => {
   try {
-    const { data: data1, status } = await axiosJsonInstance.get(
+    const { data: data1 } = await axiosJsonInstance.get(
       `/?search=${keyword}&page=${page}`
     );
     const { data } = data1;

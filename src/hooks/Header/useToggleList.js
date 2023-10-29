@@ -2,14 +2,17 @@ import { useState, useCallback } from 'react';
 import { logout } from '../../lib/apis/authService';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import * as authActions from '../../redux/actions/authActions';
+
+import { useUserStore } from '../../store/useUserStore';
 import { chatIn } from '../../redux/actions/chatActions';
-import { persistor } from '../../main';
-import { alertForm } from '../../utils/alert';
+
 export const useToggleList = () => {
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { isChatIn } = useSelector((state) => state.CHAT);
+
+  const removeUserInfo = useUserStore((state) => state.removeUserInfo);
 
   const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -25,20 +28,20 @@ export const useToggleList = () => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-  const handleLogOut = useCallback(async () => {
-    const { data } = await logout();
-    console.log(data);
-    dispatch(authActions.logout());
+
+  const handleLogOut = async () => {
+    await logout();
+
     handleClickProfileList();
-    alertForm({
-      title: '로그아웃 완료',
-      text: '로그아웃이 정상적으로 완료됐습니다',
-      icon: 'success',
-      confirmButtonText: '다른 계정으로 로그인 하기',
-    });
-    persistor.purge();
+
+    removeUserInfo();
+    useUserStore.persist.clearStorage();
+
+    alert('로그아웃 되었습니다.');
+
     navigate('/');
-  }, [dispatch, handleClickProfileList, navigate]);
+    return;
+  };
 
   const handleNavigateMypage = useCallback(() => {
     navigate('/mybooklink');

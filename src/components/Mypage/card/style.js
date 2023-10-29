@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const MypageCard = styled.div`
+export const Wrapper = styled.div``;
+export const Contents = styled.div`
   display: flex;
-  width: 76.71429rem;
+  width: 106.71429rem;
   margin-top: 2.57rem;
   padding-bottom: 0px;
   flex-direction: column;
@@ -20,7 +21,7 @@ export const MypageCardTitle = styled.div`
   justify-content: center;
   align-items: center;
   align-self: stretch;
-  border-bottom: 0.5px solid #848484;
+  border-bottom: 0.5px solid #dedede;
 
   h3 {
     text-align: center;
@@ -35,8 +36,8 @@ export const ListDiv = styled.div`
 `;
 
 export const LeftList = styled.div`
-  ul {
-    li {
+  & div {
+    & div {
       border-radius: 0rem 0.28571rem 0.28571rem 0rem;
       padding: 0.85714rem 0rem;
       background: #fff;
@@ -70,49 +71,8 @@ export const LeftList = styled.div`
 `;
 
 export const RightList = styled.div`
-  padding-left: 0.86rem;
-  table {
-    .content {
-      width: 24.42857rem;
-    }
-    thead {
-      th {
-        color: #848484;
-        text-align: center;
-        font-size: 0.85714rem;
-        font-weight: 400;
-        width: 24.42857rem;
-
-        &:first-child {
-          width: 2.571rem;
-        }
-      }
-    }
-
-    tbody {
-      td {
-        text-align: center;
-      }
-      span {
-        color: #000;
-        font-size: 0.85714rem;
-        font-weight: 400;
-      }
-      p {
-        color: #000;
-        font-size: 0.85714rem;
-        font-weight: 400;
-        max-width: 24.42857rem;
-        margin: 0 auto;
-      }
-
-      strong {
-        color: #848484;
-        font-size: 0.85714rem;
-        font-weight: 400;
-      }
-    }
-  }
+  width: 100%;
+  padding: 0 0.86rem;
 `;
 
 export const Pagination = styled.div`

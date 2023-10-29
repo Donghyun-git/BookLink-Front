@@ -1,4 +1,4 @@
-import { axiosJsonInstance } from './config/axios';
+import { axiosJsonInstance } from './common';
 import axios from 'axios';
 
 // [ 회원가입 ]
