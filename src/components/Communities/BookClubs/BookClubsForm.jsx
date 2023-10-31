@@ -1,6 +1,6 @@
 import * as Styled from './Styled';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { bookClubList } from '../../../lib/apis/communities/communitiesService';
 
@@ -15,7 +15,7 @@ const BookClubsForm = () => {
   const navigate = useNavigate();
 
   const inputRef = useRef(null);
-  let { data: bookClubData } = useQuery('bookclubs', bookClubList);
+  let { data: bookClubData } = useQuery(['bookclubs'], bookClubList);
   const [bookClubs, setBookClubs] = useState(bookClubData);
 
   /*if (select && select !== '전체보기') {

@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom';
 
 import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const BookClubsDetailForm = () => {
   const { id } = useParams();

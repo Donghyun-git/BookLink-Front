@@ -18,11 +18,16 @@ import BoardsCardForm from '../Common/Card/BoardsCard/BoardsCardForm';
 import moment from 'moment';
 
 const CommunitiesForm = () => {
-  const { data: bookClubData } = useQuery('bookclubs', bookClubList);
-  const { data: bookData } = useQuery('books', bookReports);
-  const { data: freeData } = useQuery('frees', freeReports);
+  const { data: bookClubData } = useQuery(['bookclubs'], bookClubList);
+  const { data: bookData } = useQuery(['books'], bookReports);
+  const { data: freeData } = useQuery(['frees'], freeReports);
   const boardData = [...bookData, ...freeData];
-
+  const weeklyData = boardData.filter(
+    ({ date }) =>
+      Date.parse(moment().startOf('week')) <= Date.parse(date) &&
+      Date.parse(date) <= Date.parse(moment().endOf('week'))
+  );
+  console.log(weeklyData);
   return (
     <Styled.MainContainerDiv>
       <Styled.MainContentsDiv>
@@ -37,43 +42,46 @@ const CommunitiesForm = () => {
             {/*<Styled.link href="/communities/popular">전체보기</Styled.link>*/}
           </Styled.TagDiv>
           <Styled.PopularContentSDiv>
-            {boardData
-              .filter(
-                ({ date }) =>
-                  Date.parse(moment().startOf('week')) <= Date.parse(date) &&
-                  Date.parse(date) <= Date.parse(moment().endOf('week'))
-              )
-              .slice(0, 4)
-              .sort(
-                (a, b) =>
-                  b.view_cnt + 2 * b.like_cnt - (a.view_cnt + 2 * a.like_cnt)
-              )
-              .map(
-                ({
-                  id,
-                  writer,
-                  category,
-                  like_cnt,
-                  reply_cnt,
-                  date,
-                  title,
-                  content,
-                }) => {
-                  return (
-                    <BoardsCardForm
-                      key={date}
-                      category={category}
-                      writer={writer}
-                      like_cnt={like_cnt}
-                      reply_cnt={reply_cnt}
-                      date={date}
-                      title={title}
-                      content={content}
-                      id={id}
-                    />
-                  );
-                }
-              )}
+            {weeklyData.length ? (
+              <>
+                {weeklyData
+                  .slice(0, 4)
+                  .sort(
+                    (a, b) =>
+                      b.view_cnt +
+                      2 * b.like_cnt -
+                      (a.view_cnt + 2 * a.like_cnt)
+                  )
+                  .map(
+                    ({
+                      id,
+                      writer,
+                      category,
+                      like_cnt,
+                      reply_cnt,
+                      date,
+                      title,
+                      content,
+                    }) => {
+                      return (
+                        <BoardsCardForm
+                          key={date}
+                          category={category}
+                          writer={writer}
+                          like_cnt={like_cnt}
+                          reply_cnt={reply_cnt}
+                          date={date}
+                          title={title}
+                          content={content}
+                          id={id}
+                        />
+                      );
+                    }
+                  )}
+              </>
+            ) : (
+              <p>이번주 게시글이 아직 없어요!</p>
+            )}
           </Styled.PopularContentSDiv>
         </Styled.PopularDiv>
         <Styled.BookClubsDiv>

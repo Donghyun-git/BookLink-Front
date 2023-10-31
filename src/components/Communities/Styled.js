@@ -73,6 +73,10 @@ export const ContentsDiv = styled.div`
 `;
 export const PopularContentSDiv = styled(ContentsDiv)`
   height: 33rem;
+  > p {
+    margin-left: 44.428rem;
+    padding-top: 16.5rem;
+  }
 `;
 export const BookClubsContentSDiv = styled(ContentsDiv)`
   height: 20rem;
