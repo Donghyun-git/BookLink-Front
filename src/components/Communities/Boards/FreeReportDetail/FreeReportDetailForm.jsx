@@ -14,7 +14,7 @@ import CommunitiesCommentForm from '../../../Common/CommunitiesComment/Communiti
 
 import { CommunitiesDetailContext } from '../../../../context/communitiesDetailContext';
 
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const FreeReportDetailForm = () => {
   const { id } = useParams();

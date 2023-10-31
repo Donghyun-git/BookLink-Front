@@ -7,13 +7,13 @@ import {
 } from '../../../styles/globalStyled';
 import * as Styled from './Styled';
 import Profile from '../../Profile/Profile';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { myInfo, myInfoModify } from '../../../lib/apis/mypage/mypageService';
 const MyInfoModifyForm = () => {
   const { register, handleSubmit, setValue, getValues, reset } = useForm({
     mode: 'onChange',
   });
-  const { data } = useQuery('myInfo', myInfo);
+  const { data } = useQuery(['myInfo'], myInfo);
   const [imgUrl, setImgUrl] = useState('');
   const [imgName, setImgName] = useState('');
 
