@@ -1,7 +1,7 @@
 //import React from 'react'
 import * as Styled from './Styled';
-
-import { useQuery } from 'react-query';
+import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import {
   freeReports,
@@ -16,31 +16,18 @@ import BoardsCardForm from '../../Common/Card/BoardsCard/BoardsCardForm';
 import openbook from '../../../images/openbook.png';
 
 const BoardsForm = () => {
-  const { data: bookData } = useQuery('books', bookReports);
-  const { data: freeData } = useQuery('frees', freeReports);
+  const { data: bookData } = useQuery(['books'], bookReports);
+  const { data: freeData } = useQuery(['frees'], freeReports);
 
   const inputRef = useRef(null);
-  const [boardList, setBoardList] = useState(freeData);
-  //const [freeList, setFreeList] = useState(freeData);
-  //const [bookReportList, setBookReportList] = useState(bookData);
+  const [boardList, setBoardList] = useState([]);
+
   const [select, setSelect] = useState(0); //상태가 0일시 자유글, 상태가 1일시 독후감
 
   const navigate = useNavigate();
 
-  /*const getFrees = async () => {
-    let data = await freeReports();
-    if (searchWord) {
-      data = data.filter((info) => info.title.includes(searchWord));
-    }
-    setFreeList(data);
-  };
-  const getBookReports = async () => {
-    let data = await bookReports();
-    if (searchWord) {
-      data = data.filter((info) => info.title.includes(searchWord));
-    }
-    setBookReportList(data);
-  };*/
+  console.log(boardList);
+
   const onSelectHandler = (e) => {
     if (e.target.value === 0) {
       setSelect(0);
@@ -60,6 +47,10 @@ const BoardsForm = () => {
       setBoardList(filteredData);
     }
   };
+
+  useEffect(() => {
+    setBoardList(freeData);
+  }, [freeData]);
 
   return (
     <Styled.MainContainerDiv>
