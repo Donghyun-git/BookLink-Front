@@ -11,9 +11,9 @@ export const useUserStore = create()(
           ...state,
         }),
 
-      setIsLogin: () =>
+      setIsLogin: (state) =>
         set({
-          isLogin: true,
+          isLogin: state,
         }),
 
       removeUserInfo: () =>

@@ -16,10 +16,9 @@ import kakaoLogo from '../../images/kakao.svg';
 const LoginForm = () => {
   const navigate = useNavigate();
 
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
-  const setIsLogin = useUserStore((state) => state.setIsLogin);
   const [showPassword, setShowPassword] = useState(false);
-
+  const { setIsLogin, setUserInfo } = useUserStore();
+  console.log(useUserStore());
   const {
     register,
     handleSubmit,
