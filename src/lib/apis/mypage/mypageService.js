@@ -2,15 +2,12 @@ import { axiosJsonInstance, axiosFormInstance } from '../common';
 
 export const myInfo = async () => {
   try {
-    const { data: data1, status } = await axiosJsonInstance.get(
-      `/mypage/account`
-    );
+    const { data: data1 } = await axiosJsonInstance.get(`/mypage/account`);
     const { data: data } = data1;
-    console.log(data);
 
     return data;
   } catch (error) {
-    console.log(error.response);
+    console.error(error);
   }
 };
 

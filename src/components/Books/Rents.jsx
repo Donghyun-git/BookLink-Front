@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRentContext } from '../../context/RentContext/rentContext';
 import * as Styled from './Styled';
 import BackDrop from '../Common/BackDropLayer/BackDrop';
@@ -13,8 +13,10 @@ const Rents = () => {
   const { rents } = state;
   const { goToMap } = useGoToMap();
   const { navigateToPage } = useNavigatePage();
+
   const { isModalOpen, handleOpenModal, handleCloseModal } = useModal(false);
 
+  const [title, setTitle] = useState('');
   useEffect(() => {
     (async () => {
       try {
@@ -77,7 +79,12 @@ const Rents = () => {
 
                 <Styled.CardFooterDiv>
                   <Styled.RentsCardFooterButtonDiv>
-                    <Styled.RentsCardButton onClick={() => handleOpenModal()}>
+                    <Styled.RentsCardButton
+                      onClick={() => {
+                        setTitle(title);
+                        handleOpenModal();
+                      }}
+                    >
                       대여정보 확인하기
                     </Styled.RentsCardButton>
                     <Styled.RentsCardButton
@@ -95,7 +102,7 @@ const Rents = () => {
         })}
       </Styled.BooksComponentDiv>
       {isModalOpen && (
-        <BackDrop closeModal={handleCloseModal} target={'rent'} />
+        <BackDrop closeModal={handleCloseModal} target={'rent'} title={title} />
       )}
     </Styled.RentsComponentDiv>
   );

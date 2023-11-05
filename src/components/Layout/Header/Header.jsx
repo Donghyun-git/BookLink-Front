@@ -8,10 +8,15 @@ import toggleImage from '../../../images/toggle.svg';
 import * as S from './style';
 import { useToggleList } from '../../../hooks/Header/useToggleList';
 
+import { useGetMyBookLinkQuery } from '../../../services/mypage/useGetMyBookLinkQuery';
+
 const HeaderContainer = () => {
   const navigate = useNavigate();
 
   const { isProfileListOpen, handleClickProfileList } = useToggleList();
+
+  const { data } = useGetMyBookLinkQuery();
+  const { image } = data.profile;
 
   const isLogin = useUserStore((state) => state.isLogin);
   const nickname = useUserStore((state) => state.nickname);
@@ -131,7 +136,10 @@ const HeaderContainer = () => {
               <S.ProfileText>{nickname}님 환영합니다!</S.ProfileText>
               <S.ProfileImgDiv>
                 <img
-                  src="https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png"
+                  src={
+                    image ||
+                    'https://soccerquick.s3.ap-northeast-2.amazonaws.com/1689834239634.png'
+                  }
                   alt="프로필 이미지"
                 />
               </S.ProfileImgDiv>

@@ -9,7 +9,7 @@ import ContentsLayout from '../../../layout/page/contents/ContentsLayout';
 const Mypage = () => {
   const { data } = useGetMyBookLinkQuery();
   const { myBook, myRent, rentHistory, communityHistory } = data;
-  console.log(data);
+
   return (
     <ContentsLayout>
       <Profile data={data} />

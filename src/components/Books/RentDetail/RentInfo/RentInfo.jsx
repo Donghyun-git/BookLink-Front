@@ -1,10 +1,13 @@
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { dateFormatYear } from '../../../../utils/date';
 import { generateUniqueKey } from '../../../../utils/generateUnique';
 import RentCard from '../../../Card/RentCard';
+import { useGetRentMoreQuery } from '../../../../services/rent/useGetRentMoreQuery';
 import * as Styled from './Styled';
 
 const RentInfo = ({
+  isbn,
   cover,
   createdTime,
   title,
@@ -16,6 +19,21 @@ const RentInfo = ({
   imageUrls,
   bookStatus,
 }) => {
+  const navigate = useNavigate();
+
+  const { data } = useGetRentMoreQuery({
+    title,
+  });
+
+  const filteredSameWriter = data
+    ?.filter((book) => book.writer !== writer)
+    .slice(0, 2);
+
+  const handleBookDetailMove = (isbn) => {
+    navigate(`/books/${isbn}`);
+    return;
+  };
+
   return (
     <>
       <Styled.RentInfoContent>
@@ -51,7 +69,7 @@ const RentInfo = ({
             </li>
           </ul>
           <div>
-            <button>
+            <button onClick={() => handleBookDetailMove(isbn)}>
               <span>도서정보 보기</span>
             </button>
           </div>
@@ -91,26 +109,24 @@ const RentInfo = ({
 
       <Styled.OtherRentInfo>
         <Styled.OtherRentInfoTitle>
-          <h3> 이 책을 소장한 다른 책방 </h3> <span>더보기</span>
+          <h3> 이 책을 소장한 다른 곳의 책방 </h3>
         </Styled.OtherRentInfoTitle>
         <Styled.RentCardDiv>
-          <RentCard
-            name={'길동아'}
-            distance={3.6}
-            quality={'상'}
-            rentFee={'2,500'}
-            rentMonth={4}
-            location={'서울시 청담동'}
-          />
-
-          <RentCard
-            name={'길동아'}
-            distance={3.6}
-            quality={'상'}
-            rentFee={'2,500'}
-            rentMonth={4}
-            location={'서울시 청담동'}
-          />
+          {filteredSameWriter.length > 0 ? (
+            filteredSameWriter?.map((book) => (
+              <RentCard
+                key={book.rent_id}
+                rent_id={book.rent_id}
+                writer={book.writer}
+                book_rating={book.book_rating}
+                rental_fee={book.rental_fee}
+                max_date={book.max_date}
+                rent_location={book.rent_location}
+              />
+            ))
+          ) : (
+            <p>다른 책방이 없어요. </p>
+          )}
         </Styled.RentCardDiv>
       </Styled.OtherRentInfo>
     </>

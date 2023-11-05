@@ -14,7 +14,7 @@ const BackDrop = ({
     <Styled.BackDropDiv>
       <Styled.BackDropLayer onClick={() => closeModal()} />
       {target === 'rent' ? (
-        <RentsModal />
+        <RentsModal onClose={closeModal} title={title} />
       ) : (
         <RentApplyModal
           title={title}

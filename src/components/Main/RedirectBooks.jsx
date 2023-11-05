@@ -1,10 +1,12 @@
 import { useNavigatePage } from '../../hooks/useNavigatePage';
+import { useBestSellerQuery } from '../../services/main/useBestSellerQuery';
 import BookCard from '../Card/BookCard';
 import * as Styled from './Styled';
 import mainBooksLogo from '../../images/main_books_logo.png';
 
 const RedirectBooks = () => {
   const { navigateToPage } = useNavigatePage();
+  const { data } = useBestSellerQuery();
 
   return (
     <Styled.MainBooks>
@@ -13,8 +15,9 @@ const RedirectBooks = () => {
       </Styled.MainBooksTitle>
       <Styled.MainBooksContent>
         <Styled.CardDiv>
-          <BookCard />
-          <BookCard />
+          {data?.map((book, index) => (
+            <BookCard key={index} data={book} />
+          ))}
         </Styled.CardDiv>
         <Styled.BooksImageSectionDiv>
           <div>

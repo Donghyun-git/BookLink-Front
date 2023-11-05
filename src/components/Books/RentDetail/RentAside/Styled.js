@@ -50,7 +50,7 @@ export const AsideLeftHeader = styled.div`
 export const AsideLeftCount = styled.div`
   span {
     color: #000;
-    font-size: 0.57143rem;
+    font-size: 0.87143rem;
     font-weight: 500;
   }
 `;
@@ -142,7 +142,7 @@ export const CardHeaderDiv = styled.div`
       &:last-child {
         color: #767676;
         text-align: right;
-        font-size: 0.57143rem;
+        font-size: 0.77143rem;
         font-weight: 400;
         margin-left: 0.29rem;
       }
@@ -153,7 +153,7 @@ export const CardHeaderDiv = styled.div`
 export const PossibleSpan = styled.span`
   color: ${({ active }) => (active === 'true' ? '#3365fd' : '#E30000')};
   text-align: right;
-  font-size: 0.57143rem;
+  font-size: 0.77143rem;
   font-weight: 500;
 `;
 
@@ -285,14 +285,14 @@ export const RentApplyContent = styled.div`
 export const Title = styled.div`
   h1 {
     text-align: center;
-    font-size: 1.143rem;
+    font-size: 2.143rem;
     font-weight: 700;
   }
 `;
 
 export const RentApplyInfo = styled.div`
   h2 {
-    font-size: 0.75rem;
+    font-size: 1.75rem;
     font-weight: 500;
   }
 `;
@@ -314,7 +314,7 @@ export const MockImg = styled.div`
 
 export const Description = styled.div`
   p {
-    font-size: 0.625rem;
+    font-size: 1.625rem;
     font-weight: 400;
   }
 
@@ -328,12 +328,12 @@ export const Caution = styled.div`
 
   h3 {
     color: #e30000;
-    font-size: 0.75rem;
+    font-size: 1.75rem;
     font-weight: 500;
   }
 
   p {
-    font-size: 0.625rem;
+    font-size: 1.625rem;
     font-weight: 400;
     margin-top: 0.5rem;
   }
@@ -342,7 +342,7 @@ export const Caution = styled.div`
 export const RentInfoBox = styled.div`
   ul {
     li {
-      width: 18rem;
+      width: 40rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -350,14 +350,14 @@ export const RentInfoBox = styled.div`
 
       h4 {
         color: #3a3a3a;
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: 500;
       }
 
       span {
         color: #3a3a3a;
-        font-size: 1rem;
-        font-weight: 500;
+        font-size: 1.2rem;
+        font-weight: 600;
       }
 
       &:last-child {

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useRentContext } from '../../../context/RentContext/rentContext';
 import { getRentDetail } from '../../../lib/apis/rentService';
 import RentInfo from './RentInfo/RentInfo';
@@ -17,6 +17,7 @@ const RentDetail = () => {
   const bookRecordDtoList = detail.bookRecordDtoList || [];
 
   const imageUrls = detail.image_urls || [];
+
   const {
     cover,
     book_rating: bookRating,
@@ -32,12 +33,14 @@ const RentDetail = () => {
     title,
     authors,
     writer,
+    isbn,
   } = detail;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       try {
         const { data } = await getRentDetail(id);
+        console.log(data);
         dispatch({ type: 'RENT/DETAIL', payload: data.data });
       } catch (error) {
         console.error(error);
@@ -61,6 +64,7 @@ const RentDetail = () => {
           <AsideLeft writer={writer} cardList={bookRecordDtoList} />
           <Styled.RentDetailCotent>
             <RentInfo
+              isbn={isbn}
               cover={cover}
               createdTime={createdTime}
               title={title}

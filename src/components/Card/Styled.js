@@ -303,7 +303,7 @@ export const UserProfileDiv = styled.div`
   flex-direction: column;
   div {
     &:last-child {
-      font-size: 0.85714rem;
+      font-size: 1.45714rem;
       font-weight: 400;
     }
   }

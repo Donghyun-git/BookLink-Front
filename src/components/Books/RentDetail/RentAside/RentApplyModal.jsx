@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Styled from './Styled';
 import { ko } from 'date-fns/locale';
 
@@ -70,12 +71,12 @@ const RentApplyModal = ({
                 <option key={selected} value={selected}>
                   {selected}일
                 </option>
-                {duration.map((count) => {
+                {duration.map((count, index) => {
                   if (selectDate === count.toString()) {
-                    return <></>;
+                    return <React.Fragment key={index} />;
                   } else {
                     return (
-                      <option key={count} value={count}>
+                      <option key={index} value={count}>
                         {count}일
                       </option>
                     );

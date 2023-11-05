@@ -27,8 +27,8 @@ import MyBookLink from '../pages/Mypage';
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<MainPage />} />
+      <Route element={<Layout />}>
+        <Route index path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/mybooklink" element={<MyBookLink />} />

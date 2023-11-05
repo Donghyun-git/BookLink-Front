@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 export const RentsModalDiv = styled.div`
   position: fixed;
-  width: 117.28571rem;
-  height: fit-content;
+  max-width: 117.28571rem;
+  min-height: 70vh;
   border-radius: 2.57143rem;
   background: #fafbfa;
   margin: 4.86rem auto 156rem auto; //top: 30.86rem
@@ -51,15 +51,21 @@ export const RentsModalInfoDiv = styled.div`
 
     &:last-child {
       position: relative;
-      color: #848484;
-      font-size: 0.71429rem;
-      font-weight: 500;
+
+      & button {
+        color: #848484;
+        font-size: 0.81429rem;
+        font-weight: 500;
+        background-color: #fff;
+      }
 
       &::before {
         content: '>';
         position: absolute;
-        top: 0;
+        top: 0.38rem;
         right: -0.671rem;
+        font-size: 0.81429rem;
+        color: #848484;
         cursor: pointer;
       }
     }
@@ -97,7 +103,7 @@ export const RentsModalContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  flex-basis: calc(25%); /* 네 칸씩 정렬하고 간격을 조절합니다 */
+  flex-basis: calc(25%);
 `;
 
 export const RentsModalCardDiv = styled.div`
@@ -107,9 +113,11 @@ export const RentsModalCardDiv = styled.div`
   width: 24.42857rem;
   height: 16.57143rem;
   border-radius: 0.85714rem;
+  border: 0.5px solid #00e37d;
   background: #fff;
   margin: 0 1.71rem 1.71rem 0;
   padding: 0.86rem 1.71rem;
+  cursor: pointer;
 
   &:nth-child(4n) {
     margin-right: 0;
@@ -140,7 +148,7 @@ export const UserProfileDiv = styled.div`
   flex-direction: column;
   div {
     &:last-child {
-      font-size: 0.85714rem;
+      font-size: 1.45714rem;
       font-weight: 400;
     }
   }

@@ -5,6 +5,7 @@ import { HeaderBookSearch } from '../../lib/apis/searchService/';
 import * as Styled from './Styled';
 import { MainContainerDiv, MainContentsDiv } from '../../styles/globalStyled';
 import PagingForm from '../UI/Paging/PagingForm';
+
 const SearchResultForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

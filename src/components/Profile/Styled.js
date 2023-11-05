@@ -64,14 +64,23 @@ export const ProfileActiveLabel = styled.div`
     align-items: center;
 
     li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-radius: 0.57143rem;
       border: 1px solid #00e37d;
 
       span {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0.29rem 0.57rem;
         font-size: 0.71429rem;
         font-weight: 500;
+
+        &:last-child {
+          padding-left: 0;
+        }
       }
 
       &:nth-child(2) {
@@ -88,17 +97,20 @@ export const ProfileRight = styled.div`
   div {
     cursor: pointer;
 
-    span {
-      color: #848484;
-      font-size: 0.85714rem;
-      font-weight: 500;
-      margin-right: 0.57rem;
-    }
+    & button {
+      background-color: #fafbfa;
+      span {
+        color: #848484;
+        font-size: 0.85714rem;
+        font-weight: 500;
+        margin-right: 0.57rem;
+      }
 
-    img {
-      width: 1.14286rem;
-      height: 1rem;
-      fill: #848484;
+      img {
+        width: 1.14286rem;
+        height: 1rem;
+        fill: #848484;
+      }
     }
 
     &:first-child {

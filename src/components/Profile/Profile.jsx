@@ -1,14 +1,38 @@
-import { useLocation } from 'react-router-dom';
+/* eslint-disable no-unsafe-optional-chaining */
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUserStore } from '../../store/useUserStore';
 import * as Styled from './Styled';
 import logoutImage from '../../images/logout.svg';
 import updateImage from '../../images/update.svg';
 
 const Profile = ({ data }) => {
   const { pathname } = useLocation();
-  console.log(data);
+  const navigate = useNavigate();
+
+  const removeUserInfo = useUserStore(({ removeUserInfo }) => removeUserInfo);
+
+  console.log('@@@', data);
   const { name, email, address, image } = data.profile;
-  const { register, report } = data.myBook;
-  const { renting } = data.myRent;
+  const { register, report } = data?.myBook;
+  const { renting } = data?.myRent;
+
+  const handleLogout = () => {
+    const isLogout = confirm('로그아웃 하시겠습니까?');
+
+    if (isLogout) {
+      removeUserInfo();
+      useUserStore.persist.clearStorage();
+      alert('로그아웃 되었습니다!');
+
+      navigate('/');
+      return;
+    }
+  };
+
+  const movePatchUserInfo = () => {
+    navigate('/mybooklink/modify');
+    return;
+  };
 
   return (
     <Styled.ProfileMain>
@@ -35,13 +59,16 @@ const Profile = ({ data }) => {
           <Styled.ProfileActiveLabel>
             <ul>
               <li>
-                <span>기록한 도서 {report}</span>
+                <span>기록한 도서</span>
+                <span> {report}</span>
               </li>
               <li>
-                <span>대여 가능한 도서 {register}</span>
+                <span>대여 가능한 도서 </span>
+                <span>{register}</span>
               </li>
               <li>
-                <span>대여중인 도서 {renting}</span>
+                <span>대여중인 도서</span>
+                <span> {renting}</span>
               </li>
             </ul>
           </Styled.ProfileActiveLabel>
@@ -51,13 +78,16 @@ const Profile = ({ data }) => {
         {pathname === '/mybooklink' ? (
           <>
             <div>
-              {/* 로그아웃 함수 커스텀훅으로 빼기 */}
-              <span>로그아웃</span>
-              <img src={logoutImage} alt="logout" />
+              <button onClick={handleLogout}>
+                <span>로그아웃</span>
+                <img src={logoutImage} alt="logout" />
+              </button>
             </div>
             <div>
-              <span>개인정보 수정</span>
-              <img src={updateImage} alt="update" />
+              <button onClick={movePatchUserInfo}>
+                <span>개인정보 수정</span>
+                <img src={updateImage} alt="update" />
+              </button>
             </div>
           </>
         ) : (

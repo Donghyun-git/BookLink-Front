@@ -3,6 +3,7 @@ import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { useState, useRef, useEffect } from 'react';
 import { getChatRooms, getChatRoom } from '../../lib/apis/chat/chatService';
+
 const ChatForm = ({ room_id = 1, sender = '캐치카페' }) => {
   const [stompClient, setStompClient] = useState(null);
   const [messages, setMessages] = useState([]);

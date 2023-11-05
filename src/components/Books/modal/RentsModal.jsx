@@ -1,120 +1,14 @@
-import { useState } from 'react';
+import { useGetRentMoreQuery } from '../../../services/rent/useGetRentMoreQuery';
+import { useNavigate } from 'react-router-dom';
 import * as Styled from './Styled';
 
-const RentsModal = ({ onClose }) => {
-  const initialState = [
-    {
-      user: '1n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '2n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '3n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '4n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '5n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '6n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '7n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '8n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '9n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '10n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '11n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-    {
-      user: '12n2k3',
-      name: '길동아',
-      distance: 563,
-      quality: '상',
-      rentFee: 2000,
-      rentMonth: 3,
-      location: '서울 강남구 청담동',
-    },
-  ];
+const RentsModal = ({ onClose, title }) => {
+  const navigate = useNavigate();
 
-  const [cards, setCards] = useState(initialState);
-
+  const { data } = useGetRentMoreQuery({
+    title,
+  });
+  console.log(data);
   return (
     <Styled.RentsModalDiv>
       <Styled.RentsModalRow>
@@ -123,68 +17,60 @@ const RentsModal = ({ onClose }) => {
         </Styled.RentsModalCloseButton>
         <Styled.RentsModalHeader>
           <Styled.RentsModalInfoDiv>
-            <div>삶의 무기가 되는 한마디</div>
+            <div>{title}</div>
             <div>
-              서울 강남구 청담동 근처 <span>21개</span>
+              <span>{data.length} 건</span>
             </div>
-            <div>마이페이지에서 주소 변경하기</div>
+            <div>
+              <button onClick={() => navigate('/mybooklink/modify')}>
+                마이페이지에서 주소 변경하기
+              </button>
+            </div>
           </Styled.RentsModalInfoDiv>
-          <Styled.RentsModalFilterDiv>
-            <ul>
-              <li>
-                <button>
-                  <div>거리순</div>
-                </button>
-              </li>
-              <li>
-                <button>
-                  <div>대여료순</div>
-                </button>
-              </li>
-            </ul>
-          </Styled.RentsModalFilterDiv>
         </Styled.RentsModalHeader>
         <Styled.RentsModalContainer>
-          {cards.map((card) => {
+          {data.map((card) => {
             const {
-              user,
-              name,
-              distance,
-              quality,
-              rentFee,
-              rentMonth,
-              location,
+              isbn,
+              rent_id,
+              writer,
+              book_rating,
+              rental_fee,
+              max_date,
+              rent_location,
             } = card;
             return (
-              <Styled.RentsModalCardDiv key={user}>
+              <Styled.RentsModalCardDiv
+                key={rent_id}
+                onClick={() => navigate(`/rent/${rent_id}`)}
+              >
                 <Styled.ProfileDiv>
                   <Styled.ProfileImageDiv>
                     {/* <img src="" alt="" /> */}
                   </Styled.ProfileImageDiv>
                   <Styled.UserProfileDiv>
-                    <div>{name} 님의 책방</div>
-                    <div>{distance} m</div>
+                    <div>{writer} 님의 책방</div>
                   </Styled.UserProfileDiv>
                 </Styled.ProfileDiv>
                 <Styled.RentsInfoDiv>
                   <ul>
                     <li>도서품질</li>
-                    <li>{quality}</li>
+                    <li>{book_rating}</li>
                   </ul>
 
                   <ul>
                     <li>대여료</li>
-                    <li>{rentFee}원 ~</li>
+                    <li>{rental_fee}원 ~</li>
                   </ul>
 
                   <ul>
                     <li>대여 가능 기간</li>
-                    <li>최대 {rentMonth}개월</li>
+                    <li>최대 {max_date}일</li>
                   </ul>
 
                   <ul>
                     <li>대여 장소</li>
-                    <li>{location}</li>
+                    <li>{rent_location}</li>
                   </ul>
                 </Styled.RentsInfoDiv>
               </Styled.RentsModalCardDiv>
@@ -192,7 +78,7 @@ const RentsModal = ({ onClose }) => {
           })}
         </Styled.RentsModalContainer>
         <Styled.RentsModalFooter>
-          <ul>
+          {/* <ul>
             <li>
               <button>1</button>
             </li>
@@ -202,7 +88,7 @@ const RentsModal = ({ onClose }) => {
             <li>
               <button>3</button>
             </li>
-          </ul>
+          </ul> */}
         </Styled.RentsModalFooter>
       </Styled.RentsModalRow>
     </Styled.RentsModalDiv>

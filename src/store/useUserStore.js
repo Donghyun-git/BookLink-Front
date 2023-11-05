@@ -11,16 +11,17 @@ export const useUserStore = create()(
           ...state,
         }),
 
-      setIsLogin: (state) =>
+      setIsLogin: () =>
         set({
-          isLogin: state,
+          isLogin: true,
         }),
 
       removeUserInfo: () =>
         set(
-          ({ setUserInfo, removeUserInfo }) => ({
+          ({ setUserInfo, removeUserInfo, setIsLogin }) => ({
             setUserInfo,
             removeUserInfo,
+            setIsLogin,
           }),
           true
         ),

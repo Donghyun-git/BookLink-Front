@@ -7,13 +7,16 @@ import {
 } from '../../../styles/globalStyled';
 import * as Styled from './Styled';
 import Profile from '../../Profile/Profile';
-import { useQuery } from '@tanstack/react-query';
-import { myInfo, myInfoModify } from '../../../lib/apis/mypage/mypageService';
+import { useGetMyInfoQuery } from '../../../services/mypage/useGetMyInfoQuery';
+import { useGetMyBookLinkQuery } from '../../../services/mypage/useGetMyBookLinkQuery';
+import { myInfoModify } from '../../../lib/apis/mypage/mypageService';
+
 const MyInfoModifyForm = () => {
   const { register, handleSubmit, setValue, getValues, reset } = useForm({
     mode: 'onChange',
   });
-  const { data } = useQuery(['myInfo'], myInfo);
+  const { data: mypageData } = useGetMyBookLinkQuery();
+  const { data } = useGetMyInfoQuery();
   const [imgUrl, setImgUrl] = useState('');
   const [imgName, setImgName] = useState('');
 
@@ -30,6 +33,7 @@ const MyInfoModifyForm = () => {
     setImgUrl(image);
     setValue('image', file);
   };
+
   const onSubmit = async (data) => {
     console.log(data);
     const { data: data1 } = await myInfoModify(data);
@@ -39,7 +43,7 @@ const MyInfoModifyForm = () => {
   return (
     <MainContainerDiv>
       <MainContentsDiv style={{ marginTop: '4.286rem' }}>
-        <Profile />
+        <Profile data={mypageData} />
         <Styled.MyInfoDiv>
           <Styled.MyInfoMainDiv>
             <Styled.MainTag>회원정보 수정</Styled.MainTag>

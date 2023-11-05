@@ -17,8 +17,9 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const { setIsLogin, setUserInfo } = useUserStore();
-  console.log(useUserStore());
+  const setIsLogin = useUserStore((state) => state.setIsLogin);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
+
   const {
     register,
     handleSubmit,
@@ -32,8 +33,8 @@ const LoginForm = () => {
   const handleLogin = handleSubmit(async () => {
     try {
       const res = await loginPostFetch(getValues());
-      setUserInfo(res.data.data);
       setIsLogin(true);
+      setUserInfo(res.data.data);
       alert('로그인 성공');
       navigate('/');
     } catch (error) {

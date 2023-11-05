@@ -10,14 +10,6 @@ const AsideLeft = ({ writer, cardList }) => {
     <Styled.RentDetailAsideLeft>
       <Styled.AsideLeftHeader>
         <h2>{writer} 님이 기록한 도서</h2>
-        <ul>
-          <li>
-            <span>대여 신청 가능만 보기</span>
-          </li>
-          <li>
-            <span>모두 보기</span>
-          </li>
-        </ul>
       </Styled.AsideLeftHeader>
       <Styled.AsideLeftCount>
         <span>총 {cardList.length}권</span>
