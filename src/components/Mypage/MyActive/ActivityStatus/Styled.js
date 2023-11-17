@@ -5,6 +5,7 @@ export const ActivityStatusDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1.93rem;
+  margin-bottom: 10.57rem;
 `;
 export const ActivityDiv = styled.div`
   display: flex;

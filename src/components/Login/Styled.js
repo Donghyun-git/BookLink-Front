@@ -89,7 +89,7 @@ export const StyledLink = styled(Link)`
 `;
 
 export const LoginButton = styled.button`
-  margin: 6.429rem auto 0.571rem auto;
+  margin: 3.429rem auto 2.571rem auto;
   width: 42.857rem;
   height: 4.286rem;
   border-radius: 0.857rem;

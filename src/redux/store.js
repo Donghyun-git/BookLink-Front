@@ -1,4 +1,3 @@
-import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
@@ -13,7 +12,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const logger = createLogger();
-const store = createStore(persistedReducer, applyMiddleware(thunk, logger));
+const store = createStore(persistedReducer, applyMiddleware(thunk));
 
 export { store };

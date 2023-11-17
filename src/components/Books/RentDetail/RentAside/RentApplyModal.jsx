@@ -11,6 +11,10 @@ const RentApplyModal = ({
 }) => {
   const selected = duration.filter((count) => selectDate === count.toString());
 
+  const handleSendMessage = () => {
+    // 쪽지 보내기 api post
+  };
+
   return (
     <Styled.RentApplyModal>
       <Styled.RentApplyContent>
@@ -94,8 +98,8 @@ const RentApplyModal = ({
           <button onClick={() => closeModal()}>
             <span>취소하기</span>
           </button>
-          <button>
-            <span>1 : 1 채팅하기</span>
+          <button onClick={handleSendMessage}>
+            <span>쪽지 보내기</span>
           </button>
         </Styled.RentApplyButtonBox>
       </Styled.RentApplyContent>

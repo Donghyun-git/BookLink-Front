@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
@@ -6,19 +6,28 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useUserStore } from '../../store/useUserStore';
 import { loginPostFetch } from '../../lib/apis/auth/loginPostFetch';
-import * as env from '../../../env.config';
+// import * as env from '../../../env.config';
 import * as Styled from './Styled';
 import { loginSchema } from '../../validators/authValidator';
 import Logo from '../../images/BookLink_Logo.svg';
 import showPasswordImg from '../../images/password_eye.svg';
-import kakaoLogo from '../../images/kakao.svg';
+// import kakaoLogo from '../../images/kakao.svg';
 
 const LoginForm = () => {
   const navigate = useNavigate();
 
+  const [saveId, setSaveId] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const setIsLogin = useUserStore((state) => state.setIsLogin);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+
+  const saveState = localStorage.getItem('booklink.id') || '';
+
+  let email = '';
+
+  if (saveState !== '') {
+    email = JSON.parse(saveState).email;
+  }
 
   const {
     register,
@@ -33,6 +42,14 @@ const LoginForm = () => {
   const handleLogin = handleSubmit(async () => {
     try {
       const res = await loginPostFetch(getValues());
+      if (saveId) {
+        localStorage.setItem(
+          'booklink.id',
+          JSON.stringify({ email: getValues('email'), saved: true })
+        );
+      } else {
+        localStorage.removeItem('booklink.id');
+      }
       setIsLogin(true);
       setUserInfo(res.data.data);
       alert('로그인 성공');
@@ -42,10 +59,22 @@ const LoginForm = () => {
     }
   });
 
+  const handleSaveId = () => {
+    setSaveId(!saveId);
+  };
+
   const handleShowPassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  useEffect(() => {
+    const saved = saveState !== '' ? JSON.parse(saveState).saved : null;
+
+    if (saved) {
+      setSaveId(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Styled.LoginDiv>
       <Styled.LogoDiv>
@@ -58,6 +87,7 @@ const LoginForm = () => {
             <Styled.LoginInput
               type="email"
               id="email"
+              defaultValue={email}
               placeholder="example@gmail.com"
               {...register('email')}
             />
@@ -85,9 +115,15 @@ const LoginForm = () => {
           </Styled.InputDivWithMargin>
           <Styled.LoginFormFooterDiv>
             <div>
-              <Styled.LoginFormCheckBox type="checkbox" id="checkbox" />
+              <Styled.LoginFormCheckBox
+                type="checkbox"
+                id="checkbox"
+                checked={saveId}
+                value={saveId}
+                onChange={handleSaveId}
+              />
               <Styled.LoginFormFooterLabel htmlFor="checkbox">
-                아이디/비밀번호 기억하기
+                아이디(E-MAIL) 기억하기
               </Styled.LoginFormFooterLabel>
             </div>
             <div>
@@ -95,12 +131,12 @@ const LoginForm = () => {
             </div>
           </Styled.LoginFormFooterDiv>
           <Styled.LoginButton type="submit">로그인</Styled.LoginButton>
-          <Styled.KakaoLoginButton>
+          {/* <Styled.KakaoLoginButton>
             <a href={env.KAKAO_AUTH_URL}>
               <img src={kakaoLogo} alt="카카오 로고" />
               카카오 로그인
             </a>
-          </Styled.KakaoLoginButton>
+          </Styled.KakaoLoginButton> */}
           <Styled.RegisterButton to="/register">
             회원가입 하기
           </Styled.RegisterButton>

@@ -16,6 +16,7 @@ export const useToggleList = () => {
 
   const [isProfileListOpen, setIsProfileListOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClickProfileList = useCallback(() => {
     setIsProfileListOpen(!isProfileListOpen);
@@ -51,6 +52,10 @@ export const useToggleList = () => {
     dispatch(chatIn(!isChatIn));
   };
 
+  const handleToggleMessageBox = () => {
+    setIsOpen(!isOpen);
+  };
+
   return {
     handleClickProfileList,
     handleLogOut,
@@ -58,6 +63,7 @@ export const useToggleList = () => {
     handleMouseEnter,
     handleMouseLeave,
     handleChat,
+    handleToggleMessageBox,
     isProfileListOpen,
     isHovered,
   };

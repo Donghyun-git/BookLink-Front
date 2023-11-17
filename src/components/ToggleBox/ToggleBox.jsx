@@ -9,7 +9,10 @@ const ToggleBox = ({ active }) => {
     handleLogOut,
     handleNavigateMypage,
     handleChat,
+    handleToggleMessageBox,
   } = useToggleList();
+
+  const handleOpenMessageBox = () => {};
 
   return (
     <S.ToggleBox active={active}>
@@ -18,11 +21,14 @@ const ToggleBox = ({ active }) => {
           <button onClick={handleNavigateMypage}>마이페이지</button>
         </li>
         <li>
+          <button onClick={handleToggleMessageBox}> 쪽지함 </button>
+        </li>
+        {/* <li>
           <button onClick={handleChat}>1:1 채팅</button>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <button>소장 도서</button>
-        </li>
+        </li> */}
         <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           <button onClick={handleLogOut}>
             <span>로그아웃</span>

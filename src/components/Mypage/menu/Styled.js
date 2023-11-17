@@ -15,16 +15,18 @@ export const NavMenu = styled.nav`
         font-size: 1.42857rem;
         font-weight: 500;
         transition: all 0.1s ease;
+        border-bottom: 2px solid #00e37d;
+        color: #00e37d;
         cursor: pointer;
 
-        &:first-child {
+        /* &:first-child {
           color: ${({ ismyactive }) =>
-            ismyactive === 'true' ? '#00e37d' : '#d9d9d9'};
+          ismyactive === 'true' ? '#00e37d' : '#d9d9d9'};
         }
         &:last-child {
           color: ${({ ismybooks }) =>
-            ismybooks === 'true' ? '#00e37d' : '#d9d9d9'};
-        }
+          ismybooks === 'true' ? '#00e37d' : '#d9d9d9'};
+        } */
       }
     }
   }
